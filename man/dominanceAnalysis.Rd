@@ -4,7 +4,8 @@
 Based on Azen and Bodescu(1993) and all their derivations}
 \usage{
   dominanceAnalysis(x, constants = c(),
-    fit.functions = "default", data = NULL, ...)
+    fit.functions = "default", data = NULL,
+    null.model = NULL, ...)
 }
 \arguments{
   \item{x}{lm, glm or another regression based ll}
