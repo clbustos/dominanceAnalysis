@@ -1,7 +1,12 @@
 #' Dominance Analysis
 #' Based on Azen and Bodescu(1993) and all their derivations
-#' @param x lm, glm or another regression based ll
-#' @param data.frame, if you don't provide a lm object
+#' @param x lm, glm or another regression based linear model
+#' @param constants variables to remain unchanged between models
+#' @param fit.functions list of functions which provides fit indexes for model. 
+#' @param data optional data.frame to which fit the formulas
+#' @param null.model for mixel models, null model against to test the submodels
+#' @param ... Other arguments provided to lm or lmer (not implemented yet)
+#' @return dominanceAnalysis object
 #' @export 
 dominanceAnalysis<-function(x,constants=c(),fit.functions="default",data=NULL,null.model=NULL, ...) {
   f<-formula(x)
