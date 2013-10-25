@@ -12,3 +12,6 @@ Collate:
     'dominanceanalysis-package.r'
     'daSubmodels.r'
     'daFitFunctions.r'
+    'lmWithCov.r'
+    'daRawResults.r'
+    'daAverageContributionByLevel.r'

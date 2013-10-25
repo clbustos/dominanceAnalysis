@@ -1,4 +1,5 @@
 export(da.lm.fit)
+export(daRawResults)
 export(daSubmodels)
 export(dominanceAnalysis)
 export(formulas.daSubmodels)

@@ -14,3 +14,9 @@ da.lmerMod.fit<-function(...) {
 	sb.r2.2=function(x) {l1<-lmer(x,data=mc$data);  lmmR2(m.null=mc$null.model, l1)$sb.r2.2}
 	)
 }
+
+
+da.lmWithCov.fit<-function(...) {
+	mc=match.call()
+	list(r2=function(x) {lmWithCov(x,mc$base.cov)$r.squared})
+}

@@ -8,7 +8,8 @@ Based on Azen and Bodescu(1993) and all their derivations}
     null.model = NULL, ...)
 }
 \arguments{
-  \item{x}{lm, glm or another regression based ll}
+  \item{x}{lm, glm or another regression based linear
+  model}
 
   \item{constants}{variables to remain unchanged between
   models}
