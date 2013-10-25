@@ -1,0 +1,14 @@
+Package: dominanceanalysis
+Title: 
+Description: Dominance analysis based on Bodescu
+maintainer: Claudio Bustos<clbustos@gmail.com>
+Version: 0.1
+Depends:
+    R (>= 3.0.2)
+License: GPL-2
+LazyData: true
+Collate:
+    'dominanceAnalysis.r'
+    'dominanceanalysis-package.r'
+    'daSubmodels.r'
+    'daFitFunctions.r'
