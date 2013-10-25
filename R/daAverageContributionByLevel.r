@@ -9,6 +9,5 @@ daAverageContributionByLevel<-function(x) {
 		out[[i]]<-res[res$level<max(x$level),]
 		
 	}
-	
 	out
 }

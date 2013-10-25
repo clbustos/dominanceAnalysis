@@ -15,3 +15,7 @@ Collate:
     'lmWithCov.r'
     'daRawResults.r'
     'daAverageContributionByLevel.r'
+    'daCompleteDominance.r'
+    'daConditionalDominance.r'
+    'daGeneralDominance.r'
+    'dominanceMatrix.r'

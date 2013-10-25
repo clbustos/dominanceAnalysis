@@ -11,12 +11,21 @@
 dominanceAnalysis<-function(x,constants=c(),fit.functions="default",data=NULL,null.model=NULL, ...) {
 
 	daRaw<-daRawResults(x,constants,fit.functions,data,null.model,...)
-	
-
+	daAverageByLevel<-daAverageContributionByLevel(daRaw)
+	daAverageGeneral<-lapply(daAverageByLevel,function(x) {colMeans(x[,-1])} )
+	list(fits=daRaw,
+	  contribution.by.level=daAverageByLevel,
+	  contribution.average=daAverageGeneral,
+	  complete=daCompleteDominance(daRaw),
+	  conditional=daConditionalDominance(daRaw),
+	  general=daGeneralDominance(daRaw)
+	  )
 }
 getEqualRowId<-function(m,r) {
 	which(rowSums(t(t(m)==r))==length(r))
 }
+
+
 # Crea una matriz a partir del análisis de dominancia
 dominanceAnalysis.matrix<-function(x) {
   n<-length(x$models)
@@ -52,38 +61,4 @@ dominanceAnalysis.data.frame<-function(x) {
    cbind(data.frame(vars=models,r.2=r.2,level),da.m)
 }
 
-dominanceAnalysis.dominance<-function(x) {
-  da.m<-dominanceAnalysis.matrix(x)
-  vars<-x$x.terms
-  m<-x$m
-  ma<-matrix(0,m,m)
-  for(i in 1:(m-1)) {
-    for(j in (i+1):m) {
-      comps<-na.omit(cbind(da.m[,i],da.m[,j]))
-      if(mean(comps[,1]>comps[,2])==1) 
-      {
-        ma[i,j]<-1
-        ma[j,i]<-0
-      }
-      
-      if(mean(comps[,1]<comps[,2])==1) 
-      {
-        ma[i,j]<-0
-        ma[j,i]<-1
-      }
-      
-    }
-  }
-  ma
-}
-dominanceAnalysis.complete<-function(x) {
-  da.df<-dominanceAnalysis.data.frame(x)
-  levels.da=0:(x$m-1)
-  ma<-matrix(0,x$m,x$m,dimnames=list(levels.da,x$x.terms))
-  for(i in levels.da) {
-    da.df.s<-da.df[da.df$level==i,-(1:3)]
-    ma[i+1,]<-apply(da.df.s,2,mean,na.rm=T)
-  }
-  ma
-}
 
