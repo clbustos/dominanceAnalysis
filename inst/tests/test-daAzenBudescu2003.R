@@ -53,5 +53,5 @@ expected.general.dominance<-matrix(c(
 ),4,4,byrow=T)
 general.dominance<-daGeneralDominance(rawR)
 expect_equivalent(expected.general.dominance,general.dominance$r2)
-print(dominanceAnalysis(lwith))
+print(summary(dominanceAnalysis(lwith)))
 })

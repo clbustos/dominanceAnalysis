@@ -19,3 +19,5 @@ Collate:
     'daConditionalDominance.r'
     'daGeneralDominance.r'
     'dominanceMatrix.r'
+    'summaryDominanceAnalysis.r'
+    'daUtils.r'
