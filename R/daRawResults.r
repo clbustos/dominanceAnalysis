@@ -5,28 +5,16 @@
 daRawResults<-function(x,constants=c(),fit.functions="default",data=NULL,null.model=NULL, ...) {
   f<-formula(x)
   t.f<-terms(f)
-  if(is(x,"glm")) {
-	if(is.null(data)) {
-		data=x$data
-	}
-  } else
-  if(is(x,"lm")) {
-	  if(is.null(data) & !is.null(x$call$data)) {
-		data=get(as.character(x$call$data))
-	  }
-  } else if(is(x,"lmerMod")) {
-	if(is.null(data)) {
-		data=x@frame
-	}
-  } else if(is(x,"lmWithCov")) {
-  }
-  else {
-	stop("Not implemented")
-  }
   base.cov=NULL
   if(is(x,"lmWithCov")) {
 	base.cov=x$cov
-  } 
+  } else if (is.null(data)) {
+	data=getData(x)
+	if(is.null(data)) {
+		stop("Not implemented")
+	}
+	
+  }
   x.terms<-sort(attr(t.f,"term.labels"))
   respuesta<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]
   
@@ -80,7 +68,7 @@ daRawResults<-function(x,constants=c(),fit.functions="default",data=NULL,null.mo
 	  }
 	  raw.vals[[ff]]<-mm
    }
-   out<-list(fit.functions=ffn, fits=raw.vals,base.fits=fits,level=models$level)
+   out<-list(fit.functions=ffn, fits=raw.vals, base.fits=fits,level=models$level)
    class(out)<-"daRawResults"
    out
 }

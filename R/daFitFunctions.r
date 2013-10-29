@@ -1,4 +1,5 @@
 #' Standard fit function for regression
+#' Uses R^2 (coefficient of determination) as fit index
 #' @export
 da.lm.fit<-function(...) {
 	mc=match.call()
@@ -8,6 +9,11 @@ da.lm.fit<-function(...) {
 	}
 	 list(r2=summary(lm(x, data=mc$data))$r.squared)}
 }
+#' Uses fit indexes provided by Azen and Traxel(2009)
+#' - r2.m: McFadden(1974)
+#' - r2.n: Nagelkerke(1991)
+#' - r2.e: Estrella(1998)
+#' @export
 da.glm.fit<-function(...) {
 	mc=match.call()
 	function(x) {
@@ -25,6 +31,8 @@ da.glm.fit<-function(...) {
 	}
 
 }
+#'  Uses fit index provided by Luo and Azen (2012) 
+#' @export
 da.lmerMod.fit<-function(...) {
 	require(glmmextra)
 	mc=match.call()
@@ -39,7 +47,8 @@ da.lmerMod.fit<-function(...) {
 	}
 }
 
-
+#' Uses R^2 (coefficient of determination)
+#' @export
 da.lmWithCov.fit<-function(...) {
 	mc=match.call()
 	function(x) {

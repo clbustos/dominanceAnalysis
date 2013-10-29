@@ -9,10 +9,14 @@
 #' @return dominanceAnalysis object
 #' @export 
 dominanceAnalysis<-function(x,constants=c(),fit.functions="default",data=NULL,null.model=NULL, ...) {
+
+	daModels<-daSubmodels(x,constants)
 	daRaw<-daRawResults(x,constants,fit.functions,data,null.model,...)
 	daAverageByLevel<-daAverageContributionByLevel(daRaw)
 	daAverageGeneral<-lapply(daAverageByLevel,function(x) {colMeans(x[,-1])} )
 	list(
+	  predictors=daModels$predictors,
+	  constants=daModels$constants,
 	  fit.functions=daRaw$fit.functions,
 	  fits=daRaw,
 	  contribution.by.level=daAverageByLevel,

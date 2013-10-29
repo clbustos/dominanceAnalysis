@@ -21,3 +21,5 @@ Collate:
     'dominanceMatrix.r'
     'summaryDominanceAnalysis.r'
     'daUtils.r'
+    'bootDominanceAnalysis.r'
+    'summary.bootDominanceAnalysis.r'

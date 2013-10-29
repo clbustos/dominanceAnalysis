@@ -1,10 +1,10 @@
 #' Calculates the dominance for a given matrix
 #' Dominance is defined between a pair of variables if all values on a given
 #' variable are higher than for other variable
-dominanceMatrix<-function(x) {
+dominanceMatrix<-function(x,indefined.value=0.5) {
 	vars<-colnames(x)
 	  m<-length(vars)
-	  ma<-matrix(0,m,m,dimnames=list(vars,vars))
+	  ma<-matrix(indefined.value,m,m,dimnames=list(vars,vars))
 	  
 	  for(i in 1:(m-1)) {
 		for(j in (i+1):m) {
