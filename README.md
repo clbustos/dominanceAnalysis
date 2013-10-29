@@ -4,14 +4,15 @@ dominanceAnalysis
 Dominance Analysis (Azen and Bodescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013), for multiple regression models: OLS, GLM and HLM.
 
 Features:
-- Provides complete, conditional and general dominance analysis for lm, lmer and correlation matrix based regression
-- You could use multiple criteria for fitting (useful for HLM)
+- Provides complete, conditional and general dominance analysis for lm, lmer, glm(family=binomial) and correlation matrix based regression
+- You could use multiple criteria as fit indexes (useful for HLM)
 
 With lm (see Azen and Bodescu, 2003) 
 
     dominanceAnalysis(lm(y~x1+x2+x3))
     
 For hierarchinal linear models using lmer. You should provide a null model. Requires https://github.com/clbustos/r-glmmextra (see Luo and Azen, 2013).
+
     dominanceAnalysis(lmer(y~x1+x2+x3+(1|g)), null.model=lmer(y~(1|g)))
 
 For logistic regression (experimental) (see Azen and Traxel, 2009).
