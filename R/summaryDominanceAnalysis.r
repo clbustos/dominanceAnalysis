@@ -1,3 +1,4 @@
+#' TODO
 summary.dominanceAnalysis<-function(da,...) {
 	ff<-da$fit.functions
 	out=list()

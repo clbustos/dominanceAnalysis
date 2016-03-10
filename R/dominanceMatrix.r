@@ -1,10 +1,18 @@
 #' Calculates the dominance for a given matrix
+#' 
 #' Dominance is defined between a pair of variables if all values on a given
-#' variable are higher than for other variable
-dominanceMatrix<-function(x,indefined.value=0.5) {
+#' variable are higher than for other variable.
+#'
+#' @param x matrix with fit indexes
+#' @param undefined.value value when no dominance can be established
+#' @return A matrix representing dominance. 1 represented domination of the row variable 
+#'         over the column variable, 0 dominance of the column over the row variable.
+#'         Undefined dominance is represented by \code{undefined.value} parameter
+#'          
+dominanceMatrix<-function(x,undefined.value=0.5) {
 	vars<-colnames(x)
 	  m<-length(vars)
-	  ma<-matrix(indefined.value,m,m,dimnames=list(vars,vars))
+	  ma<-matrix(undefined.value,m,m,dimnames=list(vars,vars))
 	  
 	  for(i in 1:(m-1)) {
 		for(j in (i+1):m) {

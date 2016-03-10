@@ -1,8 +1,19 @@
 #' Uses covariance/correlation matrix for OLS
+#'
 #' We use for testing, comparing the results of papers with
 #' this package, but useful anyway
 #' @param f formula
 #' @param x correlation/covariance matrix
+#' @return 
+#' \item{coef}{coefficients of the regression}
+#' \item{r.squared}{\eqn{R^2} of the regression}
+#' \item{formula}{formula provided as parameter}
+#' \item{cov}{covariance/correlation matrix provided as parameter}
+#' @examples
+#' cov.m<-matrix(c(1,0.2,0.3, 0.2,1,0.5,0.3,0.5,1),3,3,
+#' dimnames=list(c("x1","x2","y"),c("x1","x2","y")))
+#' lmWithCov(y~x1+x2,cov.m)
+#' @export
 lmWithCov<-function(f,x) {
 	t.f<-terms(f)  
 	x.terms<-sort(attr(t.f,"term.labels"))

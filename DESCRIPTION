@@ -1,25 +1,15 @@
 Package: dominanceanalysis
-Title: 
+Title: Dominance Analysis
 Description: Dominance analysis based on Bodescu
-maintainer: Claudio Bustos<clbustos@gmail.com>
+Author: Claudio Bustos<clbustos@gmail.com>
+Maintainer: Claudio Bustos<clbustos@gmail.com>
 Version: 0.1
 Depends:
     R (>= 3.0.2)
 License: GPL-2
 LazyData: true
-Collate:
-    'dominanceAnalysis.r'
-    'dominanceanalysis-package.r'
-    'daSubmodels.r'
-    'daFitFunctions.r'
-    'lmWithCov.r'
-    'daRawResults.r'
-    'daAverageContributionByLevel.r'
-    'daCompleteDominance.r'
-    'daConditionalDominance.r'
-    'daGeneralDominance.r'
-    'dominanceMatrix.r'
-    'summaryDominanceAnalysis.r'
-    'daUtils.r'
-    'bootDominanceAnalysis.r'
-    'summary.bootDominanceAnalysis.r'
+Suggests:
+    glmmextra,
+    lme4,
+    boot
+RoxygenNote: 5.0.1

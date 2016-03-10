@@ -1,9 +1,31 @@
 #' Bootstrap analysis for Dominance Analysis
-#' Based on Azen and Bodescu(2006)
+#'
+#' Bootstrap procedure as presented on Azen and Bodescu(2003).
+#' Provides the expected level of dominance of variable \eqn{X_i} over \eqn{X_j},
+#' as the degree to which the pattern found on sample is reproduced on the 
+#' bootstrap samples.
+#' Use \code{\link{summary.bootDominanceAnalysis}} to get a nice formatted
+#' data.frame
+#' 
+#' @param x lm, glm, lmer model
+#' @param constants vector of variables to remain unchanged between models
+#' @param fit.functions list of functions which provides fit indexes for model. 
+#' @param null.model for mixel models, null model against to test the submodels
+#' @param ... Other arguments provided to lm or lmer (not implemented yet)
 #' @export
+#' @seealso \code{\link{summary.bootDominanceAnalysis}}
+#' @examples
+#' \dontrun{
+#' lm.1<-lm(Employed~.,longley)
+#' da.boot<-bootDominanceAnalysis(lm.1,R=1000)
+#' summary(da.boot)
+#' }
 bootDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default",null.model=NULL, ...) {
-	require(boot)
-	# Extract the data
+	if (!requireNamespace("boot", quietly = TRUE)) {
+    stop("boot package needed for this function to work. Please install it.",
+      call. = FALSE)
+  }
+  # Extract the data
 	total.data<-getData(x)
 	da.original<-dominanceAnalysis(x,constants=constants,fit.functions=fit.functions, null.model=null.model,...)
 	preds<-			da.original$predictor
@@ -43,8 +65,8 @@ bootDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default",null.m
 		names(out)<-c.names
 		out
 	}
-	res<-boot(total.data,boot.da,R=R)
-	out<-list(boot=res,preds=preds,fit.functions=ff,c.names=c.names, m.names=m.nombres,R=R)
+	res<-boot::boot(total.data,boot.da,R=R)
+	out<-list(boot=res, preds=preds, fit.functions=ff, c.names=c.names, m.names=m.nombres, R=R)
 	class(out)<-"bootDominanceAnalysis"
 	out
 }
