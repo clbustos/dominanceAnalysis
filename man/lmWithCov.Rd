@@ -2,7 +2,7 @@
 % Please edit documentation in R/lmWithCov.r
 \name{lmWithCov}
 \alias{lmWithCov}
-\title{Uses covariance/correlation matrix for OLS}
+\title{Uses covariance/correlation matrix for calculate OLS.}
 \usage{
 lmWithCov(f, x)
 }
@@ -18,12 +18,16 @@ lmWithCov(f, x)
 \item{cov}{covariance/correlation matrix provided as parameter}
 }
 \description{
-We use for testing, comparing the results of papers with
-this package, but useful anyway
+Calculate coefficients and \eqn{R^2} for an OLS regression
+Could be used with \code{\link{dominanceAnalysis}} to
+perform a dominance analysis without the original data
 }
 \examples{
 cov.m<-matrix(c(1,0.2,0.3, 0.2,1,0.5,0.3,0.5,1),3,3,
 dimnames=list(c("x1","x2","y"),c("x1","x2","y")))
-lmWithCov(y~x1+x2,cov.m)
+lm.cov<-lmWithCov(y~x1+x2,cov.m)
+\dontrun{
+da<-dominanceAnalysis(lm.cov)
+}
 }
 

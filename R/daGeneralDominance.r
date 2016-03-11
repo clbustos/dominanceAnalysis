@@ -1,5 +1,7 @@
 #' Matrix of General dominance of one variable over another
 #' Uses daRawResults as input
+#' @keywords internal
+#' @family dominance matrices
 daGeneralDominance<-function(daRR) {
   daACBL<-daAverageContributionByLevel(daRR)
   analize<-function(x) {

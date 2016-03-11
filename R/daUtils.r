@@ -1,9 +1,14 @@
 #' Return the index of row equals to r on m
 #' @param m matrix
 #' @param r row
+#' @keywords internal
 getEqualRowId<-function(m,r) {
 	which(rowSums(t(t(m)==r))==length(r))
 }
+
+#' Returns data from different models
+#'
+#' @keywords internal
 
 getData<-function(x) {
   data=NULL;

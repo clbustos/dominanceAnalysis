@@ -10,8 +10,14 @@ daAverageContributionByLevel(x)
 \arguments{
 \item{x}{daRawResults object}
 }
+\value{
+list, with key named as a fit index
+              and values are matrix, with the average
+              contribution of each variable on every level
+}
 \description{
 Returns the average contribution by level
 presented usually as row between contributions by predictors
 }
+\keyword{internal}
 

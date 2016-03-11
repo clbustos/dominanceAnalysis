@@ -2,13 +2,16 @@
 % Please edit documentation in R/daConditionalDominance.r
 \name{daConditionalDominance}
 \alias{daConditionalDominance}
-\title{Matrix of Conditional dominance of one variable over another
-Uses daRawResults as input}
+\title{Matrix of Conditional dominance of one variable over another.}
 \usage{
 daConditionalDominance(daRR)
 }
 \description{
-Matrix of Conditional dominance of one variable over another
 Uses daRawResults as input
 }
+\seealso{
+Other dominance matrices: \code{\link{daCompleteDominance}},
+  \code{\link{daGeneralDominance}}
+}
+\keyword{internal}
 

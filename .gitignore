@@ -1,3 +1,8 @@
 ..Rcheck
 *.tar.gz
 R/.Rhistory
+.Rproj.user
+..pdf
+.Rbuildignore
+.Rhistory
+dominanceanalysis.Rproj

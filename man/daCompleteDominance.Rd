@@ -11,4 +11,9 @@ daCompleteDominance(daRR)
 Matrix of Complete dominance of one variable over another
 Uses daRawResults as input
 }
+\seealso{
+Other dominance matrices: \code{\link{daConditionalDominance}},
+  \code{\link{daGeneralDominance}}
+}
+\keyword{internal}
 

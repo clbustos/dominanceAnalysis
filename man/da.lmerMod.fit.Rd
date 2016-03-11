@@ -2,7 +2,7 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lmerMod.fit}
 \alias{da.lmerMod.fit}
-\title{Provides fit indexes for mixed models, based on Luo and Azen (2012)}
+\title{Provides fit indexes for mixed models, based on Luo and Azen (2012).}
 \usage{
 da.lmerMod.fit(...)
 }
@@ -10,8 +10,12 @@ da.lmerMod.fit(...)
 Requires glmmextra @url{https://github.com/clbustos/r-glmmextra}
 }
 \references{
-\itemize {
+\itemize{
 \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 }
+}
+\seealso{
+Other fit indexes: \code{\link{da.glm.fit}},
+  \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}}
 }
 

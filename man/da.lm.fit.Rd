@@ -2,11 +2,16 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lm.fit}
 \alias{da.lm.fit}
-\title{Provides coefficient of determination for \code{lm} models}
+\title{Provides coefficient of determination for \code{lm} models.}
 \usage{
 da.lm.fit(...)
 }
 \description{
 Uses \eqn{R^2} (coefficient of determination) as fit index
+}
+\seealso{
+Other fit indexes: \code{\link{da.glm.fit}},
+  \code{\link{da.lmWithCov.fit}},
+  \code{\link{da.lmerMod.fit}}
 }
 

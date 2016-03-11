@@ -2,12 +2,16 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lmWithCov.fit}
 \alias{da.lmWithCov.fit}
-\title{Provides coefficient of determination for lineal models, using covariance/correlation matrix}
+\title{Provides coefficient of determination for lineal models, using covariance/correlation matrix.}
 \usage{
 da.lmWithCov.fit(...)
 }
 \description{
 Uses \eqn{R^2} (coefficient of determination)
 See \code{\link{lmWithCov}}
+}
+\seealso{
+Other fit indexes: \code{\link{da.glm.fit}},
+  \code{\link{da.lm.fit}}, \code{\link{da.lmerMod.fit}}
 }
 

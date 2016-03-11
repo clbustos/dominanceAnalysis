@@ -1,28 +1,29 @@
-#' Returns all the submodels derived from full models. 
+#' Returns all the submodels derived from full models.
 #' You could set some variables as constantes, limiting the number of models.
 #' Includes, by default, the null model
 #' @param x regression class (lm or lmer)
 #' @param constants vector of constants
-#' @return list level, pred.matrix, predictors, response, constants
+#' @return list with elements level, pred.matrix, predictors, response, constants
 #' @export
+#' @keywords internal
 daSubmodels<-function(x,constants=NULL) {
   f<-formula(x)
-  t.f<-terms(f)  
+  t.f<-terms(f)
   x.terms<-sort(attr(t.f,"term.labels"))
   respuesta<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]
-  
+
   if(length(constants)>0) {
 	if(sum(constants %in% x.terms)!=length(constants)) {
-		stop("all constants should be in predictors") 
+		stop("all constants should be in predictors")
 	}
 	x.terms<-x.terms[-which(x.terms %in% constants)]
   }
-  # Every grouped term should be considered as a constant 
+  # Every grouped term should be considered as a constant
   # Because you don't want to mess with it!!!
   gt<-grep("\\|",x.terms)
   if(length(gt)>0) {
 	gt.2<-paste("(",x.terms[gt],")")
-	
+
 	constants<-c(gt.2,constants)
 	x.terms<-x.terms[-gt]
   }
@@ -32,7 +33,7 @@ daSubmodels<-function(x,constants=NULL) {
   prot.model<-rep(NA,m)
   names(prot.model)<-x.terms
   c.length<-length(constants)
-  
+
   # Construct the data.frame
   d.f<-NULL
   model.predictors=list()
@@ -57,6 +58,9 @@ daSubmodels<-function(x,constants=NULL) {
   class(out)<-"daSubmodels"
   out
 }
+
+#' @keywords internal
+
 names.daSubmodels<-function(x) {
 	pm<-x$pred.matrix
 	out<-character(nrow(pm))
@@ -64,7 +68,7 @@ names.daSubmodels<-function(x) {
 	if(!is.null(x$constants)) {
 	base<-paste0(x$constants,collapse="+")
 	}
-	
+
 	response<-x$response
 	pred<-x$predictors
 	for(i in 1:nrow(pm)) {
@@ -82,6 +86,8 @@ names.daSubmodels<-function(x) {
 #' @param env environment
 #' @return list
 #' @export
+#' @keywords internal
+
 formulas.daSubmodels<-function(x,env=parent.frame()) {
 	pm<-x$pred.matrix
 	out<-list()
@@ -89,7 +95,7 @@ formulas.daSubmodels<-function(x,env=parent.frame()) {
 	if(!is.null(x$constants)) {
 	base<-paste0(x$constants,collapse="+")
 	}
-	
+
 	response<-x$response
 	pred<-x$predictors
 	for(i in 1:nrow(pm)) {
