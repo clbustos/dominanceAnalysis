@@ -9,7 +9,6 @@ getEqualRowId<-function(m,r) {
 #' Returns data from different models
 #'
 #' @keywords internal
-
 getData<-function(x) {
   data=NULL;
   if(is(x,"glm")) {

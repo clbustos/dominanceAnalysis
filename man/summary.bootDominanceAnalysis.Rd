@@ -2,11 +2,11 @@
 % Please edit documentation in R/summary.bootDominanceAnalysis.r
 \name{summary.bootDominanceAnalysis}
 \alias{summary.bootDominanceAnalysis}
-\title{Summary for bootDominanceAnalysis}
+\title{Summary for bootDominanceAnalysis.}
 \usage{
 \method{summary}{bootDominanceAnalysis}(x, ...)
 }
 \description{
-Summary for bootDominanceAnalysis
+Summary for bootDominanceAnalysis.
 }
 

@@ -39,7 +39,7 @@ lmWithCov<-function(f,x) {
 	class(out)<-"lmWithCov"
 	out
 }
-
+# @internal
 formula.lmWithCov<-function(x) {
 	x$formula
 }

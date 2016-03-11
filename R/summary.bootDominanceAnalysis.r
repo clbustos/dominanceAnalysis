@@ -1,4 +1,4 @@
-#' Summary for bootDominanceAnalysis 
+#' Summary for bootDominanceAnalysis.
 #'@export
 summary.bootDominanceAnalysis<-function(x,...) {
 	out<-list()
@@ -26,6 +26,7 @@ summary.bootDominanceAnalysis<-function(x,...) {
 	out
 }
 
+#' @export
 print.summary.bootDominanceAnalysis<-function(x,digits=3,...) {
 	cat("Dominance Analysis\n")
 	cat("==================\n")
