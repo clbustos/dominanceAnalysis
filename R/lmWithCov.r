@@ -33,7 +33,6 @@ lmWithCov<-function(f,x) {
 	} else {
 		betas.i<-numeric(0)
 		r.2=0
-
 	}
 	out<-list(coef=as.numeric(betas.i),r.squared=as.numeric(r.2),formula=f,cov=x)
 	class(out)<-"lmWithCov"

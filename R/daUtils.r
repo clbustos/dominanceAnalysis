@@ -12,13 +12,20 @@ getEqualRowId<-function(m,r) {
 getData<-function(x) {
   data=NULL;
   if(is(x,"glm")) {
-	data=x$data
+    if(!is.null(x$data) & !is(x$data,"environment")) {
+      data=x$data
+    } else {
+      data=x$model
+    }
   } else if(is(x,"lm")) {
 	  if(!is.null(x$call$data)) {
-		data=get(as.character(x$call$data))
+      data=get(as.character(x$call$data))
 	  } else {
-		stop("Can't get data for lm")
-	  }
+      data=lm.1$model
+    }
+    if(is.null(data)) {
+      stop("Can't get data")
+    }
   } else if(is(x,"lmerMod")) {
 		data=x@frame
   }

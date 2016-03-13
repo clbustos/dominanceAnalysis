@@ -125,3 +125,29 @@ da.lmWithCov.fit<-function(...) {
 		list(r2=lmWithCov(x,mc$base.cov)$r.squared)
 	}
 }
+
+
+#' Provides coefficient of determination for multivariate models.
+#' Uses
+#' @return A list with several fit indexes
+#' \item{r.squared.xy}{\eqn{R^2_{XY}}}
+#' \item{p.squared.yx}{\eqn{P^2_{YX}}}
+#' See \code{\link{mlmWithCov}}
+#' @export
+#' @references
+#' \itemize{
+#' \item Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157–180.
+#' }
+#' @inheritParams using-fit-indexes
+#' @family fit indexes
+
+da.mlmWithCov.fit<-function(...) {
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return(c("r.squared.xy","p.squared.yx"))
+    }
+    mlm.1<-mlmWithCov(x,mc$base.cov)
+    list(r.squared.xy=mlm.1$r.squared.xy, p.squared.yx=mlm.1$p.squared.yx)
+  }
+}

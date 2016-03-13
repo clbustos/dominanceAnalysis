@@ -7,7 +7,7 @@ daRawResults<-function(x,constants=c(),fit.functions="default",data=NULL,null.mo
   f<-formula(x)
   t.f<-terms(f)
   base.cov<-family.glm<-NULL
-  if(is(x,"lmWithCov")) {
+  if(is(x,"lmWithCov") | is (x,"mlmWithCov")) {
   	base.cov=x$cov
   } else if (is.null(data)) {
 	  data=getData(x)
@@ -25,7 +25,7 @@ daRawResults<-function(x,constants=c(),fit.functions="default",data=NULL,null.mo
   fm<-formulas.daSubmodels(models)
   if(fit.functions=="default") {
 	# Should return
-	fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(data=data,null.model=null.model,base.cov=base.cov,family.glm=family.glm))
+	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(data=data,null.model=null.model,base.cov=base.cov,family.glm=family.glm))
   }
   ffn=fit.functions("names")
 
