@@ -25,6 +25,7 @@ Provides fit indexes for GLM models, based on Azen and Traxel(2009)
 \seealso{
 Other fit indexes: \code{\link{da.lm.fit}},
   \code{\link{da.lmWithCov.fit}},
-  \code{\link{da.lmerMod.fit}}
+  \code{\link{da.lmerMod.fit}},
+  \code{\link{da.mlmWithCov.fit}}
 }
 

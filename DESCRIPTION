@@ -10,7 +10,6 @@ Depends:
 License: GPL-2
 LazyData: true
 Suggests:
-    glmmextra,
     lme4,
     boot
 RoxygenNote: 5.0.1

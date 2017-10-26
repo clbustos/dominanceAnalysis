@@ -32,9 +32,9 @@ dominanceAnalysis(x, constants = c(), fit.functions = "default",
 \item{general}{Matrix for general dominance. }
 }
 \description{
-Dominance analysis Based on Azen and Bodescu(1993) and all their derivations. 
+Dominance analysis Based on Azen and Bodescu(1993) and all their derivations.
 The dominance of one variable over another is defined by the improvement on
-prediction over all the subset of other variables, based on one or more fit indexes. 
+prediction over all the subset of other variables, based on one or more fit indexes.
 The original paper (Azen & Bodescu, 1993) defines that variable \eqn{X_1} dominates \eqn{X_2} when the contribution of \eqn{X_1} are higher on every submodel of predictors that not include \eqn{X_1} or \eqn{X_2}
 Later, Azen & Bodescu (2003), define two other types of dominance. The original dominance is called complete dominance. Conditional dominance is calculated for average contribution on each level, and general dominance is calculated for the mean of average contribution on each level.
 }

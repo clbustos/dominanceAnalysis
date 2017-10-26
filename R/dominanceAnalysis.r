@@ -1,8 +1,8 @@
 #' Dominance analysis for OLS, GLM and LMM models
-#' 
-#' Dominance analysis Based on Azen and Bodescu(1993) and all their derivations. 
+#'
+#' Dominance analysis Based on Azen and Bodescu(1993) and all their derivations.
 #' The dominance of one variable over another is defined by the improvement on
-#' prediction over all the subset of other variables, based on one or more fit indexes. 
+#' prediction over all the subset of other variables, based on one or more fit indexes.
 #' The original paper (Azen & Bodescu, 1993) defines that variable \eqn{X_1} dominates \eqn{X_2} when the contribution of \eqn{X_1} are higher on every submodel of predictors that not include \eqn{X_1} or \eqn{X_2}
 #' Later, Azen & Bodescu (2003), define two other types of dominance. The original dominance is called complete dominance. Conditional dominance is calculated for average contribution on each level, and general dominance is calculated for the mean of average contribution on each level.
 #'
@@ -15,11 +15,11 @@
 #' }
 #' @param x lm, glm, lmer model
 #' @param constants vector of variables to remain unchanged between models
-#' @param fit.functions list of functions which provides fit indexes for model. 
+#' @param fit.functions list of functions which provides fit indexes for model.
 #' @param data optional data.frame to which fit the formulas
 #' @param null.model for mixel models, null model against to test the submodels
 #' @param ... Other arguments provided to lm or lmer (not implemented yet)
-#' @return 
+#' @return
 #' \item{predictors}{Vector of predictors}
 #' \item{constants}{Vector constant variables}
 #' \item{fit.functions}{Name of method used to provide fit indexes}
@@ -41,22 +41,30 @@
 #' da<-dominanceAnalysis(lm.1)
 #' # Maintain Year constant
 #' da.no.year<-dominanceAnalysis(lm.1,constants='Year')
-#' @export 
-dominanceAnalysis<-function(x,constants=c(),fit.functions="default",data=NULL,null.model=NULL, ...) {
-
-	daModels<-daSubmodels(x,constants)
-	daRaw<-daRawResults(x,constants,fit.functions,data,null.model,...)
-	daAverageByLevel<-daAverageContributionByLevel(daRaw)
-	daAverageGeneral<-lapply(daAverageByLevel,function(x) {colMeans(x[,-1])} )
-	list(
-	  predictors=daModels$predictors,
-	  constants=daModels$constants,
-	  fit.functions=daRaw$fit.functions,
-	  fits=daRaw,
-	  contribution.by.level=daAverageByLevel,
-	  contribution.average=daAverageGeneral,
-	  complete=daCompleteDominance(daRaw),
-	  conditional=daConditionalDominance(daRaw),
-	  general=daGeneralDominance(daRaw)
-	  )
-}
+#' @export
+dominanceAnalysis <-
+  function(x,
+           constants = c(),
+           fit.functions = "default",
+           data = NULL,
+           null.model = NULL,
+           ...) {
+    daModels <- daSubmodels(x, constants)
+    daRaw <- daRawResults(x, constants, fit.functions, data, null.model, ...)
+    daAverageByLevel <- daAverageContributionByLevel(daRaw)
+    daAverageGeneral <-
+      lapply(daAverageByLevel, function(x) {
+        colMeans(x[, -1])
+      })
+    list(
+      predictors = daModels$predictors,
+      constants = daModels$constants,
+      fit.functions = daRaw$fit.functions,
+      fits = daRaw,
+      contribution.by.level = daAverageByLevel,
+      contribution.average = daAverageGeneral,
+      complete = daCompleteDominance(daRaw),
+      conditional = daConditionalDominance(daRaw),
+      general = daGeneralDominance(daRaw)
+    )
+  }
