@@ -3,7 +3,7 @@
 #' \code{dominanceAnalysis} try to infer, based on the class of the
 #' model provided, the appropiate fit indexes, using the scheme
 #' da.CLASS.fit for name. This method have two interfaces, one for
-#' retreive the names of fit indexes, and other to retrieve the
+#' retrieve the names of fit indexes, and other to retrieve the
 #' indexes based on data.
 #'
 #' Interfaces are
@@ -65,9 +65,11 @@ da.glm.fit<-function(...) {
 
 		l0=-0.5*g1$null.deviance
 		l1=logLik(g1)
-    n<-nrow(mc$data)
-    r2.cs<-1-(exp(l0)/exp(l1))^(2/n)
-		list(
+		n<-nrow(mc$data)
+
+    r2.cs<-1-exp(l0-l1)^(2/n)
+    #cat(l0,",",l1,",",n,",",r2.cs,"\n")
+    list(
 		  r2.m=1-(l1/l0),
 		  r2.cs=r2.cs,
 		  r2.n=r2.cs/(1-exp(l0)^(2/n)),
