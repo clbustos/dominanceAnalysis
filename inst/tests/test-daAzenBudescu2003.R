@@ -5,7 +5,7 @@ cor.m<-matrix(c(
 0.6	,	1.0	,	0.8,	0.1,	0.3,
 0.3	,	0.8	,	1.0,	0.1,	0.1,
 0.4	,	0.1	,	0.1,	1.0,	0.5,
-0.5	,	0.3	,	0.1,	0.5,	1.0)	
+0.5	,	0.3	,	0.1,	0.5,	1.0)
 ,5,5,byrow=T,
 dimnames=list(nam,nam)
 )
@@ -53,5 +53,5 @@ expected.general.dominance<-matrix(c(
 ),4,4,byrow=T)
 general.dominance<-daGeneralDominance(rawR)
 expect_equivalent(expected.general.dominance,general.dominance$r2)
-print(summary(dominanceAnalysis(lwith)))
+#print(summary(dominanceAnalysis(lwith)))
 })
