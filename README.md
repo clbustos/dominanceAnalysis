@@ -29,6 +29,11 @@ Bootstrap analysis (Azen and Bodescu, 2006)
 
     bootDominanceAnalysis(lm(y~x1+x2+x3))
 
+Contributors
+============
+
+* Filipa Soares: Bug report.
+
 References
 ==========
 - Azen, R. & Budescu, D. (2003). The Dominance Analysis Approach for Comparing Predictors in Multiple Regression. Psychological Methods, 8 (2), 129-148.

@@ -20,4 +20,3 @@ Returns the average contribution by level
 presented usually as row between contributions by predictors
 }
 \keyword{internal}
-

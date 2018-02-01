@@ -8,6 +8,7 @@
 #' data.frame
 #'
 #' @param x lm, glm, lmer model
+#' @param R number of bootstrap resamples
 #' @param constants vector of variables to remain unchanged between models
 #' @param fit.functions list of functions which provides fit indexes for model.
 #' @param null.model for mixel models, null model against to test the submodels
@@ -61,7 +62,7 @@ bootDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default",null.m
 	boot.da<-function(d,i) {
 		ss<-d[i,]
 		da<-dominanceAnalysis(x,constants=constants,fit.functions=fit.functions,data=ss, null.model=null.model,...)
-		da$complete
+
 		out<-c(aplanar(da$complete),aplanar(da$conditional),aplanar(da$general))
 		names(out)<-c.names
 		out

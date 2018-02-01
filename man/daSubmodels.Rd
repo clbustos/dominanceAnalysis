@@ -22,4 +22,3 @@ You could set some variables as constantes, limiting the number of models.
 Includes, by default, the null model
 }
 \keyword{internal}
-

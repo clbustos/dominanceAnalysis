@@ -10,6 +10,8 @@ bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
 \arguments{
 \item{x}{lm, glm, lmer model}
 
+\item{R}{number of bootstrap resamples}
+
 \item{constants}{vector of variables to remain unchanged between models}
 
 \item{fit.functions}{list of functions which provides fit indexes for model.}
@@ -21,7 +23,7 @@ bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
 \description{
 Bootstrap procedure as presented on Azen and Bodescu(2003).
 Provides the expected level of dominance of variable \eqn{X_i} over \eqn{X_j},
-as the degree to which the pattern found on sample is reproduced on the 
+as the degree to which the pattern found on sample is reproduced on the
 bootstrap samples.
 Use \code{\link{summary.bootDominanceAnalysis}} to get a nice formatted
 data.frame
@@ -36,4 +38,3 @@ summary(da.boot)
 \seealso{
 \code{\link{summary.bootDominanceAnalysis}}
 }
-

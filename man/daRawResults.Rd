@@ -15,4 +15,3 @@ Provides name functions, base fit values and
 matrix for models vs predictors importance
 }
 \keyword{internal}
-

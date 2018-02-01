@@ -2,8 +2,8 @@
 % Please edit documentation in R/dominanceanalysis-package.r
 \docType{package}
 \name{dominanceanalysis-package}
-\alias{dominanceanalysis}
 \alias{dominanceanalysis-package}
+\alias{dominanceanalysis}
 \title{Dominance analysis for general, generalized and mixed linear models}
 \description{
 Dominance analysis for general, generalized and mixed linear models
@@ -42,9 +42,6 @@ da.boot<-bootDominanceAnalysis(lm.1,R=1000)
 summary(da.boot)
 }
 }
-\author{
-Claudio Bustos \email{clbustos_at_gmail_com}
-}
 \references{
 \itemize{
 \item Budescu, D. V. (1993). Dominance analysis: A new approach to the problem of relative importance of predictors in multiple regression. Psychological Bulletin, 114(3), 542-551. doi:10.1037/0033-2909.114.3.542
@@ -59,4 +56,6 @@ Claudio Bustos \email{clbustos_at_gmail_com}
 \seealso{
 \code{\link{dominanceAnalysis}} , \code{\link{bootDominanceAnalysis}}
 }
-
+\author{
+Claudio Bustos \email{clbustos_at_gmail_com}
+}

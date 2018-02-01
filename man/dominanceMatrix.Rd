@@ -20,4 +20,3 @@ A matrix representing dominance. 1 represented domination of the row variable
 Dominance is defined between a pair of variables if all values on a given
 variable are higher than for other variable.
 }
-

@@ -21,7 +21,7 @@ getData<-function(x) {
 	  if(!is.null(x$call$data)) {
       data=get(as.character(x$call$data))
 	  } else {
-      data=lm.1$model
+      data=x$model
     }
     if(is.null(data)) {
       stop("Can't get data")

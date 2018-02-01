@@ -14,4 +14,3 @@ Other dominance matrices: \code{\link{daCompleteDominance}},
   \code{\link{daGeneralDominance}}
 }
 \keyword{internal}
-

@@ -16,4 +16,3 @@ Other dominance matrices: \code{\link{daConditionalDominance}},
   \code{\link{daGeneralDominance}}
 }
 \keyword{internal}
-

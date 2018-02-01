@@ -61,4 +61,3 @@ da.no.year<-dominanceAnalysis(lm.1,constants='Year')
 \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 }
 }
-

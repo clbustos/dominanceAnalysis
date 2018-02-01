@@ -30,4 +30,3 @@ lm.cov<-lmWithCov(y~x1+x2,cov.m)
 da<-dominanceAnalysis(lm.cov)
 }
 }
-

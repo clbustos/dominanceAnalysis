@@ -19,7 +19,7 @@ function. See \link{using-fit-indexes} description for interface
 \code{dominanceAnalysis} try to infer, based on the class of the
 model provided, the appropiate fit indexes, using the scheme
 da.CLASS.fit for name. This method have two interfaces, one for
-retreive the names of fit indexes, and other to retrieve the
+retrieve the names of fit indexes, and other to retrieve the
 indexes based on data.
 }
 \details{
@@ -31,4 +31,3 @@ Interfaces are
 }
 \code{\link{daRawResults}}
 }
-
