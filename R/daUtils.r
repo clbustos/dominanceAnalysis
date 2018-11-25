@@ -10,6 +10,7 @@ getEqualRowId<-function(m,r) {
 #'
 #' @keywords internal
 getData<-function(x) {
+
   data=NULL;
   if(is(x,"glm")) {
     if(!is.null(x$data) & !is(x$data,"environment")) {
@@ -18,7 +19,9 @@ getData<-function(x) {
       data=x$model
     }
   } else if(is(x,"lm")) {
-	  if(!is.null(x$call$data)) {
+
+    if(!is.null(x$call$data)) {
+      #print(where(as.character(x$call$data)))
       data=get(as.character(x$call$data))
 	  } else {
       data=x$model

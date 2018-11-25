@@ -27,3 +27,4 @@ Other fit indexes: \code{\link{da.glm.fit}},
   \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}},
   \code{\link{da.lmerMod.fit}}
 }
+\concept{fit indexes}

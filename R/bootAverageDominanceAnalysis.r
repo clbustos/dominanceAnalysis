@@ -25,13 +25,13 @@ bootAverageDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default"
          call. = FALSE)
   }
   # Extract the data
-  total.data<-getData(x)
-  da.original<-dominanceAnalysis(x,constants=constants,fit.functions=fit.functions, null.model=null.model, ...)
-  preds<-			da.original$predictor
-  n.preds<-length(preds)
-  ff<-	da.original$fit.functions
+  total.data  <- getData(x)
+  da.original <- dominanceAnalysis(x,constants=constants,fit.functions=fit.functions, null.model=null.model, ...)
+  preds       <- da.original$predictor
+  n.preds     <- length(preds)
+  ff          <- da.original$fit.functions
 
-  eg<-expand.grid(preds,ff)
+  eg          <- expand.grid(preds,ff)
 
   boot.da<-function(d,i) {
     ss<-d[i,]
@@ -39,9 +39,8 @@ bootAverageDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default"
     as.numeric(sapply(da$contribution.average,I))
   }
 
-  res<-boot::boot(total.data,boot.da,R=R)
-  out<-list(boot=res, preds=preds, fit.functions=ff, R=R, eg=eg)
-  class(out)<-"bootAverageDominanceAnalysis"
+  res         <- boot::boot(total.data,boot.da,R=R)
+  out         <- list(boot=res, preds=preds, fit.functions=ff, R=R, eg=eg)
+  class(out)  <- "bootAverageDominanceAnalysis"
   out
-
 }

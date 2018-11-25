@@ -28,3 +28,4 @@ Other fit indexes: \code{\link{da.lm.fit}},
   \code{\link{da.lmerMod.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
+\concept{fit indexes}

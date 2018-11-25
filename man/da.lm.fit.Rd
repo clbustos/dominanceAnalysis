@@ -15,3 +15,4 @@ Other fit indexes: \code{\link{da.glm.fit}},
   \code{\link{da.lmerMod.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
+\concept{fit indexes}

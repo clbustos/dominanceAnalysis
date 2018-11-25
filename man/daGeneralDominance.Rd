@@ -15,4 +15,5 @@ Uses daRawResults as input
 Other dominance matrices: \code{\link{daCompleteDominance}},
   \code{\link{daConditionalDominance}}
 }
+\concept{dominance matrices}
 \keyword{internal}

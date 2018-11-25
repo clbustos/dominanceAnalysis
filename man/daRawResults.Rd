@@ -6,8 +6,8 @@
 Provides name functions, base fit values and
 matrix for models vs predictors importance}
 \usage{
-daRawResults(x, constants = c(), fit.functions = "default", data = NULL,
-  null.model = NULL, ...)
+daRawResults(x, constants = c(), fit.functions = "default",
+  data = NULL, null.model = NULL, ...)
 }
 \description{
 Retrieve raw results for dominance analysis

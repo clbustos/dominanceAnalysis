@@ -19,3 +19,4 @@ Other fit indexes: \code{\link{da.glm.fit}},
   \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
+\concept{fit indexes}
