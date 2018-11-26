@@ -18,9 +18,7 @@ Provides coefficient of determination for multivariate models.
 Uses
 }
 \references{
-\itemize{
-\item Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157–180.
-}
+Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
 }
 \seealso{
 Other fit indexes: \code{\link{da.glm.fit}},

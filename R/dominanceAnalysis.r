@@ -10,7 +10,7 @@
 #' \describe{
 #' \item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit}}}
 #' \item{glm}{ Provides three of the four fit indexes recommended by Azen & Traxel (2009):  McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
-#' \item{lmerMod}{ Provides  four fit indexes recommended by Lou & Azen (2012). See \code{\link{da.lmerMod}}}
+#' \item{lmerMod}{ Provides  four fit indexes recommended by Lou & Azen (2012). See \code{\link{da.lmerMod.fit}}}
 #' \item{lmWithCov}{Provides \eqn{R^2} for a correlation/covariance matrix. See \code{\link{lmWithCov}} to create the model and \code{\link{da.lmWithCov.fit}} for the fit index function}
 #' }
 #' @param x lm, glm, lmer model
@@ -23,7 +23,7 @@
 #' \item{predictors}{Vector of predictors}
 #' \item{constants}{Vector constant variables}
 #' \item{fit.functions}{Name of method used to provide fit indexes}
-#' \item{fits}{raw fits indexes \code{\link{daRaw}}}
+#' \item{fits}{raw fits indexes \code{\link{daRawResults}}}
 #' \item{contribution.by.level}{Mean contribution by level}
 #' \item{contribution.average}{List with mean contribution for all levels, for each fit index}
 #' \item{complete}{Matrix for complete dominance.}

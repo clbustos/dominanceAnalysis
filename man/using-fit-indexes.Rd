@@ -12,9 +12,6 @@
 
 \item{family.glm}{family for glm models}
 }
-\value{
-function. See \link{using-fit-indexes} description for interface
-}
 \description{
 \code{dominanceAnalysis} try to infer, based on the class of the
 model provided, the appropiate fit indexes, using the scheme
@@ -23,7 +20,7 @@ retrieve the names of fit indexes, and other to retrieve the
 indexes based on data.
 }
 \details{
-Interfaces are
+Interfaces are:
 \itemize{
 \item \code{da.CLASS.fit("names")} returns a vector with names for fit Indexes
 \item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one param,

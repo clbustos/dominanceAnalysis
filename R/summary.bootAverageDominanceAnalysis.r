@@ -1,12 +1,12 @@
 #' Summary for bootAverageDominanceAnalysis.
 #'@export
-summary.bootAverageDominanceAnalysis<-function(x,...) {
-	bs.mean<-colMeans(x$boot$t)
-	bs.se<-apply(x$boot$t,2,sd)
-	x.table<-data.frame(x$eg,original=x$boot$t0,bs.mean=bs.mean,bias=bs.mean-x$boot$t0,bs.se=bs.se)
+summary.bootAverageDominanceAnalysis<-function(object,...) {
+	bs.mean<-colMeans(object$boot$t)
+	bs.se<-apply(object$boot$t,2,sd)
+	x.table<-data.frame(object$eg, original=object$boot$t0, bs.mean=bs.mean,bias=bs.mean-object$boot$t0,bs.se=bs.se)
 	colnames(x.table)<-c("Var","Fit.Index","original","bs.E","bias","bs.SE")
 
-	out<-split(x.table,x.table$Fit.Index)
+	out<-split(x.table, x.table$Fit.Index)
 	attr(out,"R")<-x$R
 	class(out)<-"summary.bootAverageDominanceAnalysis"
 	out

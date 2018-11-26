@@ -4,7 +4,7 @@
 #' Use \code{\link{summary.bootAverageDominanceAnalysis}} to get a nice formatted
 #' data.frame
 #'
-#' @param x lm, glm, lmer model
+#' @param object lm, glm, lmer model
 #' @param R number on bootstrap resamples
 #' @param constants vector of variables to remain unchanged between models
 #' @param fit.functions list of functions which provides fit indexes for model.
@@ -19,14 +19,14 @@
 #' summary(da.ave.boot)
 #' }
 
-bootAverageDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default",null.model=NULL, ...) {
+bootAverageDominanceAnalysis<-function(object,R,constants=c(),fit.functions="default",null.model=NULL, ...) {
   if (!requireNamespace("boot", quietly = TRUE)) {
     stop("boot package needed for this function to work. Please install it.",
          call. = FALSE)
   }
   # Extract the data
-  total.data  <- getData(x)
-  da.original <- dominanceAnalysis(x,constants=constants,fit.functions=fit.functions, null.model=null.model, ...)
+  total.data  <- getData(object)
+  da.original <- dominanceAnalysis(object, constants=constants,fit.functions=fit.functions, null.model=null.model, ...)
   preds       <- da.original$predictor
   n.preds     <- length(preds)
   ff          <- da.original$fit.functions
@@ -35,7 +35,7 @@ bootAverageDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default"
 
   boot.da<-function(d,i) {
     ss<-d[i,]
-    da<-dominanceAnalysis(x,constants=constants,fit.functions=fit.functions,data=ss, null.model=null.model,...)
+    da<-dominanceAnalysis(object,constants=constants,fit.functions=fit.functions,data=ss, null.model=null.model,...)
     as.numeric(sapply(da$contribution.average,I))
   }
 

@@ -7,19 +7,30 @@
 da.glm.fit(...)
 }
 \value{
-A list with several fit indexes
-\item{r2.m}{McFadden(1974)}
-\item{r2.cs}{Cox and Snell(1989). Use as a reference, because don't have 1 as upper bound}
-\item{r2.n}{Nagelkerke(1991), that corrects the upper bound of Cox and Snell(1989) index }
-\item{r2.e}{Estrella(1998)}
+A function described by \link{using-fit-indexes}. You could retrieve following indexes
+\describe{
+\item{\code{r2.m}}{McFadden(1974)}
+\item{\code{r2.cs}}{Cox and Snell(1989). Use as a reference, because don't have 1 as upper bound}
+\item{\code{r2.n}}{Nagelkerke(1991), that corrects the upper bound of Cox and Snell(1989) index }
+\item{\code{r2.e}}{Estrella(1998)}
+}
 }
 \description{
-Provides fit indexes for GLM models, based on Azen and Traxel(2009)
+Check \link{daRawResults}.
+}
+\examples{
+x1<-rnorm(1000)
+x2<-rnorm(1000)
+x3<-rnorm(1000)
+y<-factor(rbinom(1000,  size=1,prob = exp(x1+x2+x3)/(1+exp(x1+x2+x3))))
+da.glm.fit(glm(y~x1+x2,family='binomial'))("names")
+da.glm.fit(glm(y~x1+x2,family='binomial'), family.glm='binomial')(y~x1)
 }
 \references{
 \itemize{
-\item Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. Journal of Educational and Behavioral Statistics, 34(3), 319-347. doi:10.3102/1076998609332754
-\item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. Biometrika, 78(3), 691–692. doi:10.1093/biomet/78.3.691
+\item Azen, R. and Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. \emph{Journal of Educational and Behavioral Statistics, 34} (3), 319-347. doi:10.3102/1076998609332754.
+
+\item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. \emph{Biometrika, 78}(3), 691-692. doi:10.1093/biomet/78.3.691.
 }
 }
 \seealso{

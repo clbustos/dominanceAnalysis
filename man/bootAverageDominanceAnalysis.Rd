@@ -4,11 +4,11 @@
 \alias{bootAverageDominanceAnalysis}
 \title{Bootstrap average values for Dominance Analysis}
 \usage{
-bootAverageDominanceAnalysis(x, R, constants = c(),
+bootAverageDominanceAnalysis(object, R, constants = c(),
   fit.functions = "default", null.model = NULL, ...)
 }
 \arguments{
-\item{x}{lm, glm, lmer model}
+\item{object}{lm, glm, lmer model}
 
 \item{R}{number on bootstrap resamples}
 

@@ -6,8 +6,21 @@
 \usage{
 da.lm.fit(...)
 }
+\arguments{
+\item{data}{complete data for model}
+}
+\value{
+A function described by \link{using-fit-indexes} description for interface
+}
 \description{
 Uses \eqn{R^2} (coefficient of determination) as fit index
+}
+\examples{
+x1<-rnorm(1000)
+x2<-rnorm(1000)
+y <-x1+x2+rnorm(1000)
+da.lm.fit(lm(y~x1+x2))("names")
+da.lm.fit(lm(y~x1+x2))(y~x1)
 }
 \seealso{
 Other fit indexes: \code{\link{da.glm.fit}},

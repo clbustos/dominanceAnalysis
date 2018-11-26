@@ -4,7 +4,7 @@
 \alias{summary.bootDominanceAnalysis}
 \title{Summary for bootDominanceAnalysis.}
 \usage{
-\method{summary}{bootDominanceAnalysis}(x, ...)
+\method{summary}{bootDominanceAnalysis}(object, ...)
 }
 \description{
 Summary for bootDominanceAnalysis.

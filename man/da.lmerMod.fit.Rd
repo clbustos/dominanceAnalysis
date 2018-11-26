@@ -7,7 +7,7 @@
 da.lmerMod.fit(...)
 }
 \description{
-Requires glmmextra @url{https://github.com/clbustos/r-glmmextra}
+Provides fit indexes for mixed models, based on Luo and Azen (2012).
 }
 \references{
 \itemize{
