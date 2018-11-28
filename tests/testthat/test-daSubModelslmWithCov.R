@@ -20,7 +20,7 @@ lwith<-lmWithCov(GPA~SES+IQ+nAch,cor.m)
 	    1,0,1,
 	    0,1,1,
 	    1,1,1),8,3,byrow=T)
-	predictors<-c("IQ","nAch","SES")
+	predictors<-c("SES","IQ","nAch")
 	level<-c(0,1,1,1,2,2,2,3)
 	response<-c("GPA")
 	constants<-c("")

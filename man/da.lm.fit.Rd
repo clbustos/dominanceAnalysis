@@ -4,10 +4,12 @@
 \alias{da.lm.fit}
 \title{Provides coefficient of determination for \code{lm} models.}
 \usage{
-da.lm.fit(...)
+da.lm.fit(data, ...)
 }
 \arguments{
-\item{data}{complete data for model}
+\item{data}{complete data set}
+
+\item{...}{just ignored}
 }
 \value{
 A function described by \link{using-fit-indexes} description for interface
@@ -19,8 +21,9 @@ Uses \eqn{R^2} (coefficient of determination) as fit index
 x1<-rnorm(1000)
 x2<-rnorm(1000)
 y <-x1+x2+rnorm(1000)
-da.lm.fit(lm(y~x1+x2))("names")
-da.lm.fit(lm(y~x1+x2))(y~x1)
+df.1=data.frame(y=y,x1=x1,x2=x2)
+da.lm.fit(df.1)("names")
+da.lm.fit(df.1)(y~x1)
 }
 \seealso{
 Other fit indexes: \code{\link{da.glm.fit}},

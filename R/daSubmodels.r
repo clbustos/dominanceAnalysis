@@ -1,15 +1,18 @@
 #' Returns all the submodels derived from full models.
+#'
 #' You could set some variables as constantes, limiting the number of models.
 #' Includes, by default, the null model
 #' @param x regression class (lm or lmer)
 #' @param constants vector of constants
 #' @return list with elements level, pred.matrix, predictors, response, constants
+#' @importFrom stats formula terms
+#' @importFrom utils combn
 #' @export
 #' @keywords internal
 daSubmodels <- function(x, constants = NULL) {
   f <- formula(x)
   t.f <- terms(f)
-  x.terms <- sort(attr(t.f, "term.labels"))
+  x.terms <- attr(t.f, "term.labels")
   respuesta <-
     rownames(attr(terms(f), "factors"))[attr(t.f, "response")]
 

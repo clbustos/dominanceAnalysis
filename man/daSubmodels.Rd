@@ -2,9 +2,7 @@
 % Please edit documentation in R/daSubmodels.r
 \name{daSubmodels}
 \alias{daSubmodels}
-\title{Returns all the submodels derived from full models.
-You could set some variables as constantes, limiting the number of models.
-Includes, by default, the null model}
+\title{Returns all the submodels derived from full models.}
 \usage{
 daSubmodels(x, constants = NULL)
 }
@@ -17,7 +15,6 @@ daSubmodels(x, constants = NULL)
 list with elements level, pred.matrix, predictors, response, constants
 }
 \description{
-Returns all the submodels derived from full models.
 You could set some variables as constantes, limiting the number of models.
 Includes, by default, the null model
 }

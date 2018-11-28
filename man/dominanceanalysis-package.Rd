@@ -6,7 +6,7 @@
 \alias{dominanceanalysis}
 \title{Dominance analysis for general, generalized and mixed linear models}
 \description{
-Dominance analysis for general, generalized and mixed linear models
+Dominance analysis for OLS (univariate and multivariate), logistic and mixed linear models.
 }
 \details{
 Dominance analysis is a method developed to measure the predictor's importance
@@ -15,13 +15,15 @@ if it contributes more to the prediction of the criterion than does its competit
 at a given level of analysis." (Azen & Bodescu, 2003, p.133).
 The original method was developed for OLS regression (Bodescu, 1993). Later, several definitions of dominance and bootstrap procedures are provided (Azen & Bodescu, 2003), as adaptations to GLM (Azen & Traxel, 2009) and LMM (Luo & Azen, 2012).
 The main method on this package is \code{\link{dominanceAnalysis}}. For bootstrap procedures, you
-should use \code{\link{bootDominanceAnalysis}}. For the latter, standard \code{summary} method is provided
+should use \code{\link{bootDominanceAnalysis}}. For the both, standard \code{print} and \code{summary} method are provided
 }
 \examples{
 # Basic dominance analysis
 
 lm.1<-lm(Employed~.,longley)
 da<-dominanceAnalysis(lm.1)
+print(da)
+summary(da)
 
 # Dominance analysis for LMM
 \dontrun{
@@ -30,10 +32,12 @@ x1<-rnorm(1000)
 x2<-rnorm(1000)
 g<-gl(10,100)
 g.x<-rnorm(10)[g]
-y<-x1+x2+g.x+rnorm(1000,sd=0.5)
+y<-2*x1+x2+g.x+rnorm(1000,sd=0.5)
 lmm1<-lmer(y~x1+x2+(1|g))
 lmm0<-lmer(y~(1|g))
 da.lmm<-dominanceAnalysis(lmm1, null.model=lmm0)
+print(da.lmm)
+summary(da.lmm)
 }
 # Bootstrap procedure
 
@@ -45,11 +49,9 @@ summary(da.boot)
 \references{
 \itemize{
 \item Budescu, D. V. (1993). Dominance analysis: A new approach to the problem of relative importance of predictors in multiple regression. Psychological Bulletin, 114(3), 542-551. doi:10.1037/0033-2909.114.3.542
-
 \item Azen, R., & Budescu, D. V. (2003). The dominance analysis approach for comparing predictors in multiple regression. Psychological Methods, 8(2), 129-148. doi:10.1037/1082-989X.8.2.129
-
+\item Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
 \item Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. Journal of Educational and Behavioral Statistics, 34(3), 319-347. doi:10.3102/1076998609332754
-
 \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 }
 }

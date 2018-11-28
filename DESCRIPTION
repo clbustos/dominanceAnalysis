@@ -6,14 +6,16 @@ Author: Claudio Bustos<clbustos@gmail.com>
 Authors@R: person("Claudio", "Bustos", email = "clbustos@gmail.com",
   role = c("aut", "cre"))
 Maintainer: Claudio Bustos<clbustos@gmail.com>
-Version: 0.1
+Version: 0.1.1
 Depends:
     R (>= 3.0.2)
 License: GPL-2
 LazyData: true
+Imports: methods, stats
 Suggests:
     lme4,
     nlme,
     boot,
-    testthat
+    testthat,
+    car
 RoxygenNote: 6.1.1

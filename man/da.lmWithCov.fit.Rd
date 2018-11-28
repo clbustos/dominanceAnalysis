@@ -4,7 +4,12 @@
 \alias{da.lmWithCov.fit}
 \title{Provides coefficient of determination for lineal models, using covariance/correlation matrix.}
 \usage{
-da.lmWithCov.fit(...)
+da.lmWithCov.fit(base.cov, ...)
+}
+\arguments{
+\item{base.cov}{variance/covariance matrix}
+
+\item{...}{ignored}
 }
 \description{
 Uses \eqn{R^2} (coefficient of determination)

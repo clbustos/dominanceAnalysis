@@ -12,12 +12,21 @@
 #' \item{p.squared.yx}{\eqn{P^2_{YX}} of the regression}
 #' \item{formula}{formula provided as parameter}
 #' \item{cov}{covariance/correlation matrix provided as parameter}
+#' @importFrom stats terms model.response model.frame
 #' @examples
-#' # TODO
-#' @export
+#' \dontrun{
+#' library(car)
+#' library(heplots)
+#' cor.m<-cor(Rohwer[Rohwer[,1]==1,2+c(7,8,1,2,3)])
+#' lwith<-mlmWithCov(cbind(na,ss)~SAT+PPVT+Raven,cor.m)
+#' da<-dominanceAnalysis(lwith)
+#' print(da)
+#' summary(da)
+#' }
+
 mlmWithCov<-function(f,x) {
 	t.f<-terms(f)
-	x.terms<-sort(attr(t.f,"term.labels"))
+	x.terms<-attr(t.f,"term.labels")
 	if(length(x.terms)>0) {
 	  response.xy<-model.response(model.frame(f,data.frame(x)))
     y.terms<-colnames(response.xy)

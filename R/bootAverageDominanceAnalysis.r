@@ -39,7 +39,7 @@ bootAverageDominanceAnalysis<-function(object,R,constants=c(),fit.functions="def
     as.numeric(sapply(da$contribution.average,I))
   }
 
-  res         <- boot::boot(total.data,boot.da,R=R)
+  res         <- boot::boot(total.data,boot.da, R=R)
   out         <- list(boot=res, preds=preds, fit.functions=ff, R=R, eg=eg)
   class(out)  <- "bootAverageDominanceAnalysis"
   out

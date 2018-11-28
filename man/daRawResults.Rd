@@ -2,15 +2,32 @@
 % Please edit documentation in R/daRawResults.r
 \name{daRawResults}
 \alias{daRawResults}
-\title{Retrieve raw results for dominance analysis
-Provides name functions, base fit values and
-matrix for models vs predictors importance}
+\title{Retrieve raw results for dominance analysis.}
 \usage{
 daRawResults(x, constants = c(), fit.functions = "default",
   data = NULL, null.model = NULL, ...)
 }
+\arguments{
+\item{x}{a model.}
+
+\item{constants}{a vector of parameter to be fixed on all analysis}
+
+\item{fit.functions}{name of functions to fit.}
+
+\item{data}{Provides full data, if can't be obtained from the model}
+
+\item{null.model}{Null model, for LMM models}
+}
+\value{
+a list with this elements
+\describe{
+\item{fit.functions}{Name of fit indexes}
+\item{fits}{Increment on fit indexes, when specific variable is added}
+\item{base.fits}{Raw fit indexes for each model}
+\item{level}{Vector of levels, compatible with fits and base.fits}
+}
+}
 \description{
-Retrieve raw results for dominance analysis
 Provides name functions, base fit values and
 matrix for models vs predictors importance
 }

@@ -4,6 +4,7 @@
 #' @return list, with key named as a fit index
 #'               and values are matrix, with the average
 #'               contribution of each variable on every level
+#' @importFrom stats aggregate
 #' @keywords internal
 daAverageContributionByLevel<-function(x) {
 	ff<-x$fit.functions

@@ -6,6 +6,11 @@
 \usage{
 \method{summary}{bootDominanceAnalysis}(object, ...)
 }
+\arguments{
+\item{object}{a \code{\link{bootDominanceAnalysis}} object}
+
+\item{...}{unused}
+}
 \description{
 Summary for bootDominanceAnalysis.
 }

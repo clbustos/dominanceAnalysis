@@ -1,10 +1,12 @@
-#' Center the variables on groups mean
+#' Center the variables on groups mean.
+#'
 #' Returns a dataframe with variables groups means as x.mean
 #' and centered variables a x.centered
 #' @param x dataframe
 #' @param g grouping factor
 #' @return New dataframe
-#' @export
+#' @importFrom stats aggregate
+#' @keywords internal
 centerOnGroup<-function(x,g) {
 	# First, create the joint distribution
 	df1<-data.frame(x)

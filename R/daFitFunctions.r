@@ -23,30 +23,35 @@ NULL
 #' Provides coefficient of determination for \code{lm} models.
 #'
 #' Uses \eqn{R^2} (coefficient of determination) as fit index
-#' @param  data complete data for model
+#' @param data complete data set
+#' @param ... just ignored
 #' @return A function described by \link{using-fit-indexes} description for interface
 #' @export
 #' @family fit indexes
+#' @importFrom stats lm
 #' @examples
 #' x1<-rnorm(1000)
 #' x2<-rnorm(1000)
 #' y <-x1+x2+rnorm(1000)
-#' da.lm.fit(lm(y~x1+x2))("names")
-#' da.lm.fit(lm(y~x1+x2))(y~x1)
-da.lm.fit<-function(...) {
+#' df.1=data.frame(y=y,x1=x1,x2=x2)
+#' da.lm.fit(df.1)("names")
+#' da.lm.fit(df.1)(y~x1)
+da.lm.fit<-function(data,...) {
   mc=match.call()
   function(x) {
   	if(x=="names") {
   		return("r2")
   	}
-	 list(r2=summary(lm(x, data=mc$data))$r.squared)
+	 list(r2=summary(lm(x, data=data))$r.squared)
 	}
 }
 
 #' Provides fit indexes for GLM models, based on Azen and Traxel(2009)
 #'
 #' Check \link{daRawResults}.
-#'
+#' @param data complete data set
+#' @param family.glm family for glm method
+#' @param ...  ignored
 #' @return A function described by \link{using-fit-indexes}. You could retrieve following indexes
 #' \describe{
 #' \item{\code{r2.m}}{McFadden(1974)}
@@ -62,15 +67,17 @@ da.lm.fit<-function(...) {
 #' \item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. \emph{Biometrika, 78}(3), 691-692. doi:10.1093/biomet/78.3.691.
 #' }
 #' @family fit indexes
+#' @importFrom stats lm glm logLik
 #' @export
 #' @examples
 #' x1<-rnorm(1000)
 #' x2<-rnorm(1000)
 #' x3<-rnorm(1000)
-#' y<-factor(rbinom(1000,  size=1,prob = exp(x1+x2+x3)/(1+exp(x1+x2+x3))))
-#' da.glm.fit(glm(y~x1+x2,family='binomial'))("names")
-#' da.glm.fit(glm(y~x1+x2,family='binomial'), family.glm='binomial')(y~x1)
-da.glm.fit<-function(...) {
+#' y<-factor(runif(1000) > exp(x1+x2+x3)/(1+exp(x1+x2+x3)))
+#' df.1=data.frame(x1,x2,x3,y)
+#' da.glm.fit(data=df.1)("names")
+#' da.glm.fit(data=df.1, family.glm='binomial')(y~x1)
+da.glm.fit<-function(data,family.glm,...) {
 
 	mc=match.call()
 	function(x) {
@@ -78,7 +85,7 @@ da.glm.fit<-function(...) {
 			return(c("r2.m","r2.cs","r2.n","r2.e"))
 		}
 
-		g1<-glm(x,data=mc$data,family=mc$family.glm);
+		g1<-glm(x,data=data,family=family.glm);
 
 		l0=-0.5*g1$null.deviance
 		l1=logLik(g1)
@@ -97,6 +104,9 @@ da.glm.fit<-function(...) {
 }
 #' Provides fit indexes for mixed models, based on Luo and Azen (2012).
 #'
+#' @param data complete data set
+#' @param null.model needed for LMM models
+#' @param ... ignored
 #' @references
 #' \itemize{
 #' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
@@ -105,7 +115,7 @@ da.glm.fit<-function(...) {
 #' @family fit indexes
 #' @export
 
-da.lmerMod.fit<-function(...) {
+da.lmerMod.fit<-function(data, null.model, ...) {
   if (!requireNamespace("lme4", quietly = TRUE)) {
     stop("lme4 needed for this function to work. Please install it.",
       call. = FALSE)
@@ -116,8 +126,8 @@ da.lmerMod.fit<-function(...) {
 			return(c("rb.r2.1","rb.r2.2","sb.r2.1","sb.r2.2"))
 		}
 
-		l1<-lme4::lmer(x,data=mc$data);
-		lmmr2<-lmmR2(m.null=mc$null.model, l1)
+		l1<-lme4::lmer(x,data=data);
+		lmmr2<-lmmR2(m.null=null.model, l1)
 		list(rb.r2.1=lmmr2$rb.r2.1,rb.r2.2=lmmr2$rb.r2.2, sb.r2.1=lmmr2$sb.r2.1,sb.r2.2=lmmr2$sb.r2.2)
 	}
 }
@@ -126,38 +136,46 @@ da.lmerMod.fit<-function(...) {
 #'
 #' Uses \eqn{R^2} (coefficient of determination)
 #' See \code{\link{lmWithCov}}
+#'
+#' @param base.cov variance/covariance matrix
+#' @param ... ignored
+#'
 #' @inheritParams using-fit-indexes
 #' @family fit indexes
 #' @export
-da.lmWithCov.fit<-function(...) {
+da.lmWithCov.fit<-function(base.cov, ...) {
 	mc=match.call()
 	function(x) {
 		if(x=="names") {
 			return(c("r2"))
 		}
-		list(r2=lmWithCov(x,mc$base.cov)$r.squared)
+		list(r2=lmWithCov(x,base.cov)$r.squared)
 	}
 }
 
 
 #' Provides coefficient of determination for multivariate models.
-#' Uses
+#'
+#' @param base.cov variance/covariance matrix
+#' @param ... ignored
 #' @return A list with several fit indexes
-#' \item{r.squared.xy}{\eqn{R^2_{XY}}}
-#' \item{p.squared.yx}{\eqn{P^2_{YX}}}
+#' \describe{
+#' \item{\code{r.squared.xy}}{\eqn{R^2_{XY}}}
+#' \item{\code{p.squared.yx}}{\eqn{P^2_{YX}}}
+#' }
 #' See \code{\link{mlmWithCov}}
 #' @inheritParams using-fit-indexes
 #' @references
 #' Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
 #' @family fit indexes
 #' @export
-da.mlmWithCov.fit<-function(...) {
+da.mlmWithCov.fit<-function(base.cov, ...) {
   mc=match.call()
   function(x) {
     if(x=="names") {
       return(c("r.squared.xy","p.squared.yx"))
     }
-    mlm.1<-mlmWithCov(x,mc$base.cov)
-    list(r.squared.xy=mlm.1$r.squared.xy, p.squared.yx=mlm.1$p.squared.yx)
+    mlm.1<-mlmWithCov(x,base.cov)
+    list(r.squared.xy = mlm.1$r.squared.xy, p.squared.yx = mlm.1$p.squared.yx)
   }
 }

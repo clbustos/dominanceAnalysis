@@ -1,4 +1,7 @@
 #' Summary for bootDominanceAnalysis.
+#' @param object a \code{\link{bootDominanceAnalysis}} object
+#' @param ... unused
+#' @importFrom stats sd
 #'@export
 summary.bootDominanceAnalysis<-function(object,...) {
 	out<-list()
@@ -26,6 +29,10 @@ summary.bootDominanceAnalysis<-function(object,...) {
 	out
 }
 
+# Print a summary.bootDominanceAnalysis object
+# @param x a \code{\link{summary.bootDominanceAnalysis}} object
+# @param digits minimal number of significant digits, see print.default.
+# @param ... further arguments passed to print method
 #' @export
 print.summary.bootDominanceAnalysis<-function(x,digits=3,...) {
 	cat("Dominance Analysis\n")

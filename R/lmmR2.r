@@ -4,7 +4,9 @@
 #' @param m.null Null model (only with random intercept effects)
 #' @param m.full Full model
 #' @return lmmR2 class
-#' @export
+#' @importFrom stats sigma
+#' @importFrom methods is
+#' @keywords internal
 lmmR2<-function(m.null, m.full) {
 	if(is(m.null,"lme"))	 {
 		return(lmmR2.lme(m.null,m.full))
@@ -20,8 +22,8 @@ lmmR2<-function(m.null, m.full) {
 # Calculates the four R^2 presents on Lou and Azen (2013) text.
 # Should extract the intercepts for each model
 lmmR2.mer<-function(m.null,m.full) {
-	# Primero, verifico que tengan la misma estructura de grupos. Si
-	# no, estoy puro leseando
+  # First, I verify the group structure.
+  # If the structure isn't the same, I'm in trouble
 	v.0<-lme4::VarCorr(m.null)
 	v.1<-lme4::VarCorr(m.full)
 	if(!all.equal(names(v.0),names(v.1))) {
@@ -29,7 +31,7 @@ lmmR2.mer<-function(m.null,m.full) {
 	}
 	n.b<-length(names(v.0))
 	# recojo los sigmas
-	sigmas=c(sigma(m.null)^2,sigma(m.full)^2)
+	sigmas=c(sigma(m.null)^2, sigma(m.full)^2)
 	# recojo los thetas
 	thetas.0=sapply(v.0,function(x) {x[1,1]})
 	thetas.1=sapply(v.1,function(x) {x[1,1]})
@@ -74,9 +76,9 @@ vars.lme<-function(x) {
 }
 # Extract coefficients for lme models
 lmmR2.lme<-function(m.null,m.full) {
-	# Primero, verifico que tengan la misma estructura de grupos. Si
-	# no, estoy puro leseando
-	v.0<-vars.lme(m.null)
+  # First, I verify the group structure.
+  # If the structure isn't the same, I'm in trouble
+  v.0<-vars.lme(m.null)
 	v.1<-vars.lme(m.full)
 	if(!all.equal(names(v.0),names(v.1))) {
 		stop("Groups should be equal")
@@ -104,12 +106,10 @@ lmmR2.lme<-function(m.null,m.full) {
 	out
 }
 
-#' @export
 print.lmmR2<-function(x,...) {
 	print(summary.lmmR2(x), ...)
 }
 # Print method for  lmmR2 models summary
-#' @export
 print.summary.lmmR2<-function(x, ...) {
 	cat("Explanatory power of Multilevel Model\n")
 	cat("=====================================\n")
@@ -122,7 +122,6 @@ print.summary.lmmR2<-function(x, ...) {
 }
 
 # Summary for lmmR2 models
-#' @export
 summary.lmmR2<-function(object, ...) {
   x<-object
   v.null<-c(x$sigmas[1],x$t0)

@@ -10,7 +10,7 @@ test_that("lmWithCovs works fine", {
   dimnames=list(nam,nam)
   )
   lwith<-lmWithCov(GPA~SES+IQ+nAch,cor.m)
-  expect_equal(lwith$coef,c(0.500,0.416,0.009),tolerance=0.001,scale=1)
+  expect_equal(lwith$coef,c(0.009, 0.500,0.416),tolerance=0.001,scale=1)
   expect_equal(lwith$r.squared,0.496,tolerance=0.001,scale=1)
 })
 

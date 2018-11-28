@@ -2,9 +2,7 @@
 % Please edit documentation in R/centerOnGroup.r
 \name{centerOnGroup}
 \alias{centerOnGroup}
-\title{Center the variables on groups mean
-Returns a dataframe with variables groups means as x.mean
-and centered variables a x.centered}
+\title{Center the variables on groups mean.}
 \usage{
 centerOnGroup(x, g)
 }
@@ -17,7 +15,7 @@ centerOnGroup(x, g)
 New dataframe
 }
 \description{
-Center the variables on groups mean
 Returns a dataframe with variables groups means as x.mean
 and centered variables a x.centered
 }
+\keyword{internal}

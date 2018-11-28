@@ -28,7 +28,7 @@ bootDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default",null.m
   }
   # Extract the data
 	total.data<-getData(x)
-	da.original<-dominanceAnalysis(x,constants=constants,fit.functions=fit.functions, null.model=null.model,...)
+	da.original<-dominanceAnalysis(x, constants=constants,fit.functions=fit.functions, null.model=null.model,...)
 	preds<-			da.original$predictor
 	n.preds<-length(preds)
 	ff<-	da.original$fit.functions

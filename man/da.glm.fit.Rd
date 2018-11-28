@@ -4,7 +4,14 @@
 \alias{da.glm.fit}
 \title{Provides fit indexes for GLM models, based on Azen and Traxel(2009)}
 \usage{
-da.glm.fit(...)
+da.glm.fit(data, family.glm, ...)
+}
+\arguments{
+\item{data}{complete data set}
+
+\item{family.glm}{family for glm method}
+
+\item{...}{ignored}
 }
 \value{
 A function described by \link{using-fit-indexes}. You could retrieve following indexes
@@ -22,9 +29,10 @@ Check \link{daRawResults}.
 x1<-rnorm(1000)
 x2<-rnorm(1000)
 x3<-rnorm(1000)
-y<-factor(rbinom(1000,  size=1,prob = exp(x1+x2+x3)/(1+exp(x1+x2+x3))))
-da.glm.fit(glm(y~x1+x2,family='binomial'))("names")
-da.glm.fit(glm(y~x1+x2,family='binomial'), family.glm='binomial')(y~x1)
+y<-factor(runif(1000) > exp(x1+x2+x3)/(1+exp(x1+x2+x3)))
+df.1=data.frame(x1,x2,x3,y)
+da.glm.fit(data=df.1)("names")
+da.glm.fit(data=df.1, family.glm='binomial')(y~x1)
 }
 \references{
 \itemize{

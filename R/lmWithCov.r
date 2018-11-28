@@ -21,7 +21,8 @@
 #' @export
 lmWithCov<-function(f,x) {
 	t.f<-terms(f)
-	x.terms<-sort(attr(t.f,"term.labels"))
+
+	x.terms<-attr(t.f,"term.labels")
 
 	if(length(x.terms)>0) {
 		respuesta<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]

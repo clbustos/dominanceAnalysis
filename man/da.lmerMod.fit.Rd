@@ -4,7 +4,14 @@
 \alias{da.lmerMod.fit}
 \title{Provides fit indexes for mixed models, based on Luo and Azen (2012).}
 \usage{
-da.lmerMod.fit(...)
+da.lmerMod.fit(data, null.model, ...)
+}
+\arguments{
+\item{data}{complete data set}
+
+\item{null.model}{needed for LMM models}
+
+\item{...}{ignored}
 }
 \description{
 Provides fit indexes for mixed models, based on Luo and Azen (2012).
