@@ -1,4 +1,5 @@
 context("Test Azen and Bodescu(2003) results")
+
 test_that("values report almost the same as Azen and Bodescu(2003)", {
 nam<-c("y","x1","x2","x3","x4")
 cor.m<-matrix(c(

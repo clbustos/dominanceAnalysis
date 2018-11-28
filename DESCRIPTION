@@ -6,7 +6,7 @@ Author: Claudio Bustos<clbustos@gmail.com>
 Authors@R: person("Claudio", "Bustos", email = "clbustos@gmail.com",
   role = c("aut", "cre"))
 Maintainer: Claudio Bustos<clbustos@gmail.com>
-Version: 0.1.1
+Version: 0.1.2
 Depends:
     R (>= 3.0.2)
 License: GPL-2
@@ -17,5 +17,6 @@ Suggests:
     nlme,
     boot,
     testthat,
-    car
+    car,
+    heplots
 RoxygenNote: 6.1.1

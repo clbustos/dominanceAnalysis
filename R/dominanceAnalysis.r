@@ -81,9 +81,8 @@ dominanceAnalysis <-
 print.dominanceAnalysis<-function(x,...) {
   cat("\nDominance analysis\n")
   cat("Predictors:", paste0(x$predictors,collapse=", "),"\n")
-  if(!is.null(x$costants)) {
+  if(!is.null(x$constants)) {
     cat("Constants:", paste0(x$constants,collapse=", "),"\n")
-
   }
   cat("Fit-indexes:", paste0(x$fit.functions,collapse=", "), "\n\n")
 
