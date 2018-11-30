@@ -99,9 +99,11 @@ print.dominanceAnalysis<-function(x,...) {
     rank.complete    =rankUsingMatrix(abbrev.matrix(x$complete[[fit]]))
     rank.conditional =rankUsingMatrix(abbrev.matrix(x$conditional[[fit]]))
     rank.general     =rankUsingMatrix(abbrev.matrix(x$general[[fit]]))
-    out<-data.frame(complete=rank.complete,conditional=rank.conditional, rank.general=rank.general)
+    out<-data.frame(complete=rank.complete,conditional=rank.conditional, general=rank.general)
     rownames(out)<-x$predictors
     print(out)
+    cat("\nAverage contribution:\n")
+    print(x$contribution.average[[fit]])
   }
   invisible(x)
 }

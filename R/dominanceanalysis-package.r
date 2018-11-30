@@ -4,9 +4,13 @@
 #' on a regression analysis: "one predictor is 'more important than another'
 #' if it contributes more to the prediction of the criterion than does its competitor
 #' at a given level of analysis." (Azen & Bodescu, 2003, p.133).
-#' The original method was developed for OLS regression (Bodescu, 1993). Later, several definitions of dominance and bootstrap procedures are provided (Azen & Bodescu, 2003), as adaptations to GLM (Azen & Traxel, 2009) and LMM (Luo & Azen, 2012).
+#'
+#' The original method was developed for OLS regression (Bodescu, 1993).
+#' Later, several definitions of dominance and bootstrap procedures are provided (Azen & Bodescu, 2003),
+#' as adaptations to GLM (Azen & Traxel, 2009) and LMM (Luo & Azen, 2012).
 #' The main method on this package is \code{\link{dominanceAnalysis}}. For bootstrap procedures, you
 #' should use \code{\link{bootDominanceAnalysis}}. For the both, standard \code{print} and \code{summary} method are provided
+#'
 #' @name dominanceanalysis-package
 #' @aliases dominanceanalysis
 #' @docType package
@@ -43,11 +47,26 @@
 #' print(da.lmm)
 #' summary(da.lmm)
 #' }
+#'
+#' # GLM analysis
+#'
+#' x1<-rnorm(1000)
+#' x2<-rnorm(1000)
+#' x3<-rnorm(1000)
+#' y<-runif(1000)<(1/(1+exp(-(2*x1+x2+1.5*x3))))
+#' glm.1<-glm(y~x1+x2+x3)
+#' da.glm<-dominanceAnalysis(glm.1)
+#' print(da.glm)
+#' summary(da.glm)
+#'
 #' # Bootstrap procedure
 #'
 #' \dontrun{
 #' da.boot<-bootDominanceAnalysis(lm.1,R=1000)
 #' summary(da.boot)
+#'
+#' da.glm.boot<-bootDominanceAnalysis(glm.1,R=200)
+#' summary(da.glm.boot)
 #' }
 
 NULL

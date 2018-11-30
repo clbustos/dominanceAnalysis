@@ -1,0 +1,92 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# dominanceanalysis
+
+[![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis)
+
+Dominance Analysis (Azen and Bodescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013), for multiple regression models: OLS, GLM and HLM.
+
+Features:
+
+- Provides complete, conditional and general dominance analysis for lm, lmer, glm(family=binomial) and correlation matrix based regression.
+- You could use multiple criteria as fit indexes (useful for HLM).
+
+# Examples
+
+## Linear regression
+
+We could apply dominance analysis directly on data, using lm (see Azen and Bodescu, 2003). 
+
+On attitude data, we could see that complaints dominates completely all others variables, and learning comes second. The other 4 variables doesn't show a consistent pattern for complete and conditional dominance.
+```{r}
+  library(dominanceanalysis)
+  lm.attitude<-lm(rating~.,attitude)
+  da.attitude<-dominanceAnalysis(lm.attitude)
+  print(da.attitude)
+  summary(da.attitude)
+```
+
+To evaluate the robustness of our results, we could use bootstrap analysis (Azen and Bodescu, 2006). We could see that complete dominance of complaints over all other variables is fairly robust, but complete dominance of learning isn't. 
+
+```{r}
+  bda.attitude=bootDominanceAnalysis(lm.attitude, R=100)
+  summary(bda.attitude)
+```
+
+We could also use only the correlation or covariance matrix. As example, we use ability.cov matrix to show dominance of 5 specific skills over general intelligence. The bigger average contribution is for reading, but we can see on level 1, vocab, that picture and blocks dominates reading. So, reading dominates completely only maze and vocabulary, blocks dominates picture and maze and picture dominates maze. 
+
+```{r}
+lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, ability.cov$cov)
+da.cov<-dominanceAnalysis(lmwithcov)
+print(da.cov)
+summary(da.cov)
+```
+
+## Hierarchical Linear Models
+
+For Hierarchical Linear Models using lme4, you should provide a null model (see Luo and Azen, 2013).
+
+Using npk dataset, we could see that using rb.r2.1 and sb.r2.1 index, that shows influence of predictors on individual data, clearly phosphate dominates over potassium and nitrogen, and potassium dominates over nitrogen.  
+```{r}
+library(lme4)
+lmer.npk.1<-lmer(yield~N+P+K+(1|block),npk)
+lmer.npk.0<-lmer(yield~1+(1|block),npk)
+da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
+print(da.lmer)
+summary(da.lmer)
+```
+
+
+## Logistic regression
+
+For logistic regression (experimental), see Azen and Traxel, 2009.
+
+As example, we use the esoph dataset. We could conclude that age and alcohol dominates completely tobacco, and age shows general dominance over alcohol and tobacco 
+
+```{r}
+glm.esoph<-glm(cbind(ncases,ncontrols)~agegp+alcgp+tobgp, esoph,family="binomial")
+da.esoph<-dominanceAnalysis(glm.esoph)
+print(da.esoph)
+summary(da.esoph)
+```
+
+## Installation
+
+You can install the github version of dominanceanalysis from [github](https://github.com/clbustos/dominanceanalysis) with:
+
+``` r
+install_github("clbustos/dominanceanalysis")
+```
+

@@ -2,10 +2,8 @@ Package: dominanceanalysis
 Title: Dominance Analysis
 Description: Dominance Analysis (Azen and Bodescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013)
              allows to analyse the importance of predictors on multiple regressions models: OLS, GLM and HLM.
-Author: Claudio Bustos<clbustos@gmail.com>
 Authors@R: person("Claudio", "Bustos", email = "clbustos@gmail.com",
   role = c("aut", "cre"))
-Maintainer: Claudio Bustos<clbustos@gmail.com>
 Version: 0.1.2
 Depends:
     R (>= 3.0.2)
