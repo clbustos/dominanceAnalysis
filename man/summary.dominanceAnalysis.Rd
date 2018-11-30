@@ -11,6 +11,13 @@
 
 \item{...}{unused}
 }
+\value{
+A list, with values
+\itemize{
+\item \code{average.contribution}: vector of average contributions of each variable
+\item \code{summary.matrix}: matrix with all calculations for dominance analysis
+}
+}
 \description{
 Summary for a \code{\link{dominanceAnalysis}} object
 }

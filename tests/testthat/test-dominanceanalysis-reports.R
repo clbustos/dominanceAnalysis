@@ -7,11 +7,12 @@ y<-x1+x2+x3+rnorm(100)
 test_that("dominanceAnalysis print and summary methods words", {
   da<-dominanceAnalysis(lm(y~x3+x2+x1))
   expect_output(print(da),"x2,x1")
-  expect_equal(dim(summary(da)$r2), c(10,6))
+  expect_equal(length(summary(da)$r2$average.contribution), 3)
+  expect_equal(dim(summary(da)$r2$summary.matrix), c(10,6))
 })
 
 test_that("dominanceAnalysis print and summary methods words when constants used", {
   da<-dominanceAnalysis(lm(y~x3+x2+x1),constants = "x3")
   expect_output(print(da),"Constants: x3")
-  expect_equal(dim(summary(da)$r2), c(5,5))
+  expect_equal(dim(summary(da)$r2$summary.matrix), c(5,5))
 })

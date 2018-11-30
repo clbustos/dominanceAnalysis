@@ -3,6 +3,7 @@
 S3method(print,dominanceAnalysis)
 S3method(print,summary.bootAverageDominanceAnalysis)
 S3method(print,summary.bootDominanceAnalysis)
+S3method(print,summary.dominanceAnalysis)
 S3method(summary,bootAverageDominanceAnalysis)
 S3method(summary,bootDominanceAnalysis)
 S3method(summary,dominanceAnalysis)

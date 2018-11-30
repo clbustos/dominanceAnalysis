@@ -95,7 +95,7 @@ print.dominanceAnalysis<-function(x,...) {
   }
 
   for(fit in x$fit.functions) {
-    cat("* Fit: ", fit,"\n")
+    cat("* Fit index: ", fit,"\n")
     rank.complete    =rankUsingMatrix(abbrev.matrix(x$complete[[fit]]))
     rank.conditional =rankUsingMatrix(abbrev.matrix(x$conditional[[fit]]))
     rank.general     =rankUsingMatrix(abbrev.matrix(x$general[[fit]]))
