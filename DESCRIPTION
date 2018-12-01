@@ -16,5 +16,6 @@ Suggests:
     boot,
     testthat,
     car,
-    heplots
+    heplots,
+    covr
 RoxygenNote: 6.1.1

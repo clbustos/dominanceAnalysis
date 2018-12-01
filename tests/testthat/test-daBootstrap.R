@@ -24,4 +24,5 @@ test_that("Bootstrap should have correct sample values", {
                       1-res.gen[2], 1-res.gen[4], 0.5, res.gen[6],
                       1-res.gen[3], 1-res.gen[5], 1-res.gen[6],0.5 ), 4,4,byrow=T)
   expect_equivalent(da.2.gen,da.2.gen.bs)
+  expect_output(print(summary(bs.da.2)),"complete xa xb")
 })

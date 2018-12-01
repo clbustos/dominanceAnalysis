@@ -62,6 +62,12 @@ test_that("Report correct values for lmer comparing both models", {
 
 })
 
+test_that("summary methods works fine",{
+  expect_output(print(summary(lmmR2.1)),"Explanatory power of Multilevel Model")
+  expect_output(print(summary(lmmR2.1)),"R & B R1")
+
+  })
+
 #test_that("Report similar values for nlme", {
 #	expect_equal(lmmR2.1$rb.r2.1, lmmR2.2$rb.r2.1,tolerance=0.05)
 #	expect_equal(lmmR2.1$rb.r2.2, lmmR2.2$rb.r2.2,tolerance=0.05)

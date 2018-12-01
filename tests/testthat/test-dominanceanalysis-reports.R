@@ -13,6 +13,8 @@ test_that("dominanceAnalysis print and summary methods words", {
 
 test_that("dominanceAnalysis print and summary methods words when constants used", {
   da<-dominanceAnalysis(lm(y~x3+x2+x1),constants = "x3")
+  s.da<-summary(da)
   expect_output(print(da),"Constants: x3")
-  expect_equal(dim(summary(da)$r2$summary.matrix), c(5,5))
+  expect_equal(dim(s.da$r2$summary.matrix), c(5,5))
+  expect_output(print(s.da),"Average level 1")
 })
