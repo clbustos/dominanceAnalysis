@@ -4,6 +4,7 @@
 #' matrix for models vs predictors importance
 #' @param x a model.
 #' @param constants a vector of parameter to be fixed on all analysis
+#' @param terms     vector of terms to be analyzed. By default, obtained using the formula of model
 #' @param fit.functions name of functions to fit.
 #' @param data Provides full data, if can't be obtained from the model
 #' @param null.model Null model, for LMM models
@@ -16,7 +17,7 @@
 #' }
 #' @importFrom stats formula terms family
 #' @keywords internal
-daRawResults<-function(x, constants=c(),fit.functions="default",data=NULL,null.model=NULL, ...) {
+daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default",data=NULL,null.model=NULL, ...) {
   f<-formula(x)
   t.f<-terms(f)
   base.cov<-family.glm<-NULL
@@ -31,11 +32,17 @@ daRawResults<-function(x, constants=c(),fit.functions="default",data=NULL,null.m
   if(is(x,"glm")) {
     family.glm<-family(x)
   }
-  x.terms<-attr(t.f,"term.labels")
-  respuesta<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]
 
-  models<-daSubmodels(x,constants)
+  if(is.null(terms)) {
+    x.terms<-attr(t.f,"term.labels")
+  } else {
+    x.terms<-terms
+  }
+  response<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]
+
+  models<-daSubmodels(x = x,constants = constants, terms=terms)
   fm<-formulas.daSubmodels(models)
+
   if(fit.functions=="default") {
 	# Should return
 	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(data=data, null.model=null.model, base.cov=base.cov, family.glm=family.glm))

@@ -16,13 +16,15 @@
 #' }
 #' @param x lm, glm, lmer model
 #' @param constants vector of variables to remain unchanged between models
+#' @param terms     vector of terms to be analyzed. By default, obtained using the formula of model
 #' @param fit.functions list of functions which provides fit indexes for model.
 #' @param data optional data.frame to which fit the formulas
 #' @param null.model for mixel models, null model against to test the submodels
 #' @param ... Other arguments provided to lm or lmer (not implemented yet)
 #' @return
 #' \item{predictors}{Vector of predictors}
-#' \item{constants}{Vector constant variables}
+#' \item{constants}{Vector of constant variables}
+#' \item{terms}{Vector of terms to be analyzed}
 #' \item{fit.functions}{Name of method used to provide fit indexes}
 #' \item{fits}{raw fits indexes \code{\link{daRawResults}}}
 #' \item{contribution.by.level}{Mean contribution by level}
@@ -51,20 +53,22 @@
 dominanceAnalysis <-
   function(x,
            constants = c(),
+           terms = NULL,
            fit.functions = "default",
            data = NULL,
            null.model = NULL,
            ...) {
-    daModels <- daSubmodels(x, constants)
-    daRaw <- daRawResults(x, constants, fit.functions, data, null.model, ...)
+    daModels <- daSubmodels(x = x, constants = constants, terms=terms)
+    daRaw <- daRawResults(x = x, constants = constants,terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, ...)
     daAverageByLevel <- daAverageContributionByLevel(daRaw)
     daAverageGeneral <-
       lapply(daAverageByLevel, function(x) {
         colMeans(x[, -1])
       })
     z<-list(
-      predictors = daModels$predictors,
-      constants = daModels$constants,
+      predictors   = daModels$predictors,
+      constants    = daModels$constants,
+      terms        = daModels$terms,
       fit.functions = daRaw$fit.functions,
       fits = daRaw,
       contribution.by.level = daAverageByLevel,

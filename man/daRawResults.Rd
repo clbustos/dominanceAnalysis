@@ -4,13 +4,15 @@
 \alias{daRawResults}
 \title{Retrieve raw results for dominance analysis.}
 \usage{
-daRawResults(x, constants = c(), fit.functions = "default",
-  data = NULL, null.model = NULL, ...)
+daRawResults(x, constants = c(), terms = NULL,
+  fit.functions = "default", data = NULL, null.model = NULL, ...)
 }
 \arguments{
 \item{x}{a model.}
 
 \item{constants}{a vector of parameter to be fixed on all analysis}
+
+\item{terms}{vector of terms to be analyzed. By default, obtained using the formula of model}
 
 \item{fit.functions}{name of functions to fit.}
 

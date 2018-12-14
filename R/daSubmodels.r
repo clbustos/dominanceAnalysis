@@ -4,16 +4,22 @@
 #' Includes, by default, the null model
 #' @param x regression class (lm or lmer)
 #' @param constants vector of constants
+#' @param terms     vector of terms. By default, obtained using the formula
 #' @return list with elements level, pred.matrix, predictors, response, constants
 #' @importFrom stats formula terms
 #' @importFrom utils combn
 #' @export
 #' @keywords internal
-daSubmodels <- function(x, constants = NULL) {
+daSubmodels <- function(x, constants = NULL, terms = NULL) {
   f <- formula(x)
   t.f <- terms(f)
-  x.terms <- attr(t.f, "term.labels")
-  respuesta <-
+
+  if(is.null(terms)) {
+    x.terms <- attr(t.f, "term.labels")
+  } else {
+    x.terms=terms
+  }
+  response <-
     rownames(attr(terms(f), "factors"))[attr(t.f, "response")]
 
   if (length(constants) > 0) {
@@ -63,7 +69,7 @@ daSubmodels <- function(x, constants = NULL) {
       level = level,
       pred.matrix = pred.matrix,
       predictors = x.terms,
-      response = respuesta,
+      response = response,
       constants = constants
     )
   class(out) <- "daSubmodels"

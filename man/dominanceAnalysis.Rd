@@ -4,13 +4,15 @@
 \alias{dominanceAnalysis}
 \title{Dominance analysis for OLS (univariate and multivariate), GLM and LMM models.}
 \usage{
-dominanceAnalysis(x, constants = c(), fit.functions = "default",
-  data = NULL, null.model = NULL, ...)
+dominanceAnalysis(x, constants = c(), terms = NULL,
+  fit.functions = "default", data = NULL, null.model = NULL, ...)
 }
 \arguments{
 \item{x}{lm, glm, lmer model}
 
 \item{constants}{vector of variables to remain unchanged between models}
+
+\item{terms}{vector of terms to be analyzed. By default, obtained using the formula of model}
 
 \item{fit.functions}{list of functions which provides fit indexes for model.}
 
@@ -22,7 +24,8 @@ dominanceAnalysis(x, constants = c(), fit.functions = "default",
 }
 \value{
 \item{predictors}{Vector of predictors}
-\item{constants}{Vector constant variables}
+\item{constants}{Vector of constant variables}
+\item{terms}{Vector of terms to be analyzed}
 \item{fit.functions}{Name of method used to provide fit indexes}
 \item{fits}{raw fits indexes \code{\link{daRawResults}}}
 \item{contribution.by.level}{Mean contribution by level}

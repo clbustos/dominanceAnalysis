@@ -4,12 +4,14 @@
 \alias{daSubmodels}
 \title{Returns all the submodels derived from full models.}
 \usage{
-daSubmodels(x, constants = NULL)
+daSubmodels(x, constants = NULL, terms = NULL)
 }
 \arguments{
 \item{x}{regression class (lm or lmer)}
 
 \item{constants}{vector of constants}
+
+\item{terms}{vector of terms. By default, obtained using the formula}
 }
 \value{
 list with elements level, pred.matrix, predictors, response, constants
