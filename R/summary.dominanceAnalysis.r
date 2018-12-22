@@ -46,7 +46,7 @@ print.summary.dominanceAnalysis<-function(x, ...) {
   for(fit in names(x)) {
     cat("\n* Fit index: ",fit,"\n")
     cat("\nAverage contribution of each variable:\n\n")
-    print(x[[fit]]$average.contribution,...)
+    print(sort(x[[fit]]$average.contribution,decreasing = T),...)
     cat("\nDominance Analysis matrix:\n")
     delete.na<-function(xx) {
       if(is.numeric(xx)) {

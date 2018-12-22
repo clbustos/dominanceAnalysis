@@ -17,37 +17,59 @@ knitr::opts_chunk$set(
 [![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis)
 [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
 
-Dominance Analysis (Azen and Bodescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013), for multiple regression models: OLS, GLM and HLM.
+Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models and Hierarchical Linear Models.
 
-Features:
+**Features**:
 
-- Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *lmer* and *glm* (family=binomial).
-- Covariance / correlation matrixes could be used as input for OLS dominance analysis, using *lmWithCov* and *mlmWithCov*, respectively.
-- You could use multiple criteria as fit indexes (useful for HLM).
+- Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *lmer* and *glm* (family=binomial) models.
+- Covariance / correlation matrixes could be used as input for OLS dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods, respectively.
+- Multiple criteria can be used as fit indexes, which is useful especially for HLM.
 
 # Examples
 
 ## Linear regression
 
-We could apply dominance analysis directly on data, using lm (see Azen and Bodescu, 2003). 
+We could apply dominance analysis directly on the data, using *lm* (see Azen and Budescu, 2003). 
 
-On attitude data, we could see that complaints dominates completely all others variables, and learning comes second. The other 4 variables doesn't show a consistent pattern for complete and conditional dominance.
+The *attitude* data is composed of six predictors of the overall rating of 35 clerical employees of a large financial organization: complaints, privileges, learning, raises, critical and advancement. The method `dominanceAnalysis()` can retrieve all necessary information directly from a *lm* model.
+
 ```{r}
   library(dominanceanalysis)
   lm.attitude<-lm(rating~.,attitude)
   da.attitude<-dominanceAnalysis(lm.attitude)
+```
+
+Using `print()` method on the *dominanceAnalysis* object, we can see that *complaints* completely dominates all other predictors, followed by *learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don't show a consistent pattern for complete and conditional dominance.
+
+The `print()` method uses `abbreviate`, to allow complex models to be visualized at a glance.
+
+```{r}
   print(da.attitude)
+```
+
+The `summary()` method provides the average contribution of each variable. This contribution defines general dominance. Also, shows the complete dominance analysis matrix, that presents all $R^2$ differences between submodels.
+
+```{r}
   summary(da.attitude)
 ```
 
-To evaluate the robustness of our results, we could use bootstrap analysis (Azen and Bodescu, 2006). We could see that complete dominance of complaints over all other variables is fairly robust, but complete dominance of learning isn't. 
+To evaluate the robustness of our results, we could use bootstrap analysis (Azen and Budescu, 2006). 
+
+We applied a bootstrap analysis using `bootDominanceAnalysis()` method with $R^2$ as a fit index and 100 permutations. For precise results, you need to run at least 1000 replications.
 
 ```{r, cache=T}
   bda.attitude=bootDominanceAnalysis(lm.attitude, R=100)
+```
+
+The `summary()` method presents the results for the bootstrap analysis. *Dij* shows the original result, and *mDij*, the mean for Dij on bootstrap samples and *SE.Dij* its standard error. *Pij* is the proportion of bootstrap samples where *i* dominantes *j*, *Pji* is the proportion of bootstrap samples where *j* dominates *i* and *Pnoij* is the proportion of samples where no dominance can be asserted. *Rep* is the proportion of samples where original dominance is replicated.
+
+We can see that the value of complete dominance for *complaints* is fairly robust over all variables (Dij almost equal to mDij, and small SE), contrarily to *learning* (Dij differs from mDij, and bigger SE).
+
+```{r, cache=T}
   summary(bda.attitude)
 ```
 
-We could also use only the correlation or covariance matrix. As example, we use ability.cov matrix to show dominance of 5 specific skills over general intelligence. The bigger average contribution is for reading, but we can see on level 1, vocab, that picture and blocks dominates reading. So, reading dominates completely only maze and vocabulary, blocks dominates picture and maze and picture dominates maze. 
+Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading*  (3.739). Nevertheless, in the ouput of `summary()` method  on level 1, we can see that *picture* (3.078) dominates over *reading* (1.892) on 'vocab' submodel.
 
 ```{r}
 lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, ability.cov$cov)
@@ -58,31 +80,50 @@ summary(da.cov)
 
 ## Hierarchical Linear Models
 
-For Hierarchical Linear Models using lme4, you should provide a null model (see Luo and Azen, 2013).
+For Hierarchical Linear Models using *lme4*, you should provide a null model (see Luo and Azen, 2013).
 
-Using npk dataset, we could see that using rb.r2.1 and sb.r2.1 index, that shows influence of predictors on individual data, clearly phosphate dominates over potassium and nitrogen, and potassium dominates over nitrogen.  
+As an example, we use *npk* dataset, which contains information about a  classical N, P, K (nitrogen, phosphate, potassium) factorial experiment on the growth of peas conducted on 6 blocks
+
 ```{r}
 library(lme4)
 lmer.npk.1<-lmer(yield~N+P+K+(1|block),npk)
 lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
+```
+
+Using `print()` method, we can see that random effects are modeled as a constant  (1 | block).
+
+```{r}
 print(da.lmer)
-summary(da.lmer)
+```
+The fit indexes used in the analysis were *rb.r2.1*, *rb.r2.2*, *sb.r2.1*, and *sb.r2.2*. We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on individual data, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
+```{r}
+s.da.lmer=summary(da.lmer)
+s.da.lmer
+sm.rb.r2.1=s.da.lmer$rb.r2.1$summary.matrix
+# Nitrogen completely dominates  potassium
+as.logical(na.omit(sm.rb.r2.1$N > sm.rb.r2.1$K))
+# Nitrogen completely dominates  phosphate
+as.logical(na.omit(sm.rb.r2.1$N > sm.rb.r2.1$P))
+# Potassium completely dominates phosphate
+as.logical(na.omit(sm.rb.r2.1$K > sm.rb.r2.1$P))
 ```
 
 
 ## Logistic regression
 
-For logistic regression (experimental), see Azen and Traxel, 2009.
+Dominance analysis can be used in logistic regression (see Azen and Traxel, 2009).
 
-As example, we use the esoph dataset. Looking the report for standard glm summary, we could see that linear effect of each variables are significant, and also quadratic effect of age. But is hard to identify what variable is more important to predict esophageal cancer. 
+As an example, we used the *esoph* dataset, that contains information about a case-control study of (o)esophageal cancer in Ille-et-Vilaine, France. 
+
+Looking at the report for standard glm summary method, we can see that the linear effect of each variable was significant (p < 0.05 for *agegp.L*, *alcgp.L* and *tobgp.L*), such as  the quadratic effect of predictor age (p < 0.05 for *agegp.Q*). Even so,it is hard to identify which variable is more important to predict esophageal cancer.
 
 ```{r}
 glm.esoph<-glm(cbind(ncases,ncontrols)~agegp+alcgp+tobgp, esoph,family="binomial")
 summary(glm.esoph)
 ```
 
-Using dominance analysis, we could conclude that age and alcohol dominates completely tobacco, and age shows general dominance over alcohol and tobacco 
+We performed dominance analysis on this dataset and the results are shown below. We can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
 
 ```{r}
 da.esoph<-dominanceAnalysis(glm.esoph)
@@ -90,7 +131,8 @@ print(da.esoph)
 summary(da.esoph)
 ```
 
-Using bootstrap analysis, we could see that dominance of age over tobacco and alcohol over tobacco is fairly robust on all levels, but age over alcohol is not easily reproducible and requires more research.
+Then, we performed a bootstrap analysis. We can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) of 0 and reproducibility (*Rep*) equal to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol*  are not easily reproducible and require more research
+
 ```{r,cache=T}
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
 summary(da.b.esoph)$r2.m
@@ -104,6 +146,11 @@ You can install the github version of dominanceanalysis from [github](https://gi
 install_github("clbustos/dominanceanalysis")
 ```
 
+## Authors
+
+* Claudio Bustos: Creator and maintainer
+* Filipa Coutinho: Documentation and testing
+
 ## References
 
 * Budescu, D. V. (1993). Dominance analysis: A new approach to the problem of relative importance of predictors in multiple regression. Psychological Bulletin, 114(3), 542-551. doi:10.1037/0033-2909.114.3.542
@@ -114,5 +161,5 @@ install_github("clbustos/dominanceanalysis")
 
 * Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. Journal of Educational and Behavioral Statistics, 34(3), 319-347. doi:10.3102/1076998609332754
 
-* Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
+* Luo, W., & Azen, R. (2013). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 

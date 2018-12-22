@@ -5,13 +5,13 @@ dominanceanalysis
 
 [![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis) [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
 
-Dominance Analysis (Azen and Bodescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013), for multiple regression models: OLS, GLM and HLM.
+Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models and Hierarchical Linear Models.
 
-Features:
+**Features**:
 
--   Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *lmer* and *glm* (family=binomial).
--   Covariance / correlation matrixes could be used as input for OLS dominance analysis, using *lmWithCov* and *mlmWithCov*, respectively.
--   You could use multiple criteria as fit indexes (useful for HLM).
+-   Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *lmer* and *glm* (family=binomial) models.
+-   Covariance / correlation matrixes could be used as input for OLS dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods, respectively.
+-   Multiple criteria can be used as fit indexes, which is useful especially for HLM.
 
 Examples
 ========
@@ -19,14 +19,21 @@ Examples
 Linear regression
 -----------------
 
-We could apply dominance analysis directly on data, using lm (see Azen and Bodescu, 2003).
+We could apply dominance analysis directly on the data, using *lm* (see Azen and Budescu, 2003).
 
-On attitude data, we could see that complaints dominates completely all others variables, and learning comes second. The other 4 variables doesn't show a consistent pattern for complete and conditional dominance.
+The *attitude* data is composed of six predictors of the overall rating of 35 clerical employees of a large financial organization: complaints, privileges, learning, raises, critical and advancement. The method `dominanceAnalysis()` can retrieve all necessary information directly from a *lm* model.
 
 ``` r
   library(dominanceanalysis)
   lm.attitude<-lm(rating~.,attitude)
   da.attitude<-dominanceAnalysis(lm.attitude)
+```
+
+Using `print()` method on the *dominanceAnalysis* object, we can see that *complaints* completely dominates all other predictors, followed by *learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don't show a consistent pattern for complete and conditional dominance.
+
+The `print()` method uses `abbreviate`, to allow complex models to be visualized at a glance.
+
+``` r
   print(da.attitude)
 #> 
 #> Dominance analysis
@@ -52,6 +59,11 @@ On attitude data, we could see that complaints dominates completely all others v
 #> Average contribution:
 #>  complaints  privileges    learning      raises    critical     advance 
 #> 0.370816194 0.050903793 0.155765990 0.120345079 0.006588723 0.028182213
+```
+
+The `summary()` method provides the average contribution of each variable. This contribution defines general dominance. Also, shows the complete dominance analysis matrix, that presents all *R*<sup>2</sup> differences between submodels.
+
+``` r
   summary(da.attitude)
 #> 
 #> * Fit index:  r2 
@@ -204,109 +216,118 @@ On attitude data, we could see that complaints dominates completely all others v
 #> 
 ```
 
-To evaluate the robustness of our results, we could use bootstrap analysis (Azen and Bodescu, 2006). We could see that complete dominance of complaints over all other variables is fairly robust, but complete dominance of learning isn't.
+To evaluate the robustness of our results, we could use bootstrap analysis (Azen and Budescu, 2006).
+
+We applied a bootstrap analysis using `bootDominanceAnalysis()` method with *R*<sup>2</sup> as a fit index and 100 permutations. For precise results, you need to run at least 1000 replications.
 
 ``` r
   bda.attitude=bootDominanceAnalysis(lm.attitude, R=100)
+```
+
+The `summary()` method presents the results for the bootstrap analysis. *Dij* shows the original result, and *mDij*, the mean for Dij on bootstrap samples and *SE.Dij* its standard error. *Pij* is the proportion of bootstrap samples where *i* dominantes *j*, *Pji* is the proportion of bootstrap samples where *j* dominates *i* and *Pnoij* is the proportion of samples where no dominance can be asserted. *Rep* is the proportion of samples where original dominance is replicated.
+
+We can see that the value of complete dominance for *complaints* is fairly robust over all variables (Dij almost equal to mDij, and small SE), contrarily to *learning* (Dij differs from mDij, and bigger SE).
+
+``` r
   summary(bda.attitude)
 #> Dominance Analysis
 #> ==================
 #> Fit index: r2 
 #>      dominance          i          j Dij  mDij            SE.Dij.  Pij
-#> 1     complete complaints privileges   1  0.99 0.0703526470681448 0.98
-#> 2     complete complaints   learning   1  0.94  0.178093154605032 0.89
-#> 3     complete complaints     raises   1 0.985 0.0857233039988826 0.97
-#> 4     complete complaints   critical   1 0.975  0.109521456778795 0.95
-#> 5     complete complaints    advance   1  0.99 0.0703526470681448 0.98
-#> 6     complete privileges   learning   0  0.26  0.251058365784339    0
-#> 7     complete privileges     raises 0.5 0.475  0.109521456778795    0
-#> 8     complete privileges   critical   1  0.52  0.172913243850753 0.08
-#> 9     complete privileges    advance 0.5 0.505               0.05 0.01
-#> 10    complete   learning     raises   1 0.675  0.259904799975886 0.37
-#> 11    complete   learning   critical   1 0.755  0.251209196897846 0.51
-#> 12    complete   learning    advance   1 0.725               0.25 0.45
-#> 13    complete     raises   critical   1 0.555   0.15723301886761 0.11
-#> 14    complete     raises    advance 0.5 0.535  0.128216199988121 0.07
-#> 15    complete   critical    advance 0.5  0.51  0.158592292219752 0.06
-#> 16 conditional complaints privileges   1     1                  0    1
-#> 17 conditional complaints   learning   1  0.96  0.153741222957161 0.93
-#> 18 conditional complaints     raises   1     1                  0    1
-#> 19 conditional complaints   critical   1 0.985 0.0857233039988826 0.97
-#> 20 conditional complaints    advance   1     1                  0    1
-#> 21 conditional privileges   learning   0  0.16  0.264765953440034 0.03
-#> 22 conditional privileges     raises 0.5  0.39  0.231158697509619 0.02
-#> 23 conditional privileges   critical   1  0.56  0.295419578350399 0.24
-#> 24 conditional privileges    advance 0.5  0.57  0.188293774338254 0.15
-#> 25 conditional   learning     raises   1  0.74  0.288500126919076 0.52
-#> 26 conditional   learning   critical   1 0.845  0.243034270352262  0.7
-#> 27 conditional   learning    advance   1  0.83  0.238047614284762 0.66
-#> 28 conditional     raises   critical   1  0.65  0.230283093235919  0.3
-#> 29 conditional     raises    advance 0.5  0.62  0.214617347995464 0.24
-#> 30 conditional   critical    advance 0.5 0.475  0.304635897922471 0.16
+#> 1     complete complaints privileges   1  0.98 0.0984731927834662 0.96
+#> 2     complete complaints   learning   1  0.95  0.150755672288882  0.9
+#> 3     complete complaints     raises   1 0.955  0.143811745632331 0.91
+#> 4     complete complaints   critical   1 0.985 0.0857233039988826 0.97
+#> 5     complete complaints    advance   1 0.955  0.143811745632331 0.91
+#> 6     complete privileges   learning   0  0.31  0.263810461498326 0.02
+#> 7     complete privileges     raises 0.5  0.45  0.166666666666667 0.01
+#> 8     complete privileges   critical   1 0.535  0.191419471688264 0.11
+#> 9     complete privileges    advance 0.5   0.5 0.0710669054518702 0.01
+#> 10    complete   learning     raises   1  0.56  0.238683256575942 0.18
+#> 11    complete   learning   critical   1  0.72  0.268929790694955 0.46
+#> 12    complete   learning    advance   1 0.635  0.223098021669237 0.27
+#> 13    complete     raises   critical   1  0.57  0.188293774338254 0.15
+#> 14    complete     raises    advance 0.5  0.51 0.0703526470681448 0.02
+#> 15    complete   critical    advance 0.5 0.515  0.132096536478043 0.05
+#> 16 conditional complaints privileges   1 0.995               0.05 0.99
+#> 17 conditional complaints   learning   1 0.955  0.143811745632331 0.91
+#> 18 conditional complaints     raises   1 0.995               0.05 0.99
+#> 19 conditional complaints   critical   1  0.99 0.0703526470681448 0.98
+#> 20 conditional complaints    advance   1  0.97  0.119341628287971 0.94
+#> 21 conditional privileges   learning   0 0.205  0.293833939221431 0.05
+#> 22 conditional privileges     raises 0.5 0.335  0.284755787624867 0.05
+#> 23 conditional privileges   critical   1  0.62  0.310750151352588 0.34
+#> 24 conditional privileges    advance 0.5  0.52   0.14070529413629 0.06
+#> 25 conditional   learning     raises   1  0.62  0.356186309210063  0.4
+#> 26 conditional   learning   critical   1  0.85  0.261116483933547 0.73
+#> 27 conditional   learning    advance   1 0.775               0.25 0.55
+#> 28 conditional     raises   critical   1  0.73  0.260341655863555 0.47
+#> 29 conditional     raises    advance 0.5 0.615  0.211476292340825 0.23
+#> 30 conditional   critical    advance 0.5 0.485  0.250806779023296 0.11
 #> 31     general complaints privileges   1     1                  0    1
 #> 32     general complaints   learning   1  0.98   0.14070529413629 0.98
 #> 33     general complaints     raises   1     1                  0    1
 #> 34     general complaints   critical   1     1                  0    1
 #> 35     general complaints    advance   1     1                  0    1
-#> 36     general privileges   learning   0  0.05   0.21904291355759 0.05
-#> 37     general privileges     raises   0  0.08  0.272659924344291 0.08
-#> 38     general privileges   critical   1  0.72  0.451260859854213 0.72
-#> 39     general privileges    advance   1  0.81  0.394277244403663 0.81
-#> 40     general   learning     raises   1  0.66  0.476095228569523 0.66
-#> 41     general   learning   critical   1  0.96  0.196946385566932 0.96
-#> 42     general   learning    advance   1  0.98   0.14070529413629 0.98
-#> 43     general     raises   critical   1  0.96  0.196946385566932 0.96
-#> 44     general     raises    advance   1     1                  0    1
-#> 45     general   critical    advance   0  0.52  0.502116731568678 0.52
+#> 36     general privileges   learning   0  0.15  0.358870281282637 0.15
+#> 37     general privileges     raises   0   0.1  0.301511344577764  0.1
+#> 38     general privileges   critical   1  0.74  0.440844002276808 0.74
+#> 39     general privileges    advance   1  0.75  0.435194139889245 0.75
+#> 40     general   learning     raises   1  0.56  0.498887651569859 0.56
+#> 41     general   learning   critical   1  0.93  0.256432399976243 0.93
+#> 42     general   learning    advance   1  0.99                0.1 0.99
+#> 43     general     raises   critical   1  0.95   0.21904291355759 0.95
+#> 44     general     raises    advance   1  0.99                0.1 0.99
+#> 45     general   critical    advance   0  0.44  0.498887651569859 0.44
 #>     Pji Pnoij  Rep
-#> 1     0  0.02 0.98
-#> 2  0.01   0.1 0.89
-#> 3     0  0.03 0.97
-#> 4     0  0.05 0.95
-#> 5     0  0.02 0.98
-#> 6  0.48  0.52 0.48
-#> 7  0.05  0.95 0.95
-#> 8  0.04  0.88 0.08
-#> 9     0  0.99 0.99
-#> 10 0.02  0.61 0.37
-#> 11    0  0.49 0.51
-#> 12    0  0.55 0.45
-#> 13    0  0.89 0.11
-#> 14    0  0.93 0.93
-#> 15 0.04   0.9  0.9
-#> 16    0     0    1
-#> 17 0.01  0.06 0.93
-#> 18    0     0    1
-#> 19    0  0.03 0.97
-#> 20    0     0    1
-#> 21 0.71  0.26 0.71
-#> 22 0.24  0.74 0.74
-#> 23 0.12  0.64 0.24
-#> 24 0.01  0.84 0.84
-#> 25 0.04  0.44 0.52
-#> 26 0.01  0.29  0.7
-#> 27    0  0.34 0.66
-#> 28    0   0.7  0.3
-#> 29    0  0.76 0.76
-#> 30 0.21  0.63 0.63
+#> 1     0  0.04 0.96
+#> 2     0   0.1  0.9
+#> 3     0  0.09 0.91
+#> 4     0  0.03 0.97
+#> 5     0  0.09 0.91
+#> 6   0.4  0.58  0.4
+#> 7  0.11  0.88 0.88
+#> 8  0.04  0.85 0.11
+#> 9  0.01  0.98 0.98
+#> 10 0.06  0.76 0.18
+#> 11 0.02  0.52 0.46
+#> 12    0  0.73 0.27
+#> 13 0.01  0.84 0.15
+#> 14    0  0.98 0.98
+#> 15 0.02  0.93 0.93
+#> 16    0  0.01 0.99
+#> 17    0  0.09 0.91
+#> 18    0  0.01 0.99
+#> 19    0  0.02 0.98
+#> 20    0  0.06 0.94
+#> 21 0.64  0.31 0.64
+#> 22 0.38  0.57 0.57
+#> 23  0.1  0.56 0.34
+#> 24 0.02  0.92 0.92
+#> 25 0.16  0.44  0.4
+#> 26 0.03  0.24 0.73
+#> 27    0  0.45 0.55
+#> 28 0.01  0.52 0.47
+#> 29    0  0.77 0.77
+#> 30 0.14  0.75 0.75
 #> 31    0     0    1
 #> 32 0.02     0 0.98
 #> 33    0     0    1
 #> 34    0     0    1
 #> 35    0     0    1
-#> 36 0.95     0 0.95
-#> 37 0.92     0 0.92
-#> 38 0.28     0 0.72
-#> 39 0.19     0 0.81
-#> 40 0.34     0 0.66
-#> 41 0.04     0 0.96
-#> 42 0.02     0 0.98
-#> 43 0.04     0 0.96
-#> 44    0     0    1
-#> 45 0.48     0 0.48
+#> 36 0.85     0 0.85
+#> 37  0.9     0  0.9
+#> 38 0.26     0 0.74
+#> 39 0.25     0 0.75
+#> 40 0.44     0 0.56
+#> 41 0.07     0 0.93
+#> 42 0.01     0 0.99
+#> 43 0.05     0 0.95
+#> 44 0.01     0 0.99
+#> 45 0.56     0 0.56
 ```
 
-We could also use only the correlation or covariance matrix. As example, we use ability.cov matrix to show dominance of 5 specific skills over general intelligence. The bigger average contribution is for reading, but we can see on level 1, vocab, that picture and blocks dominates reading. So, reading dominates completely only maze and vocabulary, blocks dominates picture and maze and picture dominates maze.
+Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading* (3.739). Nevertheless, in the ouput of `summary()` method on level 1, we can see that *picture* (3.078) dominates over *reading* (1.892) on 'vocab' submodel.
 
 ``` r
 lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, ability.cov$cov)
@@ -417,9 +438,9 @@ summary(da.cov)
 Hierarchical Linear Models
 --------------------------
 
-For Hierarchical Linear Models using lme4, you should provide a null model (see Luo and Azen, 2013).
+For Hierarchical Linear Models using *lme4*, you should provide a null model (see Luo and Azen, 2013).
 
-Using npk dataset, we could see that using rb.r2.1 and sb.r2.1 index, that shows influence of predictors on individual data, clearly phosphate dominates over potassium and nitrogen, and potassium dominates over nitrogen.
+As an example, we use *npk* dataset, which contains information about a classical N, P, K (nitrogen, phosphate, potassium) factorial experiment on the growth of peas conducted on 6 blocks
 
 ``` r
 library(lme4)
@@ -427,6 +448,11 @@ library(lme4)
 lmer.npk.1<-lmer(yield~N+P+K+(1|block),npk)
 lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
+```
+
+Using `print()` method, we can see that random effects are modeled as a constant (1 | block).
+
+``` r
 print(da.lmer)
 #> 
 #> Dominance analysis
@@ -470,7 +496,13 @@ print(da.lmer)
 #> Average contribution:
 #>             N             P             K 
 #>  5.963033e-09 -2.249891e-08  1.160901e-09
-summary(da.lmer)
+```
+
+The fit indexes used in the analysis were *rb.r2.1*, *rb.r2.2*, *sb.r2.1*, and *sb.r2.2*. We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on individual data, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
+
+``` r
+s.da.lmer=summary(da.lmer)
+s.da.lmer
 #> 
 #> * Fit index:  rb.r2.1 
 #> 
@@ -551,14 +583,26 @@ summary(da.lmer)
 #>    ( 1 | block )+P+K     2   0 0    
 #>      Average level 2     2     0 0 0
 #>  ( 1 | block )+N+P+K     3   0
+sm.rb.r2.1=s.da.lmer$rb.r2.1$summary.matrix
+# Nitrogen completely dominates  potassium
+as.logical(na.omit(sm.rb.r2.1$N > sm.rb.r2.1$K))
+#> [1] TRUE TRUE TRUE TRUE
+# Nitrogen completely dominates  phosphate
+as.logical(na.omit(sm.rb.r2.1$N > sm.rb.r2.1$P))
+#> [1] TRUE TRUE TRUE TRUE
+# Potassium completely dominates phosphate
+as.logical(na.omit(sm.rb.r2.1$K > sm.rb.r2.1$P))
+#> [1] TRUE TRUE TRUE TRUE
 ```
 
 Logistic regression
 -------------------
 
-For logistic regression (experimental), see Azen and Traxel, 2009.
+Dominance analysis can be used in logistic regression (see Azen and Traxel, 2009).
 
-As example, we use the esoph dataset. Looking the report for standard glm summary, we could see that linear effect of each variables are significant, and also quadratic effect of age. But is hard to identify what variable is more important to predict esophageal cancer.
+As an example, we used the *esoph* dataset, that contains information about a case-control study of (o)esophageal cancer in Ille-et-Vilaine, France.
+
+Looking at the report for standard glm summary method, we can see that the linear effect of each variable was significant (p &lt; 0.05 for *agegp.L*, *alcgp.L* and *tobgp.L*), such as the quadratic effect of predictor age (p &lt; 0.05 for *agegp.Q*). Even so,it is hard to identify which variable is more important to predict esophageal cancer.
 
 ``` r
 glm.esoph<-glm(cbind(ncases,ncontrols)~agegp+alcgp+tobgp, esoph,family="binomial")
@@ -598,7 +642,7 @@ summary(glm.esoph)
 #> Number of Fisher Scoring iterations: 6
 ```
 
-Using dominance analysis, we could conclude that age and alcohol dominates completely tobacco, and age shows general dominance over alcohol and tobacco
+We performed dominance analysis on this dataset and the results are shown below. We can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
 
 ``` r
 da.esoph<-dominanceAnalysis(glm.esoph)
@@ -727,30 +771,30 @@ summary(da.esoph)
 #>  agegp+alcgp+tobgp     3  0.267
 ```
 
-Using bootstrap analysis, we could see that dominance of age over tobacco and alcohol over tobacco is fairly robust on all levels, but age over alcohol is not easily reproducible and requires more research.
+Then, we performed a bootstrap analysis. We can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) of 0 and reproducibility (*Rep*) equal to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol* are not easily reproducible and require more research
 
 ``` r
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
 summary(da.b.esoph)$r2.m
-#>     dominance     i     j Dij   mDij            SE.Dij.   Pij   Pji Pnoij
-#> 1    complete agegp alcgp 0.5 0.5775  0.454175214678367   0.5 0.345 0.155
-#> 2    complete agegp tobgp   1 0.9975 0.0353553390593274 0.995     0 0.005
-#> 3    complete alcgp tobgp   1      1                  0     1     0     0
-#> 4 conditional agegp alcgp 0.5 0.5775  0.454175214678367   0.5 0.345 0.155
-#> 5 conditional agegp tobgp   1 0.9975 0.0353553390593274 0.995     0 0.005
-#> 6 conditional alcgp tobgp   1      1                  0     1     0     0
-#> 7     general agegp alcgp   1  0.575  0.495583509688707 0.575 0.425     0
-#> 8     general agegp tobgp   1  0.995 0.0707106781186548 0.995 0.005     0
-#> 9     general alcgp tobgp   1      1                  0     1     0     0
+#>     dominance     i     j Dij  mDij           SE.Dij.   Pij   Pji Pnoij
+#> 1    complete agegp alcgp 0.5  0.65 0.434099310129925  0.57  0.27  0.16
+#> 2    complete agegp tobgp   1     1                 0     1     0     0
+#> 3    complete alcgp tobgp   1     1                 0     1     0     0
+#> 4 conditional agegp alcgp 0.5  0.65 0.434099310129925  0.57  0.27  0.16
+#> 5 conditional agegp tobgp   1     1                 0     1     0     0
+#> 6 conditional alcgp tobgp   1     1                 0     1     0     0
+#> 7     general agegp alcgp   1 0.655 0.476561174209376 0.655 0.345     0
+#> 8     general agegp tobgp   1     1                 0     1     0     0
+#> 9     general alcgp tobgp   1     1                 0     1     0     0
 #>     Rep
-#> 1 0.155
-#> 2 0.995
+#> 1  0.16
+#> 2     1
 #> 3     1
-#> 4 0.155
-#> 5 0.995
+#> 4  0.16
+#> 5     1
 #> 6     1
-#> 7 0.575
-#> 8 0.995
+#> 7 0.655
+#> 8     1
 #> 9     1
 ```
 
@@ -763,6 +807,12 @@ You can install the github version of dominanceanalysis from [github](https://gi
 install_github("clbustos/dominanceanalysis")
 ```
 
+Authors
+-------
+
+-   Claudio Bustos: Creator and maintainer
+-   Filipa Coutinho: Documentation and testing
+
 References
 ----------
 
@@ -774,4 +824,4 @@ References
 
 -   Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. Journal of Educational and Behavioral Statistics, 34(3), 319-347. <doi:10.3102/1076998609332754>
 
--   Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. <doi:10.3102/1076998612458319>
+-   Luo, W., & Azen, R. (2013). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. <doi:10.3102/1076998612458319>

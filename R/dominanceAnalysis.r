@@ -107,7 +107,7 @@ print.dominanceAnalysis<-function(x,...) {
     rownames(out)<-x$predictors
     print(out)
     cat("\nAverage contribution:\n")
-    print(x$contribution.average[[fit]])
+    print(sort(x$contribution.average[[fit]], decreasing = T))
   }
   invisible(x)
 }

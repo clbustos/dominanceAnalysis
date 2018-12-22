@@ -6,11 +6,11 @@
 #' @return lmmR2 class
 #' @importFrom stats sigma
 #' @importFrom methods is
-#' @keywords internal
+#' @export
 lmmR2<-function(m.null, m.full) {
 	if(is(m.null,"lme"))	 {
 		return(lmmR2.lme(m.null,m.full))
-	} else if (class(m.null)=="mer" | class(m.null)=="lmerMod" | class(m.null)=="lmerTest") {
+	} else if (class(m.null)=="mer" | class(m.null)=="lmerMod" | class(m.null)=="lmerTest" | class(m.null)=="lmerModLmerTest") {
 		return(lmmR2.mer(m.null,m.full))
 	} else {
 		stop("Not implemented for other classes than lme or lmer")
@@ -106,10 +106,14 @@ lmmR2.lme<-function(m.null,m.full) {
 	out
 }
 
+#' Print method for  lmmR2 models summary
+
 print.lmmR2<-function(x,...) {
 	print(summary.lmmR2(x), ...)
 }
-# Print method for  lmmR2 models summary
+#' Print method for  lmmR2 models summary
+
+
 print.summary.lmmR2<-function(x, ...) {
 	cat("Explanatory power of Multilevel Model\n")
 	cat("=====================================\n")
@@ -121,7 +125,7 @@ print.summary.lmmR2<-function(x, ...) {
 
 }
 
-# Summary for lmmR2 models
+#' Summary for lmmR2 models
 summary.lmmR2<-function(object, ...) {
   x<-object
   v.null<-c(x$sigmas[1],x$t0)

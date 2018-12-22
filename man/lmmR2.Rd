@@ -21,4 +21,3 @@ Calculates several measures of fit for Linear Mixel Models
 based on Lou and Azen (2013) text.
 Models could be lmer or lme models
 }
-\keyword{internal}
