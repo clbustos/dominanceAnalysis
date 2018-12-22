@@ -61,7 +61,7 @@ The `print()` method uses `abbreviate`, to allow complex models to be visualized
 #> 0.370816194 0.050903793 0.155765990 0.120345079 0.006588723 0.028182213
 ```
 
-The `summary()` method provides the average contribution of each variable. This contribution defines general dominance. Also, shows the complete dominance analysis matrix, that presents all *R*<sup>2</sup> differences between submodels.
+The `summary()` method provides the average contribution of each variable. This contribution defines general dominance. Also, shows the complete dominance analysis matrix, that presents all fit differences between levels.
 
 ``` r
   summary(da.attitude)
@@ -216,7 +216,7 @@ The `summary()` method provides the average contribution of each variable. This 
 #> 
 ```
 
-To evaluate the robustness of our results, we could use bootstrap analysis (Azen and Budescu, 2006).
+To evaluate the robustness of our results, we can use bootstrap analysis (Azen and Budescu, 2006).
 
 We applied a bootstrap analysis using `bootDominanceAnalysis()` method with *R*<sup>2</sup> as a fit index and 100 permutations. For precise results, you need to run at least 1000 replications.
 
@@ -440,7 +440,7 @@ Hierarchical Linear Models
 
 For Hierarchical Linear Models using *lme4*, you should provide a null model (see Luo and Azen, 2013).
 
-As an example, we use *npk* dataset, which contains information about a classical N, P, K (nitrogen, phosphate, potassium) factorial experiment on the growth of peas conducted on 6 blocks
+As an example, we use *npk* dataset, which contains information about a classical N, P, K (nitrogen, phosphate, potassium) factorial experiment on the growth of peas conducted on 6 blocks.
 
 ``` r
 library(lme4)
@@ -498,7 +498,7 @@ print(da.lmer)
 #>  5.963033e-09 -2.249891e-08  1.160901e-09
 ```
 
-The fit indexes used in the analysis were *rb.r2.1*, *rb.r2.2*, *sb.r2.1*, and *sb.r2.2*. We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on individual data, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
+The fit indexes used in the analysis were *rb.r2.1* (R&B *R*<sub>1</sub><sup>2</sup>: Level-1 variance component explained by predictors), *rb.r2.2* (R&B *R*<sub>2</sub><sup>2</sup>: Level-2 variance component explained by predictors), *sb.r2.1* (S&B *R*<sub>1</sub><sup>2</sup>: Level-1 proportional reduction in error predicting scores at Level-1), and *sb.r2.2* (S&B *R*<sub>2</sub><sup>2</sup>: Level-2 proportional reduction in error predicting scores at Level-1). We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on Level-1 variance, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
 
 ``` r
 s.da.lmer=summary(da.lmer)
@@ -602,7 +602,7 @@ Dominance analysis can be used in logistic regression (see Azen and Traxel, 2009
 
 As an example, we used the *esoph* dataset, that contains information about a case-control study of (o)esophageal cancer in Ille-et-Vilaine, France.
 
-Looking at the report for standard glm summary method, we can see that the linear effect of each variable was significant (p &lt; 0.05 for *agegp.L*, *alcgp.L* and *tobgp.L*), such as the quadratic effect of predictor age (p &lt; 0.05 for *agegp.Q*). Even so,it is hard to identify which variable is more important to predict esophageal cancer.
+Looking at the report for standard glm summary method, we can see that the linear effect of each variable was significant (*p* &lt; 0.05 for *agegp.L*, *alcgp.L* and *tobgp.L*), such as the quadratic effect of predictor age (*p* &lt; 0.05 for *agegp.Q*). Even so,it is hard to identify which variable is more important to predict esophageal cancer.
 
 ``` r
 glm.esoph<-glm(cbind(ncases,ncontrols)~agegp+alcgp+tobgp, esoph,family="binomial")
@@ -642,7 +642,7 @@ summary(glm.esoph)
 #> Number of Fisher Scoring iterations: 6
 ```
 
-We performed dominance analysis on this dataset and the results are shown below. We can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
+We performed dominance analysis on this dataset and the results are shown below. The fit indexes were *r2.m* (*R*<sub>*M*</sub><sup>2</sup>: McFadden's measure), *r2.cs* ($R^2\_{(y,\\hat{y})}$: squared correlation between the predicted and the observed values of the response), *r2.n* (*R*<sub>*N*</sub><sup>2</sup>: Nagelkerke's measure) and *r2.e* (*R*<sub>*E*</sub><sup>2</sup>: Estrella's measure). For all fit indexes, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
 
 ``` r
 da.esoph<-dominanceAnalysis(glm.esoph)
@@ -771,7 +771,7 @@ summary(da.esoph)
 #>  agegp+alcgp+tobgp     3  0.267
 ```
 
-Then, we performed a bootstrap analysis. We can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) of 0 and reproducibility (*Rep*) equal to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol* are not easily reproducible and require more research
+Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) of 0 and reproducibility (*Rep*) equal to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol* are not easily reproducible and require more research
 
 ``` r
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
@@ -810,8 +810,8 @@ install_github("clbustos/dominanceanalysis")
 Authors
 -------
 
--   Claudio Bustos: Creator and maintainer
--   Filipa Coutinho: Documentation and testing
+-   Claudio Bustos Navarrete: Creator and maintainer
+-   Filipa Coutinho Soares: Documentation and testing
 
 References
 ----------
