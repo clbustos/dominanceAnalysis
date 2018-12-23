@@ -7,7 +7,7 @@
 #' Use \code{\link{summary.bootDominanceAnalysis}} to get a nice formatted
 #' data.frame
 #'
-#' @param object lm, glm or lmer model
+#' @param x lm, glm or lmer model
 #' @param R number on bootstrap resamples
 #' @param constants vector of predictors to remain unchanged between models.
 #'                  i.e. vector of variables not subjected to bootstrap analysis.

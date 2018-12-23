@@ -124,7 +124,7 @@ glm.esoph<-glm(cbind(ncases,ncontrols)~agegp+alcgp+tobgp, esoph,family="binomial
 summary(glm.esoph)
 ```
 
-We performed dominance analysis on this dataset and the results are shown below. The fit indexes  were *r2.m* ($R^2_M$: McFadden's measure), *r2.cs* ($R^2_{(y,\hat{y})}$: squared correlation between the predicted and the observed values of the response), *r2.n* ($R^2_N$: Nagelkerke's measure) and *r2.e* ($R^2_E$: Estrella's measure). For all fit indexes, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
+We performed dominance analysis on this dataset and the results are shown below. The fit indexes  were *r2.m* ($R^2_M$: McFadden's measure), *r2.cs* ($R^2_{CS}$: Cox and Snell's measure), *r2.n* ($R^2_N$: Nagelkerke's measure) and *r2.e* ($R^2_E$: Estrella's measure). For all fit indexes, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
 
 ```{r}
 da.esoph<-dominanceAnalysis(glm.esoph)
@@ -138,6 +138,29 @@ Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we c
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
 summary(da.b.esoph)$r2.m
 ```
+
+## Set of predictors
+
+Budescu (1993) shows that dominance analysis can be applied to groups or set of inseparable predictors. 
+
+```{r}
+m.budescu.5=matrix(c(1,.30,.41,.33,
+                .30,1,.16,.57,
+                .41,.16,1,.50,
+                .33,.57,.50,1), nrow = 4,ncol = 4,byrow = T,
+              dimnames = list(c('SES','IQ','nAch','GPA'),
+                              c('SES','IQ','nAch','GPA')))
+lmCov.b5<-lmWithCov(GPA~SES+IQ+nAch,m.budescu.5)
+da.b5<-dominanceAnalysis(lmCov.b5)
+print(da.b5)
+summary(da.b5)
+da.b5.g<-dominanceAnalysis(lmCov.b5,terms = c("SES","IQ+nAch"))
+print(da.b5.g)
+summary(da.b5.g)
+```
+
+
+
 
 ## Installation
 

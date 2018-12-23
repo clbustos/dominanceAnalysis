@@ -100,7 +100,7 @@ da.glm.fit<-function(data,family.glm,...) {
 		  r2.m=1-(l1/l0),
 		  r2.cs=r2.cs,
 		  r2.n=r2.cs/(1-exp(l0)^(2/n)),
-		  r2.e=1-(l1/l0)^(-(2/n)*l0)
+		  r2.e=1-(l1/l0)^(-(2/n)*l0) # Estrella
 		)
 	}
 

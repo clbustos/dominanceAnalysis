@@ -642,7 +642,7 @@ summary(glm.esoph)
 #> Number of Fisher Scoring iterations: 6
 ```
 
-We performed dominance analysis on this dataset and the results are shown below. The fit indexes were *r2.m* (*R*<sub>*M*</sub><sup>2</sup>: McFadden's measure), *r2.cs* ($R^2\_{(y,\\hat{y})}$: squared correlation between the predicted and the observed values of the response), *r2.n* (*R*<sub>*N*</sub><sup>2</sup>: Nagelkerke's measure) and *r2.e* (*R*<sub>*E*</sub><sup>2</sup>: Estrella's measure). For all fit indexes, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
+We performed dominance analysis on this dataset and the results are shown below. The fit indexes were *r2.m* (*R*<sub>*M*</sub><sup>2</sup>: McFadden's measure), *r2.cs* (*R*<sub>*C**S*</sub><sup>2</sup>: Cox and Snell's measure), *r2.n* (*R*<sub>*N*</sub><sup>2</sup>: Nagelkerke's measure) and *r2.e* (*R*<sub>*E*</sub><sup>2</sup>: Estrella's measure). For all fit indexes, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
 
 ``` r
 da.esoph<-dominanceAnalysis(glm.esoph)
@@ -796,6 +796,89 @@ summary(da.b.esoph)$r2.m
 #> 7 0.655
 #> 8     1
 #> 9     1
+```
+
+Set of predictors
+-----------------
+
+Budescu (1993) shows that dominance analysis can be applied to groups or set of inseparable predictors.
+
+``` r
+m.budescu.5=matrix(c(1,.30,.41,.33,
+                .30,1,.16,.57,
+                .41,.16,1,.50,
+                .33,.57,.50,1), nrow = 4,ncol = 4,byrow = T,
+              dimnames = list(c('SES','IQ','nAch','GPA'),
+                              c('SES','IQ','nAch','GPA')))
+lmCov.b5<-lmWithCov(GPA~SES+IQ+nAch,m.budescu.5)
+da.b5<-dominanceAnalysis(lmCov.b5)
+print(da.b5)
+#> 
+#> Dominance analysis
+#> Predictors: SES, IQ, nAch 
+#> Fit-indexes: r2 
+#> 
+#> * Fit index:  r2 
+#>      complete conditional  general
+#> SES                               
+#> IQ   SES,nAch    SES,nAch SES,nAch
+#> nAch      SES         SES      SES
+#> 
+#> Average contribution:
+#>        SES         IQ       nAch 
+#> 0.04408243 0.26589530 0.18649580
+summary(da.b5)
+#> 
+#> * Fit index:  r2 
+#> 
+#> Average contribution of each variable:
+#> 
+#>        SES         IQ       nAch 
+#> 0.04408243 0.26589530 0.18649580 
+#> 
+#> Dominance Analysis matrix:
+#>            model level   fit   SES    IQ  nAch
+#>                1     0     0 0.109 0.325  0.25
+#>              SES     1 0.109       0.244  0.16
+#>               IQ     1 0.325 0.028       0.172
+#>             nAch     1  0.25 0.019 0.246      
+#>  Average level 1     1       0.024 0.245 0.166
+#>           SES+IQ     2 0.353             0.144
+#>         SES+nAch     2 0.269       0.228      
+#>          IQ+nAch     2 0.496     0            
+#>  Average level 2     2           0 0.228 0.144
+#>      SES+IQ+nAch     3 0.496
+da.b5.g<-dominanceAnalysis(lmCov.b5,terms = c("SES","IQ+nAch"))
+print(da.b5.g)
+#> 
+#> Dominance analysis
+#> Predictors: SES, IQ+nAch 
+#> Fit-indexes: r2 
+#> 
+#> * Fit index:  r2 
+#>         complete conditional general
+#> SES                                 
+#> IQ+nAch      SES         SES     SES
+#> 
+#> Average contribution:
+#>        SES    IQ+nAch 
+#> 0.05448274 0.44199079
+summary(da.b5.g)
+#> 
+#> * Fit index:  r2 
+#> 
+#> Average contribution of each variable:
+#> 
+#>        SES    IQ+nAch 
+#> 0.05448274 0.44199079 
+#> 
+#> Dominance Analysis matrix:
+#>            model level   fit   SES IQ.nAch
+#>                1     0     0 0.109   0.496
+#>              SES     1 0.109         0.388
+#>          IQ+nAch     1 0.496     0        
+#>  Average level 1     1           0   0.388
+#>      SES+IQ+nAch     2 0.496
 ```
 
 Installation

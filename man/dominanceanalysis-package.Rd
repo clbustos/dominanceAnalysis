@@ -33,7 +33,7 @@ da<-dominanceAnalysis(lm.1)
 print(da)
 summary(da)
 
-# Dominance analysis for LMM
+# Dominance analysis for HLM
 \dontrun{
 library(lme4)
 x1<-rnorm(1000)
@@ -54,7 +54,7 @@ x1<-rnorm(1000)
 x2<-rnorm(1000)
 x3<-rnorm(1000)
 y<-runif(1000)<(1/(1+exp(-(2*x1+x2+1.5*x3))))
-glm.1<-glm(y~x1+x2+x3)
+glm.1<-glm(y~x1+x2+x3,family="binomial")
 da.glm<-dominanceAnalysis(glm.1)
 print(da.glm)
 summary(da.glm)

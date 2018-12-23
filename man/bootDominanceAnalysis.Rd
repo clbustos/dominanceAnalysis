@@ -8,6 +8,8 @@ bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
   null.model = NULL, ...)
 }
 \arguments{
+\item{x}{lm, glm or lmer model}
+
 \item{R}{number on bootstrap resamples}
 
 \item{constants}{vector of predictors to remain unchanged between models.
@@ -21,8 +23,6 @@ function.}
 i.e. only random effects, without any fixed effect.}
 
 \item{...}{Other arguments provided to lm or lmer (not implemented yet).}
-
-\item{object}{lm, glm or lmer model}
 }
 \description{
 Bootstrap procedure as presented on Azen and Budescu (2003).
