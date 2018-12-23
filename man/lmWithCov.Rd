@@ -2,23 +2,23 @@
 % Please edit documentation in R/lmWithCov.r
 \name{lmWithCov}
 \alias{lmWithCov}
-\title{Uses covariance/correlation matrix for calculate OLS.}
+\title{Uses covariance/correlation matrix for calculate OLS}
 \usage{
 lmWithCov(f, x)
 }
 \arguments{
-\item{f}{formula}
+\item{f}{formula for lm model}
 
 \item{x}{correlation/covariance matrix}
 }
 \value{
-\item{coef}{coefficients of the regression}
-\item{r.squared}{\eqn{R^2} of the regression}
+\item{coef}{regression coefficients}
+\item{r.squared}{\eqn{R^2} or coefficient of determination}
 \item{formula}{formula provided as parameter}
 \item{cov}{covariance/correlation matrix provided as parameter}
 }
 \description{
-Calculate coefficients and \eqn{R^2} for an OLS regression
+Calculate regression coefficients and \eqn{R^2} for an OLS regression
 Could be used with \code{\link{dominanceAnalysis}} to
 perform a dominance analysis without the original data
 }

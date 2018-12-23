@@ -1,12 +1,24 @@
-#' Dominance analysis for OLS (univariate and multivariate), GLM and LMM models.
+#' Dominance analysis for OLS (univariate and multivariate), GLM and LMM models
 #'
-#' Dominance analysis based on Azen and Bodescu(1993) and all their derivations.
-#' The dominance of one variable over another is defined by the improvement on
-#' prediction over all the subset of other variables, based on one or more fit indexes.
-#' The original paper (Azen & Bodescu, 1993) defines that variable \eqn{X_1} dominates \eqn{X_2} when the contribution of \eqn{X_1} are higher on every submodel of predictors that not include \eqn{X_1} or \eqn{X_2}
-#' Later, Azen & Bodescu (2003), define two other types of dominance. The original dominance is called complete dominance. Conditional dominance is calculated for average contribution on each level, and general dominance is calculated for the mean of average contribution on each level.
+#' Dominance analysis based on Budescu(1993) and all their derivations. Budescu
+#' developed a clear and intuitive definition that states that a predictor's
+#' importance reflects its contribution in the prediction of the criterion
+#' and that one predictor is 'more important than another' if it contributes
+#' more to the prediction of the criterion than does its competitor
+#' at a given level of analysis.
+#' The original paper (Bodescu, 1993) defines that variable \eqn{X_1} dominates
+#' \eqn{X_2} when \eqn{X_1} is chosen over \eqn{X_2} in all possible subset of models
+#' where only one of these two predictors is to be entered.
+#' Later, Azen & Bodescu (2003), name the previously definition as 'complete dominance'
+#' and  two other types of dominance: conditional and general dominance.
+#' Conditional dominance is calculated as the average of the additional contributions
+#' to all subset of models of a given model size. General dominance is calculated
+#' as the mean of average contribution on each level.
 #'
-#' Based on the class of model, the method run the function \code{da.<model>.fit}. Currently, five models are implemented:
+#' To obtain the fit-indexes for each model, a function called \code{da.<model>.fit}
+#' is executed. For example, for a lm model, function \code{\link{da.lm.fit}} provides
+#' \eqn{R^2} values.
+#' Currently, five models are implemented:
 #' \describe{
 #' \item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit}}}
 #' \item{glm}{ Provides three of the four fit indexes recommended by Azen & Traxel (2009):  McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
@@ -15,20 +27,20 @@
 #' \item{mlmWithCov}{Provides both \eqn{R^2_{XY}} and \eqn{P^2_{XY}} for multivariate regression models using a correlation/covariance matrix. See \code{\link{mlmWithCov}} to create the model and \code{\link{da.mlmWithCov.fit}} for the fit index function }
 #' }
 #' @param x lm, glm, lmer model
-#' @param constants vector of variables to remain unchanged between models
-#' @param terms     vector of terms to be analyzed. By default, obtained using the formula of model
-#' @param fit.functions list of functions which provides fit indexes for model.
-#' @param data optional data.frame to which fit the formulas
+#' @param constants vector of predictors to remain unchanged between models
+#' @param terms     vector of terms to be analyzed. By default, obtained from the model
+#' @param fit.functions Name of the method used to provide fit indexes
+#' @param data optional data.frame
 #' @param null.model for mixel models, null model against to test the submodels
 #' @param ... Other arguments provided to lm or lmer (not implemented yet)
 #' @return
-#' \item{predictors}{Vector of predictors}
-#' \item{constants}{Vector of constant variables}
-#' \item{terms}{Vector of terms to be analyzed}
-#' \item{fit.functions}{Name of method used to provide fit indexes}
-#' \item{fits}{raw fits indexes \code{\link{daRawResults}}}
-#' \item{contribution.by.level}{Mean contribution by level}
-#' \item{contribution.average}{List with mean contribution for all levels, for each fit index}
+#' \item{predictors}{Vector of predictors.}
+#' \item{constants}{Vector of constant variables.}
+#' \item{terms}{Vector of terms to be analyzed.}
+#' \item{fit.functions}{Vector of fit indexes names.}
+#' \item{fits}{List with raw fits indexes. See \code{\link{daRawResults}}.}
+#' \item{contribution.by.level}{List of mean contribution of each predictor by level for each fit index. Each element is a data.frame, with levels as rows and predictors as columns, for each fit index.}
+#' \item{contribution.average}{List with mean contribution of each predictor for all levels. These values are obtained for every fit index considered in the analysis. Each element is a vector of mean contributions for a given fit index.}
 #' \item{complete}{Matrix for complete dominance.}
 #' \item{conditional}{Matrix for conditional dominance.}
 #' \item{general}{Matrix for general dominance. }
@@ -41,6 +53,7 @@
 #' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 #' }
 #' @examples
+#' data(longley)
 #' lm.1<-lm(Employed~.,longley)
 #' da<-dominanceAnalysis(lm.1)
 #' print(da)
@@ -49,6 +62,13 @@
 #' da.no.year<-dominanceAnalysis(lm.1,constants='Year')
 #' print(da.no.year)
 #' summary(da.no.year)
+#' # Parameter terms could be used to group variables
+#' da.terms=c('GNP.deflator+GNP',
+#'            'Unemployed+Armed.Forces+Population+Unemployed',
+#'            'Year')
+#' da.grouped<-dominanceAnalysis(lm.1,terms=da.terms)
+#' print(da.grouped)
+#' summary(da.grouped)
 #' @export
 dominanceAnalysis <-
   function(x,

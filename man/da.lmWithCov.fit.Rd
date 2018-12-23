@@ -2,7 +2,7 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lmWithCov.fit}
 \alias{da.lmWithCov.fit}
-\title{Provides coefficient of determination for lineal models, using covariance/correlation matrix.}
+\title{Provides coefficient of determination for linear models, using covariance/correlation matrix.}
 \usage{
 da.lmWithCov.fit(base.cov, ...)
 }

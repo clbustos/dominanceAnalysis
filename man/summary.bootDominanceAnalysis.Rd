@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{a \code{\link{bootDominanceAnalysis}} object}
 
-\item{...}{unused}
+\item{...}{ignored}
 }
 \description{
 Summary for bootDominanceAnalysis.

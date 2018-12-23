@@ -2,14 +2,14 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.glm.fit}
 \alias{da.glm.fit}
-\title{Provides fit indexes for GLM models, based on Azen and Traxel(2009)}
+\title{Provides fit indexes for GLM models.}
 \usage{
 da.glm.fit(data, family.glm, ...)
 }
 \arguments{
 \item{data}{complete data set}
 
-\item{family.glm}{family for glm method}
+\item{family.glm}{family for glm method. Use 'binomial' for logistic regression.}
 
 \item{...}{ignored}
 }
@@ -17,12 +17,15 @@ da.glm.fit(data, family.glm, ...)
 A function described by \link{using-fit-indexes}. You could retrieve following indexes
 \describe{
 \item{\code{r2.m}}{McFadden(1974)}
-\item{\code{r2.cs}}{Cox and Snell(1989). Use as a reference, because don't have 1 as upper bound}
+\item{\code{r2.cs}}{Cox and Snell(1989). Use with caution, because don't have 1 as upper bound}
 \item{\code{r2.n}}{Nagelkerke(1991), that corrects the upper bound of Cox and Snell(1989) index }
 \item{\code{r2.e}}{Estrella(1998)}
 }
 }
 \description{
+Functions only available for logistic regression, based on Azen and Traxel(2009).
+}
+\details{
 Check \link{daRawResults}.
 }
 \examples{
@@ -39,6 +42,9 @@ da.glm.fit(data=df.1, family.glm='binomial')(y~x1)
 \item Azen, R. and Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. \emph{Journal of Educational and Behavioral Statistics, 34} (3), 319-347. doi:10.3102/1076998609332754.
 
 \item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. \emph{Biometrika, 78}(3), 691-692. doi:10.1093/biomet/78.3.691.
+\item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
+\item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. Journal of Business & Economic Statistics, 16(2), 198-205. doi: 10.1080/07350015.1998.10524753
+\item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
 }
 }
 \seealso{

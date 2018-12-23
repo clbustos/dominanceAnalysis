@@ -1,18 +1,22 @@
 #' Bootstrap analysis for Dominance Analysis
 #'
-#' Bootstrap procedure as presented on Azen and Bodescu(2003).
-#' Provides the expected level of dominance of variable \eqn{X_i} over \eqn{X_j},
+#' Bootstrap procedure as presented on Azen and Budescu (2003).
+#' Provides the expected level of dominance of predictor \eqn{X_i} over \eqn{X_j},
 #' as the degree to which the pattern found on sample is reproduced on the
 #' bootstrap samples.
 #' Use \code{\link{summary.bootDominanceAnalysis}} to get a nice formatted
 #' data.frame
 #'
-#' @param x lm, glm, lmer model
-#' @param R number of bootstrap resamples
-#' @param constants vector of variables to remain unchanged between models
+#' @param object lm, glm or lmer model
+#' @param R number on bootstrap resamples
+#' @param constants vector of predictors to remain unchanged between models.
+#'                  i.e. vector of variables not subjected to bootstrap analysis.
 #' @param fit.functions list of functions which provides fit indexes for model.
-#' @param null.model for mixel models, null model against to test the submodels
-#' @param ... Other arguments provided to lm or lmer (not implemented yet)
+#'                      See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
+#'                      function.
+#' @param null.model only for linear mixel models, null model against to test the submodels.
+#'                   i.e. only random effects, without any fixed effect.
+#' @param ... Other arguments provided to lm or lmer (not implemented yet).
 #' @export
 #' @seealso \code{\link{summary.bootDominanceAnalysis}}
 #' @examples

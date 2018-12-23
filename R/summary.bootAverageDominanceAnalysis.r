@@ -1,6 +1,6 @@
 #' Summary for bootAverageDominanceAnalysis.
 #' @param object a \code{\link{bootAverageDominanceAnalysis}} object
-#' @param ... Unused
+#' @param ... ignored
 #' @importFrom stats sd
 #' @export
 summary.bootAverageDominanceAnalysis<-function(object,...) {

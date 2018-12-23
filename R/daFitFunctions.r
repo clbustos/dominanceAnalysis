@@ -1,30 +1,28 @@
 #' Provides fit indexes for different regression models.
 #'
-#' \code{dominanceAnalysis} try to infer, based on the class of the
-#' model provided, the appropiate fit indexes, using the scheme
-#' da.CLASS.fit for name. This method have two interfaces, one for
-#' retrieve the names of fit indexes, and other to retrieve the
-#' indexes based on data.
+#' \code{\link{dominanceAnalysis}} tries to infer, based on the class of the
+#' model provided, the appropriate fit indexes, using the scheme
+#' da.CLASS.fit for name. This method has two interfaces, one for retrieving
+#' the names of the fit indexes, and another to retrieve the indexes based
+#' on the data.
 #'
 #' Interfaces are:
 #' \itemize{
-#' \item \code{da.CLASS.fit("names")} returns a vector with names for fit Indexes
-#' \item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one param,
-#'       the formula to calculate the submodel.
+#' \item \code{da.CLASS.fit("names")} returns a vector with names for fit indexes
+#' \item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one parameter, the formula to calculate the submodel.
 #' }
-#' \code{\link{daRawResults}}
-#' @param data complete data
-#' @param null.model needed for LMM models
-#' @param base.cov needed when only covarince/correlation matrix is provided
-#' @param family.glm family for glm models
+#' @param data Complete data set containing the variables in the model.
+#' @param null.model Null model only needed for HLM models.
+#' @param base.cov Required if only a covariance/correlation matrix is provided.
+#' @param family.glm family param for glm models.
 #' @name using-fit-indexes
 NULL
 
 #' Provides coefficient of determination for \code{lm} models.
 #'
 #' Uses \eqn{R^2} (coefficient of determination) as fit index
-#' @param data complete data set
-#' @param ... just ignored
+#' @param data complete data set containing the variables in the model
+#' @param ... ignored
 #' @return A function described by \link{using-fit-indexes} description for interface
 #' @export
 #' @family fit indexes
@@ -46,16 +44,18 @@ da.lm.fit<-function(data,...) {
 	}
 }
 
-#' Provides fit indexes for GLM models, based on Azen and Traxel(2009)
+#' Provides fit indexes for GLM models.
+#'
+#' Functions only available for logistic regression, based on Azen and Traxel(2009).
 #'
 #' Check \link{daRawResults}.
 #' @param data complete data set
-#' @param family.glm family for glm method
+#' @param family.glm family for glm method. Use 'binomial' for logistic regression.
 #' @param ...  ignored
 #' @return A function described by \link{using-fit-indexes}. You could retrieve following indexes
 #' \describe{
 #' \item{\code{r2.m}}{McFadden(1974)}
-#' \item{\code{r2.cs}}{Cox and Snell(1989). Use as a reference, because don't have 1 as upper bound}
+#' \item{\code{r2.cs}}{Cox and Snell(1989). Use with caution, because don't have 1 as upper bound}
 #' \item{\code{r2.n}}{Nagelkerke(1991), that corrects the upper bound of Cox and Snell(1989) index }
 #' \item{\code{r2.e}}{Estrella(1998)}
 #' }
@@ -65,6 +65,9 @@ da.lm.fit<-function(data,...) {
 #' \item Azen, R. and Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. \emph{Journal of Educational and Behavioral Statistics, 34} (3), 319-347. doi:10.3102/1076998609332754.
 #'
 #' \item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. \emph{Biometrika, 78}(3), 691-692. doi:10.1093/biomet/78.3.691.
+#' \item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
+#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. Journal of Business & Economic Statistics, 16(2), 198-205. doi: 10.1080/07350015.1998.10524753
+#' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
 #' }
 #' @family fit indexes
 #' @importFrom stats lm glm logLik
@@ -102,10 +105,10 @@ da.glm.fit<-function(data,family.glm,...) {
 	}
 
 }
-#' Provides fit indexes for mixed models, based on Luo and Azen (2012).
+#' Provides fit indexes for hierarchiecal linear models, based on Luo and Azen (2013).
 #'
-#' @param data complete data set
-#' @param null.model needed for LMM models
+#' @param data complete data set containing the variables in the model
+#' @param null.model needed for HLM models
 #' @param ... ignored
 #' @references
 #' \itemize{
@@ -132,7 +135,7 @@ da.lmerMod.fit<-function(data, null.model, ...) {
 	}
 }
 
-#' Provides coefficient of determination for lineal models, using covariance/correlation matrix.
+#' Provides coefficient of determination for linear models, using covariance/correlation matrix.
 #'
 #' Uses \eqn{R^2} (coefficient of determination)
 #' See \code{\link{lmWithCov}}

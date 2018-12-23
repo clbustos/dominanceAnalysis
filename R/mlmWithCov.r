@@ -1,9 +1,9 @@
-#' Uses covariance/correlation matrix for calculate multivariate index of fit
+#' Uses covariance/correlation matrix to calculate multivariate index of fit
 #'
 #' Calculate \eqn{R^2_{XY}} and  \eqn{P^2_{YX}} for multivariate regressiob
 #' Could be used with \code{\link{dominanceAnalysis}} to
 #' perform a multivariate dominance analysis without original
-#' data
+#' data.
 #'
 #' @param f formula. Should use \code{cbind(y1,y2,...,yk)~x1+x2+..+xp}
 #' @param x correlation/covariance matrix

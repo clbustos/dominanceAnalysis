@@ -107,12 +107,15 @@ lmmR2.lme<-function(m.null,m.full) {
 }
 
 #' Print method for  lmmR2 models summary
-
+#' @param x    lmmR2 object
+#' @param ...  extra arguments for print
 print.lmmR2<-function(x,...) {
 	print(summary.lmmR2(x), ...)
 }
-#' Print method for  lmmR2 models summary
 
+#' Print method for  lmmR2 models summary
+#' @param x    summary.lmmR2 object
+#' @param ...  unused
 
 print.summary.lmmR2<-function(x, ...) {
 	cat("Explanatory power of Multilevel Model\n")
@@ -126,6 +129,8 @@ print.summary.lmmR2<-function(x, ...) {
 }
 
 #' Summary for lmmR2 models
+#' @param object lmmR2 object
+#' @param ... unused
 summary.lmmR2<-function(object, ...) {
   x<-object
   v.null<-c(x$sigmas[1],x$t0)

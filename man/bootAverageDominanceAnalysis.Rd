@@ -8,22 +8,29 @@ bootAverageDominanceAnalysis(object, R, constants = c(),
   fit.functions = "default", null.model = NULL, ...)
 }
 \arguments{
-\item{object}{lm, glm, lmer model}
+\item{object}{lm, glm or lmer model}
 
 \item{R}{number on bootstrap resamples}
 
-\item{constants}{vector of variables to remain unchanged between models}
+\item{constants}{vector of predictors to remain unchanged between models.
+i.e. vector of variables not subjected to bootstrap analysis.}
 
-\item{fit.functions}{list of functions which provides fit indexes for model.}
+\item{fit.functions}{list of functions which provides fit indexes for model.
+See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
+function.}
 
-\item{null.model}{for mixel models, null model against to test the submodels}
+\item{null.model}{only for linear mixel models, null model against to test the submodels.
+i.e. only random effects, without any fixed effect.}
 
-\item{...}{Other arguments provided to lm or lmer (not implemented yet)}
+\item{...}{Other arguments provided to lm or lmer (not implemented yet).}
 }
 \description{
-Bootstrap average values, which are used on general dominance
+Bootstrap average values and correspond standard errors for each predictor
+in the dominance analysis. Those values are used for general dominance.
+}
+\details{
 Use \code{\link{summary.bootAverageDominanceAnalysis}} to get a nice formatted
-data.frame
+\code{data.frame} object.
 }
 \examples{
 \dontrun{

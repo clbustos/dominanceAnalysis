@@ -2,7 +2,7 @@
 % Please edit documentation in R/mlmWithCov.r
 \name{mlmWithCov}
 \alias{mlmWithCov}
-\title{Uses covariance/correlation matrix for calculate multivariate index of fit}
+\title{Uses covariance/correlation matrix to calculate multivariate index of fit}
 \usage{
 mlmWithCov(f, x)
 }
@@ -21,7 +21,7 @@ mlmWithCov(f, x)
 Calculate \eqn{R^2_{XY}} and  \eqn{P^2_{YX}} for multivariate regressiob
 Could be used with \code{\link{dominanceAnalysis}} to
 perform a multivariate dominance analysis without original
-data
+data.
 }
 \examples{
 \dontrun{

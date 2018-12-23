@@ -2,19 +2,19 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lmerMod.fit}
 \alias{da.lmerMod.fit}
-\title{Provides fit indexes for mixed models, based on Luo and Azen (2012).}
+\title{Provides fit indexes for hierarchiecal linear models, based on Luo and Azen (2013).}
 \usage{
 da.lmerMod.fit(data, null.model, ...)
 }
 \arguments{
-\item{data}{complete data set}
+\item{data}{complete data set containing the variables in the model}
 
-\item{null.model}{needed for LMM models}
+\item{null.model}{needed for HLM models}
 
 \item{...}{ignored}
 }
 \description{
-Provides fit indexes for mixed models, based on Luo and Azen (2012).
+Provides fit indexes for hierarchiecal linear models, based on Luo and Azen (2013).
 }
 \references{
 \itemize{

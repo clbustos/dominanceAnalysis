@@ -4,27 +4,25 @@
 \alias{using-fit-indexes}
 \title{Provides fit indexes for different regression models.}
 \arguments{
-\item{data}{complete data}
+\item{data}{Complete data set containing the variables in the model.}
 
-\item{null.model}{needed for LMM models}
+\item{null.model}{Null model only needed for HLM models.}
 
-\item{base.cov}{needed when only covarince/correlation matrix is provided}
+\item{base.cov}{Required if only a covariance/correlation matrix is provided.}
 
-\item{family.glm}{family for glm models}
+\item{family.glm}{family param for glm models.}
 }
 \description{
-\code{dominanceAnalysis} try to infer, based on the class of the
-model provided, the appropiate fit indexes, using the scheme
-da.CLASS.fit for name. This method have two interfaces, one for
-retrieve the names of fit indexes, and other to retrieve the
-indexes based on data.
+\code{\link{dominanceAnalysis}} tries to infer, based on the class of the
+model provided, the appropriate fit indexes, using the scheme
+da.CLASS.fit for name. This method has two interfaces, one for retrieving
+the names of the fit indexes, and another to retrieve the indexes based
+on the data.
 }
 \details{
 Interfaces are:
 \itemize{
-\item \code{da.CLASS.fit("names")} returns a vector with names for fit Indexes
-\item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one param,
-      the formula to calculate the submodel.
+\item \code{da.CLASS.fit("names")} returns a vector with names for fit indexes
+\item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one parameter, the formula to calculate the submodel.
 }
-\code{\link{daRawResults}}
 }

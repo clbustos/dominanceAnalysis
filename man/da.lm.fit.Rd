@@ -7,9 +7,9 @@
 da.lm.fit(data, ...)
 }
 \arguments{
-\item{data}{complete data set}
+\item{data}{complete data set containing the variables in the model}
 
-\item{...}{just ignored}
+\item{...}{ignored}
 }
 \value{
 A function described by \link{using-fit-indexes} description for interface
