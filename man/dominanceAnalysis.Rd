@@ -35,12 +35,20 @@ dominanceAnalysis(x, constants = c(), terms = NULL,
 \item{general}{Matrix for general dominance. }
 }
 \description{
+Dominance analysis for OLS (univariate and multivariate), GLM and LMM models
+}
+\section{Definition of Dominance Analysis}{
+
 Dominance analysis based on Budescu(1993) and all their derivations. Budescu
 developed a clear and intuitive definition that states that a predictor's
 importance reflects its contribution in the prediction of the criterion
 and that one predictor is 'more important than another' if it contributes
 more to the prediction of the criterion than does its competitor
 at a given level of analysis.
+}
+
+\section{Types of dominance}{
+
 The original paper (Bodescu, 1993) defines that variable \eqn{X_1} dominates
 \eqn{X_2} when \eqn{X_1} is chosen over \eqn{X_2} in all possible subset of models
 where only one of these two predictors is to be entered.
@@ -50,7 +58,9 @@ Conditional dominance is calculated as the average of the additional contributio
 to all subset of models of a given model size. General dominance is calculated
 as the mean of average contribution on each level.
 }
-\details{
+
+\section{Fit indexes availables}{
+
 To obtain the fit-indexes for each model, a function called \code{da.<model>.fit}
 is executed. For example, for a lm model, function \code{\link{da.lm.fit}} provides
 \eqn{R^2} values.
@@ -63,6 +73,7 @@ Currently, five models are implemented:
 \item{mlmWithCov}{Provides both \eqn{R^2_{XY}} and \eqn{P^2_{XY}} for multivariate regression models using a correlation/covariance matrix. See \code{\link{mlmWithCov}} to create the model and \code{\link{da.mlmWithCov.fit}} for the fit index function }
 }
 }
+
 \examples{
 data(longley)
 lm.1<-lm(Employed~.,longley)

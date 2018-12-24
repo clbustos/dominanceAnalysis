@@ -8,8 +8,8 @@ test_that("Correct raw results using glm(family=binomial)", {
 	y.binom<-rbinom(1000,1,exp(y1)/(1+exp(y1)))
 
 	d.f<-data.frame(xa=x1,xb=x2,xc=x3,y=y.binom)
-	lm.1<-glm(y~xa+xb+xc,d.f,family=binomial)
-	daRW<-daRawResults(lm.1)
+	glm.1<-glm(y~xa+xb+xc,d.f,family=binomial)
+	daRW<-daRawResults(glm.1)
 	base.fits<-daRW$base.fits
   # x2>x3>x1
   c.types=c("r2.m","r2.cs","r2.n","r2.e")

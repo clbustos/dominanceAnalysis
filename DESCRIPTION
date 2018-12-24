@@ -5,8 +5,8 @@ Description: Dominance Analysis is a method that allows to compare the
              ordinary least squares, generalized linear models and 
              hierarchical linear models.
 Authors@R: c(
-  person("Claudio", "Bustos", email = "clbustos@gmail.com", role = c("aut", "cre")),
-  person("Filipa C.", "Soares", email = "filipa.mco.soares@gmail.com", role = c("aut")))
+  person("Claudio", "Bustos Navarrete", email = "clbustos@gmail.com", role = c("aut", "cre")),
+  person("Filipa", "Coutinho Soares", email = "filipa.mco.soares@gmail.com", role = c("aut")))
 Version: 0.1.2
 Depends:
     R (>= 3.0.2)

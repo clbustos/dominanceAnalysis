@@ -5,7 +5,7 @@ dominanceanalysis
 
 [![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis) [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
 
-Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009;Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models and Hierarchical Linear Models.
+Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009; Budescu, 1993; Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models and Hierarchical Linear Models.
 
 **Features**:
 

@@ -1,5 +1,16 @@
-#' The dominanceanalysis package allows to perform the dominance analysis for multiple regression models, such as OLS (univariate and multivariate), GLM and HLM
+#' The dominanceanalysis package allows to perform the dominance analysis for multiple regression models, such as OLS (univariate and multivariate), GLM and HLM.
+#' The dominance analysis on this package is performed by \code{\link{dominanceAnalysis}}
+#' function. To perform bootstrap procedures you should use \code{\link{bootDominanceAnalysis}}
+#' function. For both, standard \code{print} and \code{summary} functions are provided.
 #'
+#' @section Main Features:
+#' \itemize{
+#' \item Provides complete, conditional and general dominance analysis for lm (univariate and multivariate), lmer and glm (family=binomial) models.
+#' \item Covariance / correlation matrixes could be used as input for OLS dominance analysis, using \code{\link{lmWithCov}} and \code{\link{mlmWithCov}} methods, respectively.
+#' \item Multiple criteria can be used as fit indexes, which is useful especially for HLM.
+#' }
+#'
+#' @section About Dominance Analysis:
 #' Dominance analysis is a method developed to evaluate the importance of each predictor
 #' in the selected regression model: "one predictor is 'more important than another'
 #' if it contributes more to the prediction of the criterion than does its competitor
@@ -10,10 +21,6 @@
 #' were provided by Azen & Budescu (2003), as well as adaptations
 #' to Generalized Linear Models (Azen & Traxel, 2009)
 #' and Hierarchical Linear Models (Luo & Azen, 2013).
-#'
-#' The dominance analysis on this package is performed by \code{\link{dominanceAnalysis}}
-#' function. To perform bootstrap procedures you should use \code{\link{bootDominanceAnalysis}}
-#' function. For both, standard \code{print} and \code{summary} functions are provided.
 #'
 #' @name dominanceanalysis-package
 #' @aliases dominanceanalysis
