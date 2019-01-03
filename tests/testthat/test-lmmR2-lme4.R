@@ -1,4 +1,4 @@
-context ("lmmR2 method")
+context ("lmmR2 method for lme4")
 library(lme4)
 #library(nlme)
 m<-250
@@ -68,15 +68,12 @@ test_that("summary methods works fine",{
 
   })
 
-#test_that("Report similar values for nlme", {
-#	expect_equal(lmmR2.1$rb.r2.1, lmmR2.2$rb.r2.1,tolerance=0.05)
-#	expect_equal(lmmR2.1$rb.r2.2, lmmR2.2$rb.r2.2,tolerance=0.05)
-#	expect_equal(lmmR2.1$sb.r2.1, lmmR2.2$sb.r2.1,tolerance=0.05)
-#	expect_equal(lmmR2.1$sb.r2.2, lmmR2.2$sbs.r2.1,tolerance=0.05)
-
-#	r2.1=rb.r2.1, rb.r2.2=rb.r2.2, sb.r2.1=sb.r2.1, sb.r2.2=sb.r2.2
-
-#})
-
-#m.null.lme<-lme(fixed=y~1,random=~1|gg2/gg)
-#m.full.lme<-lme(fixed=y~1+x.g.i+x.i,random=~1+x.i|gg2/gg)
+test_that("group structure should be equal between models", {
+  lmer.dif<-lmer(y~(1|gg))
+  expect_error(lmmR2(m.null, lmer.dif),"Groups should be equal")
+})
+test_that("should raise an error if use an object that isn't created by lme4",{
+  lm.1<-lm(y~x.i)
+  expect_error(lmmR2(m.null, lm.1),"Not implemented")
+  expect_error(lmmR2(lm.1,m.null),"Not implemented")
+})

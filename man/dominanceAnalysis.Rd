@@ -39,8 +39,8 @@ Dominance analysis for OLS (univariate and multivariate), GLM and LMM models
 }
 \section{Definition of Dominance Analysis}{
 
-Dominance analysis based on Budescu(1993) and all their derivations. Budescu
-developed a clear and intuitive definition that states that a predictor's
+Budescu (1993) developed a clear and intuitive definition of importance
+in regression models, that states that a predictor's
 importance reflects its contribution in the prediction of the criterion
 and that one predictor is 'more important than another' if it contributes
 more to the prediction of the criterion than does its competitor

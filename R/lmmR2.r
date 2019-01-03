@@ -8,12 +8,14 @@
 #' @importFrom methods is
 #' @export
 lmmR2<-function(m.null, m.full) {
-	if(is(m.null,"lme"))	 {
-		return(lmmR2.lme(m.null,m.full))
-	} else if (class(m.null)=="mer" | class(m.null)=="lmerMod" | class(m.null)=="lmerTest" | class(m.null)=="lmerModLmerTest") {
+  test.lmer.class<-function(x) {
+    class(x) %in% c("mer","lmerMod","lmerTest","lmerModLmerTest")
+  }
+
+	if (test.lmer.class(m.null) & test.lmer.class(m.full)) {
 		return(lmmR2.mer(m.null,m.full))
 	} else {
-		stop("Not implemented for other classes than lme or lmer")
+		stop("Not implemented for other classes than lmer")
 	}
 }
 
@@ -26,10 +28,13 @@ lmmR2.mer<-function(m.null,m.full) {
   # If the structure isn't the same, I'm in trouble
 	v.0<-lme4::VarCorr(m.null)
 	v.1<-lme4::VarCorr(m.full)
-	if(!all.equal(names(v.0),names(v.1))) {
+	#print(names(v.0))
+	#print(names(v.1))
+	n.v.0<-length(names(v.0))
+	n.v.1<-length(names(v.1))
+	if(!(n.v.0==n.v.1 && all.equal(names(v.0),names(v.1)))) {
 		stop("Groups should be equal")
 	}
-	n.b<-length(names(v.0))
 	# recojo los sigmas
 	sigmas=c(sigma(m.null)^2, sigma(m.full)^2)
 	# recojo los thetas
@@ -48,63 +53,8 @@ lmmR2.mer<-function(m.null,m.full) {
 	out
 }
 
-# Extract variances on nlme models
-vars.lme<-function(x) {
-	vv<-nlme::VarCorr(x)
-	# Si tiene solo dos filas, recoge un solo factor
-	if(nrow(vv)==2) {
-		out=list()
-		out[[colnames(x$groups)]]=as.numeric(vv[1,1])
-		return(out)
-	} else {
-		out=list()
-		vv.n<-rownames(vv)
-		current.var=NULL
-		for(i in 1:nrow(vv)) {
-			c.name=vv.n[i]
-			#print(vv.n[i])
-			aa=grep("(.+) =",c.name,value=T)
-			if(length(aa)) {
-				aa=sub(" =","",aa)
-				current.var=aa
-			} else if(!is.null(current.var) & c.name=="(Intercept)") {
-				out[[current.var]]=vv[i,1]
-			}
-		}
-		out
-	}
-}
-# Extract coefficients for lme models
-lmmR2.lme<-function(m.null,m.full) {
-  # First, I verify the group structure.
-  # If the structure isn't the same, I'm in trouble
-  v.0<-vars.lme(m.null)
-	v.1<-vars.lme(m.full)
-	if(!all.equal(names(v.0),names(v.1))) {
-		stop("Groups should be equal")
-	}
 
-	n.b<-length(names(v.0))
-	# recojo los sigmas
-	sigmas=c(m.null$sigma^2,m.full$sigma^2)
-	# recojo los thetas
-	thetas.0=sapply(v.0,function(x) {as.numeric(x[1])})
-	thetas.1=sapply(v.1,function(x) {as.numeric(x[1])})
-	#print(thetas.0)
-	#print(thetas.1)
-	# recojo el largo promedio
-	nn=sapply(m.null$groups,function(x) {
-		length(levels(x)) / sum(1/table(x))
-	})
 
-	rb.r2.1<-1-(sigmas[2]/sigmas[1])
-	rb.r2.2<-1-(sum(thetas.1)/sum(thetas.0))
-	sb.r2.1<-1-((sigmas[2]+sum(thetas.1))/(sigmas[1]+sum(thetas.0)))
-	sb.r2.2<-1-(  sigmas[2]+sum(thetas.1*nn)) / (sigmas[1]+sum(thetas.0*nn))
-	out<-list(sigmas=sigmas,t0=thetas.0,t1=thetas.1, nn=nn,rb.r2.1=rb.r2.1, rb.r2.2=rb.r2.2, sb.r2.1=sb.r2.1, sb.r2.2=sb.r2.2)
-	class(out)<-"lmmR2"
-	out
-}
 
 #' Print method for  lmmR2 models summary
 #' @param x    lmmR2 object
