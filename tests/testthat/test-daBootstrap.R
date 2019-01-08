@@ -1,4 +1,8 @@
 context("Bootstrap samples")
+
+
+
+
 test_that("Bootstrap should have correct sample values", {
   x1<-rnorm(1000)
   x2<-rnorm(1000)

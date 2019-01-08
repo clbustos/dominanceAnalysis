@@ -2,14 +2,22 @@
 % Please edit documentation in R/dominanceMatrix.r
 \name{dominanceMatrix}
 \alias{dominanceMatrix}
-\title{Calculates the dominance for a given matrix}
+\title{Retrieve or calculates a dominance matrix for a given object}
 \usage{
-dominanceMatrix(x, undefined.value = 0.5)
+dominanceMatrix(x, undefined.value = 0.5, type = NULL,
+  fit.function = NULL, ...)
 }
 \arguments{
-\item{x}{matrix with fit indexes}
+\item{x}{matrix (calculate) or dominanceAnalysis (retrieve)}
 
 \item{undefined.value}{value when no dominance can be established}
+
+\item{type}{type of dominance matrix to retrieve. Could be complete, conditional or general}
+
+\item{fit.function}{specific fit function to retrieve. If not specified, retrieve the first
+method according to fit.functions}
+
+\item{...}{extra arguments. Check  \code{\link{dominanceMatrix.matrix}} and \code{\link{dominanceMatrix.dominanceAnalysis}} for specific arguments}
 }
 \value{
 A matrix representing dominance. 1 represented domination of the row variable
@@ -17,7 +25,13 @@ A matrix representing dominance. 1 represented domination of the row variable
         Undefined dominance is represented by \code{undefined.value} parameter
 }
 \description{
-Dominance is defined between a pair of variables if all values on a given
-variable are higher than for other variable.
+This methods calculates or retrieve dominance matrix
 }
-\keyword{internal}
+\details{
+To calculate a dominance matrix from a matrix or dataframe, use
+
+\code{dominanceMatrix(x,undefined.value)}.
+To retrieve the dominance matrices from a dominanceAnalysis object, use
+
+\code{dominanceMatrix(x,type,fit.function)}
+}

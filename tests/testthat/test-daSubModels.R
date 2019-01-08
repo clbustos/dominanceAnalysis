@@ -109,3 +109,12 @@ test_that("Correct submodels for standard data.frame with constants", {
 	expect_that(ds$level,equals(level))
 
 	})
+
+test_that("should raise an error if a constant is not available in predictors" ,{
+  y1<-x1+x2+x3+rnorm(1000)
+
+  d.f<-data.frame(xa=x1,xb=x2,xc=x3,y=y1)
+  lm.1<-lm(y~xa+xb+xc,d.f)
+  expect_error(daSubmodels(lm.1,constants="xe"),"all constants should be in predictors")
+
+})
