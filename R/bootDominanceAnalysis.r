@@ -26,10 +26,10 @@
 #' summary(da.boot)
 #' }
 bootDominanceAnalysis<-function(x,R,constants=c(),fit.functions="default",null.model=NULL, ...) {
-	if (!requireNamespace("boot", quietly = TRUE)) {
+	if (!requireNamespace("boot", quietly = TRUE)) { #nocov start
     stop("boot package needed for this function to work. Please install it.",
       call. = FALSE)
-  }
+  } #nocov end
   # Extract the data
 	total.data<-getData(x)
 	da.original<-dominanceAnalysis(x, constants=constants,fit.functions=fit.functions, null.model=null.model,...)

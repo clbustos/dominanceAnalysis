@@ -119,10 +119,10 @@ da.glm.fit<-function(data,family.glm,...) {
 #' @export
 
 da.lmerMod.fit<-function(data, null.model, ...) {
-  if (!requireNamespace("lme4", quietly = TRUE)) {
+  if (!requireNamespace("lme4", quietly = TRUE)) { #nocov start
     stop("lme4 needed for this function to work. Please install it.",
       call. = FALSE)
-  }
+  } #nocov end
 	mc=match.call()
 	function(x) {
 		if(x=="names") {
