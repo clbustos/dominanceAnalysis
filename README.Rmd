@@ -70,10 +70,10 @@ We can see that the value of complete dominance for *complaints* is fairly robus
   summary(bda.attitude)
 ```
 
-Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading*  (3.739). Nevertheless, in the ouput of `summary()` method  on level 1, we can see that *picture* (3.078) dominates over *reading* (1.892) on 'vocab' submodel.
+Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading*  (0.152). Nevertheless, in the output of `summary()` method  on level 1, we can see that *picture* (0.125) dominates over *reading* (0.077) on 'vocab' submodel.
 
 ```{r}
-lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, ability.cov$cov)
+lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, cov2cor(ability.cov$cov))
 da.cov<-dominanceAnalysis(lmwithcov)
 print(da.cov)
 summary(da.cov)

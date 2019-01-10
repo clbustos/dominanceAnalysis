@@ -281,10 +281,10 @@ We can see that the value of complete dominance for *complaints* is fairly robus
 #>      general   critical    advance 0.0 0.440  0.499 0.44 0.56  0.00 0.56
 ```
 
-Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading* (3.739). Nevertheless, in the ouput of `summary()` method on level 1, we can see that *picture* (3.078) dominates over *reading* (1.892) on 'vocab' submodel.
+Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading* (0.152). Nevertheless, in the output of `summary()` method on level 1, we can see that *picture* (0.125) dominates over *reading* (0.077) on 'vocab' submodel.
 
 ``` r
-lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, ability.cov$cov)
+lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, cov2cor(ability.cov$cov))
 da.cov<-dominanceAnalysis(lmwithcov)
 print(da.cov)
 #> 
@@ -302,7 +302,7 @@ print(da.cov)
 #> 
 #> Average contribution:
 #> reading  blocks   vocab picture    maze 
-#>   3.739   3.066   2.374   2.248   1.056
+#>   0.152   0.124   0.096   0.091   0.043
 summary(da.cov)
 #> 
 #> * Fit index:  r2 
@@ -310,82 +310,82 @@ summary(da.cov)
 #> Average contribution of each variable:
 #> 
 #> reading  blocks   vocab picture    maze 
-#>   3.739   3.066   2.374   2.248   1.056 
+#>   0.152   0.124   0.096   0.091   0.043 
 #> 
 #> Dominance Analysis matrix:
-#>                              model level    fit picture blocks  maze
-#>                                  1     0      0   5.357  7.499 2.854
-#>                            picture     1  5.357          2.972 1.603
-#>                             blocks     1  7.499    0.83        0.276
-#>                               maze     1  2.854   4.106  4.921      
-#>                            reading     1  8.189   2.621  3.403   1.4
-#>                              vocab     1   6.52   3.078  3.829 1.342
-#>                    Average level 1     1          2.659  3.781 1.155
-#>                     picture+blocks     2  8.329                0.365
-#>                       picture+maze     2   6.96          1.733      
-#>                    picture+reading     2  10.81          1.351 0.897
-#>                      picture+vocab     2  9.599          1.446 0.825
-#>                        blocks+maze     2  7.775   0.919             
-#>                     blocks+reading     2 11.592   0.569        0.213
-#>                       blocks+vocab     2 10.349   0.696        0.164
-#>                       maze+reading     2  9.589   2.119  2.217      
-#>                         maze+vocab     2  7.863    2.56   2.65      
-#>                      reading+vocab     2  8.412   2.548  3.232 1.286
-#>                    Average level 2     2          1.569  2.105 0.625
-#>                picture+blocks+maze     3  8.694                     
-#>             picture+blocks+reading     3 12.161                 0.28
-#>               picture+blocks+vocab     3 11.045                 0.23
-#>               picture+maze+reading     3 11.707          0.734      
-#>                 picture+maze+vocab     3 10.423          0.852      
-#>              picture+reading+vocab     3  10.96          1.261 0.825
-#>                blocks+maze+reading     3 11.806   0.636             
-#>                  blocks+maze+vocab     3 10.513   0.762             
-#>               blocks+reading+vocab     3 11.644   0.577        0.199
-#>                 maze+reading+vocab     3  9.698   2.088  2.145      
-#>                    Average level 3     3          1.016  1.248 0.384
-#>        picture+blocks+maze+reading     4 12.442                     
-#>          picture+blocks+maze+vocab     4 11.276                     
-#>       picture+blocks+reading+vocab     4 12.221                0.263
-#>         picture+maze+reading+vocab     4 11.786          0.698      
-#>          blocks+maze+reading+vocab     4 11.844   0.641             
-#>                    Average level 4     4          0.641  0.698 0.263
-#>  picture+blocks+maze+reading+vocab     5 12.484                     
+#>                              model level   fit picture blocks  maze
+#>                                  1     0     0   0.217  0.304 0.116
+#>                            picture     1 0.217          0.121 0.065
+#>                             blocks     1 0.304   0.034        0.011
+#>                               maze     1 0.116   0.167    0.2      
+#>                            reading     1 0.332   0.106  0.138 0.057
+#>                              vocab     1 0.265   0.125  0.155 0.054
+#>                    Average level 1     1         0.108  0.153 0.047
+#>                     picture+blocks     2 0.338                0.015
+#>                       picture+maze     2 0.282           0.07      
+#>                    picture+reading     2 0.439          0.055 0.036
+#>                      picture+vocab     2  0.39          0.059 0.033
+#>                        blocks+maze     2 0.316   0.037             
+#>                     blocks+reading     2  0.47   0.023        0.009
+#>                       blocks+vocab     2  0.42   0.028        0.007
+#>                       maze+reading     2 0.389   0.086   0.09      
+#>                         maze+vocab     2 0.319   0.104  0.108      
+#>                      reading+vocab     2 0.341   0.103  0.131 0.052
+#>                    Average level 2     2         0.064  0.085 0.025
+#>                picture+blocks+maze     3 0.353                     
+#>             picture+blocks+reading     3 0.494                0.011
+#>               picture+blocks+vocab     3 0.448                0.009
+#>               picture+maze+reading     3 0.475           0.03      
+#>                 picture+maze+vocab     3 0.423          0.035      
+#>              picture+reading+vocab     3 0.445          0.051 0.033
+#>                blocks+maze+reading     3 0.479   0.026             
+#>                  blocks+maze+vocab     3 0.427   0.031             
+#>               blocks+reading+vocab     3 0.473   0.023        0.008
+#>                 maze+reading+vocab     3 0.394   0.085  0.087      
+#>                    Average level 3     3         0.041  0.051 0.016
+#>        picture+blocks+maze+reading     4 0.505                     
+#>          picture+blocks+maze+vocab     4 0.458                     
+#>       picture+blocks+reading+vocab     4 0.496                0.011
+#>         picture+maze+reading+vocab     4 0.478          0.028      
+#>          blocks+maze+reading+vocab     4 0.481   0.026             
+#>                    Average level 4     4         0.026  0.028 0.011
+#>  picture+blocks+maze+reading+vocab     5 0.507                     
 #>  reading vocab
-#>    8.189  6.52
-#>    5.453 4.242
-#>    4.093  2.85
-#>    6.735 5.009
-#>          0.223
-#>    1.892      
-#>    4.543 3.081
-#>    3.832 2.716
-#>    4.747 3.463
-#>           0.15
-#>    1.362      
-#>    4.031 2.738
-#>          0.052
-#>    1.295      
-#>          0.109
-#>    1.835      
+#>    0.332 0.265
+#>    0.221 0.172
+#>    0.166 0.116
+#>    0.273 0.203
+#>          0.009
+#>    0.077      
+#>    0.184 0.125
+#>    0.156  0.11
+#>    0.193 0.141
+#>          0.006
+#>    0.055      
+#>    0.164 0.111
+#>          0.002
+#>    0.053      
+#>          0.004
+#>    0.074      
 #>               
-#>     2.85 1.538
-#>    3.748 2.582
-#>           0.06
-#>    1.176      
-#>          0.078
-#>    1.363      
+#>    0.116 0.062
+#>    0.152 0.105
+#>          0.002
+#>    0.048      
+#>          0.003
+#>    0.055      
 #>               
-#>          0.038
-#>     1.33      
-#>               
-#>               
-#>    1.904 0.689
-#>          0.043
-#>    1.209      
+#>          0.002
+#>    0.054      
 #>               
 #>               
+#>    0.077 0.028
+#>          0.002
+#>    0.049      
 #>               
-#>    1.209 0.043
+#>               
+#>               
+#>    0.049 0.002
 #> 
 ```
 
