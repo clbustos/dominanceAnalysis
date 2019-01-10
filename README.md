@@ -57,8 +57,8 @@ The `print()` method uses `abbreviate`, to allow complex models to be visualized
 #> advance                        crtc
 #> 
 #> Average contribution:
-#>  complaints  privileges    learning      raises    critical     advance 
-#> 0.370816194 0.050903793 0.155765990 0.120345079 0.006588723 0.028182213
+#> complaints   learning     raises privileges    advance   critical 
+#>      0.371      0.156      0.120      0.051      0.028      0.007
 ```
 
 The `summary()` method provides the average contribution of each variable. This contribution defines general dominance. Also, shows the complete dominance analysis matrix, that presents all fit differences between levels.
@@ -70,8 +70,8 @@ The `summary()` method provides the average contribution of each variable. This 
 #> 
 #> Average contribution of each variable:
 #> 
-#>  complaints  privileges    learning      raises    critical     advance 
-#> 0.370816194 0.050903793 0.155765990 0.120345079 0.006588723 0.028182213 
+#> complaints   learning     raises privileges    advance   critical 
+#>      0.371      0.156      0.120      0.051      0.028      0.007 
 #> 
 #> Dominance Analysis matrix:
 #>                                                   model level   fit
@@ -152,7 +152,7 @@ The `summary()` method provides the average contribution of each variable. This 
 #>       0.336      0.033    0.102           0.005    0.05
 #>       0.657      0.166    0.372  0.329            0.013
 #>       0.658      0.158    0.408  0.375    0.014        
-#>       0.494      0.076    0.227  0.194    0.007   0.021
+#>       0.494      0.075    0.227  0.194    0.007   0.022
 #>                           0.032  0.003        0       0
 #>                  0.007               0        0   0.018
 #>                  0.002    0.024               0   0.006
@@ -189,7 +189,7 @@ The `summary()` method provides the average contribution of each variable. This 
 #>       0.176      0.011                    0.001        
 #>       0.274      0.022             0.1                 
 #>       0.288      0.044    0.152                        
-#>       0.287      0.011    0.084  0.052    0.002   0.039
+#>       0.287      0.011    0.084  0.053    0.002   0.039
 #>                                               0   0.017
 #>                                      0            0.016
 #>                                  0.002    0.002        
@@ -205,7 +205,7 @@ The `summary()` method provides the average contribution of each variable. This 
 #>       0.255                      0.088                 
 #>       0.246               0.119                        
 #>       0.176      0.011                                 
-#>        0.22      0.005    0.055   0.02    0.001   0.033
+#>        0.22      0.005    0.055   0.02    0.001   0.032
 #>                                                   0.017
 #>                                           0.001        
 #>                                  0.002                 
@@ -233,98 +233,52 @@ We can see that the value of complete dominance for *complaints* is fairly robus
 #> Dominance Analysis
 #> ==================
 #> Fit index: r2 
-#>      dominance          i          j Dij  mDij            SE.Dij.  Pij
-#> 1     complete complaints privileges   1  0.98 0.0984731927834662 0.96
-#> 2     complete complaints   learning   1  0.95  0.150755672288882  0.9
-#> 3     complete complaints     raises   1 0.955  0.143811745632331 0.91
-#> 4     complete complaints   critical   1 0.985 0.0857233039988826 0.97
-#> 5     complete complaints    advance   1 0.955  0.143811745632331 0.91
-#> 6     complete privileges   learning   0  0.31  0.263810461498326 0.02
-#> 7     complete privileges     raises 0.5  0.45  0.166666666666667 0.01
-#> 8     complete privileges   critical   1 0.535  0.191419471688264 0.11
-#> 9     complete privileges    advance 0.5   0.5 0.0710669054518702 0.01
-#> 10    complete   learning     raises   1  0.56  0.238683256575942 0.18
-#> 11    complete   learning   critical   1  0.72  0.268929790694955 0.46
-#> 12    complete   learning    advance   1 0.635  0.223098021669237 0.27
-#> 13    complete     raises   critical   1  0.57  0.188293774338254 0.15
-#> 14    complete     raises    advance 0.5  0.51 0.0703526470681448 0.02
-#> 15    complete   critical    advance 0.5 0.515  0.132096536478043 0.05
-#> 16 conditional complaints privileges   1 0.995               0.05 0.99
-#> 17 conditional complaints   learning   1 0.955  0.143811745632331 0.91
-#> 18 conditional complaints     raises   1 0.995               0.05 0.99
-#> 19 conditional complaints   critical   1  0.99 0.0703526470681448 0.98
-#> 20 conditional complaints    advance   1  0.97  0.119341628287971 0.94
-#> 21 conditional privileges   learning   0 0.205  0.293833939221431 0.05
-#> 22 conditional privileges     raises 0.5 0.335  0.284755787624867 0.05
-#> 23 conditional privileges   critical   1  0.62  0.310750151352588 0.34
-#> 24 conditional privileges    advance 0.5  0.52   0.14070529413629 0.06
-#> 25 conditional   learning     raises   1  0.62  0.356186309210063  0.4
-#> 26 conditional   learning   critical   1  0.85  0.261116483933547 0.73
-#> 27 conditional   learning    advance   1 0.775               0.25 0.55
-#> 28 conditional     raises   critical   1  0.73  0.260341655863555 0.47
-#> 29 conditional     raises    advance 0.5 0.615  0.211476292340825 0.23
-#> 30 conditional   critical    advance 0.5 0.485  0.250806779023296 0.11
-#> 31     general complaints privileges   1     1                  0    1
-#> 32     general complaints   learning   1  0.98   0.14070529413629 0.98
-#> 33     general complaints     raises   1     1                  0    1
-#> 34     general complaints   critical   1     1                  0    1
-#> 35     general complaints    advance   1     1                  0    1
-#> 36     general privileges   learning   0  0.15  0.358870281282637 0.15
-#> 37     general privileges     raises   0   0.1  0.301511344577764  0.1
-#> 38     general privileges   critical   1  0.74  0.440844002276808 0.74
-#> 39     general privileges    advance   1  0.75  0.435194139889245 0.75
-#> 40     general   learning     raises   1  0.56  0.498887651569859 0.56
-#> 41     general   learning   critical   1  0.93  0.256432399976243 0.93
-#> 42     general   learning    advance   1  0.99                0.1 0.99
-#> 43     general     raises   critical   1  0.95   0.21904291355759 0.95
-#> 44     general     raises    advance   1  0.99                0.1 0.99
-#> 45     general   critical    advance   0  0.44  0.498887651569859 0.44
-#>     Pji Pnoij  Rep
-#> 1     0  0.04 0.96
-#> 2     0   0.1  0.9
-#> 3     0  0.09 0.91
-#> 4     0  0.03 0.97
-#> 5     0  0.09 0.91
-#> 6   0.4  0.58  0.4
-#> 7  0.11  0.88 0.88
-#> 8  0.04  0.85 0.11
-#> 9  0.01  0.98 0.98
-#> 10 0.06  0.76 0.18
-#> 11 0.02  0.52 0.46
-#> 12    0  0.73 0.27
-#> 13 0.01  0.84 0.15
-#> 14    0  0.98 0.98
-#> 15 0.02  0.93 0.93
-#> 16    0  0.01 0.99
-#> 17    0  0.09 0.91
-#> 18    0  0.01 0.99
-#> 19    0  0.02 0.98
-#> 20    0  0.06 0.94
-#> 21 0.64  0.31 0.64
-#> 22 0.38  0.57 0.57
-#> 23  0.1  0.56 0.34
-#> 24 0.02  0.92 0.92
-#> 25 0.16  0.44  0.4
-#> 26 0.03  0.24 0.73
-#> 27    0  0.45 0.55
-#> 28 0.01  0.52 0.47
-#> 29    0  0.77 0.77
-#> 30 0.14  0.75 0.75
-#> 31    0     0    1
-#> 32 0.02     0 0.98
-#> 33    0     0    1
-#> 34    0     0    1
-#> 35    0     0    1
-#> 36 0.85     0 0.85
-#> 37  0.9     0  0.9
-#> 38 0.26     0 0.74
-#> 39 0.25     0 0.75
-#> 40 0.44     0 0.56
-#> 41 0.07     0 0.93
-#> 42 0.01     0 0.99
-#> 43 0.05     0 0.95
-#> 44 0.01     0 0.99
-#> 45 0.56     0 0.56
+#>    dominance          i          k Dij  mDij SE.Dij  Pij  Pji Pnoij  Rep
+#>     complete complaints privileges 1.0 0.980  0.098 0.96 0.00  0.04 0.96
+#>     complete complaints   learning 1.0 0.910  0.229 0.85 0.03  0.12 0.85
+#>     complete complaints     raises 1.0 0.980  0.098 0.96 0.00  0.04 0.96
+#>     complete complaints   critical 1.0 0.975  0.110 0.95 0.00  0.05 0.95
+#>     complete complaints    advance 1.0 0.955  0.144 0.91 0.00  0.09 0.91
+#>     complete privileges   learning 0.0 0.275  0.269 0.02 0.47  0.51 0.47
+#>     complete privileges     raises 0.5 0.460  0.136 0.00 0.08  0.92 0.92
+#>     complete privileges   critical 1.0 0.530  0.156 0.08 0.02  0.90 0.08
+#>     complete privileges    advance 0.5 0.510  0.070 0.02 0.00  0.98 0.98
+#>     complete   learning     raises 1.0 0.615  0.292 0.31 0.08  0.61 0.31
+#>     complete   learning   critical 1.0 0.715  0.278 0.46 0.03  0.51 0.46
+#>     complete   learning    advance 1.0 0.665  0.236 0.33 0.00  0.67 0.33
+#>     complete     raises   critical 1.0 0.555  0.157 0.11 0.00  0.89 0.11
+#>     complete     raises    advance 0.5 0.525  0.110 0.05 0.00  0.95 0.95
+#>     complete   critical    advance 0.5 0.520  0.098 0.04 0.00  0.96 0.96
+#>  conditional complaints privileges 1.0 0.985  0.086 0.97 0.00  0.03 0.97
+#>  conditional complaints   learning 1.0 0.925  0.229 0.89 0.04  0.07 0.89
+#>  conditional complaints     raises 1.0 0.975  0.131 0.96 0.01  0.03 0.96
+#>  conditional complaints   critical 1.0 0.990  0.070 0.98 0.00  0.02 0.98
+#>  conditional complaints    advance 1.0 0.980  0.098 0.96 0.00  0.04 0.96
+#>  conditional privileges   learning 0.0 0.195  0.309 0.07 0.68  0.25 0.68
+#>  conditional privileges     raises 0.5 0.345  0.253 0.02 0.33  0.65 0.65
+#>  conditional privileges   critical 1.0 0.600  0.246 0.24 0.04  0.72 0.24
+#>  conditional privileges    advance 0.5 0.535  0.163 0.09 0.02  0.89 0.89
+#>  conditional   learning     raises 1.0 0.665  0.370 0.49 0.16  0.35 0.49
+#>  conditional   learning   critical 1.0 0.790  0.286 0.62 0.04  0.34 0.62
+#>  conditional   learning    advance 1.0 0.760  0.251 0.52 0.00  0.48 0.52
+#>  conditional     raises   critical 1.0 0.685  0.263 0.39 0.02  0.59 0.39
+#>  conditional     raises    advance 0.5 0.595  0.197 0.19 0.00  0.81 0.81
+#>  conditional   critical    advance 0.5 0.445  0.255 0.08 0.19  0.73 0.73
+#>      general complaints privileges 1.0 1.000  0.000 1.00 0.00  0.00 1.00
+#>      general complaints   learning 1.0 0.930  0.256 0.93 0.07  0.00 0.93
+#>      general complaints     raises 1.0 0.980  0.141 0.98 0.02  0.00 0.98
+#>      general complaints   critical 1.0 1.000  0.000 1.00 0.00  0.00 1.00
+#>      general complaints    advance 1.0 1.000  0.000 1.00 0.00  0.00 1.00
+#>      general privileges   learning 0.0 0.100  0.302 0.10 0.90  0.00 0.90
+#>      general privileges     raises 0.0 0.070  0.256 0.07 0.93  0.00 0.93
+#>      general privileges   critical 1.0 0.760  0.429 0.76 0.24  0.00 0.76
+#>      general privileges    advance 1.0 0.770  0.423 0.77 0.23  0.00 0.77
+#>      general   learning     raises 1.0 0.600  0.492 0.60 0.40  0.00 0.60
+#>      general   learning   critical 1.0 0.930  0.256 0.93 0.07  0.00 0.93
+#>      general   learning    advance 1.0 0.970  0.171 0.97 0.03  0.00 0.97
+#>      general     raises   critical 1.0 0.940  0.239 0.94 0.06  0.00 0.94
+#>      general     raises    advance 1.0 1.000  0.000 1.00 0.00  0.00 1.00
+#>      general   critical    advance 0.0 0.440  0.499 0.44 0.56  0.00 0.56
 ```
 
 Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading* (3.739). Nevertheless, in the ouput of `summary()` method on level 1, we can see that *picture* (3.078) dominates over *reading* (1.892) on 'vocab' submodel.
@@ -347,16 +301,16 @@ print(da.cov)
 #> vocab                                           pctr,maze
 #> 
 #> Average contribution:
-#>  picture   blocks     maze  reading    vocab 
-#> 2.248179 3.066392 1.056265 3.739114 2.374326
+#> reading  blocks   vocab picture    maze 
+#>   3.739   3.066   2.374   2.248   1.056
 summary(da.cov)
 #> 
 #> * Fit index:  r2 
 #> 
 #> Average contribution of each variable:
 #> 
-#>  picture   blocks     maze  reading    vocab 
-#> 2.248179 3.066392 1.056265 3.739114 2.374326 
+#> reading  blocks   vocab picture    maze 
+#>   3.739   3.066   2.374   2.248   1.056 
 #> 
 #> Dominance Analysis matrix:
 #>                              model level    fit picture blocks  maze
@@ -377,7 +331,7 @@ summary(da.cov)
 #>                       maze+reading     2  9.589   2.119  2.217      
 #>                         maze+vocab     2  7.863    2.56   2.65      
 #>                      reading+vocab     2  8.412   2.548  3.232 1.286
-#>                    Average level 2     2          1.568  2.105 0.625
+#>                    Average level 2     2          1.569  2.105 0.625
 #>                picture+blocks+maze     3  8.694                     
 #>             picture+blocks+reading     3 12.161                 0.28
 #>               picture+blocks+vocab     3 11.045                 0.23
@@ -425,7 +379,7 @@ summary(da.cov)
 #>     1.33      
 #>               
 #>               
-#>    1.904  0.69
+#>    1.904 0.689
 #>          0.043
 #>    1.209      
 #>               
@@ -467,8 +421,8 @@ print(da.lmer)
 #> K        P           P       P
 #> 
 #> Average contribution:
-#>           N           P           K 
-#>  0.34084333 -0.02966148  0.14813494 
+#>      N      K      P 
+#>  0.341  0.148 -0.030 
 #> * Fit index:  rb.r2.2 
 #>   complete conditional general
 #> N                             
@@ -476,8 +430,8 @@ print(da.lmer)
 #> K        N           N       N
 #> 
 #> Average contribution:
-#>           N           P           K 
-#> -0.25853075  0.02249829 -0.11236083 
+#>      P      K      N 
+#>  0.022 -0.112 -0.259 
 #> * Fit index:  sb.r2.1 
 #>   complete conditional general
 #> N      P,K         P,K     P,K
@@ -485,8 +439,8 @@ print(da.lmer)
 #> K        P           P       P
 #> 
 #> Average contribution:
-#>           N           P           K 
-#>  0.19226322 -0.01673148  0.08356009 
+#>      N      K      P 
+#>  0.192  0.084 -0.017 
 #> * Fit index:  sb.r2.2 
 #>   complete conditional general
 #> N                          P,K
@@ -494,8 +448,8 @@ print(da.lmer)
 #> K                            P
 #> 
 #> Average contribution:
-#>             N             P             K 
-#>  5.963033e-09 -2.249891e-08  1.160901e-09
+#> N K P 
+#> 0 0 0
 ```
 
 The fit indexes used in the analysis were *rb.r2.1* (R&B *R*<sub>1</sub><sup>2</sup>: Level-1 variance component explained by predictors), *rb.r2.2* (R&B *R*<sub>2</sub><sup>2</sup>: Level-2 variance component explained by predictors), *sb.r2.1* (S&B *R*<sub>1</sub><sup>2</sup>: Level-1 proportional reduction in error predicting scores at Level-1), and *sb.r2.2* (S&B *R*<sub>2</sub><sup>2</sup>: Level-2 proportional reduction in error predicting scores at Level-1). We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on Level-1 variance, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
@@ -508,8 +462,8 @@ s.da.lmer
 #> 
 #> Average contribution of each variable:
 #> 
-#>           N           P           K 
-#>  0.34084333 -0.02966148  0.14813494 
+#>      N      K      P 
+#>  0.341  0.148 -0.030 
 #> 
 #> Dominance Analysis matrix:
 #>                model level    fit     N      P     K
@@ -528,8 +482,8 @@ s.da.lmer
 #> 
 #> Average contribution of each variable:
 #> 
-#>           N           P           K 
-#> -0.25853075  0.02249829 -0.11236083 
+#>      P      K      N 
+#>  0.022 -0.112 -0.259 
 #> 
 #> Dominance Analysis matrix:
 #>                model level    fit      N     P      K
@@ -537,7 +491,7 @@ s.da.lmer
 #>      ( 1 | block )+N     1 -0.241        0.019  -0.12
 #>      ( 1 | block )+P     1  0.032 -0.254       -0.103
 #>      ( 1 | block )+K     1 -0.099 -0.262 0.028       
-#>      Average level 1     1        -0.258 0.024 -0.111
+#>      Average level 1     1        -0.258 0.023 -0.112
 #>    ( 1 | block )+N+P     2 -0.222              -0.127
 #>    ( 1 | block )+N+K     2 -0.361        0.012       
 #>    ( 1 | block )+P+K     2 -0.071 -0.277             
@@ -548,8 +502,8 @@ s.da.lmer
 #> 
 #> Average contribution of each variable:
 #> 
-#>           N           P           K 
-#>  0.19226322 -0.01673148  0.08356009 
+#>      N      K      P 
+#>  0.192  0.084 -0.017 
 #> 
 #> Dominance Analysis matrix:
 #>                model level    fit     N      P     K
@@ -557,7 +511,7 @@ s.da.lmer
 #>      ( 1 | block )+N     1  0.179       -0.014 0.089
 #>      ( 1 | block )+P     1 -0.024 0.189        0.077
 #>      ( 1 | block )+K     1  0.073 0.195 -0.021      
-#>      Average level 1     1        0.192 -0.018 0.083
+#>      Average level 1     1        0.192 -0.017 0.083
 #>    ( 1 | block )+N+P     2  0.165              0.094
 #>    ( 1 | block )+N+K     2  0.268       -0.009      
 #>    ( 1 | block )+P+K     2  0.053 0.206             
@@ -568,8 +522,8 @@ s.da.lmer
 #> 
 #> Average contribution of each variable:
 #> 
-#>             N             P             K 
-#>  5.963033e-09 -2.249891e-08  1.160901e-09 
+#> N K P 
+#> 0 0 0 
 #> 
 #> Dominance Analysis matrix:
 #>                model level fit N P K
@@ -659,8 +613,8 @@ print(da.esoph)
 #> tobgp                               
 #> 
 #> Average contribution:
-#>      agegp      alcgp      tobgp 
-#> 0.36305016 0.33855396 0.06087984 
+#> agegp alcgp tobgp 
+#> 0.363 0.339 0.061 
 #> * Fit index:  r2.cs 
 #>       complete conditional   general
 #> agegp     tbgp        tbgp alcg,tbgp
@@ -668,8 +622,8 @@ print(da.esoph)
 #> tobgp                               
 #> 
 #> Average contribution:
-#>     agegp     alcgp     tobgp 
-#> 2.1288386 2.0225780 0.4462756 
+#> agegp alcgp tobgp 
+#> 2.129 2.023 0.446 
 #> * Fit index:  r2.n 
 #>       complete conditional   general
 #> agegp     tbgp        tbgp alcg,tbgp
@@ -677,8 +631,8 @@ print(da.esoph)
 #> tobgp                               
 #> 
 #> Average contribution:
-#>    agegp    alcgp    tobgp 
-#> 2.302945 2.187994 0.482774 
+#> agegp alcgp tobgp 
+#> 2.303 2.188 0.483 
 #> * Fit index:  r2.e 
 #>       complete conditional   general
 #> agegp     tbgp        tbgp alcg,tbgp
@@ -686,16 +640,16 @@ print(da.esoph)
 #> tobgp                               
 #> 
 #> Average contribution:
-#>     agegp     alcgp     tobgp 
-#> 1.3721220 1.2876291 0.2461135
+#> agegp alcgp tobgp 
+#> 1.372 1.288 0.246
 summary(da.esoph)
 #> 
 #> * Fit index:  r2.m 
 #> 
 #> Average contribution of each variable:
 #> 
-#>      agegp      alcgp      tobgp 
-#> 0.36305016 0.33855396 0.06087984 
+#> agegp alcgp tobgp 
+#> 0.363 0.339 0.061 
 #> 
 #> Dominance Analysis matrix:
 #>              model level    fit agegp alcgp tobgp
@@ -703,7 +657,7 @@ summary(da.esoph)
 #>              agegp     1 -0.261       0.328 0.084
 #>              alcgp     1  -0.26 0.327       0.032
 #>              tobgp     1 -0.571 0.394 0.343      
-#>    Average level 1     1        0.361 0.336 0.058
+#>    Average level 1     1         0.36 0.336 0.058
 #>        agegp+alcgp     2  0.067             0.047
 #>        agegp+tobgp     2 -0.177       0.291      
 #>        alcgp+tobgp     2 -0.228 0.341            
@@ -714,8 +668,8 @@ summary(da.esoph)
 #> 
 #> Average contribution of each variable:
 #> 
-#>     agegp     alcgp     tobgp 
-#> 2.1288386 2.0225780 0.4462756 
+#> agegp alcgp tobgp 
+#> 2.129 2.023 0.446 
 #> 
 #> Dominance Analysis matrix:
 #>              model level    fit agegp alcgp tobgp
@@ -723,7 +677,7 @@ summary(da.esoph)
 #>              agegp     1 -0.963       1.121 0.383
 #>              alcgp     1 -0.956 1.114       0.156
 #>              tobgp     1  -3.37 2.789  2.57      
-#>    Average level 1     1        1.952 1.845  0.27
+#>    Average level 1     1        1.952 1.846 0.269
 #>        agegp+alcgp     2  0.159             0.095
 #>        agegp+tobgp     2  -0.58       0.834      
 #>        alcgp+tobgp     2   -0.8 1.054            
@@ -734,8 +688,8 @@ summary(da.esoph)
 #> 
 #> Average contribution of each variable:
 #> 
-#>    agegp    alcgp    tobgp 
-#> 2.302945 2.187994 0.482774 
+#> agegp alcgp tobgp 
+#> 2.303 2.188 0.483 
 #> 
 #> Dominance Analysis matrix:
 #>              model level    fit agegp alcgp tobgp
@@ -743,7 +697,7 @@ summary(da.esoph)
 #>              agegp     1 -1.042       1.213 0.414
 #>              alcgp     1 -1.034 1.205       0.169
 #>              tobgp     1 -3.645 3.017  2.78      
-#>    Average level 1     1        2.111 1.996 0.292
+#>    Average level 1     1        2.111 1.996 0.291
 #>        agegp+alcgp     2  0.171             0.103
 #>        agegp+tobgp     2 -0.628       0.902      
 #>        alcgp+tobgp     2 -0.865  1.14            
@@ -754,8 +708,8 @@ summary(da.esoph)
 #> 
 #> Average contribution of each variable:
 #> 
-#>     agegp     alcgp     tobgp 
-#> 1.3721220 1.2876291 0.2461135 
+#> agegp alcgp tobgp 
+#> 1.372 1.288 0.246 
 #> 
 #> Dominance Analysis matrix:
 #>              model level    fit agegp alcgp tobgp
@@ -763,7 +717,7 @@ summary(da.esoph)
 #>              agegp     1 -0.821       0.984 0.297
 #>              alcgp     1 -0.815 0.979       0.117
 #>              tobgp     1 -2.211 1.687 1.513      
-#>    Average level 1     1        1.333 1.248 0.207
+#>    Average level 1     1        1.333 1.249 0.207
 #>        agegp+alcgp     2  0.164             0.104
 #>        agegp+tobgp     2 -0.524       0.791      
 #>        alcgp+tobgp     2 -0.698 0.965            
@@ -775,27 +729,17 @@ Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we c
 
 ``` r
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
-summary(da.b.esoph)$r2.m
-#>     dominance     i     j Dij  mDij           SE.Dij.   Pij   Pji Pnoij
-#> 1    complete agegp alcgp 0.5  0.65 0.434099310129925  0.57  0.27  0.16
-#> 2    complete agegp tobgp   1     1                 0     1     0     0
-#> 3    complete alcgp tobgp   1     1                 0     1     0     0
-#> 4 conditional agegp alcgp 0.5  0.65 0.434099310129925  0.57  0.27  0.16
-#> 5 conditional agegp tobgp   1     1                 0     1     0     0
-#> 6 conditional alcgp tobgp   1     1                 0     1     0     0
-#> 7     general agegp alcgp   1 0.655 0.476561174209376 0.655 0.345     0
-#> 8     general agegp tobgp   1     1                 0     1     0     0
-#> 9     general alcgp tobgp   1     1                 0     1     0     0
-#>     Rep
-#> 1  0.16
-#> 2     1
-#> 3     1
-#> 4  0.16
-#> 5     1
-#> 6     1
-#> 7 0.655
-#> 8     1
-#> 9     1
+print(format(summary(da.b.esoph)$r2.m,digits=3),row.names=F)
+#>    dominance     i     k Dij  mDij SE.Dij   Pij   Pji Pnoij   Rep
+#>     complete agegp alcgp 0.5 0.580 0.4551 0.505 0.345 0.150 0.150
+#>     complete agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
+#>     complete alcgp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
+#>  conditional agegp alcgp 0.5 0.580 0.4551 0.505 0.345 0.150 0.150
+#>  conditional agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
+#>  conditional alcgp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
+#>      general agegp alcgp 1.0 0.590 0.4931 0.590 0.410 0.000 0.590
+#>      general agegp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
+#>      general alcgp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
 ```
 
 Set of predictors
@@ -825,16 +769,16 @@ print(da.b5)
 #> nAch      SES         SES      SES
 #> 
 #> Average contribution:
-#>        SES         IQ       nAch 
-#> 0.04408243 0.26589530 0.18649580
+#>    IQ  nAch   SES 
+#> 0.266 0.186 0.044
 summary(da.b5)
 #> 
 #> * Fit index:  r2 
 #> 
 #> Average contribution of each variable:
 #> 
-#>        SES         IQ       nAch 
-#> 0.04408243 0.26589530 0.18649580 
+#>    IQ  nAch   SES 
+#> 0.266 0.186 0.044 
 #> 
 #> Dominance Analysis matrix:
 #>            model level   fit   SES    IQ  nAch
@@ -842,7 +786,7 @@ summary(da.b5)
 #>              SES     1 0.109       0.244  0.16
 #>               IQ     1 0.325 0.028       0.172
 #>             nAch     1  0.25 0.019 0.246      
-#>  Average level 1     1       0.024 0.245 0.166
+#>  Average level 1     1       0.023 0.245 0.166
 #>           SES+IQ     2 0.353             0.144
 #>         SES+nAch     2 0.269       0.228      
 #>          IQ+nAch     2 0.496     0            
@@ -861,16 +805,16 @@ print(da.b5.g)
 #> IQ+nAch      SES         SES     SES
 #> 
 #> Average contribution:
-#>        SES    IQ+nAch 
-#> 0.05448274 0.44199079
+#> IQ+nAch     SES 
+#>   0.442   0.054
 summary(da.b5.g)
 #> 
 #> * Fit index:  r2 
 #> 
 #> Average contribution of each variable:
 #> 
-#>        SES    IQ+nAch 
-#> 0.05448274 0.44199079 
+#> IQ+nAch     SES 
+#>   0.442   0.054 
 #> 
 #> Dominance Analysis matrix:
 #>            model level   fit   SES IQ.nAch

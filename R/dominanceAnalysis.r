@@ -102,7 +102,7 @@ dominanceAnalysis <-
     class(z)<-c("dominanceAnalysis","list")
     z
   }
-
+#' @keywords internal
 #' @export
 print.dominanceAnalysis<-function(x,...) {
   cat("\nDominance analysis\n")
@@ -129,7 +129,7 @@ print.dominanceAnalysis<-function(x,...) {
     rownames(out)<-x$predictors
     print(out)
     cat("\nAverage contribution:\n")
-    print(sort(x$contribution.average[[fit]], decreasing = T))
+    print(round(sort(x$contribution.average[[fit]], decreasing = T),3))
   }
   invisible(x)
 }

@@ -3,6 +3,8 @@
 #' @param ... ignored
 #' @importFrom stats sd
 #' @export
+#' @keywords internal
+
 summary.bootAverageDominanceAnalysis<-function(object,...) {
 	bs.mean<-colMeans(object$boot$t)
 	bs.se<-apply(object$boot$t,2,sd)
@@ -20,6 +22,8 @@ summary.bootAverageDominanceAnalysis<-function(object,...) {
 # @param digits minimal number of significant digits. See \code{\link{print.default}}
 # @param ... further arguments passed to print method
 #' @export
+#' @keywords internal
+
 print.summary.bootAverageDominanceAnalysis<-function(x,digits=3,...) {
 	cat("Bootstrap Average for Dominance Analysis\n")
 	cat("========================================\n")

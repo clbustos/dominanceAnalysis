@@ -8,12 +8,13 @@
 #' \item \code{summary.matrix}: matrix with all calculations for dominance analysis
 #' }
 #' @export
+
 summary.dominanceAnalysis<-function(object, ...) {
 	ff<-object$fit.functions
 	out=list()
 	for(fit in ff) {
 
-	  fit.matrix<-data.frame(model=rownames(object$fits$fits[[fit]]), level=object$fits$level, fit=object$fits$base.fits[,fit],  round(object$fits$fits[[fit]],3))
+	  fit.matrix<-data.frame(model=rownames(object$fits$fits[[fit]]), level=object$fits$level, fit=object$fits$base.fits[,fit],  object$fits$fits[[fit]])
 	  split.fit.matrix<-split(fit.matrix,f = fit.matrix$level)
 	  max.level=max(fit.matrix$level)
 	  split.fit.matrix.1<-lapply(split.fit.matrix,function(xx) {
@@ -40,17 +41,18 @@ summary.dominanceAnalysis<-function(object, ...) {
 
 # Print a summary.dominanceAnalysis object
 # @param x a \code{\link{summary.dominanceAnalysis}} object
+# @param round.digits Number of decimal places to round results
 # @param ... further arguments passed to print method
 #' @export
-print.summary.dominanceAnalysis<-function(x, ...) {
+print.summary.dominanceAnalysis<-function(x, round.digits=3,...) {
   for(fit in names(x)) {
     cat("\n* Fit index: ",fit,"\n")
     cat("\nAverage contribution of each variable:\n\n")
-    print(sort(x[[fit]]$average.contribution,decreasing = T),...)
+    print(round(sort(x[[fit]]$average.contribution,decreasing = T), round.digits),...)
     cat("\nDominance Analysis matrix:\n")
     delete.na<-function(xx) {
       if(is.numeric(xx)) {
-        result<-as.character(round(xx,3))
+        result<-as.character(round(xx,round.digits))
         result[is.na(result)]<-""
         result
       } else {

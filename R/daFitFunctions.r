@@ -16,6 +16,7 @@
 #' @param base.cov Required if only a covariance/correlation matrix is provided.
 #' @param family.glm family param for glm models.
 #' @name using-fit-indexes
+
 NULL
 
 #' Provides coefficient of determination for \code{lm} models.

@@ -14,3 +14,4 @@
 \description{
 Summary for bootDominanceAnalysis.
 }
+\keyword{internal}

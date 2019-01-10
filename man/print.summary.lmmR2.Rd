@@ -14,3 +14,4 @@
 \description{
 Print method for  lmmR2 models summary
 }
+\keyword{internal}

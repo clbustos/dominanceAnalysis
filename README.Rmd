@@ -136,7 +136,7 @@ Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we c
 
 ```{r,cache=T}
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
-summary(da.b.esoph)$r2.m
+print(format(summary(da.b.esoph)$r2.m,digits=3),row.names=F)
 ```
 
 ## Set of predictors

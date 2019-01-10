@@ -14,3 +14,4 @@
 \description{
 Summary for lmmR2 models
 }
+\keyword{internal}
