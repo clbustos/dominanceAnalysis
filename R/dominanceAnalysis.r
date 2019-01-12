@@ -16,22 +16,22 @@
 #' Conditional dominance is calculated as the average of the additional contributions
 #' to all subset of models of a given model size. General dominance is calculated
 #' as the mean of average contribution on each level.
-#' @section Fit indexes availables:
-#' To obtain the fit-indexes for each model, a function called \code{da.<model>.fit}
+#' @section Fit indeces availables:
+#' To obtain the fit-indeces for each model, a function called \code{da.<model>.fit}
 #' is executed. For example, for a lm model, function \code{\link{da.lm.fit}} provides
 #' \eqn{R^2} values.
 #' Currently, five models are implemented:
 #' \describe{
 #' \item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit}}}
-#' \item{glm}{ Provides three of the four fit indexes recommended by Azen & Traxel (2009):  McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
-#' \item{lmerMod}{ Provides  four fit indexes recommended by Lou & Azen (2012). See \code{\link{da.lmerMod.fit}}}
+#' \item{glm}{ Provides three of the four fit indeces recommended by Azen & Traxel (2009):  McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
+#' \item{lmerMod}{ Provides  four fit indeces recommended by Lou & Azen (2012). See \code{\link{da.lmerMod.fit}}}
 #' \item{lmWithCov}{Provides \eqn{R^2} for a correlation/covariance matrix. See \code{\link{lmWithCov}} to create the model and \code{\link{da.lmWithCov.fit}} for the fit index function.}
 #' \item{mlmWithCov}{Provides both \eqn{R^2_{XY}} and \eqn{P^2_{XY}} for multivariate regression models using a correlation/covariance matrix. See \code{\link{mlmWithCov}} to create the model and \code{\link{da.mlmWithCov.fit}} for the fit index function }
 #' }
 #' @param x lm, glm, lmer model
 #' @param constants vector of predictors to remain unchanged between models
 #' @param terms     vector of terms to be analyzed. By default, obtained from the model
-#' @param fit.functions Name of the method used to provide fit indexes
+#' @param fit.functions Name of the method used to provide fit indeces
 #' @param data optional data.frame
 #' @param null.model for mixel models, null model against to test the submodels
 #' @param ... Other arguments provided to lm or lmer (not implemented yet)
@@ -40,7 +40,7 @@
 #' \item{constants}{Vector of constant variables.}
 #' \item{terms}{Vector of terms to be analyzed.}
 #' \item{fit.functions}{Vector of fit indeces names.}
-#' \item{fits}{List with raw fits indexes. See \code{\link{daRawResults}}.}
+#' \item{fits}{List with raw fits indeces. See \code{\link{daRawResults}}.}
 #' \item{contribution.by.level}{List of mean contribution of each predictor by level for each fit index. Each element is a data.frame, with levels as rows and predictors as columns, for each fit index.}
 #' \item{contribution.average}{List with mean contribution of each predictor for all levels. These values are obtained for every fit index considered in the analysis. Each element is a vector of mean contributions for a given fit index.}
 #' \item{complete}{Matrix for complete dominance.}

@@ -4,21 +4,19 @@
 #' Provides the expected level of dominance of predictor \eqn{X_i} over \eqn{X_j},
 #' as the degree to which the pattern found on sample is reproduced on the
 #' bootstrap samples.
-#' Use \code{\link{summary.bootDominanceAnalysis}} to get a nice formatted
-#' data.frame
+#' Use \code{summary()} to get a nice formatted data.frame
 #'
 #' @param x lm, glm or lmer model
 #' @param R number on bootstrap resamples
 #' @param constants vector of predictors to remain unchanged between models.
 #'                  i.e. vector of variables not subjected to bootstrap analysis.
-#' @param fit.functions list of functions which provides fit indexes for model.
+#' @param fit.functions list of functions which provides fit indeces for model.
 #'                      See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
 #'                      function.
 #' @param null.model only for linear mixel models, null model against to test the submodels.
 #'                   i.e. only random effects, without any fixed effect.
 #' @param ... Other arguments provided to lm or lmer (not implemented yet).
 #' @export
-#' @seealso \code{\link{summary.bootDominanceAnalysis}}
 #' @examples
 #' \dontrun{
 #' lm.1<-lm(Employed~.,longley)

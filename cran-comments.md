@@ -10,6 +10,5 @@ In win-builder, there is one NOTE
 * This is a new submission
 
 
-
 ## Downstream dependencies
 There are currently no downstream dependencies for this package

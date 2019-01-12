@@ -1,21 +1,21 @@
-#' Provides fit indexes for different regression models.
+#' Provides fit indeces for different regression models.
 #'
 #' \code{\link{dominanceAnalysis}} tries to infer, based on the class of the
-#' model provided, the appropriate fit indexes, using the scheme
+#' model provided, the appropriate fit indeces, using the scheme
 #' da.CLASS.fit for name. This method has two interfaces, one for retrieving
-#' the names of the fit indexes, and another to retrieve the indexes based
+#' the names of the fit indeces, and another to retrieve the indeces based
 #' on the data.
 #'
 #' Interfaces are:
 #' \itemize{
-#' \item \code{da.CLASS.fit("names")} returns a vector with names for fit indexes
+#' \item \code{da.CLASS.fit("names")} returns a vector with names for fit indeces
 #' \item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one parameter, the formula to calculate the submodel.
 #' }
 #' @param data Complete data set containing the variables in the model.
 #' @param null.model Null model only needed for HLM models.
 #' @param base.cov Required if only a covariance/correlation matrix is provided.
 #' @param family.glm family param for glm models.
-#' @name using-fit-indexes
+#' @name using-fit-indeces
 
 NULL
 
@@ -24,9 +24,9 @@ NULL
 #' Uses \eqn{R^2} (coefficient of determination) as fit index
 #' @param data complete data set containing the variables in the model
 #' @param ... ignored
-#' @return A function described by \link{using-fit-indexes} description for interface
+#' @return A function described by \link{using-fit-indeces} description for interface
 #' @export
-#' @family fit indexes
+#' @family fit indeces
 #' @importFrom stats lm
 #' @examples
 #' x1<-rnorm(1000)
@@ -45,7 +45,7 @@ da.lm.fit<-function(data,...) {
 	}
 }
 
-#' Provides fit indexes for GLM models.
+#' Provides fit indeces for GLM models.
 #'
 #' Functions only available for logistic regression, based on Azen and Traxel(2009).
 #'
@@ -53,7 +53,7 @@ da.lm.fit<-function(data,...) {
 #' @param data complete data set
 #' @param family.glm family for glm method. Use 'binomial' for logistic regression.
 #' @param ...  ignored
-#' @return A function described by \link{using-fit-indexes}. You could retrieve following indexes
+#' @return A function described by \link{using-fit-indeces}. You could retrieve following indeces
 #' \describe{
 #' \item{\code{r2.m}}{McFadden(1974)}
 #' \item{\code{r2.cs}}{Cox and Snell(1989). Use with caution, because don't have 1 as upper bound}
@@ -70,7 +70,7 @@ da.lm.fit<-function(data,...) {
 #' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. Journal of Business & Economic Statistics, 16(2), 198-205. doi: 10.1080/07350015.1998.10524753
 #' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
 #' }
-#' @family fit indexes
+#' @family fit indeces
 #' @importFrom stats lm glm logLik
 #' @export
 #' @examples
@@ -106,7 +106,7 @@ da.glm.fit<-function(data,family.glm,...) {
 	}
 
 }
-#' Provides fit indexes for hierarchiecal linear models, based on Luo and Azen (2013).
+#' Provides fit indeces for hierarchiecal linear models, based on Luo and Azen (2013).
 #'
 #' @param data complete data set containing the variables in the model
 #' @param null.model needed for HLM models
@@ -115,8 +115,8 @@ da.glm.fit<-function(data,family.glm,...) {
 #' \itemize{
 #' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 #' }
-#' @inheritParams using-fit-indexes
-#' @family fit indexes
+#' @inheritParams using-fit-indeces
+#' @family fit indeces
 #' @export
 
 da.lmerMod.fit<-function(data, null.model, ...) {
@@ -144,8 +144,8 @@ da.lmerMod.fit<-function(data, null.model, ...) {
 #' @param base.cov variance/covariance matrix
 #' @param ... ignored
 #'
-#' @inheritParams using-fit-indexes
-#' @family fit indexes
+#' @inheritParams using-fit-indeces
+#' @family fit indeces
 #' @export
 da.lmWithCov.fit<-function(base.cov, ...) {
 	mc=match.call()
@@ -162,16 +162,16 @@ da.lmWithCov.fit<-function(base.cov, ...) {
 #'
 #' @param base.cov variance/covariance matrix
 #' @param ... ignored
-#' @return A list with several fit indexes
+#' @return A list with several fit indeces
 #' \describe{
 #' \item{\code{r.squared.xy}}{\eqn{R^2_{XY}}}
 #' \item{\code{p.squared.yx}}{\eqn{P^2_{YX}}}
 #' }
 #' See \code{\link{mlmWithCov}}
-#' @inheritParams using-fit-indexes
+#' @inheritParams using-fit-indeces
 #' @references
 #' Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
-#' @family fit indexes
+#' @family fit indeces
 #' @export
 da.mlmWithCov.fit<-function(base.cov, ...) {
   mc=match.call()

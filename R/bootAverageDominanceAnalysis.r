@@ -3,21 +3,19 @@
 #' Bootstrap average values and correspond standard errors for each predictor
 #' in the dominance analysis. Those values are used for general dominance.
 #'
-#' Use \code{\link{summary.bootAverageDominanceAnalysis}} to get a nice formatted
-#' \code{data.frame} object.
+#' Use \code{summary()} to get a nice formatted \code{data.frame} object.
 #'
 #' @param object lm, glm or lmer model
 #' @param R number on bootstrap resamples
 #' @param constants vector of predictors to remain unchanged between models.
 #'                  i.e. vector of variables not subjected to bootstrap analysis.
-#' @param fit.functions list of functions which provides fit indexes for model.
+#' @param fit.functions list of functions which provides fit indeces for model.
 #'                      See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
 #'                      function.
 #' @param null.model only for linear mixel models, null model against to test the submodels.
 #'                   i.e. only random effects, without any fixed effect.
 #' @param ... Other arguments provided to lm or lmer (not implemented yet).
 #' @export
-#' @seealso \code{\link{summary.bootAverageDominanceAnalysis}}
 #' @examples
 #' \dontrun{
 #' lm.1<-lm(Employed~.,longley)

@@ -75,7 +75,7 @@ print.summary.lmmR2<-function(x, ...) {
 	cat("=====================================\n")
 	cat("Variances:\n")
 	print(x$m1)
-	cat("Indexes:\n")
+	cat("Indeces:\n")
 	print(x$m2,row.names=F)
 	cat("\n")
 
@@ -94,9 +94,8 @@ summary.lmmR2<-function(object, ...) {
 	m1<-data.frame(avg.size=c(1,x$nn),null=v.null, null.r=v.null/(sum(v.null)),  full=v.full, pseudo.r2= 1-(v.full/v.null) )
 	#cat("Variances:\n")
 	rownames(m1)[1]<-"Residual"
-	#print(m1)
-	#cat("Indexes:\n")
-	m2<-with(x, data.frame(indexes=c("R & B R1","R & B R2","S & B R1","S & B R2"),
+
+	m2<-with(x, data.frame(indeces=c("R & B R1","R & B R2","S & B R1","S & B R2"),
 	meaning=c("Within-cluster variance(relative)",
 	"Between-cluster variance(relative)",
 	"Reduce individual error(total)",

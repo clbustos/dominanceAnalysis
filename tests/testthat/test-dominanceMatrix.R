@@ -23,7 +23,8 @@ test_that("calculates dominance on data.frame", {
   expect_equal(dm,expected)
 })
 
-test_that("retrieve correct dominance for a DominanceAnalysis object", {
+test_that("retrieve correct matrix dominance for a DominanceAnalysis object", {
+  set.seed(1234)
   xa<-rnorm(1000)
   xb<-rnorm(1000)
   xc<-rnorm(1000)
@@ -34,6 +35,7 @@ test_that("retrieve correct dominance for a DominanceAnalysis object", {
   cdm<-dominanceMatrix(da,type="complete")
   expected<-matrix(c(0.5,1,1,0,0.5,1,0,0,0.5),3,3,byrow=T,dimnames = list(c("a","b","c"),c("a","b","c")))
   expect_equal(cdm, expected)
-
+  cdm2<-dominanceMatrix(da,type="complete",drop = FALSE)
+  expect_equal(cdm2, list(r2=expected))
   expect_error(dominanceMatrix(da,type="non_existant"),"type is incorrect")
 })

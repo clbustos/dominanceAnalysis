@@ -15,7 +15,7 @@ bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
 \item{constants}{vector of predictors to remain unchanged between models.
 i.e. vector of variables not subjected to bootstrap analysis.}
 
-\item{fit.functions}{list of functions which provides fit indexes for model.
+\item{fit.functions}{list of functions which provides fit indeces for model.
 See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
 function.}
 
@@ -29,8 +29,7 @@ Bootstrap procedure as presented on Azen and Budescu (2003).
 Provides the expected level of dominance of predictor \eqn{X_i} over \eqn{X_j},
 as the degree to which the pattern found on sample is reproduced on the
 bootstrap samples.
-Use \code{\link{summary.bootDominanceAnalysis}} to get a nice formatted
-data.frame
+Use \code{summary()} to get a nice formatted data.frame
 }
 \examples{
 \dontrun{
@@ -38,7 +37,4 @@ lm.1<-lm(Employed~.,longley)
 da.boot<-bootDominanceAnalysis(lm.1,R=1000)
 summary(da.boot)
 }
-}
-\seealso{
-\code{\link{summary.bootDominanceAnalysis}}
 }

@@ -2,8 +2,7 @@
 % Please edit documentation in R/daAverageContributionByLevel.r
 \name{daAverageContributionByLevel}
 \alias{daAverageContributionByLevel}
-\title{Returns the average contribution by level
-presented usually as row between contributions by predictors}
+\title{Calculates the average contribution by level for a daRawResult object}
 \usage{
 daAverageContributionByLevel(x)
 }
@@ -16,7 +15,6 @@ list, with key named as a fit index
               contribution of each variable on every level
 }
 \description{
-Returns the average contribution by level
-presented usually as row between contributions by predictors
+Calculates the average contribution by level for a daRawResult object
 }
 \keyword{internal}
