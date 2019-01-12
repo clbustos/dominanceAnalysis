@@ -188,23 +188,29 @@ Furthermore, if we want to establish a rank of importance among predictors, we c
 
 ### 4.	Applying bootstrap analysis
 
-To evaluate the robustness of our results, we use bootstrapping analysis by using `bootDominanceAnalysis()` function.
+To evaluate the robustness of our results, we use bootstrapping analysis by using `bootDominanceAnalysis()` function. Remember that this method could take a long time to complete.
 
-```{r}
-bootmodpres1000 <- bootDominanceAnalysis(modpres, R=100)
-summary(bootmodpres1000,fit.functions="r2.m")
+```{r,eval=FALSE}
+bootmodpres100 <- bootDominanceAnalysis(modpres, R=100)
+summary(bootmodpres100,fit.functions="r2.m")
 ```
-
+```{r, echo=FALSE}
+summary(readRDS(system.file("extdata", "bootmodpres100.rds", package = "dominanceanalysis")),fit.functions="r2.m")
+```
 This method provides measures of accuracy for our estimates. More specifically, the bootstrap values of complete, conditional and general dominance are calculated for each pair of predictors (see column *Dij* that represents the original result, *mDij* that represents the mean for *Dij* on bootstrap samples, and *SE.Dij* that represents standard error). These values of dominance can be interpreted as the expected level of dominance between pairs of predictors, as the degree to which this pattern was found on the resamples. Note that we recommend this analysis is performed with at least 1000 replications (*R*), with the size of the original sample, for precise results (i.e., bootstrap samples).
 
 Additionally, other parameters are estimated: *Pij* (proportion of bootstrap samples where *i* dominates *j*); *Pji* (proportion of bootstrap samples where *j* dominates *i*); *Pnoij* (proportion of samples where no dominance can be asserted); and *Rep* (proportion of samples where original dominance is replicated). When standard error and reproducibility are close or equal to zero and one, respectively, the results are fairly robust. For example, in our analysis we see that the bootstrap complete dominance of remoteness over land use has a standard error of zero and a reproducibility of 1.
 
 Moreover, we can obtain bootstrap general dominance values by using `bootAverageDominanceAnalysis()` function.
 
-```{r}
-bootavemodpres1000<-bootAverageDominanceAnalysis(modpres,R=100)
-summary(bootavemodpres1000,fit.functions=c("r2.m"))
+```{r,eval=FALSE}
+bootavemodpres100<-bootAverageDominanceAnalysis(modpres,R=100)
+summary(bootavemodpres100,fit.functions=c("r2.m"))
 ```
+```{r, echo=FALSE}
+summary(readRDS(system.file("extdata", "bootavemodpres100.rds", package = "dominanceanalysis")),fit.functions="r2.m")
+```
+
 
 The results are organized per fit index and include the estimated bootstrap values of general dominance for each predictor (*bs.E*) and its corresponding standard errors (*bs.SE*), as well as the previously calculated general dominance values (*original*). The difference between these values and the estimated bootstrap values is represented by *Bias*. In our example, the bias is small, which is another good indicator of our results' robustness.
 
