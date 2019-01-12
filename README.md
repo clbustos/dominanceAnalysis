@@ -11,7 +11,7 @@ Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009; Budescu
 
 -   Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *lmer* and *glm* (family=binomial) models.
 -   Covariance / correlation matrixes could be used as input for OLS dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods, respectively.
--   Multiple criteria can be used as fit indeces, which is useful especially for HLM.
+-   Multiple criteria can be used as fit indices, which is useful especially for HLM.
 
 Examples
 ========
@@ -224,7 +224,7 @@ We applied a bootstrap analysis using `bootDominanceAnalysis()` method with *R*<
   bda.attitude=bootDominanceAnalysis(lm.attitude, R=100)
 ```
 
-The `summary()` method presents the results for the bootstrap analysis. *Dij* shows the original result, and *mDij*, the mean for Dij on bootstrap samples and *SE.Dij* its standard error. *Pij* is the proportion of bootstrap samples where *i* dominantes *j*, *Pji* is the proportion of bootstrap samples where *j* dominates *i* and *Pnoij* is the proportion of samples where no dominance can be asserted. *Rep* is the proportion of samples where original dominance is replicated.
+The `summary()` method presents the results for the bootstrap analysis. *Dij* shows the original result, and *mDij*, the mean for Dij on bootstrap samples and *SE.Dij* its standard error. *Pij* is the proportion of bootstrap samples where *i* dominates *j*, *Pji* is the proportion of bootstrap samples where *j* dominates *i* and *Pnoij* is the proportion of samples where no dominance can be asserted. *Rep* is the proportion of samples where original dominance is replicated.
 
 We can see that the value of complete dominance for *complaints* is fairly robust over all variables (Dij almost equal to mDij, and small SE), contrarily to *learning* (Dij differs from mDij, and bigger SE).
 
@@ -452,7 +452,7 @@ print(da.lmer)
 #> 0 0 0
 ```
 
-The fit indeces used in the analysis were *rb.r2.1* (R&B *R*<sub>1</sub><sup>2</sup>: Level-1 variance component explained by predictors), *rb.r2.2* (R&B *R*<sub>2</sub><sup>2</sup>: Level-2 variance component explained by predictors), *sb.r2.1* (S&B *R*<sub>1</sub><sup>2</sup>: Level-1 proportional reduction in error predicting scores at Level-1), and *sb.r2.2* (S&B *R*<sub>2</sub><sup>2</sup>: Level-2 proportional reduction in error predicting scores at Level-1). We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on Level-1 variance, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
+The fit indices used in the analysis were *rb.r2.1* (R&B *R*<sub>1</sub><sup>2</sup>: Level-1 variance component explained by predictors), *rb.r2.2* (R&B *R*<sub>2</sub><sup>2</sup>: Level-2 variance component explained by predictors), *sb.r2.1* (S&B *R*<sub>1</sub><sup>2</sup>: Level-1 proportional reduction in error predicting scores at Level-1), and *sb.r2.2* (S&B *R*<sub>2</sub><sup>2</sup>: Level-2 proportional reduction in error predicting scores at Level-1). We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on Level-1 variance, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
 
 ``` r
 s.da.lmer=summary(da.lmer)
@@ -596,7 +596,7 @@ summary(glm.esoph)
 #> Number of Fisher Scoring iterations: 6
 ```
 
-We performed dominance analysis on this dataset and the results are shown below. The fit indeces were *r2.m* (*R*<sub>*M*</sub><sup>2</sup>: McFadden's measure), *r2.cs* (*R*<sub>*C**S*</sub><sup>2</sup>: Cox and Snell's measure), *r2.n* (*R*<sub>*N*</sub><sup>2</sup>: Nagelkerke's measure) and *r2.e* (*R*<sub>*E*</sub><sup>2</sup>: Estrella's measure). For all fit indeces, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
+We performed dominance analysis on this dataset and the results are shown below. The fit indices were *r2.m* (*R*<sub>*M*</sub><sup>2</sup>: McFadden's measure), *r2.cs* (*R*<sub>*C**S*</sub><sup>2</sup>: Cox and Snell's measure), *r2.n* (*R*<sub>*N*</sub><sup>2</sup>: Nagelkerke's measure) and *r2.e* (*R*<sub>*E*</sub><sup>2</sup>: Estrella's measure). For all fit indices, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
 
 ``` r
 da.esoph<-dominanceAnalysis(glm.esoph)

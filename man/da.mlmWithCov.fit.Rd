@@ -12,7 +12,7 @@ da.mlmWithCov.fit(base.cov, ...)
 \item{...}{ignored}
 }
 \value{
-A list with several fit indeces
+A list with several fit indices
 \describe{
 \item{\code{r.squared.xy}}{\eqn{R^2_{XY}}}
 \item{\code{p.squared.yx}}{\eqn{P^2_{YX}}}
@@ -26,8 +26,8 @@ Provides coefficient of determination for multivariate models.
 Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
 }
 \seealso{
-Other fit indeces: \code{\link{da.glm.fit}},
+Other fit indices: \code{\link{da.glm.fit}},
   \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}},
   \code{\link{da.lmerMod.fit}}
 }
-\concept{fit indeces}
+\concept{fit indices}

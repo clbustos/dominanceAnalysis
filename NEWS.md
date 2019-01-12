@@ -1,6 +1,6 @@
 # dominanceanalysis 1.0.0
 
-- First oficial version. Code coverage of 99% and complete documentation of all methods.
+- First official version. Code coverage of 99% and complete documentation of all methods.
 - Vignette "Exploring predictors' importance in binomial logistic regressions", by Filipa Coutinho Soares
 - Added dominanceMatrix() as a generic for matrix, data.frame and dominanceAnalysis methods
 - New retrieval methods for dominanceAnalysis object: getFits(), contributionAverage() and contributionByLevel()

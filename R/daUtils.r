@@ -39,7 +39,7 @@ getData<-function(x) {
 #'
 #' Stop execution if object isn't a dominanceAnalysis object
 #' @param x an object
-#' @return boolean TRUE if x is a dominaceAnalysis object, raises an error otherwise
+#' @return boolean TRUE if x is a dominanceAnalysis object, raises an error otherwise
 #' @keywords internal
 checkDominanceAnalysis<-function(x) {
   if(!inherits(x,"dominanceAnalysis")) {

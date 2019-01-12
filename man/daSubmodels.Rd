@@ -17,7 +17,7 @@ daSubmodels(x, constants = NULL, terms = NULL)
 list with elements level, pred.matrix, predictors, response, constants
 }
 \description{
-You could set some variables as constantes, limiting the number of models.
+You could set some variables as constants, limiting the number of models.
 Includes, by default, the null model
 }
 \keyword{internal}

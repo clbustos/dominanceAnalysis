@@ -13,7 +13,7 @@
 #' @param x matrix (calculate) or dominanceAnalysis (retrieve)
 #' @param undefined.value value when no dominance can be established
 #' @param type type of dominance matrix to retrieve. Could be complete, conditional or general
-#' @param fit.functions name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved
+#' @param fit.functions name of the fit indices to retrieve. If NULL, all fit indices will be retrieved
 #' @param drop if TRUE and just one fit index is available, returns a matrix. Else, returns a list
 #' @param ... extra arguments. Not used
 #' @return for matrix and data-frame, returns a matrix representing dominance.
@@ -22,7 +22,7 @@
 #'          Undefined dominance is represented by \code{undefined.value} parameter.
 #'          For dominanceAnalysis object, returns a matrix, if \code{drop} parameter
 #'          if TRUE and just one index is available. Else, a list is returned, with
-#'          keys as name of fit-indeces and values as matrices, as described previously.
+#'          keys as name of fit-indices and values as matrices, as described previously.
 #' @export
 #' @family retrieval methods
 #' @examples

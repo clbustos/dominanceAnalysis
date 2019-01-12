@@ -1,6 +1,6 @@
 #' Returns all the submodels derived from full models.
 #'
-#' You could set some variables as constantes, limiting the number of models.
+#' You could set some variables as constants, limiting the number of models.
 #' Includes, by default, the null model
 #' @param x regression class (lm or lmer)
 #' @param constants vector of constants

@@ -37,7 +37,7 @@ This document explains how to perform a dominance analysis to compare the relati
 
 Understanding how a species is distributed throughout the landscape is key to create effective conservation actions. By disentangling the limiting factors behind a species distribution, we can start to understand its ecological requirements, which can help support conservation and population management actions.
 
-In this tutorial, we explore the distribution of a tropical native bird species inhabiting a small oceanic island. Since human occupation, the island's forests have disappeared from the flat lowland areas, located closer to the coastline. Nowadays, these areas are considered anthropogenic areas, which include cities, agricultural areas (e.g., horticultures), savannahs, and oil-palm monocultures. 
+In this tutorial, we explore the distribution of a tropical native bird species inhabiting a small oceanic island. Since human occupation, the island's forests have disappeared from the flat lowland areas, located closer to the coastline. Nowadays, these areas are considered anthropogenic areas, which include cities, agricultural areas (e.g., horticultures), savannas, and oil-palm monocultures. 
 
 We use binomial generalized linear models (GLMs) to explore the role of several environmental variables in shaping this species distribution. Furthermore, we use dominance analysis to determine the relative importance of every variable in the logistic regression model.
 
@@ -127,13 +127,13 @@ This method is used to determine the relative importance of predictors in a regr
 
 In dominance analysis, one predictor is said to completely dominate another, if its additional contribution to every possible subset model (that doesn't include any of the predictors) is greater than that of the other predictor (Azen and Traxel, 2009). However, if this level of dominance cannot be established, but the average additional contribution of that predictor within each model size is greater than that of the other predictor, we can say that the first conditionally dominates the latter. Yet, if this is still not established, but this predictor's average conditional contribution is greater than that of the other predictor over all model sizes, we can say that the first generally dominates the latter.
 
-For ordinary least squares regressions, the predictors' additional contribution to a certain subset model is defined as the change in *R^2^* when the predictor is added to the model. In logistic regressions, several analogues of *R^2^* were proposed as measures of model fit, but only four were considered according to three criteria (Azen and Traxel, 2009). These are included in the [dominanceanalysis](https://github.com/clbustos/dominanceAnalysis) package: McFadden (*r2.m*), Cox and Snell (*r2.cs*), Nagelkerke (*r2.n*), and Estrella (*r2.e*). To view these indeces, we can use the `da.glm.fit()` function.
+For ordinary least squares regressions, the predictors' additional contribution to a certain subset model is defined as the change in *R^2^* when the predictor is added to the model. In logistic regressions, several analogues of *R^2^* were proposed as measures of model fit, but only four were considered according to three criteria (Azen and Traxel, 2009). These are included in the [dominanceanalysis](https://github.com/clbustos/dominanceAnalysis) package: McFadden (*r2.m*), Cox and Snell (*r2.cs*), Nagelkerke (*r2.n*), and Estrella (*r2.e*). To view these indices, we can use the `da.glm.fit()` function.
 
 ```{r}
 da.glm.fit()("names")
 ```
 
-With this very brief introduction to dominance analysis, we can start to analyse our dataset. We can use the `glm` object to perform dominance analysis, by using the `dominanceAnalysis()` function.
+With this very brief introduction to dominance analysis, we can start to analyze our dataset. We can use the `glm` object to perform dominance analysis, by using the `dominanceAnalysis()` function.
 
 ```{r}
 dapres<-dominanceAnalysis(modpres)
@@ -181,7 +181,7 @@ To determine general dominance, we compute the mean of each predictor's conditio
 dominanceMatrix(dapres, type="general",fit.functions = "r2.m")
 ```
 
-Nevertheless, depending on the goals, we might want to analyse the dominance between all pairs of predictors. If this is the case, we can simply use the dominance matrices explained above, which summarize the relation between pairs of predictors in three values (0, 0.5 and 1). In our example, when looking at complete dominance matrix, we conclude that distance to coast completely dominates slope, and remoteness completely dominates land use and slope. However, when looking at conditional dominance matrix, we realize that altitude conditionally dominates slope, and rainfall conditionally dominates slope. Lastly, when exploring general dominance matrix, we conclude that distance to coast generally dominates altitude and land use, land use generally dominates altitude and slope, rainfall generally dominates altitude, distance to coast and land use, and remoteness generally dominates altitude, distance to coast and rainfall.
+Nevertheless, depending on the goals, we might want to analyze the dominance between all pairs of predictors. If this is the case, we can simply use the dominance matrices explained above, which summarize the relation between pairs of predictors in three values (0, 0.5 and 1). In our example, when looking at complete dominance matrix, we conclude that distance to coast completely dominates slope, and remoteness completely dominates land use and slope. However, when looking at conditional dominance matrix, we realize that altitude conditionally dominates slope, and rainfall conditionally dominates slope. Lastly, when exploring general dominance matrix, we conclude that distance to coast generally dominates altitude and land use, land use generally dominates altitude and slope, rainfall generally dominates altitude, distance to coast and land use, and remoteness generally dominates altitude, distance to coast and rainfall.
 
 Furthermore, if we want to establish a rank of importance among predictors, we can explore the raw values of general dominance. In our example, we conclude that remoteness is clearly the most important predictor to explain bird species occurrence (0.122), followed by rainfall (0.058), distance to coast (0.056), land use (0.047), altitude (0.042) and slope (0.012).
 
@@ -197,7 +197,7 @@ summary(bootmodpres1000,fit.functions="r2.m")
 
 This method provides measures of accuracy for our estimates. More specifically, the bootstrap values of complete, conditional and general dominance are calculated for each pair of predictors (see column *Dij* that represents the original result, *mDij* that represents the mean for *Dij* on bootstrap samples, and *SE.Dij* that represents standard error). These values of dominance can be interpreted as the expected level of dominance between pairs of predictors, as the degree to which this pattern was found on the resamples. Note that we recommend this analysis is performed with at least 1000 replications (*R*), with the size of the original sample, for precise results (i.e., bootstrap samples).
 
-Additionally, other parameters are estimated: *Pij* (proportion of bootstrap samples where *i* dominantes *j*); *Pji* (proportion of bootstrap samples where *j* dominates *i*); *Pnoij* (proportion of samples where no dominance can be asserted); and *Rep* (proportion of samples where original dominance is replicated). When standard error and reproducibility are close or equal to zero and one, respectively, the results are fairly robust. For example, in our analysis we see that the bootstrap complete dominance of remoteness over land use has a standard error of zero and a reproducibility of 1.
+Additionally, other parameters are estimated: *Pij* (proportion of bootstrap samples where *i* dominates *j*); *Pji* (proportion of bootstrap samples where *j* dominates *i*); *Pnoij* (proportion of samples where no dominance can be asserted); and *Rep* (proportion of samples where original dominance is replicated). When standard error and reproducibility are close or equal to zero and one, respectively, the results are fairly robust. For example, in our analysis we see that the bootstrap complete dominance of remoteness over land use has a standard error of zero and a reproducibility of 1.
 
 Moreover, we can obtain bootstrap general dominance values by using `bootAverageDominanceAnalysis()` function.
 

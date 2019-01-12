@@ -1,6 +1,6 @@
 #' Summary for bootAverageDominanceAnalysis.
 #' @param object a \code{\link{bootAverageDominanceAnalysis}} object
-#' @param fit.functions name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved
+#' @param fit.functions name of the fit indices to retrieve. If NULL, all fit indices will be retrieved
 #' @param ... ignored
 #' @importFrom stats sd
 #' @export

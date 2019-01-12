@@ -2,7 +2,7 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.glm.fit}
 \alias{da.glm.fit}
-\title{Provides fit indeces for GLM models.}
+\title{Provides fit indices for GLM models.}
 \usage{
 da.glm.fit(data, family.glm, ...)
 }
@@ -14,7 +14,7 @@ da.glm.fit(data, family.glm, ...)
 \item{...}{ignored}
 }
 \value{
-A function described by \link{using-fit-indeces}. You could retrieve following indeces
+A function described by \link{using-fit-indices}. You could retrieve following indices
 \describe{
 \item{\code{r2.m}}{McFadden(1974)}
 \item{\code{r2.cs}}{Cox and Snell(1989). Use with caution, because don't have 1 as upper bound}
@@ -48,9 +48,9 @@ da.glm.fit(data=df.1, family.glm='binomial')(y~x1)
 }
 }
 \seealso{
-Other fit indeces: \code{\link{da.lm.fit}},
+Other fit indices: \code{\link{da.lm.fit}},
   \code{\link{da.lmWithCov.fit}},
   \code{\link{da.lmerMod.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
-\concept{fit indeces}
+\concept{fit indices}

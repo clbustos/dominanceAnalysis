@@ -12,7 +12,7 @@ da.lm.fit(data, ...)
 \item{...}{ignored}
 }
 \value{
-A function described by \link{using-fit-indeces} description for interface
+A function described by \link{using-fit-indices} description for interface
 }
 \description{
 Uses \eqn{R^2} (coefficient of determination) as fit index
@@ -26,9 +26,9 @@ da.lm.fit(df.1)("names")
 da.lm.fit(df.1)(y~x1)
 }
 \seealso{
-Other fit indeces: \code{\link{da.glm.fit}},
+Other fit indices: \code{\link{da.glm.fit}},
   \code{\link{da.lmWithCov.fit}},
   \code{\link{da.lmerMod.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
-\concept{fit indeces}
+\concept{fit indices}

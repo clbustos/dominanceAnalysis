@@ -16,7 +16,7 @@ function. For both, standard \code{print} and \code{summary} functions are provi
 \itemize{
 \item Provides complete, conditional and general dominance analysis for lm (univariate and multivariate), lmer and glm (family=binomial) models.
 \item Covariance / correlation matrixes could be used as input for OLS dominance analysis, using \code{\link{lmWithCov}} and \code{\link{mlmWithCov}} methods, respectively.
-\item Multiple criteria can be used as fit indeces, which is useful especially for HLM.
+\item Multiple criteria can be used as fit indices, which is useful especially for HLM.
 }
 }
 
