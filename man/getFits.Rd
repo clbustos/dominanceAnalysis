@@ -17,3 +17,14 @@ a list. Key corresponds to fit-index and the value is a matrix, with fits values
 \description{
 Retrieve fit matrix or matrices for a given dominanceAnalysis object
 }
+\examples{
+data(longley)
+da.longley<-dominanceAnalysis(lm(Employed~.,longley))
+getFits(da.longley)
+}
+\seealso{
+Other retrieval methods: \code{\link{averageContribution}},
+  \code{\link{contributionByLevel}},
+  \code{\link{dominanceMatrix}}
+}
+\concept{retrieval methods}

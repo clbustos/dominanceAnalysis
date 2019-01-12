@@ -2,7 +2,7 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lmerMod.fit}
 \alias{da.lmerMod.fit}
-\title{Provides fit indexes for hierarchiecal linear models, based on Luo and Azen (2013).}
+\title{Provides fit indeces for hierarchiecal linear models, based on Luo and Azen (2013).}
 \usage{
 da.lmerMod.fit(data, null.model, ...)
 }
@@ -14,7 +14,7 @@ da.lmerMod.fit(data, null.model, ...)
 \item{...}{ignored}
 }
 \description{
-Provides fit indexes for hierarchiecal linear models, based on Luo and Azen (2013).
+Provides fit indeces for hierarchiecal linear models, based on Luo and Azen (2013).
 }
 \references{
 \itemize{
@@ -22,8 +22,8 @@ Provides fit indexes for hierarchiecal linear models, based on Luo and Azen (201
 }
 }
 \seealso{
-Other fit indexes: \code{\link{da.glm.fit}},
+Other fit indeces: \code{\link{da.glm.fit}},
   \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
-\concept{fit indexes}
+\concept{fit indeces}

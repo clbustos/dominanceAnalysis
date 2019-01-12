@@ -2,7 +2,7 @@
 % Please edit documentation in R/contributionByLevel.r
 \name{contributionByLevel}
 \alias{contributionByLevel}
-\title{Retrieve contribution by level for one or more fit indeces}
+\title{Retrieve average contribution by level for each predictor}
 \usage{
 contributionByLevel(da.object, fit.functions = NULL)
 }
@@ -16,6 +16,16 @@ a list. Key corresponds to fit-index and the value is a matrix, with contributio
                 by level
 }
 \description{
-Retrieve the contribution by level for a given dominanceAnalysis object.
-This contribution defines conditional dominance.
+Retrieve the average contribution by level for each predictor in a dominance analysis.
+The average contribution defines conditional dominance.
 }
+\examples{
+data(longley)
+da.longley<-dominanceAnalysis(lm(Employed~.,longley))
+contributionByLevel(da.longley)
+}
+\seealso{
+Other retrieval methods: \code{\link{averageContribution}},
+  \code{\link{dominanceMatrix}}, \code{\link{getFits}}
+}
+\concept{retrieval methods}

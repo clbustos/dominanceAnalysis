@@ -8,21 +8,33 @@
 #'
 #' To retrieve the dominance matrices from a dominanceAnalysis object, use
 #'
-#'    \code{dominanceMatrix(x,type,fit.function)}
+#'    \code{dominanceMatrix(x,type,fit.function,drop)}
 #'
 #' @param x matrix (calculate) or dominanceAnalysis (retrieve)
 #' @param undefined.value value when no dominance can be established
 #' @param type type of dominance matrix to retrieve. Could be complete, conditional or general
-#' @param fit.function specific fit function to retrieve. If not specified, retrieve the first
-#'                     method according to fit.functions
+#' @param fit.functions name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved
+#' @param drop if TRUE and just one fit index is available, returns a matrix. Else, returns a list
 #' @param ... extra arguments. Not used
-#' @return A matrix representing dominance. 1 represented domination of the row variable
-#'         over the column variable, 0 dominance of the column over the row variable.
-#'         Undefined dominance is represented by \code{undefined.value} parameter
+#' @return for matrix and data-frame, returns a matrix representing dominance.
+#'          1 represents domination of the row variable over the column variable,
+#'          0 dominance of the column over the row variable.
+#'          Undefined dominance is represented by \code{undefined.value} parameter.
+#'          For dominanceAnalysis object, returns a matrix, if \code{drop} parameter
+#'          if TRUE and just one index is available. Else, a list is returned, with
+#'          keys as name of fit-indeces and values as matrices, as described previously.
 #' @export
+#' @family retrieval methods
+#' @examples
+#' # For matrix or data.frame
+#' mm<-data.frame(a=c(5,3,2),b=c(4,2,1),c=c(5,4,3))
+#' dominanceMatrix(mm)
+#' # For dominanceAnalysis
+#' data(longley)
+#' da.longley<-dominanceAnalysis(lm(Employed~.,longley))
+#' dominanceMatrix(da.longley,type="complete")
 
 dominanceMatrix<-function(x, ...) {
-#dominanceMatrix<-function(x, undefined.value=0.5, type=NULL, fit.function=NULL, ...) {
   UseMethod("dominanceMatrix",x)
 }
 
@@ -80,14 +92,19 @@ dominanceMatrix.matrix<-function(x,undefined.value=0.5, ...) {
 #' @importFrom stats na.omit
 #' @export
 #' @rdname dominanceMatrix
-dominanceMatrix.dominanceAnalysis<-function(x, type, fit.function=NULL,...) {
+dominanceMatrix.dominanceAnalysis<-function(x, type, fit.functions=NULL,drop=TRUE,...) {
   if(!(type %in% c("complete","conditional","general"))) {
     stop("Matrix type is incorrect")
   } else {
-    if(is.null(fit.function)) {
-      fit.function=x$fit.functions[1]
+    if(is.null(fit.functions)) {
+      fit.functions=x$fit.functions
     }
-    x[[type]][[fit.function]]
+
+    if(length(fit.functions)==1 & drop) {
+      x[[type]][[fit.functions]]
+    } else {
+      x[[type]][fit.functions]
+    }
   }
 }
 

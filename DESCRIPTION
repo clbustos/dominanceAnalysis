@@ -7,7 +7,7 @@ Description: Dominance Analysis is a method that allows to compare the
 Authors@R: c(
   person("Claudio", "Bustos Navarrete", email = "clbustos@gmail.com", role = c("aut", "cre")),
   person("Filipa", "Coutinho Soares", email = "filipa.mco.soares@gmail.com", role = c("aut")))
-Version: 0.1.2
+Version: 1.0.0
 Depends:
     R (>= 3.0.2)
 License: GPL-2

@@ -7,6 +7,12 @@
 #' @return a list. Key corresponds to fit-index and the value is a matrix, with contribution of each variable
 #'                 by level
 #' @export
+#' @family retrieval methods
+#' @examples
+#' data(longley)
+#' da.longley<-dominanceAnalysis(lm(Employed~.,longley))
+#' contributionByLevel(da.longley)
+
 
 contributionByLevel<-function(da.object, fit.functions=NULL) {
   checkDominanceAnalysis(da.object)

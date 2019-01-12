@@ -13,8 +13,8 @@ dominanceMatrix(x, ...)
 
 \method{dominanceMatrix}{matrix}(x, undefined.value = 0.5, ...)
 
-\method{dominanceMatrix}{dominanceAnalysis}(x, type, fit.function = NULL,
-  ...)
+\method{dominanceMatrix}{dominanceAnalysis}(x, type,
+  fit.functions = NULL, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{matrix (calculate) or dominanceAnalysis (retrieve)}
@@ -25,13 +25,18 @@ dominanceMatrix(x, ...)
 
 \item{type}{type of dominance matrix to retrieve. Could be complete, conditional or general}
 
-\item{fit.function}{specific fit function to retrieve. If not specified, retrieve the first
-method according to fit.functions}
+\item{fit.functions}{name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved}
+
+\item{drop}{if TRUE and just one fit index is available, returns a matrix. Else, returns a list}
 }
 \value{
-A matrix representing dominance. 1 represented domination of the row variable
-        over the column variable, 0 dominance of the column over the row variable.
-        Undefined dominance is represented by \code{undefined.value} parameter
+for matrix and data-frame, returns a matrix representing dominance.
+         1 represents domination of the row variable over the column variable,
+         0 dominance of the column over the row variable.
+         Undefined dominance is represented by \code{undefined.value} parameter.
+         For dominanceAnalysis object, returns a matrix, if \code{drop} parameter
+         if TRUE and just one index is available. Else, a list is returned, with
+         keys as name of fit-indeces and values as matrices, as described previously.
 }
 \description{
 This methods calculates or retrieve dominance matrix
@@ -46,5 +51,19 @@ To calculate a dominance matrix from a matrix or dataframe, use
 
 To retrieve the dominance matrices from a dominanceAnalysis object, use
 
-\code{dominanceMatrix(x,type,fit.function)}
+\code{dominanceMatrix(x,type,fit.function,drop)}
 }
+\examples{
+# For matrix or data.frame
+mm<-data.frame(a=c(5,3,2),b=c(4,2,1),c=c(5,4,3))
+dominanceMatrix(mm)
+# For dominanceAnalysis
+data(longley)
+da.longley<-dominanceAnalysis(lm(Employed~.,longley))
+dominanceMatrix(da.longley,type="complete")
+}
+\seealso{
+Other retrieval methods: \code{\link{averageContribution}},
+  \code{\link{contributionByLevel}}, \code{\link{getFits}}
+}
+\concept{retrieval methods}

@@ -15,7 +15,7 @@ bootAverageDominanceAnalysis(object, R, constants = c(),
 \item{constants}{vector of predictors to remain unchanged between models.
 i.e. vector of variables not subjected to bootstrap analysis.}
 
-\item{fit.functions}{list of functions which provides fit indexes for model.
+\item{fit.functions}{list of functions which provides fit indeces for model.
 See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
 function.}
 
@@ -29,8 +29,7 @@ Bootstrap average values and correspond standard errors for each predictor
 in the dominance analysis. Those values are used for general dominance.
 }
 \details{
-Use \code{\link{summary.bootAverageDominanceAnalysis}} to get a nice formatted
-\code{data.frame} object.
+Use \code{summary()} to get a nice formatted \code{data.frame} object.
 }
 \examples{
 \dontrun{
@@ -38,7 +37,4 @@ lm.1<-lm(Employed~.,longley)
 da.ave.boot<-bootAverageDominanceAnalysis(lm.1,R=1000)
 summary(da.ave.boot)
 }
-}
-\seealso{
-\code{\link{summary.bootAverageDominanceAnalysis}}
 }

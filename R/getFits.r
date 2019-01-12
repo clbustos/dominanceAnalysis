@@ -5,6 +5,12 @@
 #' @param fit.functions name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved
 #' @return a list. Key corresponds to fit-index and the value is a matrix, with fits values
 #' @export
+#' @family retrieval methods
+#' @examples
+#' data(longley)
+#' da.longley<-dominanceAnalysis(lm(Employed~.,longley))
+#' getFits(da.longley)
+
 
 
 getFits<-function(da.object, fit.functions=NULL) {
