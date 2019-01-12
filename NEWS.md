@@ -4,7 +4,7 @@
 - Vignette "Exploring predictors' importance in binomial logistic regressions", by Filipa Coutinho Soares
 - Added dominanceMatrix() as a generic for matrix, data.frame and dominanceAnalysis methods
 - New retrieval methods for dominanceAnalysis object: getFits(), contributionAverage() and contributionByLevel()
-- Removed support for nlme (never works right)
+- Removed support for nlme (never worked right)
 
 # dominanceanalysis 0.1.2
 
