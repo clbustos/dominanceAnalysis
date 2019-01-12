@@ -10,7 +10,7 @@ checkDominanceAnalysis(x)
 \item{x}{an object}
 }
 \value{
-boolean TRUE if x is a dominaceAnalysis object, raises an error otherwise
+boolean TRUE if x is a dominanceAnalysis object, raises an error otherwise
 }
 \description{
 Stop execution if object isn't a dominanceAnalysis object

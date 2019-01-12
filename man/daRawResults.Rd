@@ -23,9 +23,9 @@ daRawResults(x, constants = c(), terms = NULL,
 \value{
 a list with this elements
 \describe{
-\item{fit.functions}{Name of fit indeces}
-\item{fits}{Increment on fit indeces, when specific variable is added}
-\item{base.fits}{Raw fit indeces for each model}
+\item{fit.functions}{Name of fit indices}
+\item{fits}{Increment on fit indices, when specific variable is added}
+\item{base.fits}{Raw fit indices for each model}
 \item{level}{Vector of levels, compatible with fits and base.fits}
 }
 }

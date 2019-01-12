@@ -9,7 +9,7 @@ getFits(da.object, fit.functions = NULL)
 \arguments{
 \item{da.object}{dominanceAnalysis object}
 
-\item{fit.functions}{name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved}
+\item{fit.functions}{name of the fit indices to retrieve. If NULL, all fit indices will be retrieved}
 }
 \value{
 a list. Key corresponds to fit-index and the value is a matrix, with fits values

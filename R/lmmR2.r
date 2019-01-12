@@ -1,4 +1,4 @@
-#' Calculates several measures of fit for Linear Mixel Models
+#' Calculates several measures of fit for Linear Mixed Models
 #' based on Lou and Azen (2013) text.
 #' Models could be lmer or lme models
 #' @param m.null Null model (only with random intercept effects)

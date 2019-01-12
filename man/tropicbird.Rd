@@ -26,6 +26,6 @@ The dataset contains information about points distributed across a small oceanic
 In each of these points, a 10-minute count was carried out to record the species presence
 (assuming 1 if the species was present, or 0 if it was absent). The species'
 presence/absence is the binary response variable (i.e., dependent variable).
-Additionally, all sampled points were caracterized by multiple environmental variables.
+Additionally, all sampled points were characterized by multiple environmental variables.
 }
 \keyword{datasets}

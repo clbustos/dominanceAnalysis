@@ -1,6 +1,6 @@
 #' Uses covariance/correlation matrix to calculate multivariate index of fit
 #'
-#' Calculate \eqn{R^2_{XY}} and  \eqn{P^2_{YX}} for multivariate regressiob
+#' Calculate \eqn{R^2_{XY}} and  \eqn{P^2_{YX}} for multivariate regression
 #' Could be used with \code{\link{dominanceAnalysis}} to
 #' perform a multivariate dominance analysis without original
 #' data.

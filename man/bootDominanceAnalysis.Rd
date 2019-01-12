@@ -15,11 +15,11 @@ bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
 \item{constants}{vector of predictors to remain unchanged between models.
 i.e. vector of variables not subjected to bootstrap analysis.}
 
-\item{fit.functions}{list of functions which provides fit indeces for model.
+\item{fit.functions}{list of functions which provides fit indices for model.
 See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
 function.}
 
-\item{null.model}{only for linear mixel models, null model against to test the submodels.
+\item{null.model}{only for linear mixed models, null model against to test the submodels.
 i.e. only random effects, without any fixed effect.}
 
 \item{...}{Other arguments provided to lm or lmer (not implemented yet).}
