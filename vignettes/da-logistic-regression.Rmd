@@ -1,0 +1,227 @@
+---
+title: "Exploring predictors' importance in binomial logistic regressions"
+author: "Filipa Coutinho Soares"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring predictors' importance in binomial logistic regressions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Exploring predictors' importance in binomial logistic regressions
+
+
+### Summary
+This tutorial presents a real example where dominance analysis is used to determine predictors' importance in a binomial logistic regression model (Azen and Traxel, 2009). More specifically, we model the distribution of a tropical native bird species, inhabiting a small oceanic island, using a binomial generalized linear model, and dominance analysis to identify the most important environmental variables.
+
+
+### Contents
+
+1.	Introducing a tropical bird
+2.	Fitting a logistic regression model
+3.	Using dominance analysis
+4.	Applying bootstrap analysis
+
+This document explains how to perform a dominance analysis to compare the relative importance of predictors in a binomial logistic regression model, using [dominanceanalysis](https://github.com/clbustos/dominanceAnalysis) package. It is important to note that it only describes a small part of all dominanceanalysis functions. Nonetheless, it includes the most significant ones, such as `dominanceAnalysis()`, `da.glm.fit()`, `bootDominanceAnalysis()`, and `bootAverageDominanceAnalysis()`.
+
+
+### 1.	Introducing a tropical bird
+
+Understanding how a species is distributed throughout the landscape is key to create effective conservation actions. By disentangling the limiting factors behind a species distribution, we can start to understand its ecological requirements, which can help support conservation and population management actions.
+
+In this tutorial, we explore the distribution of a tropical native bird species inhabiting a small oceanic island. Since human occupation, the island's forests have disappeared from the flat lowland areas, located closer to the coastline. Nowadays, these areas are considered anthropogenic areas, which include cities, agricultural areas (e.g., horticultures), savannahs, and oil-palm monocultures. 
+
+We use binomial generalized linear models (GLMs) to explore the role of several environmental variables in shaping this species distribution. Furthermore, we use dominance analysis to determine the relative importance of every variable in the logistic regression model.
+
+We use the `tropicbird` dataset, which is a collection of points distributed across the island (Soares, 2017). In each of these points, a 10-minute count was carried out to record the species presence (assuming 1 if the species was present, or 0 if it was absent). The species' presence/absence is the binary response variable (i.e., dependent variable). Additionally, we characterized all sampled points for each of the following environmental variables (i.e., independent variables, or predictors):
+
+- *remoteness (rem)* is an index that represents the difficulty of movement through the landscape, with the highest values corresponding to the most remote areas;
+
+- *land use (land)* is an index that represents the land-use intensification, with the highest values corresponding to the more humanized areas (e.g., cities, agricultural areas, horticultures, oil-palm monocultures);
+
+- *altitude (alt)* is a continuous variable, with the highest values corresponding to the higher altitude areas;
+
+- *slope (slo)* is a continuous variable, with the highest values corresponding to the steepest areas;
+
+- *rainfall (rain)* is a continuous variable, with the highest values corresponding to the rainy wet areas;
+
+- *distance to the coast (coast)* is the minimum linear distance between each point and the coast line, with the highest values corresponding to the points further away from the coastline.
+
+Please note that in this dataset there are no false negatives, hence the bird was always recorded if present. Also, the dataset has no missing values, so it is already prepared for the analysis.
+
+We start by loading the csv data using the `data` function.
+
+```{r}
+library(dominanceanalysis)
+data("tropicbird")
+```
+
+To see how the dataset is organized we can just write `str(tropicbird)`. The first column represents the ID of each point. From the second to the seventh column we have the six continuous predictors (*rem, alt, slo, rain, coast,* and *land*), and finally in the last column we have the binary response variable (*pres*).
+
+With the `str()` function, we can conclude the dataset has 2398 points, which we already know are distributed throughout the island.
+
+```{r}
+str(tropicbird)
+```
+
+We randomly select 70% of the points as the training set to develop the binomial generalized linear model (*train*), and the remaining 30% as the testing set to validate the model (*test*). However, we have to import [caTools](https://github.com/cran/caTools) package.
+
+```{r}
+library(caTools)
+set.seed(101) 
+sample <- caTools::sample.split(tropicbird$ID, SplitRatio = .70)
+train <- subset(tropicbird, sample == TRUE)
+test  <- subset(tropicbird, sample == FALSE)
+```
+
+
+### 2.	Fitting a logistic regression model
+
+The next step is to fit the model to the data frame `train`, using the `glm()` function. Note that distribution of the response variable is defined by the argument `family=`, which in this case corresponds to the binomial distribution.
+
+```{r}
+modpres <- glm(pres~rem+land+alt+slo+rain+coast, data=train, family=binomial(link='logit'))
+```
+
+The function `summary()` provides the summarized results of our model.
+
+```{r}
+summary(modpres)
+```
+
+Remember, our goal with this analysis is to describe the occurrence of our tropical bird species in terms of a linear combination of six environmental variables (i.e., predictors) and a constant term (*intercept*).
+
+First, we can see that remoteness (*rem*), altitude (*alt*), rainfall (*rain*) and distance to coast (*coast*) are statistically significant predictors (*p* < 0.05). Altitude has the lower *p*-value suggesting this predictor has a strong association with the species occurrence. All significant predictors have a positive coefficient, which indicates that our bird is associated to remote, rainy, higher altitude areas, further way from the coast.
+
+If we use the `anova()` function, we can interpret the table of deviance.
+
+```{r}
+anova(modpres, test="Chisq")
+```
+
+We must look at the difference between the null deviance, which is the deviance of the null model (i.e., model with only the intercept), and the residual deviance. The bigger is difference the best our model is doing against the null model. In our case, we can see that adding remoteness alone reduces the deviance drastically (i.e., from 530.66 to 385.36). The small deviance value of slope indicates this variable does not add much to the model, meaning that almost the same amount of variation is explained when this variable is added.
+
+The McFadden index, *R^2^M*, is sometimes referred to as closer equivalent of the coefficient of determination, *R^2^*, in linear regressions. We can obtain the *R^2^M* for our model by using the `pR2()` function in the [pscl](https://github.com/cran/pscl) package.
+
+```{r}
+library(pscl)
+pR2(modpres)
+```
+
+After fitting the logistic regression to our dataset, we know how our species responds to the six environmental variables. Still, we are interested in the relative importance of each variable. Please note that we do not seek to identify which one of these predictors must be eliminated to achieve the best model. If that was our goal, we would use one of the several statistical model selection procedures, like the lasso. Instead, we want to assess predictors' importance through the comparison of their individual contributions in the selected model. In other words, we want to explore the importance of each environmental variable to predict the species occurrence. Furthermore, this information will allow us to recognize the limiting factors constraining our species' distribution, which if you remember can be used to create effective conservation actions.
+
+
+### 3.	Using dominance analysis
+
+Initially, dominance analysis was developed for ordinary least squares regressions (Budescu, 1993), but currently it can be used with logistic regression models (Azen and Traxel, 2009) and hierarchical linear models (Luo and Azen, 2013).
+
+This method is used to determine the relative importance of predictors in a regression analysis. Importance is defined as a qualitative comparison between pairs of predictors (Budescu, 1993). With this being said, one predictor is more important than another, if it contributes more to the prediction of the response variable in all possible subset models (i.e., all possible combinations of predictors) (Azen and Budescu, 2003). Nevertheless, we highlight that importance depends upon the set of predictors considered in the analysis. 
+
+In dominance analysis, one predictor is said to completely dominate another, if its additional contribution to every possible subset model (that doesn't include any of the predictors) is greater than that of the other predictor (Azen and Traxel, 2009). However, if this level of dominance cannot be established, but the average additional contribution of that predictor within each model size is greater than that of the other predictor, we can say that the first conditionally dominates the latter. Yet, if this is still not established, but this predictor's average conditional contribution is greater than that of the other predictor over all model sizes, we can say that the first generally dominates the latter.
+
+For ordinary least squares regressions, the predictors' additional contribution to a certain subset model is defined as the change in *R^2^* when the predictor is added to the model. In logistic regressions, several analogues of *R^2^* were proposed as measures of model fit, but only four were considered according to three criteria (Azen and Traxel, 2009). These are included in the [dominanceanalysis](https://github.com/clbustos/dominanceAnalysis) package: McFadden (*r2.m*), Cox and Snell (*r2.cs*), Nagelkerke (*r2.n*), and Estrella (*r2.e*). To view these indexes, we can use the `da.glm.fit()` function.
+
+```{r}
+da.glm.fit()("names")
+```
+
+With this very brief introduction to dominance analysis, we can start to analyse our dataset. We can use the `glm` object to perform dominance analysis, by using the `dominanceAnalysis()` function.
+
+```{r}
+dapres<-dominanceAnalysis(modpres)
+```
+
+To show all the results, we use the `print()` function. However, we can explore just the raw values of each fit index by using `getFits()`. These raw values are organized in tables, one for each fit index. For simplicity, we only consider the McFadden index, *R^2^M*, to interpret the results (e.g., `$fits$r2.m`). 
+
+```{r}
+getFits(dapres,"r2.m")
+```
+
+The first row represents the raw values of each univariate model. The following rows show the additional contribution of each predictor added to the subset model (indicated by the first column). For example, the univariate model containing altitude produces *R^2^M* = 0.074 (see entry in the first row under the *alt* column of the table). If distance to coast(*coast*) is added to this model, *R^2^M* increases by 0.058 (see entry in the *alt* row under the *coast* column of the table). In contrast, if rainfall (*rain*) is added to the altitude subset model, the increase in *R^2^M* is 0.157 (see entry in the *alt* row under the *rain* column of the table). These results indicate that rainfall dominates distance to coast when added to the altitude subset model, because the additional contribution of rainfall to this model (0.157) is larger than the additional contribution of distance to coast to the same model (0.058).
+
+Furthermore, if the additional contributions of a predictor are higher than that of other predictor for every subset model, the first predictor is said to completely dominate the second. This is the case with distance to coast, which completely dominates slope (compare the values of the columns *coast* and *slo* in the table). The summarized results for complete dominance could be retrieved using `dominanceMatrix()`. 
+
+```{r}
+dominanceMatrix(dapres, type="complete",fit.functions = "r2.m" )
+```
+
+This complete dominance matrix summarizes the relation between each pair of predictors. If the value between two predictors is 1, the predictor under the first column completely dominates the other predictor of the pair. If the value is 0, the predictor under the first column is completely dominated by the other predictor of the pair. Lastly, if the value is 0.5, complete dominance could not be established between the pair. For this reason, as distance to coast dominates completely in all submodels, in the matrix the element row:coast-col:slo have a value of 1 (see entry in the *coast* row under the *slo* column of the table).
+
+However, if complete dominance cannot be established, we explore conditional dominance by using method  `contributionByLevel()`.
+
+```{r}
+contributionByLevel(dapres,fit.functions="r2.m")
+```
+
+For each model size (see column *level* of the table), the average additional contribution of each predictor is calculated. For example, the average additional contribution of altitude to models of size 1 is computed as (0.0072582 + 0.0137805 + 0.1629760 + 0.0227860 + 0.0504051)/5 = 0.051. To establish conditional dominance, we compare the average additional contributions across all model sizes. For example, rainfall conditionally dominates slope, because the average additional contribution of rainfall is higher than that of slope across all model sizes (compare the values of the columns *rain* and *slo* in the table).
+
+The summarized results for conditional dominance can be retrieved using `dominanceMatrix()` (see entry in the *rain* row under the *slo* column of the table).
+
+```{r}
+dominanceMatrix(dapres, type="conditional",fit.functions = "r2.m")
+```
+
+Lastly, if conditional dominance cannot be established, we explore general dominance by using `averageContribution()` method.
+
+```{r}
+averageContribution(dapres,fit.functions = "r2.m")
+```
+
+To determine general dominance, we compute the mean of each predictor's conditional measures. We conclude that remoteness has the highest value (0.122) and generally dominates all other predictors. For this reason, in the general dominance matrix, remoteness assumes a value of 1 with all other predictors (see entry in the *rem* row under every column of the table).
+
+```{r}
+dominanceMatrix(dapres, type="general",fit.functions = "r2.m")
+```
+
+Nevertheless, depending on the goals, we might want to analyse the dominance between all pairs of predictors. If this is the case, we can simply use the dominance matrices explained above, which summarize the relation between pairs of predictors in three values (0, 0.5 and 1). In our example, when looking at complete dominance matrix, we conclude that distance to coast completely dominates slope, and remoteness completely dominates land use and slope. However, when looking at conditional dominance matrix, we realize that altitude conditionally dominates slope, and rainfall conditionally dominates slope. Lastly, when exploring general dominance matrix, we conclude that distance to coast generally dominates altitude and land use, land use generally dominates altitude and slope, rainfall generally dominates altitude, distance to coast and land use, and remoteness generally dominates altitude, distance to coast and rainfall.
+
+Furthermore, if we want to establish a rank of importance among predictors, we can explore the raw values of general dominance. In our example, we conclude that remoteness is clearly the most important predictor to explain bird species occurrence (0.122), followed by rainfall (0.058), distance to coast (0.056), land use (0.047), altitude (0.042) and slope (0.012).
+
+
+### 4.	Applying bootstrap analysis
+
+To evaluate the robustness of our results, we use bootstrapping analysis by using `bootDominanceAnalysis()` function.
+
+```{r}
+bootmodpres1000 <- bootDominanceAnalysis(modpres, R=100)
+summary(bootmodpres1000,fit.functions="r2.m")
+```
+
+This method provides measures of accuracy for our estimates. More specifically, the bootstrap values of complete, conditional and general dominance are calculated for each pair of predictors (see column *Dij* that represents the original result, *mDij* that represents the mean for *Dij* on bootstrap samples, and *SE.Dij* that represents standard error). These values of dominance can be interpreted as the expected level of dominance between pairs of predictors, as the degree to which this pattern was found on the resamples. Note that we recommend this analysis is performed with at least 1000 replications (*R*), with the size of the original sample, for precise results (i.e., bootstrap samples).
+
+Additionally, other parameters are estimated: *Pij* (proportion of bootstrap samples where *i* dominantes *j*); *Pji* (proportion of bootstrap samples where *j* dominates *i*); *Pnoij* (proportion of samples where no dominance can be asserted); and *Rep* (proportion of samples where original dominance is replicated). When standard error and reproducibility are close or equal to zero and one, respectively, the results are fairly robust. For example, in our analysis we see that the bootstrap complete dominance of remoteness over land use has a standard error of zero and a reproducibility of 1.
+
+Moreover, we can obtain bootstrap general dominance values by using `bootAverageDominanceAnalysis()` function.
+
+```{r}
+bootavemodpres1000<-bootAverageDominanceAnalysis(modpres,R=100)
+summary(bootavemodpres1000,fit.functions=c("r2.m"))
+```
+
+The results are organized per fit index and include the estimated bootstrap values of general dominance for each predictor (*bs.E*) and its corresponding standard errors (*bs.SE*), as well as the previously calculated general dominance values (*original*). The difference between these values and the estimated bootstrap values is represented by *Bias*. In our example, the bias is small, which is another good indicator of our results' robustness.
+
+
+### References
+
+*Following the citation rules of Biological Conservation*
+
+* Azen, R., Budescu, D. V., 2003. The Dominance Analysis Approach for Comparing Predictors in Multiple Regression. Psychol. Methods 8, 129-148. https://doi.org/10.1037/1082-989X.8.2.129
+
+* Azen, R., Traxel, N., 2009. Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. J. Educ. Behav. Stat. 34, 319-347. https://doi.org/10.3102/1076998609332754
+
+* Budescu, D. V., 1993. Dominance analysis: A new approach to the problem of relative importance of predictors in multiple regression. Psychol. Bull. 114, 542-551. https://doi.org/10.1037/0033-2909.114.3.542
+
+* Luo, W., Azen, R., 2013. Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. J. Educ. Behav. Stat. 38, 3-31. https://doi.org/10.3102/1076998612458319
+
+* Soares, F.C., 2017. Modelling the distribution of Sao Tome bird species: Ecological determinants and conservation prioritization. Faculdade de Ciencias da Universidade de Lisboa.
+
+
+Author's e-mail: filipa.mco.soares@gmail.com

@@ -26,7 +26,7 @@ dominanceAnalysis(x, constants = c(), terms = NULL,
 \item{predictors}{Vector of predictors.}
 \item{constants}{Vector of constant variables.}
 \item{terms}{Vector of terms to be analyzed.}
-\item{fit.functions}{Vector of fit indexes names.}
+\item{fit.functions}{Vector of fit indeces names.}
 \item{fits}{List with raw fits indexes. See \code{\link{daRawResults}}.}
 \item{contribution.by.level}{List of mean contribution of each predictor by level for each fit index. Each element is a data.frame, with levels as rows and predictors as columns, for each fit index.}
 \item{contribution.average}{List with mean contribution of each predictor for all levels. These values are obtained for every fit index considered in the analysis. Each element is a vector of mean contributions for a given fit index.}

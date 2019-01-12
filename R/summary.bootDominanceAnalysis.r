@@ -1,11 +1,12 @@
 #' Summary for bootDominanceAnalysis.
 #' @param object a \code{\link{bootDominanceAnalysis}} object
+#' @param fit.functions name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved
 #' @param ... ignored
 #' @importFrom stats sd
 #' @export
 #' @keywords internal
 
-summary.bootDominanceAnalysis<-function(object,...) {
+summary.bootDominanceAnalysis<-function(object,fit.functions=NULL,...) {
 	out<-list()
 	mm.n<-nrow(object$m.names)
 	#m.out<-matrix(0,mm.n*3*length(object$fit.functions),11)
@@ -13,8 +14,11 @@ summary.bootDominanceAnalysis<-function(object,...) {
 	#colnames(m.out)<-c("f", "dominance","i","j","Dij","mDij","SE(Dij)","Pij","Pji","Pnoij","Rep")
 	ii<-1
 
+	if(is.null(fit.functions)) {
+	  fit.functions=object$fit.functions
+	}
 	for(an in c("complete","conditional","general")) {
-		for(ff in object$fit.functions) {
+		for(ff in fit.functions) {
 		  for(m in 1:mm.n) {
 			boot.t<-object$boot$t[,ii]
 			m.out[[ii]]<-list(f=ff, dominance=an, i=object$m.names[m,1], k=object$m.names[m,2],
@@ -29,7 +33,7 @@ summary.bootDominanceAnalysis<-function(object,...) {
 	}
 	mm.out<-data.frame(do.call(rbind,m.out))
 	#print(str(mm.out))
-	for(ff in object$fit.functions) {
+	for(ff in fit.functions) {
 			out[[ff]]<-data.frame(lapply(mm.out[mm.out[,1]==ff,-1],unlist))
 	}
 	class(out)<-"summary.bootDominanceAnalysis"

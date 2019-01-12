@@ -21,3 +21,4 @@ A list with values:
 \description{
 Summary for a \code{\link{dominanceAnalysis}} object
 }
+\keyword{internal}

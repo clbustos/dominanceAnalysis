@@ -18,9 +18,9 @@ lmWithCov(f, x)
 \item{cov}{covariance/correlation matrix provided as parameter}
 }
 \description{
-Calculate regression coefficients and \eqn{R^2} for an OLS regression
+Calculate regression coefficients and \eqn{R^2} for an OLS regression.
 Could be used with \code{\link{dominanceAnalysis}} to
-perform a dominance analysis without the original data
+perform a dominance analysis without the original data.
 }
 \examples{
 cov.m<-matrix(c(1,0.2,0.3, 0.2,1,0.5,0.3,0.5,1),3,3,

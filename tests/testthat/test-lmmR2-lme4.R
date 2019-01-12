@@ -6,6 +6,7 @@ reps.n1<-2
 reps.n2<-2
 
 # Big groups
+set.seed(12345)
 x2.g<-rnorm(m)
 e2.g<-rnorm(m)
 gg2<-gl(m,reps.n1*reps.n2)

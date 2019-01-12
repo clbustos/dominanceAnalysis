@@ -7,13 +7,12 @@ lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
 
 test_that("contribution by level are correct", {
-  cbyl<-da.lmer$contribution.by.level
+  cbyl<-contributionByLevel(da.lmer,fit.functions = "rb.r2.1")
   expect_equal(sum(cbyl$rb.r2.1$N>cbyl$rb.r2.1$P),3L)
   expect_equal(sum(cbyl$rb.r2.1$K>cbyl$rb.r2.1$P),3L)
 })
 
 test_that("contribution.average are correct",{
-  ca<-da.lmer$contribution.average
+  ca<-averageContribution(da.lmer,fit.functions = "rb.r2.1")
   expect_equal(ca$rb.r2.1,c(N=0.34,P=-0.03, K=.15),tolerance=0.005)
-
 })

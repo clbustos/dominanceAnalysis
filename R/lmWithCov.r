@@ -1,8 +1,9 @@
 #' Uses covariance/correlation matrix for calculate OLS
 #'
-#' Calculate regression coefficients and \eqn{R^2} for an OLS regression
+#' Calculate regression coefficients and \eqn{R^2} for an OLS regression.
 #' Could be used with \code{\link{dominanceAnalysis}} to
-#' perform a dominance analysis without the original data
+#' perform a dominance analysis without the original data.
+#'
 #'
 #' @param f formula for lm model
 #' @param x correlation/covariance matrix

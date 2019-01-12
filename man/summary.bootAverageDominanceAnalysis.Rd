@@ -4,10 +4,13 @@
 \alias{summary.bootAverageDominanceAnalysis}
 \title{Summary for bootAverageDominanceAnalysis.}
 \usage{
-\method{summary}{bootAverageDominanceAnalysis}(object, ...)
+\method{summary}{bootAverageDominanceAnalysis}(object,
+  fit.functions = NULL, ...)
 }
 \arguments{
 \item{object}{a \code{\link{bootAverageDominanceAnalysis}} object}
+
+\item{fit.functions}{name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved}
 
 \item{...}{ignored}
 }

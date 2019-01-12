@@ -13,5 +13,6 @@ Depends:
 License: GPL-2
 LazyData: true
 Imports: methods, stats
-Suggests: lme4, nlme, boot, testthat, car, heplots, covr
+Suggests:  lme4, boot, testthat, car, heplots, covr, knitr,rmarkdown,caTools,pscl
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

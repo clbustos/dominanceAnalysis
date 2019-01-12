@@ -7,6 +7,7 @@
 #' \item \code{average.contribution}: vector of average contributions of each variable
 #' \item \code{summary.matrix}: matrix with all calculations for dominance analysis
 #' }
+#' @keywords internal
 #' @export
 
 summary.dominanceAnalysis<-function(object, ...) {
@@ -39,10 +40,11 @@ summary.dominanceAnalysis<-function(object, ...) {
 	out
 }
 
-# Print a summary.dominanceAnalysis object
-# @param x a \code{\link{summary.dominanceAnalysis}} object
-# @param round.digits Number of decimal places to round results
-# @param ... further arguments passed to print method
+#' Print a summary.dominanceAnalysis object
+#' @param x a \code{\link{summary.dominanceAnalysis}} object
+#' @param round.digits Number of decimal places to round results
+#' @param ... further arguments passed to print method
+#' @keywords internal
 #' @export
 print.summary.dominanceAnalysis<-function(x, round.digits=3,...) {
   for(fit in names(x)) {

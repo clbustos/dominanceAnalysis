@@ -10,7 +10,7 @@ test_that("should have correct sample values", {
 
   d.f     <<- data.frame(xa=x1,xb=x2,xc=x3,xd=x4,y=y1,y2=y2)
   lm.1    <- lm(y~xa+xb+xc+xd, data = d.f)
-
+  set.seed(12345)
   bs.da.1 <- bootAverageDominanceAnalysis(lm.1, R=2)
   expect_equivalent(names(bs.da.1),c("boot","preds","fit.functions","R","eg"))
   expect_equivalent(bs.da.1$R,2)
