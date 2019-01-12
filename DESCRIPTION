@@ -1,5 +1,6 @@
 Package: dominanceanalysis
 Title: Dominance Analysis
+Date: 2019-01-12
 Description: Dominance Analysis is a method that allows to compare the
              relative importance of predictors in multiple regression models:
              ordinary least squares, generalized linear models and 
