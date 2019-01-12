@@ -34,3 +34,16 @@ getData<-function(x) {
   }
   data;
 }
+
+#' Check if the given object have the dominanceAnalysis class
+#'
+#' Stop execution if object isn't a dominanceAnalysis object
+#' @param x an object
+#' @return boolean TRUE if x is a dominaceAnalysis object, raises an error otherwise
+#' @keywords internal
+checkDominanceAnalysis<-function(x) {
+  if(!inherits(x,"dominanceAnalysis")) {
+    stop("parameter da.object should be a dominanceAnalysis object")
+  }
+  TRUE
+}

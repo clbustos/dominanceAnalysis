@@ -1,18 +1,18 @@
-#' Retrieve average contribution for one or more fit indeces
+#' Retrieve average contribution of each predictor in a dominance analysis.
 #'
-#' Retrieve the average contribution for a dominanceAnalysis object.
+#' Retrieve the average contribution for each predictor. Is calculated
+#' averaging all contribution by level.
 #' The average contribution defines general dominance.
 #' @param da.object dominanceAnalysis object
 #' @param fit.functions name of the fit indeces to retrieve. If NULL, all fit indeces will be retrieved
 #' @return a list. Key corresponds to fit-index and the value is vector,
 #'                 with average contribution for each variable
+#' @seealso contributionByLevel
 #' @export
 
 
 averageContribution<-function(da.object, fit.functions=NULL) {
-  if(!inherits(da.object,"dominanceAnalysis")) {
-    stop("parameter da.object should be a dominanceAnalysis object")
-  }
+  checkDominanceAnalysis(da.object)
   if(is.null(fit.functions)) {
     fit.functions=da.object$fit.functions
   }
@@ -24,7 +24,7 @@ averageContribution<-function(da.object, fit.functions=NULL) {
 #' @keywords internal
 #' @export
 print.daAverageContribution<-function(x,...) {
-  cat("\nAverage Contribution by index\n")
+  cat("\nAverage Contribution by predictor\n")
   print(round(t(sapply(x,I)),3))
 
   invisible(x)

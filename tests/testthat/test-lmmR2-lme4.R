@@ -63,6 +63,12 @@ test_that("Report correct values for lmer comparing both models", {
 
 })
 
+test_that("print methods works fine",{
+  expect_output(print(lmmR2.1),"Explanatory power of Multilevel Model")
+  expect_output(print(lmmR2.1),"R & B R1")
+
+})
+
 test_that("summary methods works fine",{
   expect_output(print(summary(lmmR2.1)),"Explanatory power of Multilevel Model")
   expect_output(print(summary(lmmR2.1)),"R & B R1")

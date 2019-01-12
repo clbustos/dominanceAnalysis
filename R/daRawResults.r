@@ -17,7 +17,7 @@
 #' }
 #' @importFrom stats formula terms family
 #' @keywords internal
-daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default",data=NULL,null.model=NULL, ...) {
+daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", data=NULL, null.model=NULL, ...) {
   f<-formula(x)
   t.f<-terms(f)
   base.cov<-family.glm<-NULL
@@ -91,7 +91,7 @@ daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default",dat
 	  }
 	  raw.vals[[ff]]<-mm
    }
-   out<-list(fit.functions=ffn, fits=raw.vals, base.fits=fits,level=models$level)
+   out<-list(fit.functions = ffn, fits=raw.vals, base.fits=fits, level=models$level)
    class(out)<-"daRawResults"
    out
 }

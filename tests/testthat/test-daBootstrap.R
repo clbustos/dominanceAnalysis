@@ -13,13 +13,16 @@ test_that("Bootstrap should have correct sample values", {
   d.f<-data.frame(xa=x1,xb=x2,xc=x3,xd=x4,y=y1,y2=y2)
   lm.1<-lm(y~xa+xb+xc+xd,data=d.f)
   da<-dominanceAnalysis(lm.1)
-  expect_equivalent(rowSums(da$complete$r2),c(3.5,2.5,1.5,0.5))
-  bs.da.1 <- bootDominanceAnalysis(lm.1, R=2)
+  cdom<-dominanceMatrix(da,"complete",fit.function = "r2")
+  expect_equivalent(rowSums(cdom),c(3.5,2.5,1.5,0.5))
+  set.seed(1234)
+  bs.da.1 <- bootDominanceAnalysis(lm.1, R=3)
   expect_equal(sum(summary(bs.da.1)$r2[,4]==1),18)
   lm.2<-lm(y2~xa+xb+xc+xd,data=d.f)
 
   da.2<-dominanceAnalysis(lm.2)
   da.2.gen<-da.2$general$r2
+  set.seed(1234)
   bs.da.2 <- bootDominanceAnalysis(lm.2, R=2)
   sum.bs.da.2<-summary(bs.da.2)$r2
   res.gen<-as.numeric(as.character(sum.bs.da.2[sum.bs.da.2$dominance=="general","Dij"]))

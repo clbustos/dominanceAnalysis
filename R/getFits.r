@@ -8,9 +8,7 @@
 
 
 getFits<-function(da.object, fit.functions=NULL) {
-  if(!inherits(da.object,"dominanceAnalysis")) {
-    stop("parameter da.object should be a dominanceAnalysis object")
-  }
+  checkDominanceAnalysis(da.object)
   if(is.null(fit.functions)) {
     fit.functions=da.object$fit.functions
   }
@@ -22,7 +20,7 @@ getFits<-function(da.object, fit.functions=NULL) {
 #' @keywords internal
 #' @export
 print.daFits<-function(x,...) {
-  cat("\nDominance analysis fit matrix\n")
+  cat("\nDominance analysis fit matrices\n")
   for(fit in names(x)) {
     cat("* Fit index: ", fit,"\n")
     print(round(x[[fit]],3),na.print = "")
