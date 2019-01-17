@@ -40,7 +40,7 @@ daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", da
   }
   response<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]
 
-  models<-daSubmodels(x = x,constants = constants, terms=terms)
+  models<-daSubmodels(x = x,constants = constants, terms=x.terms)
   fm<-formulas.daSubmodels(models)
 
   if(fit.functions=="default") {

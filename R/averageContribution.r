@@ -22,6 +22,12 @@ averageContribution<-function(da.object, fit.functions=NULL) {
     fit.functions=da.object$fit.functions
   }
   out<-da.object$contribution.average[fit.functions]
+  out<-lapply(out,function(xx) {
+    names(xx)<-replaceTermsInString(names(xx),da.object$terms)
+    xx
+  })
+
+  #print(out)
   class(out)<-c("daAverageContribution","list")
   out
 }

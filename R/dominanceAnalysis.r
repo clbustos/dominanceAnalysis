@@ -90,7 +90,7 @@ dominanceAnalysis <-
     z<-list(
       predictors   = daModels$predictors,
       constants    = daModels$constants,
-      terms        = daModels$terms,
+      terms        = terms,
       fit.functions = daRaw$fit.functions,
       fits = daRaw,
       contribution.by.level = daAverageByLevel,
