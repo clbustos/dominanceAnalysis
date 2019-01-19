@@ -39,7 +39,7 @@ The *attitude* data is composed of six predictors of the overall rating of 35 cl
   da.attitude<-dominanceAnalysis(lm.attitude)
 ```
 
-Using `print()` method on the *dominanceAnalysis* object, we can see that *complaints* completely dominates all other predictors, followed by *learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don't show a consistent pattern for complete and conditional dominance.
+Using `print()` method on the *dominanceAnalysis* object, we can see that *complaints* completely dominates all other predictors, followed by *learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don't show a consistent pattern for complete and conditional dominance. The average contribution of each predictor is also presented, that defines defines general dominance. 
 
 The `print()` method uses `abbreviate`, to allow complex models to be visualized at a glance.
 
@@ -47,7 +47,14 @@ The `print()` method uses `abbreviate`, to allow complex models to be visualized
   print(da.attitude)
 ```
 
-The `summary()` method provides the average contribution of each variable. This contribution defines general dominance. Also, shows the complete dominance analysis matrix, that presents all fit differences between levels.
+The dominance brief and average contribution of each predictor could be retrieved separately using `dominanceBriefing()` and `averageContribution()` methods, respectively. 
+
+```{r}
+  dominanceBriefing(da.attitude, abbrev = TRUE)$r2
+  averageContribution(da.attitude)
+```
+
+The `summary()` method shows the complete dominance analysis matrix, that presents all fit differences between levels. Also, provides the average contribution of each variable.
 
 
 ```{r}
@@ -73,7 +80,8 @@ We can see that the value of complete dominance for *complaints* is fairly robus
 Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading*  (0.152). Nevertheless, in the output of `summary()` method  on level 1, we can see that *picture* (0.125) dominates over *reading* (0.077) on 'vocab' submodel.
 
 ```{r}
-lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, cov2cor(ability.cov$cov))
+lmwithcov<-lmWithCov( f = general~picture+blocks+maze+reading+vocab,
+                      x = cov2cor(ability.cov$cov))
 da.cov<-dominanceAnalysis(lmwithcov)
 print(da.cov)
 summary(da.cov)
@@ -141,22 +149,19 @@ print(format(summary(da.b.esoph)$r2.m,digits=3),row.names=F)
 
 ## Set of predictors
 
-Budescu (1993) shows that dominance analysis can be applied to groups or set of inseparable predictors. 
+Budescu (1993) shows that dominance analysis can be applied to groups or set of inseparable predictors. The Longley's economic regression data is know for  have a highly collinear set on `Employed` variable. We can see that `GNP.deflator`, `GNP`, `Population` and `Year`  are highly correlated.
 
 ```{r}
-m.budescu.5=matrix(c(1,.30,.41,.33,
-                .30,1,.16,.57,
-                .41,.16,1,.50,
-                .33,.57,.50,1), nrow = 4,ncol = 4,byrow = T,
-              dimnames = list(c('SES','IQ','nAch','GPA'),
-                              c('SES','IQ','nAch','GPA')))
-lmCov.b5<-lmWithCov(GPA~SES+IQ+nAch,m.budescu.5)
-da.b5<-dominanceAnalysis(lmCov.b5)
-print(da.b5)
-summary(da.b5)
-da.b5.g<-dominanceAnalysis(lmCov.b5,terms = c("SES","IQ+nAch"))
-print(da.b5.g)
-summary(da.b5.g)
+data(longley)
+round(cor(longley),2)
+```
+
+We can group GNP and employment related variables, to determine the importance of both groups of variables. The GNP related variables dominates completely population, and we can see that all predictors dominates generally over employment.
+
+```{r}
+terms.r<-c(GNP.rel="GNP.deflator+GNP", employment="Unemployed+Armed.Forces", "Population", "Year")
+da.longley<-dominanceAnalysis(lm(Employed~.,longley),terms = terms.r)
+print(da.longley)
 ```
 
 

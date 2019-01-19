@@ -15,23 +15,33 @@ summary.dominanceAnalysis<-function(object, ...) {
 	out=list()
 	for(fit in ff) {
 
-	  fit.matrix<-data.frame(model=rownames(object$fits$fits[[fit]]), level=object$fits$level, fit=object$fits$base.fits[,fit],  object$fits$fits[[fit]])
+	  fit.matrix<-data.frame(model = rownames(object$fits$fits[[fit]]),
+	                         level = object$fits$level,
+	                         fit   = object$fits$base.fits[,fit],
+	                         getFits(object)[[fit]]
+	                         )
+	  if(!is.null(object$terms)) {
+	    fit.matrix$model<-replaceTermsInString(string = fit.matrix$model, object$terms)
+	  }
+
 	  split.fit.matrix<-split(fit.matrix,f = fit.matrix$level)
 	  max.level=max(fit.matrix$level)
+
 	  split.fit.matrix.1<-lapply(split.fit.matrix,function(xx) {
 	    level=min(xx$level)
 	    if(level==0 || level==max.level) {
 	      xx
 	    } else {
         averages=colMeans(xx[,-c(1:3)],na.rm=T)
-
         row=data.frame(c(list(model=paste0("Average level ",level), level=level,fit=NA), as.list(averages)))
         rbind(xx,row)
 	    }
 	  })
+
 	  summary.matrix<-do.call(rbind, split.fit.matrix.1)
+
 	  out[[fit]]<-list(
-	    average.contribution=object$contribution.average[[fit]],
+	    average.contribution=averageContribution(object, fit)[[fit]],
 	    summary.matrix=summary.matrix
 	  )
 	  rownames(out[[fit]]$summary.matrix)<-abbreviate(out[[fit]]$summary.matrix$model)

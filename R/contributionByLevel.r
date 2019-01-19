@@ -20,6 +20,10 @@ contributionByLevel<-function(da.object, fit.functions=NULL) {
     fit.functions=da.object$fit.functions
   }
   out<-da.object$contribution.by.level[fit.functions]
+  out<-lapply(out,function(xx) {
+    names(xx)<-replaceTermsInString(names(xx),da.object$terms)
+    xx
+  })
   class(out)<-c("daContributionByLevel","list")
   out
 }

@@ -99,11 +99,16 @@ dominanceMatrix.dominanceAnalysis<-function(x, type, fit.functions=NULL,drop=TRU
     if(is.null(fit.functions)) {
       fit.functions=x$fit.functions
     }
+    matrices.type<-lapply(x[[type]],function(xx) {
+      colnames(xx)<-replaceTermsInString(colnames(xx), x$terms)
+      rownames(xx)<-replaceTermsInString(rownames(xx), x$terms)
+      xx
+    })
 
     if(length(fit.functions)==1 & drop) {
-      x[[type]][[fit.functions]]
+      matrices.type[[fit.functions]]
     } else {
-      x[[type]][fit.functions]
+      matrices.type[fit.functions]
     }
   }
 }

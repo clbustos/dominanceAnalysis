@@ -25,6 +25,7 @@ getFits(da.longley)
 \seealso{
 Other retrieval methods: \code{\link{averageContribution}},
   \code{\link{contributionByLevel}},
+  \code{\link{dominanceBriefing}},
   \code{\link{dominanceMatrix}}
 }
 \concept{retrieval methods}

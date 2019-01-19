@@ -2,9 +2,9 @@
 % Please edit documentation in R/rankUsingMatrix.r
 \name{rankUsingMatrix}
 \alias{rankUsingMatrix}
-\title{Dominance of each factor over others
+\title{Dominance of each factor over others.
 Dominance requires that a variable have higher values on all submodels.
-This method allows to visualize those relation}
+This method allows to visualize those relation.}
 \usage{
 rankUsingMatrix(x)
 }
@@ -15,8 +15,8 @@ rankUsingMatrix(x)
 a vector of string, each one showing what factors dominates others
 }
 \description{
-Dominance of each factor over others
+Dominance of each factor over others.
 Dominance requires that a variable have higher values on all submodels.
-This method allows to visualize those relation
+This method allows to visualize those relation.
 }
 \keyword{internal}

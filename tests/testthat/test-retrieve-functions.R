@@ -61,3 +61,17 @@ test_that("print for a daAverageContribution object", {
   expect_output(print(ac),"Average Contribution by predictor")
   expect_output(print(ac),"r2.+0.466.+0.066.+0.182")
 })
+
+test_that("dominanceBriefing retrieve a matrix with a briefing of dominance ",{
+  expected<-data.frame(complete=c("privileges,learning","","privileges"), conditional=c("privileges,learning","", "privileges"), general=c("privileges,learning","","privileges"))
+  rownames(expected)<-c("complaints","privileges","learning")
+  dom.brief<-dominanceBriefing(da.attitude)
+  expect_named(dom.brief,"r2")
+  expect_equal(dom.brief$r2, expected)
+
+  expected.brief<-data.frame(complete=c("prvl,lrnn","","prvl"), conditional=c("prvl,lrnn","","prvl"), general=c(c("prvl,lrnn","","prvl")))
+  rownames(expected.brief)<-c("complaints","privileges","learning")
+  dom.brief<-dominanceBriefing(da.attitude,abbrev = TRUE)
+  expect_named(dom.brief,"r2")
+  expect_equal(dom.brief$r2, expected.brief)
+})

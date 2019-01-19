@@ -19,6 +19,11 @@ getFits<-function(da.object, fit.functions=NULL) {
     fit.functions=da.object$fit.functions
   }
   out<-da.object$fits$fits[fit.functions]
+  out<-lapply(out,function(xx) {
+    colnames(xx)<-replaceTermsInString(colnames(xx),da.object$terms)
+    rownames(xx)<-replaceTermsInString(rownames(xx),da.object$terms)
+    xx
+  })
   class(out)<-c("daFits","list")
   out
 }

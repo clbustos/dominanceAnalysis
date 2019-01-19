@@ -64,6 +64,7 @@ dominanceMatrix(da.longley,type="complete")
 }
 \seealso{
 Other retrieval methods: \code{\link{averageContribution}},
-  \code{\link{contributionByLevel}}, \code{\link{getFits}}
+  \code{\link{contributionByLevel}},
+  \code{\link{dominanceBriefing}}, \code{\link{getFits}}
 }
 \concept{retrieval methods}

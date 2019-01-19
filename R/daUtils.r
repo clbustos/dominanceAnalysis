@@ -59,7 +59,7 @@ replaceTermsInString<-function(string,replacement) {
     to.replace<-as.character(replacement)
     for(i in 1:length(names.r)) {
       if(names.r[i]!="") {
-      string=sub(to.replace[i], names.r[i], string,fixed=TRUE)
+        string=sub(to.replace[i], names.r[i], string, fixed=TRUE)
       }
     }
   }
