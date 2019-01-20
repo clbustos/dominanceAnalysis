@@ -38,7 +38,7 @@ The `print()` method uses `abbreviate`, to allow complex models to be visualized
 #> 
 #> Dominance analysis
 #> Predictors: complaints, privileges, learning, raises, critical, advance 
-#> Fit-indeces: r2 
+#> Fit-indices: r2 
 #> 
 #> * Fit index:  r2 
 #>                            complete              conditional
@@ -234,51 +234,51 @@ We can see that the value of complete dominance for *complaints* is fairly robus
 #> ==================
 #> Fit index: r2 
 #>    dominance          i          k Dij  mDij SE.Dij  Pij  Pji Pnoij  Rep
-#>     complete complaints privileges 1.0 0.980  0.098 0.96 0.00  0.04 0.96
-#>     complete complaints   learning 1.0 0.910  0.229 0.85 0.03  0.12 0.85
-#>     complete complaints     raises 1.0 0.980  0.098 0.96 0.00  0.04 0.96
-#>     complete complaints   critical 1.0 0.975  0.110 0.95 0.00  0.05 0.95
-#>     complete complaints    advance 1.0 0.955  0.144 0.91 0.00  0.09 0.91
-#>     complete privileges   learning 0.0 0.275  0.269 0.02 0.47  0.51 0.47
-#>     complete privileges     raises 0.5 0.460  0.136 0.00 0.08  0.92 0.92
-#>     complete privileges   critical 1.0 0.530  0.156 0.08 0.02  0.90 0.08
-#>     complete privileges    advance 0.5 0.510  0.070 0.02 0.00  0.98 0.98
-#>     complete   learning     raises 1.0 0.615  0.292 0.31 0.08  0.61 0.31
-#>     complete   learning   critical 1.0 0.715  0.278 0.46 0.03  0.51 0.46
-#>     complete   learning    advance 1.0 0.665  0.236 0.33 0.00  0.67 0.33
-#>     complete     raises   critical 1.0 0.555  0.157 0.11 0.00  0.89 0.11
-#>     complete     raises    advance 0.5 0.525  0.110 0.05 0.00  0.95 0.95
-#>     complete   critical    advance 0.5 0.520  0.098 0.04 0.00  0.96 0.96
-#>  conditional complaints privileges 1.0 0.985  0.086 0.97 0.00  0.03 0.97
-#>  conditional complaints   learning 1.0 0.925  0.229 0.89 0.04  0.07 0.89
-#>  conditional complaints     raises 1.0 0.975  0.131 0.96 0.01  0.03 0.96
-#>  conditional complaints   critical 1.0 0.990  0.070 0.98 0.00  0.02 0.98
-#>  conditional complaints    advance 1.0 0.980  0.098 0.96 0.00  0.04 0.96
-#>  conditional privileges   learning 0.0 0.195  0.309 0.07 0.68  0.25 0.68
-#>  conditional privileges     raises 0.5 0.345  0.253 0.02 0.33  0.65 0.65
-#>  conditional privileges   critical 1.0 0.600  0.246 0.24 0.04  0.72 0.24
-#>  conditional privileges    advance 0.5 0.535  0.163 0.09 0.02  0.89 0.89
-#>  conditional   learning     raises 1.0 0.665  0.370 0.49 0.16  0.35 0.49
-#>  conditional   learning   critical 1.0 0.790  0.286 0.62 0.04  0.34 0.62
-#>  conditional   learning    advance 1.0 0.760  0.251 0.52 0.00  0.48 0.52
-#>  conditional     raises   critical 1.0 0.685  0.263 0.39 0.02  0.59 0.39
-#>  conditional     raises    advance 0.5 0.595  0.197 0.19 0.00  0.81 0.81
-#>  conditional   critical    advance 0.5 0.445  0.255 0.08 0.19  0.73 0.73
-#>      general complaints privileges 1.0 1.000  0.000 1.00 0.00  0.00 1.00
-#>      general complaints   learning 1.0 0.930  0.256 0.93 0.07  0.00 0.93
-#>      general complaints     raises 1.0 0.980  0.141 0.98 0.02  0.00 0.98
-#>      general complaints   critical 1.0 1.000  0.000 1.00 0.00  0.00 1.00
-#>      general complaints    advance 1.0 1.000  0.000 1.00 0.00  0.00 1.00
-#>      general privileges   learning 0.0 0.100  0.302 0.10 0.90  0.00 0.90
-#>      general privileges     raises 0.0 0.070  0.256 0.07 0.93  0.00 0.93
-#>      general privileges   critical 1.0 0.760  0.429 0.76 0.24  0.00 0.76
-#>      general privileges    advance 1.0 0.770  0.423 0.77 0.23  0.00 0.77
-#>      general   learning     raises 1.0 0.600  0.492 0.60 0.40  0.00 0.60
-#>      general   learning   critical 1.0 0.930  0.256 0.93 0.07  0.00 0.93
-#>      general   learning    advance 1.0 0.970  0.171 0.97 0.03  0.00 0.97
-#>      general     raises   critical 1.0 0.940  0.239 0.94 0.06  0.00 0.94
-#>      general     raises    advance 1.0 1.000  0.000 1.00 0.00  0.00 1.00
-#>      general   critical    advance 0.0 0.440  0.499 0.44 0.56  0.00 0.56
+#>     complete complaints privileges 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
+#>     complete complaints   learning 1.0 0.910 0.2290 0.85 0.03  0.12 0.85
+#>     complete complaints     raises 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
+#>     complete complaints   critical 1.0 0.975 0.1095 0.95 0.00  0.05 0.95
+#>     complete complaints    advance 1.0 0.955 0.1438 0.91 0.00  0.09 0.91
+#>     complete privileges   learning 0.0 0.275 0.2694 0.02 0.47  0.51 0.47
+#>     complete privileges     raises 0.5 0.460 0.1363 0.00 0.08  0.92 0.92
+#>     complete privileges   critical 1.0 0.530 0.1560 0.08 0.02  0.90 0.08
+#>     complete privileges    advance 0.5 0.510 0.0704 0.02 0.00  0.98 0.98
+#>     complete   learning     raises 1.0 0.615 0.2918 0.31 0.08  0.61 0.31
+#>     complete   learning   critical 1.0 0.715 0.2776 0.46 0.03  0.51 0.46
+#>     complete   learning    advance 1.0 0.665 0.2363 0.33 0.00  0.67 0.33
+#>     complete     raises   critical 1.0 0.555 0.1572 0.11 0.00  0.89 0.11
+#>     complete     raises    advance 0.5 0.525 0.1095 0.05 0.00  0.95 0.95
+#>     complete   critical    advance 0.5 0.520 0.0985 0.04 0.00  0.96 0.96
+#>  conditional complaints privileges 1.0 0.985 0.0857 0.97 0.00  0.03 0.97
+#>  conditional complaints   learning 1.0 0.925 0.2289 0.89 0.04  0.07 0.89
+#>  conditional complaints     raises 1.0 0.975 0.1306 0.96 0.01  0.03 0.96
+#>  conditional complaints   critical 1.0 0.990 0.0704 0.98 0.00  0.02 0.98
+#>  conditional complaints    advance 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
+#>  conditional privileges   learning 0.0 0.195 0.3089 0.07 0.68  0.25 0.68
+#>  conditional privileges     raises 0.5 0.345 0.2532 0.02 0.33  0.65 0.65
+#>  conditional privileges   critical 1.0 0.600 0.2462 0.24 0.04  0.72 0.24
+#>  conditional privileges    advance 0.5 0.535 0.1629 0.09 0.02  0.89 0.89
+#>  conditional   learning     raises 1.0 0.665 0.3697 0.49 0.16  0.35 0.49
+#>  conditional   learning   critical 1.0 0.790 0.2859 0.62 0.04  0.34 0.62
+#>  conditional   learning    advance 1.0 0.760 0.2511 0.52 0.00  0.48 0.52
+#>  conditional     raises   critical 1.0 0.685 0.2626 0.39 0.02  0.59 0.39
+#>  conditional     raises    advance 0.5 0.595 0.1971 0.19 0.00  0.81 0.81
+#>  conditional   critical    advance 0.5 0.445 0.2552 0.08 0.19  0.73 0.73
+#>      general complaints privileges 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
+#>      general complaints   learning 1.0 0.930 0.2564 0.93 0.07  0.00 0.93
+#>      general complaints     raises 1.0 0.980 0.1407 0.98 0.02  0.00 0.98
+#>      general complaints   critical 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
+#>      general complaints    advance 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
+#>      general privileges   learning 0.0 0.100 0.3015 0.10 0.90  0.00 0.90
+#>      general privileges     raises 0.0 0.070 0.2564 0.07 0.93  0.00 0.93
+#>      general privileges   critical 1.0 0.760 0.4292 0.76 0.24  0.00 0.76
+#>      general privileges    advance 1.0 0.770 0.4230 0.77 0.23  0.00 0.77
+#>      general   learning     raises 1.0 0.600 0.4924 0.60 0.40  0.00 0.60
+#>      general   learning   critical 1.0 0.930 0.2564 0.93 0.07  0.00 0.93
+#>      general   learning    advance 1.0 0.970 0.1714 0.97 0.03  0.00 0.97
+#>      general     raises   critical 1.0 0.940 0.2387 0.94 0.06  0.00 0.94
+#>      general     raises    advance 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
+#>      general   critical    advance 0.0 0.440 0.4989 0.44 0.56  0.00 0.56
 ```
 
 Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading* (0.152). Nevertheless, in the output of `summary()` method on level 1, we can see that *picture* (0.125) dominates over *reading* (0.077) on 'vocab' submodel.
@@ -290,7 +290,7 @@ print(da.cov)
 #> 
 #> Dominance analysis
 #> Predictors: picture, blocks, maze, reading, vocab 
-#> Fit-indeces: r2 
+#> Fit-indices: r2 
 #> 
 #> * Fit index:  r2 
 #>          complete         conditional             general
@@ -412,7 +412,7 @@ print(da.lmer)
 #> Dominance analysis
 #> Predictors: N, P, K 
 #> Constants: ( 1 | block ) 
-#> Fit-indeces: rb.r2.1, rb.r2.2, sb.r2.1, sb.r2.2 
+#> Fit-indices: rb.r2.1, rb.r2.2, sb.r2.1, sb.r2.2 
 #> 
 #> * Fit index:  rb.r2.1 
 #>   complete conditional general
@@ -604,7 +604,7 @@ print(da.esoph)
 #> 
 #> Dominance analysis
 #> Predictors: agegp, alcgp, tobgp 
-#> Fit-indeces: r2.m, r2.cs, r2.n, r2.e 
+#> Fit-indices: r2.m, r2.cs, r2.n, r2.e 
 #> 
 #> * Fit index:  r2.m 
 #>       complete conditional   general
@@ -760,7 +760,7 @@ print(da.b5)
 #> 
 #> Dominance analysis
 #> Predictors: SES, IQ, nAch 
-#> Fit-indeces: r2 
+#> Fit-indices: r2 
 #> 
 #> * Fit index:  r2 
 #>      complete conditional  general
@@ -797,7 +797,8 @@ print(da.b5.g)
 #> 
 #> Dominance analysis
 #> Predictors: SES, IQ+nAch 
-#> Fit-indeces: r2 
+#> Terms:  = SES ;  = IQ+nAch 
+#> Fit-indices: r2 
 #> 
 #> * Fit index:  r2 
 #>         complete conditional general

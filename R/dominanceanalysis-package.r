@@ -46,7 +46,7 @@
 #' summary(da)
 #'
 #' # Dominance analysis for HLM
-#' \dontrun{
+#'
 #' library(lme4)
 #' x1<-rnorm(1000)
 #' x2<-rnorm(1000)
@@ -58,7 +58,7 @@
 #' da.lmm<-dominanceAnalysis(lmm1, null.model=lmm0)
 #' print(da.lmm)
 #' summary(da.lmm)
-#' }
+#'
 #'
 #' # GLM analysis
 #'
@@ -73,7 +73,7 @@
 #'
 #' # Bootstrap procedure
 #'
-#' \dontrun{
+#' \donttest{
 #' da.boot<-bootDominanceAnalysis(lm.1,R=1000)
 #' summary(da.boot)
 #'

@@ -26,7 +26,5 @@ perform a dominance analysis without the original data.
 cov.m<-matrix(c(1,0.2,0.3, 0.2,1,0.5,0.3,0.5,1),3,3,
 dimnames=list(c("x1","x2","y"),c("x1","x2","y")))
 lm.cov<-lmWithCov(y~x1+x2,cov.m)
-\dontrun{
 da<-dominanceAnalysis(lm.cov)
-}
 }

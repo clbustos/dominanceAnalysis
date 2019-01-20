@@ -24,7 +24,6 @@ perform a multivariate dominance analysis without original
 data.
 }
 \examples{
-\dontrun{
 library(car)
 library(heplots)
 cor.m<-cor(Rohwer[Rohwer[,1]==1,2+c(7,8,1,2,3)])
@@ -32,5 +31,4 @@ lwith<-mlmWithCov(cbind(na,ss)~SAT+PPVT+Raven,cor.m)
 da<-dominanceAnalysis(lwith)
 print(da)
 summary(da)
-}
 }

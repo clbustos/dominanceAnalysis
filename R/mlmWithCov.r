@@ -13,8 +13,8 @@
 #' \item{formula}{formula provided as parameter}
 #' \item{cov}{covariance/correlation matrix provided as parameter}
 #' @importFrom stats terms model.response model.frame
+#' @export
 #' @examples
-#' \dontrun{
 #' library(car)
 #' library(heplots)
 #' cor.m<-cor(Rohwer[Rohwer[,1]==1,2+c(7,8,1,2,3)])
@@ -22,7 +22,6 @@
 #' da<-dominanceAnalysis(lwith)
 #' print(da)
 #' summary(da)
-#' }
 
 mlmWithCov<-function(f,x) {
 	t.f<-terms(f)

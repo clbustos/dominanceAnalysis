@@ -32,7 +32,7 @@ bootstrap samples.
 Use \code{summary()} to get a nice formatted data.frame
 }
 \examples{
-\dontrun{
+\donttest{
 lm.1<-lm(Employed~.,longley)
 da.boot<-bootDominanceAnalysis(lm.1,R=1000)
 summary(da.boot)
