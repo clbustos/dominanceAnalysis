@@ -18,7 +18,7 @@
 #' @param ... Other arguments provided to lm or lmer (not implemented yet).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' lm.1<-lm(Employed~.,longley)
 #' da.boot<-bootDominanceAnalysis(lm.1,R=1000)
 #' summary(da.boot)

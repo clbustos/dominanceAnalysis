@@ -159,7 +159,10 @@ round(cor(longley),2)
 We can group GNP and employment related variables, to determine the importance of both groups of variables. The GNP related variables dominates completely population, and we can see that all predictors dominates generally over employment.
 
 ```{r}
-terms.r<-c(GNP.rel="GNP.deflator+GNP", employment="Unemployed+Armed.Forces", "Population", "Year")
+terms.r<-c(GNP.rel="GNP.deflator+GNP", 
+           employment="Unemployed+Armed.Forces", 
+           "Population", 
+           "Year")
 da.longley<-dominanceAnalysis(lm(Employed~.,longley),terms = terms.r)
 print(da.longley)
 ```

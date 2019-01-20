@@ -32,7 +32,7 @@ in the dominance analysis. Those values are used for general dominance.
 Use \code{summary()} to get a nice formatted \code{data.frame} object.
 }
 \examples{
-\dontrun{
+\donttest{
 lm.1<-lm(Employed~.,longley)
 da.ave.boot<-bootAverageDominanceAnalysis(lm.1,R=1000)
 summary(da.ave.boot)
