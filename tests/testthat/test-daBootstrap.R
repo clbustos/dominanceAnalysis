@@ -1,7 +1,4 @@
-context("Bootstrap samples")
-
-
-
+context("Bootstrap dominance analysis")
 
 test_that("Bootstrap should have correct sample values", {
   x1<-rnorm(1000)
@@ -32,4 +29,22 @@ test_that("Bootstrap should have correct sample values", {
                       1-res.gen[3], 1-res.gen[5], 1-res.gen[6],0.5 ), 4,4,byrow=T)
   expect_equivalent(da.2.gen,da.2.gen.bs)
   expect_output(print(summary(bs.da.2)),"complete xa xb")
+})
+
+
+test_that("should have correct values using terms",{
+
+  lm.mtcars<-lm(mpg~.,mtcars)
+  terms<-c(motor='cyl+disp+hp+carb',trans='drat+am+gear',other='wt+qsec+vs+am')
+  da.mtcars<-bootDominanceAnalysis(lm.mtcars,R=2,terms=terms)
+  expect_equal(da.mtcars$terms,terms)
+  expected.m.names<-matrix(
+    c(terms[1], terms[2], terms[1], terms[3], terms[2], terms[3]),
+    3,2, byrow = TRUE
+  )
+  expect_equal(da.mtcars$m.names, expected.m.names)
+  s.da<-summary(da.mtcars)
+  expect_equal(as.character(s.da$r2$i),rep(c("motor","motor","trans"),3))
+  expect_equal(as.character(s.da$r2$k),rep(c("trans","other","other"),3))
+
 })

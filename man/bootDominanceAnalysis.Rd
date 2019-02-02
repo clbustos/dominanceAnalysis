@@ -4,8 +4,8 @@
 \alias{bootDominanceAnalysis}
 \title{Bootstrap analysis for Dominance Analysis}
 \usage{
-bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
-  null.model = NULL, ...)
+bootDominanceAnalysis(x, R, constants = c(), terms = NULL,
+  fit.functions = "default", null.model = NULL, ...)
 }
 \arguments{
 \item{x}{lm, glm or lmer model}
@@ -14,6 +14,8 @@ bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
 
 \item{constants}{vector of predictors to remain unchanged between models.
 i.e. vector of variables not subjected to bootstrap analysis.}
+
+\item{terms}{vector of terms to be analyzed. By default, obtained from the model}
 
 \item{fit.functions}{list of functions which provides fit indices for model.
 See \code{fit.functions} param in \code{\link{dominanceAnalysis}}

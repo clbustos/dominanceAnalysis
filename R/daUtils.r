@@ -47,3 +47,21 @@ checkDominanceAnalysis<-function(x) {
   }
   TRUE
 }
+
+#' Replace terms by name using the terms definition
+#' @param string string to be updated
+#' @param replacement string with replacement for strings. values are replaced by names
+replaceTermsInString<-function(string,replacement) {
+  if(is.null(replacement) || is.null(names(replacement))) {
+    string
+  } else {
+    names.r=names(replacement)
+    to.replace<-as.character(replacement)
+    for(i in 1:length(names.r)) {
+      if(names.r[i]!="") {
+        string=sub(to.replace[i], names.r[i], string, fixed=TRUE)
+      }
+    }
+  }
+  string
+}

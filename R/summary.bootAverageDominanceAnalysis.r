@@ -11,6 +11,9 @@ summary.bootAverageDominanceAnalysis<-function(object, fit.functions=NULL, ...) 
 	bs.se<-apply(object$boot$t,2,sd)
 	x.table<-data.frame(object$eg, original=object$boot$t0, bs.mean=bs.mean,bias=bs.mean-object$boot$t0,bs.se=bs.se)
 	colnames(x.table)<-c("Var","Fit.Index","original","bs.E","bias","bs.SE")
+  if(!is.null(object$terms)) {
+	  x.table$Var<-replaceTermsInString(string = as.character(x.table$Var), object$terms)
+  }
 
 	out<-split(x.table, x.table$Fit.Index)
 	if(!is.null(fit.functions)) {

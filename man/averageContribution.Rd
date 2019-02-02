@@ -27,6 +27,7 @@ averageContribution(da.longley)
 }
 \seealso{
 Other retrieval methods: \code{\link{contributionByLevel}},
+  \code{\link{dominanceBriefing}},
   \code{\link{dominanceMatrix}}, \code{\link{getFits}}
 }
 \concept{retrieval methods}

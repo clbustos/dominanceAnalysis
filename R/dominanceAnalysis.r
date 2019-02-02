@@ -83,14 +83,11 @@ dominanceAnalysis <-
     daModels <- daSubmodels(x = x, constants = constants, terms=terms)
     daRaw <- daRawResults(x = x, constants = constants,terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, ...)
     daAverageByLevel <- daAverageContributionByLevel(daRaw)
-    daAverageGeneral <-
-      lapply(daAverageByLevel, function(x) {
-        colMeans(x[, -1])
-      })
+    daAverageGeneral <- lapply(daAverageByLevel, function(x) {colMeans(x[, -1])})
     z<-list(
       predictors   = daModels$predictors,
       constants    = daModels$constants,
-      terms        = daModels$terms,
+      terms        = terms,
       fit.functions = daRaw$fit.functions,
       fits = daRaw,
       contribution.by.level = daAverageByLevel,
@@ -107,29 +104,21 @@ dominanceAnalysis <-
 print.dominanceAnalysis<-function(x,...) {
   cat("\nDominance analysis\n")
   cat("Predictors:", paste0(x$predictors,collapse=", "),"\n")
+  if(!is.null(x$terms)) {
+    cat("Terms:", paste0(paste0(names(x$terms)," = ",as.character(x$terms)), collapse=" ; ")  ,"\n")
+  }
   if(!is.null(x$constants)) {
     cat("Constants:", paste0(x$constants,collapse=", "),"\n")
   }
   cat("Fit-indices:", paste0(x$fit.functions,collapse=", "), "\n\n")
 
-  abbrev.matrix<-function(m) {
-    n=rownames(m)
-    n=abbreviate(n)
-    rownames(m)<-n
-    colnames(m)<-n
-    m
-  }
-
   for(fit in x$fit.functions) {
     cat("* Fit index: ", fit,"\n")
-    rank.complete    =rankUsingMatrix(abbrev.matrix(x$complete[[fit]]))
-    rank.conditional =rankUsingMatrix(abbrev.matrix(x$conditional[[fit]]))
-    rank.general     =rankUsingMatrix(abbrev.matrix(x$general[[fit]]))
-    out<-data.frame(complete=rank.complete,conditional=rank.conditional, general=rank.general)
-    rownames(out)<-x$predictors
-    print(out)
+    dom.brief<-dominanceBriefing(x,fit.functions = fit,abbrev = TRUE)[[fit]]
+    print(dom.brief)
     cat("\nAverage contribution:\n")
-    print(round(sort(x$contribution.average[[fit]], decreasing = T),3))
+    print( round(sort(averageContribution(x)[[fit]], decreasing=T) ,3))
+    #print(round(sort(x$contribution.average[[fit]], decreasing = T),3))
   }
   invisible(x)
 }

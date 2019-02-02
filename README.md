@@ -29,7 +29,7 @@ The *attitude* data is composed of six predictors of the overall rating of 35 cl
   da.attitude<-dominanceAnalysis(lm.attitude)
 ```
 
-Using `print()` method on the *dominanceAnalysis* object, we can see that *complaints* completely dominates all other predictors, followed by *learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don't show a consistent pattern for complete and conditional dominance.
+Using `print()` method on the *dominanceAnalysis* object, we can see that *complaints* completely dominates all other predictors, followed by *learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don't show a consistent pattern for complete and conditional dominance. The average contribution of each predictor is also presented, that defines defines general dominance.
 
 The `print()` method uses `abbreviate`, to allow complex models to be visualized at a glance.
 
@@ -61,7 +61,32 @@ The `print()` method uses `abbreviate`, to allow complex models to be visualized
 #>      0.371      0.156      0.120      0.051      0.028      0.007
 ```
 
-The `summary()` method provides the average contribution of each variable. This contribution defines general dominance. Also, shows the complete dominance analysis matrix, that presents all fit differences between levels.
+The dominance brief and average contribution of each predictor could be retrieved separately using `dominanceBriefing()` and `averageContribution()` methods, respectively.
+
+``` r
+  dominanceBriefing(da.attitude, abbrev = TRUE)$r2
+#>                            complete              conditional
+#> complaints prvl,lrnn,rass,crtc,advn prvl,lrnn,rass,crtc,advn
+#> privileges                     crtc                     crtc
+#> learning        prvl,rass,crtc,advn      prvl,rass,crtc,advn
+#> raises                         crtc                     crtc
+#> critical                                                    
+#> advance                                                     
+#>                             general
+#> complaints prvl,lrnn,rass,crtc,advn
+#> privileges                crtc,advn
+#> learning        prvl,rass,crtc,advn
+#> raises               prvl,crtc,advn
+#> critical                           
+#> advance                        crtc
+  averageContribution(da.attitude)
+#> 
+#> Average Contribution by predictor
+#>    complaints privileges learning raises critical advance
+#> r2      0.371      0.051    0.156   0.12    0.007   0.028
+```
+
+The `summary()` method shows the complete dominance analysis matrix, that presents all fit differences between levels. Also, provides the average contribution of each variable.
 
 ``` r
   summary(da.attitude)
@@ -221,6 +246,7 @@ To evaluate the robustness of our results, we can use bootstrap analysis (Azen a
 We applied a bootstrap analysis using `bootDominanceAnalysis()` method with *R*<sup>2</sup> as a fit index and 100 permutations. For precise results, you need to run at least 1000 replications.
 
 ``` r
+  set.seed(1234)
   bda.attitude=bootDominanceAnalysis(lm.attitude, R=100)
 ```
 
@@ -235,56 +261,57 @@ We can see that the value of complete dominance for *complaints* is fairly robus
 #> Fit index: r2 
 #>    dominance          i          k Dij  mDij SE.Dij  Pij  Pji Pnoij  Rep
 #>     complete complaints privileges 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>     complete complaints   learning 1.0 0.910 0.2290 0.85 0.03  0.12 0.85
+#>     complete complaints   learning 1.0 0.945 0.1725 0.90 0.01  0.09 0.90
 #>     complete complaints     raises 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>     complete complaints   critical 1.0 0.975 0.1095 0.95 0.00  0.05 0.95
-#>     complete complaints    advance 1.0 0.955 0.1438 0.91 0.00  0.09 0.91
-#>     complete privileges   learning 0.0 0.275 0.2694 0.02 0.47  0.51 0.47
-#>     complete privileges     raises 0.5 0.460 0.1363 0.00 0.08  0.92 0.92
-#>     complete privileges   critical 1.0 0.530 0.1560 0.08 0.02  0.90 0.08
-#>     complete privileges    advance 0.5 0.510 0.0704 0.02 0.00  0.98 0.98
-#>     complete   learning     raises 1.0 0.615 0.2918 0.31 0.08  0.61 0.31
-#>     complete   learning   critical 1.0 0.715 0.2776 0.46 0.03  0.51 0.46
-#>     complete   learning    advance 1.0 0.665 0.2363 0.33 0.00  0.67 0.33
-#>     complete     raises   critical 1.0 0.555 0.1572 0.11 0.00  0.89 0.11
-#>     complete     raises    advance 0.5 0.525 0.1095 0.05 0.00  0.95 0.95
-#>     complete   critical    advance 0.5 0.520 0.0985 0.04 0.00  0.96 0.96
-#>  conditional complaints privileges 1.0 0.985 0.0857 0.97 0.00  0.03 0.97
-#>  conditional complaints   learning 1.0 0.925 0.2289 0.89 0.04  0.07 0.89
-#>  conditional complaints     raises 1.0 0.975 0.1306 0.96 0.01  0.03 0.96
-#>  conditional complaints   critical 1.0 0.990 0.0704 0.98 0.00  0.02 0.98
-#>  conditional complaints    advance 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>  conditional privileges   learning 0.0 0.195 0.3089 0.07 0.68  0.25 0.68
-#>  conditional privileges     raises 0.5 0.345 0.2532 0.02 0.33  0.65 0.65
-#>  conditional privileges   critical 1.0 0.600 0.2462 0.24 0.04  0.72 0.24
-#>  conditional privileges    advance 0.5 0.535 0.1629 0.09 0.02  0.89 0.89
-#>  conditional   learning     raises 1.0 0.665 0.3697 0.49 0.16  0.35 0.49
-#>  conditional   learning   critical 1.0 0.790 0.2859 0.62 0.04  0.34 0.62
-#>  conditional   learning    advance 1.0 0.760 0.2511 0.52 0.00  0.48 0.52
-#>  conditional     raises   critical 1.0 0.685 0.2626 0.39 0.02  0.59 0.39
-#>  conditional     raises    advance 0.5 0.595 0.1971 0.19 0.00  0.81 0.81
-#>  conditional   critical    advance 0.5 0.445 0.2552 0.08 0.19  0.73 0.73
+#>     complete complaints   critical 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
+#>     complete complaints    advance 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
+#>     complete privileges   learning 0.0 0.275 0.2500 0.00 0.45  0.55 0.45
+#>     complete privileges     raises 0.5 0.480 0.0985 0.00 0.04  0.96 0.96
+#>     complete privileges   critical 1.0 0.495 0.1123 0.02 0.03  0.95 0.02
+#>     complete privileges    advance 0.5 0.505 0.0500 0.01 0.00  0.99 0.99
+#>     complete   learning     raises 1.0 0.665 0.2467 0.34 0.01  0.65 0.34
+#>     complete   learning   critical 1.0 0.770 0.2603 0.55 0.01  0.44 0.55
+#>     complete   learning    advance 1.0 0.705 0.2472 0.41 0.00  0.59 0.41
+#>     complete     raises   critical 1.0 0.555 0.1725 0.12 0.01  0.87 0.12
+#>     complete     raises    advance 0.5 0.535 0.1282 0.07 0.00  0.93 0.93
+#>     complete   critical    advance 0.5 0.500 0.1231 0.03 0.03  0.94 0.94
+#>  conditional complaints privileges 1.0 0.990 0.0704 0.98 0.00  0.02 0.98
+#>  conditional complaints   learning 1.0 0.960 0.1537 0.93 0.01  0.06 0.93
+#>  conditional complaints     raises 1.0 0.995 0.0500 0.99 0.00  0.01 0.99
+#>  conditional complaints   critical 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
+#>  conditional complaints    advance 1.0 0.990 0.0704 0.98 0.00  0.02 0.98
+#>  conditional privileges   learning 0.0 0.150 0.2410 0.01 0.71  0.28 0.71
+#>  conditional privileges     raises 0.5 0.370 0.2316 0.01 0.27  0.72 0.72
+#>  conditional privileges   critical 1.0 0.600 0.2659 0.26 0.06  0.68 0.26
+#>  conditional privileges    advance 0.5 0.540 0.1837 0.11 0.03  0.86 0.86
+#>  conditional   learning     raises 1.0 0.700 0.3333 0.50 0.10  0.40 0.50
+#>  conditional   learning   critical 1.0 0.845 0.2430 0.70 0.01  0.29 0.70
+#>  conditional   learning    advance 1.0 0.810 0.2439 0.62 0.00  0.38 0.62
+#>  conditional     raises   critical 1.0 0.670 0.2680 0.37 0.03  0.60 0.37
+#>  conditional     raises    advance 0.5 0.610 0.2082 0.22 0.00  0.78 0.78
+#>  conditional   critical    advance 0.5 0.445 0.2451 0.07 0.18  0.75 0.75
 #>      general complaints privileges 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
-#>      general complaints   learning 1.0 0.930 0.2564 0.93 0.07  0.00 0.93
-#>      general complaints     raises 1.0 0.980 0.1407 0.98 0.02  0.00 0.98
+#>      general complaints   learning 1.0 0.980 0.1407 0.98 0.02  0.00 0.98
+#>      general complaints     raises 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
 #>      general complaints   critical 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
 #>      general complaints    advance 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
-#>      general privileges   learning 0.0 0.100 0.3015 0.10 0.90  0.00 0.90
-#>      general privileges     raises 0.0 0.070 0.2564 0.07 0.93  0.00 0.93
-#>      general privileges   critical 1.0 0.760 0.4292 0.76 0.24  0.00 0.76
-#>      general privileges    advance 1.0 0.770 0.4230 0.77 0.23  0.00 0.77
-#>      general   learning     raises 1.0 0.600 0.4924 0.60 0.40  0.00 0.60
-#>      general   learning   critical 1.0 0.930 0.2564 0.93 0.07  0.00 0.93
-#>      general   learning    advance 1.0 0.970 0.1714 0.97 0.03  0.00 0.97
-#>      general     raises   critical 1.0 0.940 0.2387 0.94 0.06  0.00 0.94
-#>      general     raises    advance 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
-#>      general   critical    advance 0.0 0.440 0.4989 0.44 0.56  0.00 0.56
+#>      general privileges   learning 0.0 0.070 0.2564 0.07 0.93  0.00 0.93
+#>      general privileges     raises 0.0 0.080 0.2727 0.08 0.92  0.00 0.92
+#>      general privileges   critical 1.0 0.790 0.4094 0.79 0.21  0.00 0.79
+#>      general privileges    advance 1.0 0.750 0.4352 0.75 0.25  0.00 0.75
+#>      general   learning     raises 1.0 0.670 0.4726 0.67 0.33  0.00 0.67
+#>      general   learning   critical 1.0 0.960 0.1969 0.96 0.04  0.00 0.96
+#>      general   learning    advance 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
+#>      general     raises   critical 1.0 0.970 0.1714 0.97 0.03  0.00 0.97
+#>      general     raises    advance 1.0 0.970 0.1714 0.97 0.03  0.00 0.97
+#>      general   critical    advance 0.0 0.350 0.4794 0.35 0.65  0.00 0.65
 ```
 
 Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading* (0.152). Nevertheless, in the output of `summary()` method on level 1, we can see that *picture* (0.125) dominates over *reading* (0.077) on 'vocab' submodel.
 
 ``` r
-lmwithcov<-lmWithCov(general~picture+blocks+maze+reading+vocab, cov2cor(ability.cov$cov))
+lmwithcov<-lmWithCov( f = general~picture+blocks+maze+reading+vocab,
+                      x = cov2cor(ability.cov$cov))
 da.cov<-dominanceAnalysis(lmwithcov)
 print(da.cov)
 #> 
@@ -728,101 +755,72 @@ summary(da.esoph)
 Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) of 0 and reproducibility (*Rep*) equal to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol* are not easily reproducible and require more research
 
 ``` r
+set.seed(1234)
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
 print(format(summary(da.b.esoph)$r2.m,digits=3),row.names=F)
 #>    dominance     i     k Dij  mDij SE.Dij   Pij   Pji Pnoij   Rep
-#>     complete agegp alcgp 0.5 0.580 0.4551 0.505 0.345 0.150 0.150
-#>     complete agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>     complete alcgp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
-#>  conditional agegp alcgp 0.5 0.580 0.4551 0.505 0.345 0.150 0.150
-#>  conditional agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>  conditional alcgp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
-#>      general agegp alcgp 1.0 0.590 0.4931 0.590 0.410 0.000 0.590
-#>      general agegp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
+#>     complete agegp alcgp 0.5 0.657 0.4300 0.575 0.260 0.165 0.165
+#>     complete agegp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
+#>     complete alcgp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
+#>  conditional agegp alcgp 0.5 0.657 0.4300 0.575 0.260 0.165 0.165
+#>  conditional agegp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
+#>  conditional alcgp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
+#>      general agegp alcgp 1.0 0.650 0.4782 0.650 0.350 0.000 0.650
+#>      general agegp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
 #>      general alcgp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
 ```
 
 Set of predictors
 -----------------
 
-Budescu (1993) shows that dominance analysis can be applied to groups or set of inseparable predictors.
+Budescu (1993) shows that dominance analysis can be applied to groups or set of inseparable predictors. The Longley's economic regression data is know for have a highly collinear set on `Employed` variable. We can see that `GNP.deflator`, `GNP`, `Population` and `Year` are highly correlated.
 
 ``` r
-m.budescu.5=matrix(c(1,.30,.41,.33,
-                .30,1,.16,.57,
-                .41,.16,1,.50,
-                .33,.57,.50,1), nrow = 4,ncol = 4,byrow = T,
-              dimnames = list(c('SES','IQ','nAch','GPA'),
-                              c('SES','IQ','nAch','GPA')))
-lmCov.b5<-lmWithCov(GPA~SES+IQ+nAch,m.budescu.5)
-da.b5<-dominanceAnalysis(lmCov.b5)
-print(da.b5)
+data(longley)
+round(cor(longley),2)
+#>              GNP.deflator  GNP Unemployed Armed.Forces Population Year
+#> GNP.deflator         1.00 0.99       0.62         0.46       0.98 0.99
+#> GNP                  0.99 1.00       0.60         0.45       0.99 1.00
+#> Unemployed           0.62 0.60       1.00        -0.18       0.69 0.67
+#> Armed.Forces         0.46 0.45      -0.18         1.00       0.36 0.42
+#> Population           0.98 0.99       0.69         0.36       1.00 0.99
+#> Year                 0.99 1.00       0.67         0.42       0.99 1.00
+#> Employed             0.97 0.98       0.50         0.46       0.96 0.97
+#>              Employed
+#> GNP.deflator     0.97
+#> GNP              0.98
+#> Unemployed       0.50
+#> Armed.Forces     0.46
+#> Population       0.96
+#> Year             0.97
+#> Employed         1.00
+```
+
+We can group GNP and employment related variables, to determine the importance of both groups of variables. The GNP related variables dominates completely population, and we can see that all predictors dominates generally over employment.
+
+``` r
+terms.r<-c(GNP.rel="GNP.deflator+GNP", 
+           employment="Unemployed+Armed.Forces", 
+           "Population", 
+           "Year")
+da.longley<-dominanceAnalysis(lm(Employed~.,longley),terms = terms.r)
+print(da.longley)
 #> 
 #> Dominance analysis
-#> Predictors: SES, IQ, nAch 
+#> Predictors: GNP.deflator+GNP, Unemployed+Armed.Forces, Population, Year 
+#> Terms: GNP.rel = GNP.deflator+GNP ; employment = Unemployed+Armed.Forces ;  = Population ;  = Year 
 #> Fit-indices: r2 
 #> 
 #> * Fit index:  r2 
-#>      complete conditional  general
-#> SES                               
-#> IQ   SES,nAch    SES,nAch SES,nAch
-#> nAch      SES         SES      SES
+#>            complete conditional        general
+#> GNP.rel        Pplt        Pplt empl,Pplt,Year
+#> employment                                    
+#> Population                                empl
+#> Year                       Pplt      empl,Pplt
 #> 
 #> Average contribution:
-#>    IQ  nAch   SES 
-#> 0.266 0.186 0.044
-summary(da.b5)
-#> 
-#> * Fit index:  r2 
-#> 
-#> Average contribution of each variable:
-#> 
-#>    IQ  nAch   SES 
-#> 0.266 0.186 0.044 
-#> 
-#> Dominance Analysis matrix:
-#>            model level   fit   SES    IQ  nAch
-#>                1     0     0 0.109 0.325  0.25
-#>              SES     1 0.109       0.244  0.16
-#>               IQ     1 0.325 0.028       0.172
-#>             nAch     1  0.25 0.019 0.246      
-#>  Average level 1     1       0.023 0.245 0.166
-#>           SES+IQ     2 0.353             0.144
-#>         SES+nAch     2 0.269       0.228      
-#>          IQ+nAch     2 0.496     0            
-#>  Average level 2     2           0 0.228 0.144
-#>      SES+IQ+nAch     3 0.496
-da.b5.g<-dominanceAnalysis(lmCov.b5,terms = c("SES","IQ+nAch"))
-print(da.b5.g)
-#> 
-#> Dominance analysis
-#> Predictors: SES, IQ+nAch 
-#> Fit-indices: r2 
-#> 
-#> * Fit index:  r2 
-#>         complete conditional general
-#> SES                                 
-#> IQ+nAch      SES         SES     SES
-#> 
-#> Average contribution:
-#> IQ+nAch     SES 
-#>   0.442   0.054
-summary(da.b5.g)
-#> 
-#> * Fit index:  r2 
-#> 
-#> Average contribution of each variable:
-#> 
-#> IQ+nAch     SES 
-#>   0.442   0.054 
-#> 
-#> Dominance Analysis matrix:
-#>            model level   fit   SES IQ.nAch
-#>                1     0     0 0.109   0.496
-#>              SES     1 0.109         0.388
-#>          IQ+nAch     1 0.496     0        
-#>  Average level 1     1           0   0.388
-#>      SES+IQ+nAch     2 0.496
+#>    GNP.rel       Year Population employment 
+#>      0.290      0.279      0.267      0.159
 ```
 
 Installation
