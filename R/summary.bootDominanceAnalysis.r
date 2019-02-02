@@ -17,11 +17,16 @@ summary.bootDominanceAnalysis<-function(object,fit.functions=NULL,...) {
 	if(is.null(fit.functions)) {
 	  fit.functions=object$fit.functions
 	}
+	m.names<-object$m.names
+	if(!is.null(object$terms)) {
+    m.names[,1]<-replaceTermsInString(string = m.names[,1], object$terms)
+    m.names[,2]<-replaceTermsInString(string = m.names[,2], object$terms)
+	}
 	for(an in c("complete","conditional","general")) {
 		for(ff in fit.functions) {
 		  for(m in 1:mm.n) {
 			boot.t<-object$boot$t[,ii]
-			m.out[[ii]]<-list(f=ff, dominance=an, i=object$m.names[m,1], k=object$m.names[m,2],
+			m.out[[ii]]<-list(f=ff, dominance=an, i=m.names[m,1], k=m.names[m,2],
 			                  Dij=object$boot$t0[ii], mDij=mean(boot.t), `SE.Dij`=sd(boot.t),
 			                  Pij=sum(boot.t==1)/object$R, Pji=sum(boot.t==0)/object$R,
 			                  Pnoij=sum(boot.t==0.5) / object$R,

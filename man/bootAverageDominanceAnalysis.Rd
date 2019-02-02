@@ -4,7 +4,7 @@
 \alias{bootAverageDominanceAnalysis}
 \title{Bootstrap average values for Dominance Analysis}
 \usage{
-bootAverageDominanceAnalysis(object, R, constants = c(),
+bootAverageDominanceAnalysis(object, R, constants = c(), terms = NULL,
   fit.functions = "default", null.model = NULL, ...)
 }
 \arguments{
@@ -14,6 +14,8 @@ bootAverageDominanceAnalysis(object, R, constants = c(),
 
 \item{constants}{vector of predictors to remain unchanged between models.
 i.e. vector of variables not subjected to bootstrap analysis.}
+
+\item{terms}{vector of terms to be analyzed. By default, obtained from the model}
 
 \item{fit.functions}{list of functions which provides fit indices for model.
 See \code{fit.functions} param in \code{\link{dominanceAnalysis}}

@@ -424,7 +424,6 @@ As an example, we use *npk* dataset, which contains information about a classica
 
 ``` r
 library(lme4)
-#> Loading required package: Matrix
 lmer.npk.1<-lmer(yield~N+P+K+(1|block),npk)
 lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
