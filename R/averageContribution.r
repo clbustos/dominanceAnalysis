@@ -14,8 +14,6 @@
 #' da.longley<-dominanceAnalysis(lm(Employed~.,longley))
 #' averageContribution(da.longley)
 
-
-
 averageContribution<-function(da.object, fit.functions=NULL) {
   checkDominanceAnalysis(da.object)
   if(is.null(fit.functions)) {
@@ -37,6 +35,5 @@ averageContribution<-function(da.object, fit.functions=NULL) {
 print.daAverageContribution<-function(x,...) {
   cat("\nAverage Contribution by predictor\n")
   print(round(t(sapply(x,I)),3))
-
   invisible(x)
 }

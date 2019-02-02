@@ -47,4 +47,3 @@ test_that("dominanceBriefing have correct colnames and rownames",{
   expect_named(da.dm,"r2")
   expect_equal(da.dm$r2, expected)
 })
-

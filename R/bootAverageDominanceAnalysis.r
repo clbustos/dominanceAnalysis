@@ -9,6 +9,7 @@
 #' @param R number on bootstrap resamples
 #' @param constants vector of predictors to remain unchanged between models.
 #'                  i.e. vector of variables not subjected to bootstrap analysis.
+#' @param terms     vector of terms to be analyzed. By default, obtained from the model
 #' @param fit.functions list of functions which provides fit indices for model.
 #'                      See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
 #'                      function.
@@ -23,14 +24,14 @@
 #' summary(da.ave.boot)
 #' }
 
-bootAverageDominanceAnalysis<-function(object,R,constants=c(),fit.functions="default",null.model=NULL, ...) {
+bootAverageDominanceAnalysis<-function(object,R,constants=c(), terms = NULL, fit.functions="default",null.model=NULL, ...) {
   if (!requireNamespace("boot", quietly = TRUE)) { #nocov start
     stop("boot package needed for this function to work. Please install it.",
          call. = FALSE)
   } #nocov end
   # Extract the data
   total.data  <- getData(object)
-  da.original <- dominanceAnalysis(object, constants=constants,fit.functions=fit.functions, null.model=null.model, ...)
+  da.original <- dominanceAnalysis(object, constants=constants, terms = terms, fit.functions=fit.functions, null.model=null.model, ...)
   preds       <- da.original$predictor
   n.preds     <- length(preds)
   ff          <- da.original$fit.functions
@@ -39,12 +40,12 @@ bootAverageDominanceAnalysis<-function(object,R,constants=c(),fit.functions="def
 
   boot.da<-function(d,i) {
     ss<-d[i,]
-    da<-dominanceAnalysis(object,constants=constants,fit.functions=fit.functions,data=ss, null.model=null.model,...)
+    da<-dominanceAnalysis(object,constants=constants,terms=terms,fit.functions=fit.functions,data=ss, null.model=null.model,...)
     as.numeric(sapply(da$contribution.average,I))
   }
 
   res         <- boot::boot(total.data,boot.da, R=R)
-  out         <- list(boot=res, preds=preds, fit.functions=ff, R=R, eg=eg)
+  out         <- list(boot=res, preds=preds, fit.functions=ff, R=R, eg=eg, terms=terms)
   class(out)  <- "bootAverageDominanceAnalysis"
   out
 }
