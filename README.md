@@ -3,7 +3,7 @@
 dominanceanalysis
 =================
 
-[![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis) [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
+[![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis) [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis) [![Stable version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis) [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
 
 Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009; Budescu, 1993; Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models and Hierarchical Linear Models.
 
@@ -797,7 +797,6 @@ print(da.b5.g)
 #> 
 #> Dominance analysis
 #> Predictors: SES, IQ+nAch 
-#> Terms:  = SES ;  = IQ+nAch 
 #> Fit-indices: r2 
 #> 
 #> * Fit index:  r2 
@@ -829,9 +828,16 @@ summary(da.b5.g)
 Installation
 ------------
 
-You can install the github version of dominanceanalysis from [github](https://github.com/clbustos/dominanceanalysis) with:
+You can install the stable version from [CRAN](https://cran.r-project.org/package=dominanceanalysis)
 
 ``` r
+install.packages('dominanceanalysis')
+```
+
+Also, you can install the latest version from [github](https://github.com/clbustos/dominanceanalysis) with:
+
+``` r
+library(devtools)
 install_github("clbustos/dominanceanalysis")
 ```
 
