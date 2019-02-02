@@ -1,3 +1,8 @@
+# dominanceanalysis 1.1.0 (in development)
+
+- Support named terms in bootDominanceAnalysis and bootAverageDominanceAnalysis
+- Added dominanceBriefing()
+
 # dominanceanalysis 1.0.0
 
 - First official version. Code coverage of 99% and complete documentation of all methods.
