@@ -81,7 +81,7 @@ dominanceAnalysis <-
            null.model = NULL,
            ...) {
     daModels <- daSubmodels(x = x, constants = constants, terms=terms)
-    daRaw <- daRawResults(x = x, constants = constants,terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, ...)
+    daRaw <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, ...)
     daAverageByLevel <- daAverageContributionByLevel(daRaw)
     daAverageGeneral <- lapply(daAverageByLevel, function(x) {colMeans(x[, -1])})
     z<-list(

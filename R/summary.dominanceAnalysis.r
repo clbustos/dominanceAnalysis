@@ -20,10 +20,7 @@ summary.dominanceAnalysis<-function(object, ...) {
 	                         fit   = object$fits$base.fits[,fit],
 	                         getFits(object)[[fit]]
 	                         )
-	  if(!is.null(object$terms)) {
-	    fit.matrix$model<-replaceTermsInString(string = fit.matrix$model, object$terms)
-	  }
-
+    fit.matrix$model<-replaceTermsInString(string = fit.matrix$model, object$terms)
 	  split.fit.matrix<-split(fit.matrix,f = fit.matrix$level)
 	  max.level=max(fit.matrix$level)
 

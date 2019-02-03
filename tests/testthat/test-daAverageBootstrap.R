@@ -16,7 +16,7 @@ test_that("should have correct sample values", {
   expect_equivalent(bs.da.1$R,2)
   sum.bs.da.1<-summary(bs.da.1)
   expect_equal(colnames(sum.bs.da.1$r2),c("Var","Fit.Index","original","bs.E","bias","bs.SE"))
-  expect_equal(sum.bs.da.1$r2$Var, factor(c("xa","xb","xc","xd")))
+  expect_equal(sum.bs.da.1$r2$Var, c("xa","xb","xc","xd"))
   expect_output(print(sum.bs.da.1),"Resamples:  2")
 })
 

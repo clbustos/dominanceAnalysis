@@ -18,10 +18,8 @@ summary.bootDominanceAnalysis<-function(object,fit.functions=NULL,...) {
 	  fit.functions=object$fit.functions
 	}
 	m.names<-object$m.names
-	if(!is.null(object$terms)) {
-    m.names[,1]<-replaceTermsInString(string = m.names[,1], object$terms)
-    m.names[,2]<-replaceTermsInString(string = m.names[,2], object$terms)
-	}
+	m.names[,1]<-replaceTermsInString(string = m.names[,1], object$terms)
+  m.names[,2]<-replaceTermsInString(string = m.names[,2], object$terms)
 	for(an in c("complete","conditional","general")) {
 		for(ff in fit.functions) {
 		  for(m in 1:mm.n) {

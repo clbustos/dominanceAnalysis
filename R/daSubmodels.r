@@ -40,6 +40,9 @@ daSubmodels <- function(x, constants = NULL, terms = NULL) {
   # Set combinations
   models <- list()
   m <- length(x.terms)
+  if(m<2) {
+    stop("You should have at least two predictors in a dominance analysis")
+  }
   prot.model <- rep(NA, m)
   names(prot.model) <- x.terms
   c.length <- length(constants)
