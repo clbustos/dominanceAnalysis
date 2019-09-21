@@ -16,8 +16,9 @@ Uses \eqn{R^2} (coefficient of determination)
 See \code{\link{lmWithCov}}
 }
 \seealso{
-Other fit indices: \code{\link{da.glm.fit}},
-  \code{\link{da.lm.fit}}, \code{\link{da.lmerMod.fit}},
+Other fit indices: \code{\link{da.dynlm.fit}},
+  \code{\link{da.glm.fit}}, \code{\link{da.lm.fit}},
+  \code{\link{da.lmerMod.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
 \concept{fit indices}

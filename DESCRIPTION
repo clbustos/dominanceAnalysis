@@ -3,8 +3,8 @@ Title: Dominance Analysis
 Date: 2019-01-20
 Description: Dominance analysis is a method that allows to compare the
              relative importance of predictors in multiple regression models:
-             ordinary least squares, generalized linear models and
-             hierarchical linear models. The main principles and methods of 
+             ordinary least squares, generalized linear models, 
+             hierarchical linear models and dynamic linear models. The main principles and methods of 
              dominance analysis are described in
              Budescu, D. V. (1993) <doi:10.1037/0033-2909.114.3.542> and  
              Azen, R., & Budescu, D. V. (2003) <doi:10.1037/1082-989X.8.2.129>
@@ -22,9 +22,9 @@ Authors@R: c(
   person("Filipa", "Coutinho Soares", 
          email = "filipa.mco.soares@gmail.com", role = c("aut"),
          comment = c(ORCID = "0000-0002-7579-2538")))
-Version: 1.2.0.9000
+Version: 1.2.0
 Depends:
-    R (>= 3.0.2)
+    R (>= 3.5.0)
 License: GPL-2
 LazyData: true
 Imports: methods, stats

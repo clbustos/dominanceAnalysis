@@ -144,7 +144,7 @@ print(da.esoph)
 summary(da.esoph)
 ```
 
-Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) of 0 and reproducibility (*Rep*) equal to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol*  are not easily reproducible and require more research
+Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) near 0 and reproducibility (*Rep*) close to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol*  are not easily reproducible and require more research
 
 ```{r,cache=T}
 set.seed(1234)

@@ -22,8 +22,9 @@ Provides fit indices for hierarchical linear models, based on Luo and Azen (2013
 }
 }
 \seealso{
-Other fit indices: \code{\link{da.glm.fit}},
-  \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}},
+Other fit indices: \code{\link{da.dynlm.fit}},
+  \code{\link{da.glm.fit}}, \code{\link{da.lm.fit}},
+  \code{\link{da.lmWithCov.fit}},
   \code{\link{da.mlmWithCov.fit}}
 }
 \concept{fit indices}

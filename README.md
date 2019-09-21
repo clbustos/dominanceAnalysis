@@ -1,27 +1,43 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-dominanceanalysis
-=================
 
-[![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis) [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis) [![Stable version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis) [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
+# dominanceanalysis
 
-Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009; Budescu, 1993; Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models and Hierarchical Linear Models.
+[![Build
+Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis)
+[![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
+[![Stable
+version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
+[![downloads](http://cranlogs.r-pkg.org/badges/grand-total/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
+
+Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009;
+Budescu, 1993; Luo and Azen, 2013), for multiple regression models:
+Ordinary Least Squares, Generalized Linear Models and Hierarchical
+Linear Models.
 
 **Features**:
 
--   Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *lmer* and *glm* (family=binomial) models.
--   Covariance / correlation matrixes could be used as input for OLS dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods, respectively.
--   Multiple criteria can be used as fit indices, which is useful especially for HLM.
+  - Provides complete, conditional and general dominance analysis for
+    *lm* (univariate and multivariate), *lmer* and *glm*
+    (family=binomial) models.
+  - Covariance / correlation matrixes could be used as input for OLS
+    dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods,
+    respectively.
+  - Multiple criteria can be used as fit indices, which is useful
+    especially for HLM.
 
-Examples
-========
+# Examples
 
-Linear regression
------------------
+## Linear regression
 
-We could apply dominance analysis directly on the data, using *lm* (see Azen and Budescu, 2003).
+We could apply dominance analysis directly on the data, using *lm* (see
+Azen and Budescu, 2003).
 
-The *attitude* data is composed of six predictors of the overall rating of 35 clerical employees of a large financial organization: complaints, privileges, learning, raises, critical and advancement. The method `dominanceAnalysis()` can retrieve all necessary information directly from a *lm* model.
+The *attitude* data is composed of six predictors of the overall rating
+of 35 clerical employees of a large financial organization: complaints,
+privileges, learning, raises, critical and advancement. The method
+`dominanceAnalysis()` can retrieve all necessary information directly
+from a *lm* model.
 
 ``` r
   library(dominanceanalysis)
@@ -29,9 +45,15 @@ The *attitude* data is composed of six predictors of the overall rating of 35 cl
   da.attitude<-dominanceAnalysis(lm.attitude)
 ```
 
-Using `print()` method on the *dominanceAnalysis* object, we can see that *complaints* completely dominates all other predictors, followed by *learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don't show a consistent pattern for complete and conditional dominance. The average contribution of each predictor is also presented, that defines defines general dominance.
+Using `print()` method on the *dominanceAnalysis* object, we can see
+that *complaints* completely dominates all other predictors, followed by
+*learning* (lrnn). The remaining 4 variables (prvl,rass,crtc,advn) don’t
+show a consistent pattern for complete and conditional dominance. The
+average contribution of each predictor is also presented, that defines
+defines general dominance.
 
-The `print()` method uses `abbreviate`, to allow complex models to be visualized at a glance.
+The `print()` method uses `abbreviate`, to allow complex models to be
+visualized at a glance.
 
 ``` r
   print(da.attitude)
@@ -61,7 +83,9 @@ The `print()` method uses `abbreviate`, to allow complex models to be visualized
 #>      0.371      0.156      0.120      0.051      0.028      0.007
 ```
 
-The dominance brief and average contribution of each predictor could be retrieved separately using `dominanceBriefing()` and `averageContribution()` methods, respectively.
+The dominance brief and average contribution of each predictor could be
+retrieved separately using `dominanceBriefing()` and
+`averageContribution()` methods, respectively.
 
 ``` r
   dominanceBriefing(da.attitude, abbrev = TRUE)$r2
@@ -86,7 +110,9 @@ The dominance brief and average contribution of each predictor could be retrieve
 #> r2      0.371      0.051    0.156   0.12    0.007   0.028
 ```
 
-The `summary()` method shows the complete dominance analysis matrix, that presents all fit differences between levels. Also, provides the average contribution of each variable.
+The `summary()` method shows the complete dominance analysis matrix,
+that presents all fit differences between levels. Also, provides the
+average contribution of each variable.
 
 ``` r
   summary(da.attitude)
@@ -241,18 +267,29 @@ The `summary()` method shows the complete dominance analysis matrix, that presen
 #> 
 ```
 
-To evaluate the robustness of our results, we can use bootstrap analysis (Azen and Budescu, 2006).
+To evaluate the robustness of our results, we can use bootstrap analysis
+(Azen and Budescu, 2006).
 
-We applied a bootstrap analysis using `bootDominanceAnalysis()` method with *R*<sup>2</sup> as a fit index and 100 permutations. For precise results, you need to run at least 1000 replications.
+We applied a bootstrap analysis using `bootDominanceAnalysis()` method
+with \(R^2\) as a fit index and 100 permutations. For precise results,
+you need to run at least 1000 replications.
 
 ``` r
   set.seed(1234)
   bda.attitude=bootDominanceAnalysis(lm.attitude, R=100)
 ```
 
-The `summary()` method presents the results for the bootstrap analysis. *Dij* shows the original result, and *mDij*, the mean for Dij on bootstrap samples and *SE.Dij* its standard error. *Pij* is the proportion of bootstrap samples where *i* dominates *j*, *Pji* is the proportion of bootstrap samples where *j* dominates *i* and *Pnoij* is the proportion of samples where no dominance can be asserted. *Rep* is the proportion of samples where original dominance is replicated.
+The `summary()` method presents the results for the bootstrap analysis.
+*Dij* shows the original result, and *mDij*, the mean for Dij on
+bootstrap samples and *SE.Dij* its standard error. *Pij* is the
+proportion of bootstrap samples where *i* dominates *j*, *Pji* is the
+proportion of bootstrap samples where *j* dominates *i* and *Pnoij* is
+the proportion of samples where no dominance can be asserted. *Rep* is
+the proportion of samples where original dominance is replicated.
 
-We can see that the value of complete dominance for *complaints* is fairly robust over all variables (Dij almost equal to mDij, and small SE), contrarily to *learning* (Dij differs from mDij, and bigger SE).
+We can see that the value of complete dominance for *complaints* is
+fairly robust over all variables (Dij almost equal to mDij, and small
+SE), contrarily to *learning* (Dij differs from mDij, and bigger SE).
 
 ``` r
   summary(bda.attitude)
@@ -260,54 +297,60 @@ We can see that the value of complete dominance for *complaints* is fairly robus
 #> ==================
 #> Fit index: r2 
 #>    dominance          i          k Dij  mDij SE.Dij  Pij  Pji Pnoij  Rep
-#>     complete complaints privileges 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>     complete complaints   learning 1.0 0.945 0.1725 0.90 0.01  0.09 0.90
+#>     complete complaints privileges 1.0 0.975 0.1095 0.95 0.00  0.05 0.95
+#>     complete complaints   learning 1.0 0.930 0.1883 0.87 0.01  0.12 0.87
 #>     complete complaints     raises 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>     complete complaints   critical 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>     complete complaints    advance 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>     complete privileges   learning 0.0 0.275 0.2500 0.00 0.45  0.55 0.45
-#>     complete privileges     raises 0.5 0.480 0.0985 0.00 0.04  0.96 0.96
-#>     complete privileges   critical 1.0 0.495 0.1123 0.02 0.03  0.95 0.02
-#>     complete privileges    advance 0.5 0.505 0.0500 0.01 0.00  0.99 0.99
-#>     complete   learning     raises 1.0 0.665 0.2467 0.34 0.01  0.65 0.34
-#>     complete   learning   critical 1.0 0.770 0.2603 0.55 0.01  0.44 0.55
-#>     complete   learning    advance 1.0 0.705 0.2472 0.41 0.00  0.59 0.41
-#>     complete     raises   critical 1.0 0.555 0.1725 0.12 0.01  0.87 0.12
-#>     complete     raises    advance 0.5 0.535 0.1282 0.07 0.00  0.93 0.93
-#>     complete   critical    advance 0.5 0.500 0.1231 0.03 0.03  0.94 0.94
+#>     complete complaints   critical 1.0 0.975 0.1095 0.95 0.00  0.05 0.95
+#>     complete complaints    advance 1.0 0.970 0.1193 0.94 0.00  0.06 0.94
+#>     complete privileges   learning 0.0 0.270 0.2603 0.01 0.47  0.52 0.47
+#>     complete privileges     raises 0.5 0.465 0.1282 0.00 0.07  0.93 0.93
+#>     complete privileges   critical 1.0 0.510 0.1586 0.06 0.04  0.90 0.06
+#>     complete privileges    advance 0.5 0.495 0.0500 0.00 0.01  0.99 0.99
+#>     complete   learning     raises 1.0 0.625 0.2876 0.32 0.07  0.61 0.32
+#>     complete   learning   critical 1.0 0.700 0.2659 0.42 0.02  0.56 0.42
+#>     complete   learning    advance 1.0 0.725 0.2500 0.45 0.00  0.55 0.45
+#>     complete     raises   critical 1.0 0.565 0.1833 0.14 0.01  0.85 0.14
+#>     complete     raises    advance 0.5 0.555 0.1572 0.11 0.00  0.89 0.89
+#>     complete   critical    advance 0.5 0.535 0.1629 0.09 0.02  0.89 0.89
 #>  conditional complaints privileges 1.0 0.990 0.0704 0.98 0.00  0.02 0.98
-#>  conditional complaints   learning 1.0 0.960 0.1537 0.93 0.01  0.06 0.93
+#>  conditional complaints   learning 1.0 0.940 0.1781 0.89 0.01  0.10 0.89
 #>  conditional complaints     raises 1.0 0.995 0.0500 0.99 0.00  0.01 0.99
-#>  conditional complaints   critical 1.0 0.980 0.0985 0.96 0.00  0.04 0.96
-#>  conditional complaints    advance 1.0 0.990 0.0704 0.98 0.00  0.02 0.98
-#>  conditional privileges   learning 0.0 0.150 0.2410 0.01 0.71  0.28 0.71
-#>  conditional privileges     raises 0.5 0.370 0.2316 0.01 0.27  0.72 0.72
-#>  conditional privileges   critical 1.0 0.600 0.2659 0.26 0.06  0.68 0.26
-#>  conditional privileges    advance 0.5 0.540 0.1837 0.11 0.03  0.86 0.86
-#>  conditional   learning     raises 1.0 0.700 0.3333 0.50 0.10  0.40 0.50
-#>  conditional   learning   critical 1.0 0.845 0.2430 0.70 0.01  0.29 0.70
-#>  conditional   learning    advance 1.0 0.810 0.2439 0.62 0.00  0.38 0.62
-#>  conditional     raises   critical 1.0 0.670 0.2680 0.37 0.03  0.60 0.37
+#>  conditional complaints   critical 1.0 0.985 0.0857 0.97 0.00  0.03 0.97
+#>  conditional complaints    advance 1.0 0.975 0.1095 0.95 0.00  0.05 0.95
+#>  conditional privileges   learning 0.0 0.170 0.2484 0.01 0.67  0.32 0.67
+#>  conditional privileges     raises 0.5 0.340 0.2449 0.01 0.33  0.66 0.66
+#>  conditional privileges   critical 1.0 0.600 0.3178 0.32 0.12  0.56 0.32
+#>  conditional privileges    advance 0.5 0.575 0.2057 0.17 0.02  0.81 0.81
+#>  conditional   learning     raises 1.0 0.685 0.3383 0.48 0.11  0.41 0.48
+#>  conditional   learning   critical 1.0 0.830 0.2862 0.71 0.05  0.24 0.71
+#>  conditional   learning    advance 1.0 0.805 0.2451 0.61 0.00  0.39 0.61
+#>  conditional     raises   critical 1.0 0.660 0.2648 0.35 0.03  0.62 0.35
 #>  conditional     raises    advance 0.5 0.610 0.2082 0.22 0.00  0.78 0.78
-#>  conditional   critical    advance 0.5 0.445 0.2451 0.07 0.18  0.75 0.75
+#>  conditional   critical    advance 0.5 0.475 0.3128 0.17 0.22  0.61 0.61
 #>      general complaints privileges 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
-#>      general complaints   learning 1.0 0.980 0.1407 0.98 0.02  0.00 0.98
+#>      general complaints   learning 1.0 0.970 0.1714 0.97 0.03  0.00 0.97
 #>      general complaints     raises 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
 #>      general complaints   critical 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
 #>      general complaints    advance 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
 #>      general privileges   learning 0.0 0.070 0.2564 0.07 0.93  0.00 0.93
-#>      general privileges     raises 0.0 0.080 0.2727 0.08 0.92  0.00 0.92
-#>      general privileges   critical 1.0 0.790 0.4094 0.79 0.21  0.00 0.79
-#>      general privileges    advance 1.0 0.750 0.4352 0.75 0.25  0.00 0.75
-#>      general   learning     raises 1.0 0.670 0.4726 0.67 0.33  0.00 0.67
-#>      general   learning   critical 1.0 0.960 0.1969 0.96 0.04  0.00 0.96
-#>      general   learning    advance 1.0 1.000 0.0000 1.00 0.00  0.00 1.00
-#>      general     raises   critical 1.0 0.970 0.1714 0.97 0.03  0.00 0.97
+#>      general privileges     raises 0.0 0.070 0.2564 0.07 0.93  0.00 0.93
+#>      general privileges   critical 1.0 0.750 0.4352 0.75 0.25  0.00 0.75
+#>      general privileges    advance 1.0 0.730 0.4462 0.73 0.27  0.00 0.73
+#>      general   learning     raises 1.0 0.680 0.4688 0.68 0.32  0.00 0.68
+#>      general   learning   critical 1.0 0.910 0.2876 0.91 0.09  0.00 0.91
+#>      general   learning    advance 1.0 0.980 0.1407 0.98 0.02  0.00 0.98
+#>      general     raises   critical 1.0 0.920 0.2727 0.92 0.08  0.00 0.92
 #>      general     raises    advance 1.0 0.970 0.1714 0.97 0.03  0.00 0.97
-#>      general   critical    advance 0.0 0.350 0.4794 0.35 0.65  0.00 0.65
+#>      general   critical    advance 0.0 0.380 0.4878 0.38 0.62  0.00 0.62
 ```
 
-Another way to perform the dominance analysis is by using a correlation or covariance matrix. As an example, we use the *ability.cov* matrix which is composed of five specific skills that might explain *general intelligence* (general). The biggest average contribution is for predictor *reading* (0.152). Nevertheless, in the output of `summary()` method on level 1, we can see that *picture* (0.125) dominates over *reading* (0.077) on 'vocab' submodel.
+Another way to perform the dominance analysis is by using a correlation
+or covariance matrix. As an example, we use the *ability.cov* matrix
+which is composed of five specific skills that might explain *general
+intelligence* (general). The biggest average contribution is for
+predictor *reading* (0.152). Nevertheless, in the output of `summary()`
+method on level 1, we can see that *picture* (0.125) dominates over
+*reading* (0.077) on ‘vocab’ submodel.
 
 ``` r
 lmwithcov<-lmWithCov( f = general~picture+blocks+maze+reading+vocab,
@@ -416,12 +459,14 @@ summary(da.cov)
 #> 
 ```
 
-Hierarchical Linear Models
---------------------------
+## Hierarchical Linear Models
 
-For Hierarchical Linear Models using *lme4*, you should provide a null model (see Luo and Azen, 2013).
+For Hierarchical Linear Models using *lme4*, you should provide a null
+model (see Luo and Azen, 2013).
 
-As an example, we use *npk* dataset, which contains information about a classical N, P, K (nitrogen, phosphate, potassium) factorial experiment on the growth of peas conducted on 6 blocks.
+As an example, we use *npk* dataset, which contains information about a
+classical N, P, K (nitrogen, phosphate, potassium) factorial experiment
+on the growth of peas conducted on 6 blocks.
 
 ``` r
 library(lme4)
@@ -431,7 +476,8 @@ lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
 ```
 
-Using `print()` method, we can see that random effects are modeled as a constant (1 | block).
+Using `print()` method, we can see that random effects are modeled as a
+constant (1 | block).
 
 ``` r
 print(da.lmer)
@@ -458,7 +504,7 @@ print(da.lmer)
 #> 
 #> Average contribution:
 #>      P      K      N 
-#>  0.022 -0.112 -0.259 
+#>  0.023 -0.112 -0.259 
 #> * Fit index:  sb.r2.1 
 #>   complete conditional general
 #> N      P,K         P,K     P,K
@@ -470,16 +516,24 @@ print(da.lmer)
 #>  0.192  0.084 -0.017 
 #> * Fit index:  sb.r2.2 
 #>   complete conditional general
-#> N                          P,K
-#> P                             
-#> K                            P
+#> N                             
+#> P      N,K         N,K     N,K
+#> K                            N
 #> 
 #> Average contribution:
-#> N K P 
+#> P K N 
 #> 0 0 0
 ```
 
-The fit indices used in the analysis were *rb.r2.1* (R&B *R*<sub>1</sub><sup>2</sup>: Level-1 variance component explained by predictors), *rb.r2.2* (R&B *R*<sub>2</sub><sup>2</sup>: Level-2 variance component explained by predictors), *sb.r2.1* (S&B *R*<sub>1</sub><sup>2</sup>: Level-1 proportional reduction in error predicting scores at Level-1), and *sb.r2.2* (S&B *R*<sub>2</sub><sup>2</sup>: Level-2 proportional reduction in error predicting scores at Level-1). We can see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of predictors on Level-1 variance, clearly *nitrogen* dominates over *potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
+The fit indices used in the analysis were *rb.r2.1* (R\&B \(R^2_1\):
+Level-1 variance component explained by predictors), *rb.r2.2* (R\&B
+\(R^2_2\): Level-2 variance component explained by predictors),
+*sb.r2.1* (S\&B \(R^2_1\): Level-1 proportional reduction in error
+predicting scores at Level-1), and *sb.r2.2* (S\&B \(R^2_2\): Level-2
+proportional reduction in error predicting scores at Level-1). We can
+see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of
+predictors on Level-1 variance, clearly *nitrogen* dominates over
+*potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
 
 ``` r
 s.da.lmer=summary(da.lmer)
@@ -510,7 +564,7 @@ s.da.lmer
 #> Average contribution of each variable:
 #> 
 #>      P      K      N 
-#>  0.022 -0.112 -0.259 
+#>  0.023 -0.112 -0.259 
 #> 
 #> Dominance Analysis matrix:
 #>                model level    fit      N     P      K
@@ -549,7 +603,7 @@ s.da.lmer
 #> 
 #> Average contribution of each variable:
 #> 
-#> N K P 
+#> P K N 
 #> 0 0 0 
 #> 
 #> Dominance Analysis matrix:
@@ -576,14 +630,21 @@ as.logical(na.omit(sm.rb.r2.1$K > sm.rb.r2.1$P))
 #> [1] TRUE TRUE TRUE TRUE
 ```
 
-Logistic regression
--------------------
+## Logistic regression
 
-Dominance analysis can be used in logistic regression (see Azen and Traxel, 2009).
+Dominance analysis can be used in logistic regression (see Azen and
+Traxel, 2009).
 
-As an example, we used the *esoph* dataset, that contains information about a case-control study of (o)esophageal cancer in Ille-et-Vilaine, France.
+As an example, we used the *esoph* dataset, that contains information
+about a case-control study of (o)esophageal cancer in Ille-et-Vilaine,
+France.
 
-Looking at the report for standard glm summary method, we can see that the linear effect of each variable was significant (*p* &lt; 0.05 for *agegp.L*, *alcgp.L* and *tobgp.L*), such as the quadratic effect of predictor age (*p* &lt; 0.05 for *agegp.Q*). Even so,it is hard to identify which variable is more important to predict esophageal cancer.
+Looking at the report for standard glm summary method, we can see that
+the linear effect of each variable was significant (*p* \< 0.05 for
+*agegp.L*, *alcgp.L* and *tobgp.L*), such as the quadratic effect of
+predictor age (*p* \< 0.05 for *agegp.Q*). Even so,it is hard to
+identify which variable is more important to predict esophageal
+cancer.
 
 ``` r
 glm.esoph<-glm(cbind(ncases,ncontrols)~agegp+alcgp+tobgp, esoph,family="binomial")
@@ -623,7 +684,13 @@ summary(glm.esoph)
 #> Number of Fisher Scoring iterations: 6
 ```
 
-We performed dominance analysis on this dataset and the results are shown below. The fit indices were *r2.m* (*R*<sub>*M*</sub><sup>2</sup>: McFadden's measure), *r2.cs* (*R*<sub>*C**S*</sub><sup>2</sup>: Cox and Snell's measure), *r2.n* (*R*<sub>*N*</sub><sup>2</sup>: Nagelkerke's measure) and *r2.e* (*R*<sub>*E*</sub><sup>2</sup>: Estrella's measure). For all fit indices, we can conclude that *age* and *alcohol* completely dominate *tobacco*, while *age* shows general dominance over both *alcohol* and *tobacco.*
+We performed dominance analysis on this dataset and the results are
+shown below. The fit indices were *r2.m* (\(R^2_M\): McFadden’s
+measure), *r2.cs* (\(R^2_{CS}\): Cox and Snell’s measure), *r2.n*
+(\(R^2_N\): Nagelkerke’s measure) and *r2.e* (\(R^2_E\): Estrella’s
+measure). For all fit indices, we can conclude that *age* and *alcohol*
+completely dominate *tobacco*, while *age* shows general dominance over
+both *alcohol* and *tobacco.*
 
 ``` r
 da.esoph<-dominanceAnalysis(glm.esoph)
@@ -641,7 +708,7 @@ print(da.esoph)
 #> 
 #> Average contribution:
 #> agegp alcgp tobgp 
-#> 0.363 0.339 0.061 
+#> 0.220 0.205 0.037 
 #> * Fit index:  r2.cs 
 #>       complete conditional   general
 #> agegp     tbgp        tbgp alcg,tbgp
@@ -650,7 +717,7 @@ print(da.esoph)
 #> 
 #> Average contribution:
 #> agegp alcgp tobgp 
-#> 2.129 2.023 0.446 
+#> 0.398 0.378 0.084 
 #> * Fit index:  r2.n 
 #>       complete conditional   general
 #> agegp     tbgp        tbgp alcg,tbgp
@@ -659,7 +726,7 @@ print(da.esoph)
 #> 
 #> Average contribution:
 #> agegp alcgp tobgp 
-#> 2.303 2.188 0.483 
+#> 0.404 0.384 0.085 
 #> * Fit index:  r2.e 
 #>       complete conditional   general
 #> agegp     tbgp        tbgp alcg,tbgp
@@ -668,7 +735,7 @@ print(da.esoph)
 #> 
 #> Average contribution:
 #> agegp alcgp tobgp 
-#> 1.372 1.288 0.246
+#> 0.432 0.410 0.087
 summary(da.esoph)
 #> 
 #> * Fit index:  r2.m 
@@ -676,104 +743,112 @@ summary(da.esoph)
 #> Average contribution of each variable:
 #> 
 #> agegp alcgp tobgp 
-#> 0.363 0.339 0.061 
+#> 0.220 0.205 0.037 
 #> 
 #> Dominance Analysis matrix:
-#>              model level    fit agegp alcgp tobgp
-#>                  1     0 -0.649 0.388 0.389 0.078
-#>              agegp     1 -0.261       0.328 0.084
-#>              alcgp     1  -0.26 0.327       0.032
-#>              tobgp     1 -0.571 0.394 0.343      
-#>    Average level 1     1         0.36 0.336 0.058
-#>        agegp+alcgp     2  0.067             0.047
-#>        agegp+tobgp     2 -0.177       0.291      
-#>        alcgp+tobgp     2 -0.228 0.341            
-#>    Average level 2     2        0.341 0.291 0.047
-#>  agegp+alcgp+tobgp     3  0.113                  
+#>              model level   fit agegp alcgp tobgp
+#>                  1     0     0 0.235 0.236 0.047
+#>              agegp     1 0.235       0.199 0.051
+#>              alcgp     1 0.236 0.198       0.019
+#>              tobgp     1 0.047 0.239 0.208      
+#>    Average level 1     1       0.218 0.204 0.035
+#>        agegp+alcgp     2 0.434             0.028
+#>        agegp+tobgp     2 0.286       0.176      
+#>        alcgp+tobgp     2 0.256 0.207            
+#>    Average level 2     2       0.207 0.176 0.028
+#>  agegp+alcgp+tobgp     3 0.462                  
 #> 
 #> * Fit index:  r2.cs 
 #> 
 #> Average contribution of each variable:
 #> 
 #> agegp alcgp tobgp 
-#> 2.129 2.023 0.446 
+#> 0.398 0.378 0.084 
 #> 
 #> Dominance Analysis matrix:
-#>              model level    fit agegp alcgp tobgp
-#>                  1     0 -4.344 3.381 3.388 0.974
-#>              agegp     1 -0.963       1.121 0.383
-#>              alcgp     1 -0.956 1.114       0.156
-#>              tobgp     1  -3.37 2.789  2.57      
-#>    Average level 1     1        1.952 1.846 0.269
-#>        agegp+alcgp     2  0.159             0.095
-#>        agegp+tobgp     2  -0.58       0.834      
-#>        alcgp+tobgp     2   -0.8 1.054            
-#>    Average level 2     2        1.054 0.834 0.095
-#>  agegp+alcgp+tobgp     3  0.254                  
+#>              model level   fit agegp alcgp tobgp
+#>                  1     0     0 0.633 0.634 0.182
+#>              agegp     1 0.633        0.21 0.072
+#>              alcgp     1 0.634 0.209       0.029
+#>              tobgp     1 0.182 0.522 0.481      
+#>    Average level 1     1       0.365 0.345  0.05
+#>        agegp+alcgp     2 0.843             0.018
+#>        agegp+tobgp     2 0.704       0.156      
+#>        alcgp+tobgp     2 0.663 0.197            
+#>    Average level 2     2       0.197 0.156 0.018
+#>  agegp+alcgp+tobgp     3  0.86                  
 #> 
 #> * Fit index:  r2.n 
 #> 
 #> Average contribution of each variable:
 #> 
 #> agegp alcgp tobgp 
-#> 2.303 2.188 0.483 
+#> 0.404 0.384 0.085 
 #> 
 #> Dominance Analysis matrix:
-#>              model level    fit agegp alcgp tobgp
-#>                  1     0 -4.699 3.657 3.665 1.054
-#>              agegp     1 -1.042       1.213 0.414
-#>              alcgp     1 -1.034 1.205       0.169
-#>              tobgp     1 -3.645 3.017  2.78      
-#>    Average level 1     1        2.111 1.996 0.291
-#>        agegp+alcgp     2  0.171             0.103
-#>        agegp+tobgp     2 -0.628       0.902      
-#>        alcgp+tobgp     2 -0.865  1.14            
-#>    Average level 2     2         1.14 0.902 0.103
-#>  agegp+alcgp+tobgp     3  0.275                  
+#>              model level   fit agegp alcgp tobgp
+#>                  1     0     0 0.642 0.643 0.185
+#>              agegp     1 0.642       0.213 0.073
+#>              alcgp     1 0.643 0.212        0.03
+#>              tobgp     1 0.185 0.529 0.488      
+#>    Average level 1     1        0.37  0.35 0.051
+#>        agegp+alcgp     2 0.855             0.018
+#>        agegp+tobgp     2 0.714       0.158      
+#>        alcgp+tobgp     2 0.673   0.2            
+#>    Average level 2     2         0.2 0.158 0.018
+#>  agegp+alcgp+tobgp     3 0.873                  
 #> 
 #> * Fit index:  r2.e 
 #> 
 #> Average contribution of each variable:
 #> 
 #> agegp alcgp tobgp 
-#> 1.372 1.288 0.246 
+#> 0.432 0.410 0.087 
 #> 
 #> Dominance Analysis matrix:
-#>              model level    fit agegp alcgp tobgp
-#>                  1     0 -2.639 1.818 1.823 0.428
-#>              agegp     1 -0.821       0.984 0.297
-#>              alcgp     1 -0.815 0.979       0.117
-#>              tobgp     1 -2.211 1.687 1.513      
-#>    Average level 1     1        1.333 1.249 0.207
-#>        agegp+alcgp     2  0.164             0.104
-#>        agegp+tobgp     2 -0.524       0.791      
-#>        alcgp+tobgp     2 -0.698 0.965            
-#>    Average level 2     2        0.965 0.791 0.104
-#>  agegp+alcgp+tobgp     3  0.267
+#>              model level   fit agegp alcgp tobgp
+#>                  1     0     0 0.681 0.682 0.186
+#>              agegp     1 0.681       0.231 0.081
+#>              alcgp     1 0.682 0.229       0.033
+#>              tobgp     1 0.186 0.576 0.529      
+#>    Average level 1     1       0.402  0.38 0.057
+#>        agegp+alcgp     2 0.911             0.017
+#>        agegp+tobgp     2 0.762       0.167      
+#>        alcgp+tobgp     2 0.715 0.213            
+#>    Average level 2     2       0.213 0.167 0.017
+#>  agegp+alcgp+tobgp     3 0.929
 ```
 
-Then, we performed a bootstrap analysis. Using McFadden's measure (*r2.m*), we can see that bootstrap dominance of *age* over *tobacco*, and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) of 0 and reproducibility (*Rep*) equal to 1, so are fairly robust on all levels.Dominance values of *age* over *alcohol* are not easily reproducible and require more research
+Then, we performed a bootstrap analysis. Using McFadden’s measure
+(*r2.m*), we can see that bootstrap dominance of *age* over *tobacco*,
+and of *alcohol* over *tobacco* have standard errors (*SE.Dij*) near 0
+and reproducibility (*Rep*) close to 1, so are fairly robust on all
+levels.Dominance values of *age* over *alcohol* are not easily
+reproducible and require more research
 
 ``` r
 set.seed(1234)
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
 print(format(summary(da.b.esoph)$r2.m,digits=3),row.names=F)
 #>    dominance     i     k Dij  mDij SE.Dij   Pij   Pji Pnoij   Rep
-#>     complete agegp alcgp 0.5 0.657 0.4300 0.575 0.260 0.165 0.165
-#>     complete agegp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
+#>     complete agegp alcgp 0.5 0.627 0.4312 0.530 0.275 0.195 0.195
+#>     complete agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
 #>     complete alcgp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>  conditional agegp alcgp 0.5 0.657 0.4300 0.575 0.260 0.165 0.165
-#>  conditional agegp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
+#>  conditional agegp alcgp 0.5 0.627 0.4312 0.530 0.275 0.195 0.195
+#>  conditional agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
 #>  conditional alcgp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>      general agegp alcgp 1.0 0.650 0.4782 0.650 0.350 0.000 0.650
-#>      general agegp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
-#>      general alcgp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
+#>      general agegp alcgp 1.0 0.600 0.4911 0.600 0.400 0.000 0.600
+#>      general agegp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
+#>      general alcgp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
 ```
 
-Set of predictors
------------------
+## Set of predictors
 
-Budescu (1993) shows that dominance analysis can be applied to groups or set of inseparable predictors. The Longley's economic regression data is know for have a highly collinear set on `Employed` variable. We can see that `GNP.deflator`, `GNP`, `Population` and `Year` are highly correlated.
+Budescu (1993) shows that dominance analysis can be applied to groups or
+set of inseparable predictors. The Longley’s economic regression data is
+know for have a highly collinear set on `Employed` variable. We can see
+that `GNP.deflator`, `GNP`, `Population` and `Year` are highly
+correlated.
 
 ``` r
 data(longley)
@@ -796,7 +871,10 @@ round(cor(longley),2)
 #> Employed         1.00
 ```
 
-We can group GNP and employment related variables, to determine the importance of both groups of variables. The GNP related variables dominates completely population, and we can see that all predictors dominates generally over employment.
+We can group GNP and employment related variables, to determine the
+importance of both groups of variables. The GNP related variables
+dominates completely population, and we can see that all predictors
+dominates generally over employment.
 
 ``` r
 terms.r<-c(GNP.rel="GNP.deflator+GNP", 
@@ -823,37 +901,50 @@ print(da.longley)
 #>      0.290      0.279      0.267      0.159
 ```
 
-Installation
-------------
+## Installation
 
-You can install the stable version from [CRAN](https://cran.r-project.org/package=dominanceanalysis)
+You can install the stable version from
+[CRAN](https://cran.r-project.org/package=dominanceanalysis)
 
 ``` r
 install.packages('dominanceanalysis')
 ```
 
-Also, you can install the latest version from [github](https://github.com/clbustos/dominanceanalysis) with:
+Also, you can install the latest version from
+[github](https://github.com/clbustos/dominanceanalysis) with:
 
 ``` r
 library(devtools)
 install_github("clbustos/dominanceanalysis")
 ```
 
-Authors
--------
+## Authors
 
--   Claudio Bustos Navarrete: Creator and maintainer
--   Filipa Coutinho Soares: Documentation and testing
+  - Claudio Bustos Navarrete: Creator and maintainer
+  - Filipa Coutinho Soares: Documentation and testing
 
-References
-----------
+## References
 
--   Budescu, D. V. (1993). Dominance analysis: A new approach to the problem of relative importance of predictors in multiple regression. Psychological Bulletin, 114(3), 542-551. <https://doi.org/10.1037/0033-2909.114.3.542>
+  - Budescu, D. V. (1993). Dominance analysis: A new approach to the
+    problem of relative importance of predictors in multiple regression.
+    Psychological Bulletin, 114(3), 542-551.
+    <https://doi.org/10.1037/0033-2909.114.3.542>
 
--   Azen, R., & Budescu, D. V. (2003). The dominance analysis approach for comparing predictors in multiple regression. Psychological Methods, 8(2), 129-148. <https://doi.org/10.1037/1082-989X.8.2.129>
+  - Azen, R., & Budescu, D. V. (2003). The dominance analysis approach
+    for comparing predictors in multiple regression. Psychological
+    Methods, 8(2), 129-148. <https://doi.org/10.1037/1082-989X.8.2.129>
 
--   Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. <https://doi.org/10.3102/10769986031002157>
+  - Azen, R., & Budescu, D. V. (2006). Comparing Predictors in
+    Multivariate Regression Models: An Extension of Dominance Analysis.
+    Journal of Educational and Behavioral Statistics, 31(2), 157-180.
+    <https://doi.org/10.3102/10769986031002157>
 
--   Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. Journal of Educational and Behavioral Statistics, 34(3), 319-347. <https://doi.org/10.3102/1076998609332754>
+  - Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine
+    Predictor Importance in Logistic Regression. Journal of Educational
+    and Behavioral Statistics, 34(3), 319-347.
+    <https://doi.org/10.3102/1076998609332754>
 
--   Luo, W., & Azen, R. (2013). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. <https://doi.org/10.3102/1076998612458319>
+  - Luo, W., & Azen, R. (2013). Determining Predictor Importance in
+    Hierarchical Linear Models Using Dominance Analysis. Journal of
+    Educational and Behavioral Statistics, 38(1), 3-31.
+    <https://doi.org/10.3102/1076998612458319>
