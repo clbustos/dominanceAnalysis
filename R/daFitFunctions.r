@@ -91,9 +91,16 @@ da.glm.fit<-function(data,family.glm,...) {
 
 		g1<-glm(x,data=data,family=family.glm);
 
-		l0=-0.5*g1$null.deviance
+		g.null<-update(g1,~1,data=data,family=family.glm)
+		#print(summary(g1))
+		#print(logLik(g.null))
+		#l0=-0.5*g1$null.deviance
+
+		#print(l0)
+		l0=logLik(g.null)
 		l1=logLik(g1)
 		n<-nrow(mc$data)
+
 
     r2.cs<-1-exp(l0-l1)^(2/n)
     #cat(l0,",",l1,",",n,",",r2.cs,"\n")
