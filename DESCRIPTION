@@ -22,12 +22,12 @@ Authors@R: c(
   person("Filipa", "Coutinho Soares", 
          email = "filipa.mco.soares@gmail.com", role = c("aut"),
          comment = c(ORCID = "0000-0002-7579-2538")))
-Version: 1.1.0.9000
+Version: 1.2.0.9000
 Depends:
     R (>= 3.0.2)
 License: GPL-2
 LazyData: true
 Imports: methods, stats
-Suggests:  lme4, boot, testthat, car, heplots, covr, knitr,rmarkdown,caTools,pscl
+Suggests:  lme4, boot, testthat, car, heplots, covr, knitr,rmarkdown,caTools,pscl, dynlm
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

@@ -183,3 +183,17 @@ da.mlmWithCov.fit<-function(base.cov, ...) {
     list(r.squared.xy = mlm.1$r.squared.xy, p.squared.yx = mlm.1$p.squared.yx)
   }
 }
+
+da.dynlm.fit<-function(data,...) {
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return("r2")
+    }
+
+    environment(x)<-environment()
+    dlm<-dynlm(formula=x,data=data)
+    out<-list(r2=summary(dlm)$r.squared)
+    out
+  }
+}

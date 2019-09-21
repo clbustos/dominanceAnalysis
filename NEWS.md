@@ -1,4 +1,8 @@
-# dominanceanalysis 1.1.0 (in development)
+# dominanceanalysis 1.2.0 (in development)
+
+- Added (basic) support for dynamic linear models, using dynlm package.  Suggestion by Xiong Zhang.
+
+# dominanceanalysis 1.1.0
 
 - Support named terms in bootDominanceAnalysis and bootAverageDominanceAnalysis
 - Added dominanceBriefing()

@@ -9,7 +9,6 @@ test_that("mlmWithCov() returns correct results ", {
   # We use directly the data from Rohwer, as given by package heplots
   expect_equal(lwith$r.squared.xy,0.494,tolerance=0.001,scale=1)
   expect_equal(lwith$p.squared.yx,0.256,tolerance=0.001,scale=1)
-
 })
 
 test_that("a dominance analysis based on mlmWithCov gives correct results",{

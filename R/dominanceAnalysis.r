@@ -27,6 +27,7 @@
 #' \item{lmerMod}{ Provides  four fit indices recommended by Lou & Azen (2012). See \code{\link{da.lmerMod.fit}}}
 #' \item{lmWithCov}{Provides \eqn{R^2} for a correlation/covariance matrix. See \code{\link{lmWithCov}} to create the model and \code{\link{da.lmWithCov.fit}} for the fit index function.}
 #' \item{mlmWithCov}{Provides both \eqn{R^2_{XY}} and \eqn{P^2_{XY}} for multivariate regression models using a correlation/covariance matrix. See \code{\link{mlmWithCov}} to create the model and \code{\link{da.mlmWithCov.fit}} for the fit index function }
+#' \item{dynlm}{Provides \eqn{R^2} for dynamic linear models. There is no literature reference about using dominance analysis on dynamic linear models, so you're warned!. See \code{\link{da.dynlm.fit}}}
 #' }
 #' @param x lm, glm, lmer model
 #' @param constants vector of predictors to remain unchanged between models
@@ -80,8 +81,13 @@ dominanceAnalysis <-
            data = NULL,
            null.model = NULL,
            ...) {
-    daModels <- daSubmodels(x = x, constants = constants, terms=terms)
-    daRaw <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, ...)
+    if(is.list(terms)) {
+      terms<-sapply(terms,paste0,collapse="+")
+    }
+    daModels        <- daSubmodels(x = x, constants = constants, terms = terms)
+
+    daRaw           <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, ...)
+
     daAverageByLevel <- daAverageContributionByLevel(daRaw)
     daAverageGeneral <- lapply(daAverageByLevel, function(x) {colMeans(x[, -1])})
     z<-list(
