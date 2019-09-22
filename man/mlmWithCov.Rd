@@ -25,8 +25,17 @@ data.
 }
 \examples{
 library(car)
-library(heplots)
-cor.m<-cor(Rohwer[Rohwer[,1]==1,2+c(7,8,1,2,3)])
+cor.m<-matrix(c(
+ 1.0000000, 0.7951377, 0.2617168, 0.6720053, 0.3390278,
+ 0.7951377, 1.0000000, 0.3341037, 0.5876337, 0.3404206,
+ 0.2617168, 0.3341037, 1.0000000, 0.3703162, 0.2114153,
+ 0.6720053, 0.5876337, 0.3703162, 1.0000000, 0.3548077,
+ 0.3390278, 0.3404206, 0.2114153, 0.3548077, 1.0000000),
+ 5,5,
+ byrow = TRUE,
+ dimnames = list(
+   c("na","ss","SAT","PPVT","Raven"),
+   c("na","ss","SAT","PPVT","Raven")))
 lwith<-mlmWithCov(cbind(na,ss)~SAT+PPVT+Raven,cor.m)
 da<-dominanceAnalysis(lwith)
 print(da)

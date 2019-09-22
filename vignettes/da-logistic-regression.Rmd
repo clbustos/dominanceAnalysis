@@ -72,14 +72,13 @@ With the `str()` function, we can conclude the dataset has 2398 points, which we
 str(tropicbird)
 ```
 
-We randomly select 70% of the points as the training set to develop the binomial generalized linear model (*train*), and the remaining 30% as the testing set to validate the model (*test*). However, we have to import [caTools](https://github.com/cran/caTools) package.
+We randomly select 70% of the points as the training set to develop the binomial generalized linear model (*train*), and the remaining 30% as the testing set to validate the model (*test*).
 
 ```{r}
-library(caTools)
 set.seed(101) 
-sample <- caTools::sample.split(tropicbird$ID, SplitRatio = .70)
-train <- subset(tropicbird, sample == TRUE)
-test  <- subset(tropicbird, sample == FALSE)
+sample <-sample(floor(nrow(tropicbird))*0.7)
+train <- tropicbird[sample,]
+test  <- tropicbird[-sample,]
 ```
 
 
@@ -231,3 +230,11 @@ The results are organized per fit index and include the estimated bootstrap valu
 
 
 Author's e-mail: filipa.mco.soares@gmail.com
+
+```{r,echo=FALSE,eval=FALSE}
+# This code allows to save the bootstrap analyses
+saveRDS(bootmodpres100, "bootmodpres100.rds")
+saveRDS(bootavemodpres100, "bootavemodpres100.rds")
+
+```
+
