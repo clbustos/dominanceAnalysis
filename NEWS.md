@@ -1,7 +1,10 @@
 # dominanceanalysis 1.2.0
 
+- Added documentation for da.dynlm.fit. 
+- Test for esoph example. 
+- New Acknowledgments section in README file
 - Removed dependencies on caTools and heplots, because are used only for examples.
-- Bug fix: Logistic regression indexes failed on some models. Null model likehood is now correctly calculated using update(x,~1). . Report by Daniel Schlaepfer.
+- Bug fix: Logistic regression indexes failed on some models. Null model likelihood is now correctly calculated using update(x,~1). . Report by Daniel Schlaepfer.
 - Added (basic) support for dynamic linear models, using dynlm package.  Suggestion by Xiong Zhang.
 
 # dominanceanalysis 1.1.0

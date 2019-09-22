@@ -16,6 +16,7 @@ Bustos
 caTools
 Ciencias
 codecov
+collinear
 contributionAverage
 contributionByLevel
 Coutinho
@@ -30,7 +31,9 @@ de
 Dij
 doi
 dominanceAnalysis
+dominanceBriefing
 dominanceMatrix
+dynlm
 esoph
 Estrella
 Estrella's
@@ -44,6 +47,7 @@ horticultures
 https
 Ille
 Lisboa
+Longley's
 lm
 lme
 lmer
@@ -71,12 +75,16 @@ Psychol
 rass
 rb
 reproducibility
+README
 Sao
 sb
 slo
 Soares
+Schlaepfer
 tobgp
 Traxel
 Universidade
 Vilaine
+Xiong
 Zarembka
+Zhang
