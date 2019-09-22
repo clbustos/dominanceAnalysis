@@ -106,7 +106,7 @@ If we use the `anova()` function, we can interpret the table of deviance.
 anova(modpres, test="Chisq")
 ```
 
-We must look at the difference between the null deviance, which is the deviance of the null model (i.e., model with only the intercept), and the residual deviance. The bigger is difference the best our model is doing against the null model. In our case, we can see that adding remoteness alone reduces the deviance drastically (i.e., from 530.66 to 385.36). The small deviance value of slope indicates this variable does not add much to the model, meaning that almost the same amount of variation is explained when this variable is added.
+We must look at the difference between the null deviance, which is the deviance of the null model (i.e., model with only the intercept), and the residual deviance. The bigger is difference the best our model is doing against the null model. In our case, we can see that adding remoteness alone reduces the deviance drastically (i.e., from 637.05 to 502.95). The small deviance value of slope indicates this variable does not add much to the model, meaning that almost the same amount of variation is explained when this variable is added.
 
 The McFadden index, *R^2^M*, is sometimes referred to as closer equivalent of the coefficient of determination, *R^2^*, in linear regressions. We can obtain the *R^2^M* for our model by using the `pR2()` function in the [pscl](https://github.com/cran/pscl) package.
 
@@ -144,7 +144,7 @@ To show all the results, we use the `print()` function. However, we can explore 
 getFits(dapres,"r2.m")
 ```
 
-The first row represents the raw values of each univariate model. The following rows show the additional contribution of each predictor added to the subset model (indicated by the first column). For example, the univariate model containing altitude produces *R^2^M* = 0.074 (see entry in the first row under the *alt* column of the table). If distance to coast(*coast*) is added to this model, *R^2^M* increases by 0.058 (see entry in the *alt* row under the *coast* column of the table). In contrast, if rainfall (*rain*) is added to the altitude subset model, the increase in *R^2^M* is 0.157 (see entry in the *alt* row under the *rain* column of the table). These results indicate that rainfall dominates distance to coast when added to the altitude subset model, because the additional contribution of rainfall to this model (0.157) is larger than the additional contribution of distance to coast to the same model (0.058).
+The first row represents the raw values of each univariate model. The following rows show the additional contribution of each predictor added to the subset model (indicated by the first column). For example, the univariate model containing altitude produces *R^2^M* = 0.054 (see entry in the first row under the *alt* column of the table). If distance to coast(*coast*) is added to this model, *R^2^M* increases by 0.072 (see entry in the *alt* row under the *coast* column of the table). In contrast, if rainfall (*rain*) is added to the altitude subset model, the increase in *R^2^M* is 0.093 (see entry in the *alt* row under the *rain* column of the table). These results indicate that rainfall dominates distance to coast when added to the altitude subset model, because the additional contribution of rainfall to this model (0.093) is larger than the additional contribution of distance to coast to the same model (0.072).
 
 Furthermore, if the additional contributions of a predictor are higher than that of other predictor for every subset model, the first predictor is said to completely dominate the second. This is the case with distance to coast, which completely dominates slope (compare the values of the columns *coast* and *slo* in the table). The summarized results for complete dominance could be retrieved using `dominanceMatrix()`. 
 
@@ -160,7 +160,7 @@ However, if complete dominance cannot be established, we explore conditional dom
 contributionByLevel(dapres,fit.functions="r2.m")
 ```
 
-For each model size (see column *level* of the table), the average additional contribution of each predictor is calculated. For example, the average additional contribution of altitude to models of size 1 is computed as (0.0072582 + 0.0137805 + 0.1629760 + 0.0227860 + 0.0504051)/5 = 0.051. To establish conditional dominance, we compare the average additional contributions across all model sizes. For example, rainfall conditionally dominates slope, because the average additional contribution of rainfall is higher than that of slope across all model sizes (compare the values of the columns *rain* and *slo* in the table).
+For each model size (see column *level* of the table), the average additional contribution of each predictor is calculated. For example, the average additional contribution of altitude to models of size 1 is computed as (0.016+0.012+0.043+0.126+0.005)/5 = 0.040. To establish conditional dominance, we compare the average additional contributions across all model sizes. For example, rainfall conditionally dominates slope, because the average additional contribution of rainfall is higher than that of slope across all model sizes (compare the values of the columns *rain* and *slo* in the table).
 
 The summarized results for conditional dominance can be retrieved using `dominanceMatrix()` (see entry in the *rain* row under the *slo* column of the table).
 
@@ -174,7 +174,7 @@ Lastly, if conditional dominance cannot be established, we explore general domin
 averageContribution(dapres,fit.functions = "r2.m")
 ```
 
-To determine general dominance, we compute the mean of each predictor's conditional measures. We conclude that remoteness has the highest value (0.122) and generally dominates all other predictors. For this reason, in the general dominance matrix, remoteness assumes a value of 1 with all other predictors (see entry in the *rem* row under every column of the table).
+To determine general dominance, we compute the mean of each predictor's conditional measures. We conclude that remoteness has the highest value (0.104) and generally dominates all other predictors. For this reason, in the general dominance matrix, remoteness assumes a value of 1 with all other predictors (see entry in the *rem* row under every column of the table).
 
 ```{r}
 dominanceMatrix(dapres, type="general",fit.functions = "r2.m")
@@ -182,7 +182,7 @@ dominanceMatrix(dapres, type="general",fit.functions = "r2.m")
 
 Nevertheless, depending on the goals, we might want to analyze the dominance between all pairs of predictors. If this is the case, we can simply use the dominance matrices explained above, which summarize the relation between pairs of predictors in three values (0, 0.5 and 1). In our example, when looking at complete dominance matrix, we conclude that distance to coast completely dominates slope, and remoteness completely dominates land use and slope. However, when looking at conditional dominance matrix, we realize that altitude conditionally dominates slope, and rainfall conditionally dominates slope. Lastly, when exploring general dominance matrix, we conclude that distance to coast generally dominates altitude and land use, land use generally dominates altitude and slope, rainfall generally dominates altitude, distance to coast and land use, and remoteness generally dominates altitude, distance to coast and rainfall.
 
-Furthermore, if we want to establish a rank of importance among predictors, we can explore the raw values of general dominance. In our example, we conclude that remoteness is clearly the most important predictor to explain bird species occurrence (0.122), followed by rainfall (0.058), distance to coast (0.056), land use (0.047), altitude (0.042) and slope (0.012).
+Furthermore, if we want to establish a rank of importance among predictors, we can explore the raw values of general dominance. In our example, we conclude that remoteness is clearly the most important predictor to explain bird species occurrence (0.104), followed by distance to coast (0.061), rainfall (0.038), land use (0.027), altitude (0.032) and slope (0.005).
 
 
 ### 4.	Applying bootstrap analysis
