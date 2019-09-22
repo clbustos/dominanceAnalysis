@@ -8,10 +8,14 @@ This is a new version, that covers changes on 1.0.1 (only on github) and some ur
 
 ## Test environments
 * local Ubuntu 16.04.1 install, R 3.6.1
-* ubuntu Ubuntu 16.04.6 LTS (on travis-ci), R 3.6.1
+* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (on rhub), R 3.6.1
+* Ubuntu Linux 16.04 LTS, R-release (on rhub), R 3.6.1
+* Fedora Linux, R-devel, clang, gfortran (on rhub), R 3.6.1
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs on local and travis-ci 
+There were no ERRORs, WARNINGs or NOTEs on local, Windows Server,  Ubuntu Linux 16.04 LTS (remote), 
+
+
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package

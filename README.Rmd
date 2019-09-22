@@ -20,11 +20,11 @@ knitr::opts_chunk$set(
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
 
 
-Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009; Budescu, 1993; Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models and Hierarchical Linear Models.
+Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009; Budescu, 1993; Luo and Azen, 2013), for multiple regression models: Ordinary Least Squares, Generalized Linear Models, Dynamic Linear Models  and Hierarchical Linear Models.
 
 **Features**:
 
-- Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *lmer* and *glm* (family=binomial) models.
+- Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *dynlm*, *lmer* and *glm* (family=binomial) models.
 - Covariance / correlation matrixes could be used as input for OLS dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods, respectively.
 - Multiple criteria can be used as fit indices, which is useful especially for HLM.
 
@@ -195,6 +195,12 @@ install_github("clbustos/dominanceanalysis")
 
 * Claudio Bustos Navarrete: Creator and maintainer
 * Filipa Coutinho Soares: Documentation and testing
+
+
+## Acknowledgments
+
+* Daniel Schlaepfer: Error reporting on logistic regression code.
+* Xiong Zhang: Incorporation of dynamic linear models.
 
 ## References
 
