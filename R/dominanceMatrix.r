@@ -14,7 +14,8 @@
 #' @param undefined.value value when no dominance can be established
 #' @param type type of dominance matrix to retrieve. Could be complete, conditional or general
 #' @param fit.functions name of the fit indices to retrieve. If NULL, all fit indices will be retrieved
-#' @param drop if TRUE and just one fit index is available, returns a matrix. Else, returns a list
+#' @param drop  if TRUE and just one fit index is available, returns a matrix. Else, returns a list
+#' @param ordered Logical. If TRUE, sort the output according to dominance.
 #' @param ... extra arguments. Not used
 #' @return for matrix and data-frame, returns a matrix representing dominance.
 #'          1 represents domination of the row variable over the column variable,
@@ -43,9 +44,9 @@ dominanceMatrix<-function(x, ...) {
 #' @export
 #' @rdname dominanceMatrix
 
-dominanceMatrix.data.frame<-function(x,undefined.value=0.5, ...) {
+dominanceMatrix.data.frame<-function(x,undefined.value=0.5, ordered=FALSE, ...) {
   x<-as.matrix(x)
-  dominanceMatrix.matrix(x, undefined.value = 0.5)
+  dominanceMatrix.matrix(x, undefined.value = undefined.value,ordered=ordered)
 }
 
 #' Calculates the dominance for a given matrix
@@ -54,7 +55,7 @@ dominanceMatrix.data.frame<-function(x,undefined.value=0.5, ...) {
 #' @rdname dominanceMatrix
 
 
-dominanceMatrix.matrix<-function(x,undefined.value=0.5, ...) {
+dominanceMatrix.matrix<-function(x,undefined.value=0.5, ordered=FALSE, ...) {
 	vars<-colnames(x)
 	if(is.null(vars)) {
 	  stop("Matrix should have colnames")
@@ -80,6 +81,9 @@ dominanceMatrix.matrix<-function(x,undefined.value=0.5, ...) {
 		}
 	  }
 	  #class(ma)<-c("dominanceMatrix","matrix")
+	  if(ordered ) {
+	    ma<-sort.matrix(ma)
+	  }
 	  ma
 }
 
@@ -92,7 +96,7 @@ dominanceMatrix.matrix<-function(x,undefined.value=0.5, ...) {
 #' @importFrom stats na.omit
 #' @export
 #' @rdname dominanceMatrix
-dominanceMatrix.dominanceAnalysis<-function(x, type, fit.functions=NULL,drop=TRUE,...) {
+dominanceMatrix.dominanceAnalysis<-function(x, type, fit.functions=NULL,drop=TRUE, ordered=FALSE, ...) {
   if(!(type %in% c("complete","conditional","general"))) {
     stop("Matrix type is incorrect")
   } else {
@@ -106,10 +110,25 @@ dominanceMatrix.dominanceAnalysis<-function(x, type, fit.functions=NULL,drop=TRU
     })
 
     if(length(fit.functions)==1 & drop) {
-      matrices.type[[fit.functions]]
+      if(ordered) {
+        sort.matrix(matrices.type[[fit.functions]])
+      } else {
+        matrices.type[[fit.functions]]
+      }
     } else {
-      matrices.type[fit.functions]
+      rr<-matrices.type[fit.functions]
+      if(ordered) {
+        print(rr)
+        rr<-lapply(rr, sort.matrix)
+        }
+      rr
     }
   }
 }
 
+# Sort a matrix
+#' @keywords internal
+sort.matrix<-function(x) {
+  or<-order(rowSums(x,na.rm=T),decreasing = T)
+  x[or,or]
+}

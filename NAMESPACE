@@ -3,6 +3,7 @@
 S3method(dominanceMatrix,data.frame)
 S3method(dominanceMatrix,dominanceAnalysis)
 S3method(dominanceMatrix,matrix)
+S3method(plot,dominanceAnalysis)
 S3method(print,daAverageContribution)
 S3method(print,daContributionByLevel)
 S3method(print,daFits)

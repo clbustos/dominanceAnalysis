@@ -9,12 +9,14 @@
 \usage{
 dominanceMatrix(x, ...)
 
-\method{dominanceMatrix}{data.frame}(x, undefined.value = 0.5, ...)
+\method{dominanceMatrix}{data.frame}(x, undefined.value = 0.5,
+  ordered = FALSE, ...)
 
-\method{dominanceMatrix}{matrix}(x, undefined.value = 0.5, ...)
+\method{dominanceMatrix}{matrix}(x, undefined.value = 0.5,
+  ordered = FALSE, ...)
 
 \method{dominanceMatrix}{dominanceAnalysis}(x, type,
-  fit.functions = NULL, drop = TRUE, ...)
+  fit.functions = NULL, drop = TRUE, ordered = FALSE, ...)
 }
 \arguments{
 \item{x}{matrix (calculate) or dominanceAnalysis (retrieve)}
@@ -22,6 +24,8 @@ dominanceMatrix(x, ...)
 \item{...}{extra arguments. Not used}
 
 \item{undefined.value}{value when no dominance can be established}
+
+\item{ordered}{Logical. If TRUE, sort the output according to dominance.}
 
 \item{type}{type of dominance matrix to retrieve. Could be complete, conditional or general}
 
