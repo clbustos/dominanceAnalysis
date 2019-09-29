@@ -4,7 +4,9 @@ author: "Filipa Coutinho Soares"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: |
-  %\VignetteIndexEntry{Exploring predictors' importance in binomial logistic regressions} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Exploring predictors' importance in binomial logistic regressions}
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}

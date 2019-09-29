@@ -1,6 +1,6 @@
 #' Plot for a \code{\link{dominanceAnalysis}} object
 #'
-#' @param object a \code{\link{dominanceAnalysis}} object
+#' @param x a \code{\link{dominanceAnalysis}} object
 #' @param which.graph which graph to plot
 #' @param fit.function name of the fit indices to retrieve. If NULL, first index will be used
 #' @param ... unused

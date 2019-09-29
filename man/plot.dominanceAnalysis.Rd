@@ -9,13 +9,13 @@
   ...)
 }
 \arguments{
+\item{x}{a \code{\link{dominanceAnalysis}} object}
+
 \item{which.graph}{which graph to plot}
 
 \item{fit.function}{name of the fit indices to retrieve. If NULL, first index will be used}
 
 \item{...}{unused}
-
-\item{object}{a \code{\link{dominanceAnalysis}} object}
 }
 \value{
 a ggplot object

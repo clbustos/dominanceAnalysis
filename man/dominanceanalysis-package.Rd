@@ -42,6 +42,9 @@ lm.1<-lm(Employed~.,longley)
 da<-dominanceAnalysis(lm.1)
 print(da)
 summary(da)
+plot(da,which.graph='complete')
+plot(da,which.graph='conditional')
+plot(da,which.graph='general')
 
 # Dominance analysis for HLM
 
