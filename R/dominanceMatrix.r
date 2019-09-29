@@ -118,7 +118,6 @@ dominanceMatrix.dominanceAnalysis<-function(x, type, fit.functions=NULL,drop=TRU
     } else {
       rr<-matrices.type[fit.functions]
       if(ordered) {
-        print(rr)
         rr<-lapply(rr, sort.matrix)
         }
       rr

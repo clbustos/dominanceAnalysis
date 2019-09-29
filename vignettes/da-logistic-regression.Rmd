@@ -2,18 +2,16 @@
 title: "Exploring predictors' importance in binomial logistic regressions"
 author: "Filipa Coutinho Soares"
 date: "`r Sys.Date()`"
-output: pdf_document
-vignette: >
-  %\VignetteIndexEntry{Exploring predictors' importance in binomial logistic regressions}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: rmarkdown::html_vignette
+vignette: |
+  %\VignetteIndexEntry{Exploring predictors' importance in binomial logistic regressions} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width=6,
+  fig.width=5,
   fig.height=4
 )
 ```

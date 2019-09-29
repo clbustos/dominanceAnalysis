@@ -61,17 +61,24 @@
 #' da<-dominanceAnalysis(lm.1)
 #' print(da)
 #' summary(da)
+#' plot(da,which.graph='complete')
+#' plot(da,which.graph='conditional')
+#' plot(da,which.graph='general')
+#'
 #' # Maintaining year as a constant on all submodels
 #' da.no.year<-dominanceAnalysis(lm.1,constants='Year')
 #' print(da.no.year)
 #' summary(da.no.year)
+#' plot(da.no.year,which.graph='complete')
+#'
 #' # Parameter terms could be used to group variables
-#' da.terms=c('GNP.deflator+GNP',
-#'            'Unemployed+Armed.Forces+Population+Unemployed',
-#'            'Year')
+#' da.terms=c(GNP.rel='GNP.deflator+GNP',
+#'            pop.rel='Unemployed+Armed.Forces+Population+Unemployed',
+#'            year='Year')
 #' da.grouped<-dominanceAnalysis(lm.1,terms=da.terms)
 #' print(da.grouped)
 #' summary(da.grouped)
+#' plot(da.grouped, which.graph='complete')
 #' @export
 dominanceAnalysis <-
   function(x,
