@@ -38,7 +38,7 @@ plot.dominanceAnalysis<-function(x, which.graph=c("complete", "complete_no_facet
     colnames(x.fits)<-replaceTermsInString(string = colnames(x.fits), x$terms)
     x.df<-data.frame(.level=factor(paste0("Level: ",x.level)), .names=x.names, x.fits)
     x.df.m<-na.omit(reshape2::melt(x.df,id.vars = c(".level",".names")))
-    gg<-ggplot2::ggplot(x.df.m, ggplot2::aes_string(x=".names", y="value", color="variable",group="variable", shape=".level")) +
+    gg<-ggplot2::ggplot(x.df.m, ggplot2::aes_string(y=".names", x="value", color="variable",group="variable", shape=switch(which.graph, complete=NULL, complete_no_facet=".level"))) +
       ggplot2::geom_point(size=2) +
       ggplot2::guides(shape=FALSE) +
       ggplot2::xlab("Submodels") +
@@ -46,7 +46,7 @@ plot.dominanceAnalysis<-function(x, which.graph=c("complete", "complete_no_facet
       ggplot2::ggtitle("Complete dominance")
 
     if(which.graph=='complete') {
-      gg<-gg+ggplot2::facet_wrap(~.level, scales="free_x")
+      gg<-gg+ggplot2::facet_wrap(~.level, scales="free_y")
     }
 
   }
