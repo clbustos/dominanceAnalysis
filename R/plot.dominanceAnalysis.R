@@ -16,16 +16,17 @@
 #' plot(da,which.graph='conditional')
 #' plot(da,which.graph='general')
 
-plot.dominanceAnalysis<-function(x, which.graph=c("complete", "complete_no_facet", "conditional","general"), fit.function=NULL,...) {
+plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "complete_no_facet", "conditional"), fit.function=NULL,...) {
   which.graph<-which.graph[1]
 
   if(is.null(fit.function)) {
     fit.function<-x$fit.functions[[1]]
   }
-  # Check
+  # Check if x is a dominanceAnalysis
   checkDominanceAnalysis(x)
-  if(!(which.graph %in% c("complete", "complete_no_facet", "conditional","general"))) {
-    stop("which.graph should be 'complete', 'complete_no_facet', 'conditional' or 'general'")
+  valid_graphs=c("complete", "complete_no_facet", "conditional","general")
+  if(!(which.graph %in% valid_graphs)) {
+    stop("which.graph should be", paste0(valid_graphs, collapse=" , "))
   }
   if(!(fit.function %in% x$fit.functions)) {
     stop("fit function should be one of the following: ",paste0(x$fit.functions, collapse=" , "))
