@@ -17,22 +17,37 @@
 #' }
 #' @importFrom stats formula terms family
 #' @keywords internal
-daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", data=NULL, null.model=NULL, ...) {
+daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", data=NULL, null.model=NULL, link.betareg=NULL, ...) {
   f<-formula(x)
   t.f<-terms(f)
-  base.cov<-family.glm<-NULL
+  base.cov<-family.glm<-link.betareg<-NULL
   if(is(x,"lmWithCov") | is (x,"mlmWithCov")) {
   	base.cov=x$cov
   } else if (is.null(data)) {
 	  data=getData(x)
   	if(is.null(data)) {
-  		stop("Not implemented")
+  		stop("Not implemented method to retrieve data from model")
   	}
   }
+
   if(is(x,"glm")) {
     family.glm<-family(x)
   }
 
+  if(is(x,"betareg")) {
+    # check if link.betareg is provided
+
+    if(is.null(link.betareg)) {
+      link.betareg.call<-x$call$link
+      if(is.null(link.betareg.call)) {
+        link.betareg="logit"
+      } else {
+        link.betareg=link.betareg.call
+      }
+    } else {
+      link.betareg=link.betareg
+    }
+  }
   if(is.null(terms)) {
     x.terms<-attr(t.f,"term.labels")
   } else {
@@ -45,7 +60,7 @@ daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", da
 
   if(fit.functions=="default") {
 	# Should return
-	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(data=data, null.model=null.model, base.cov=base.cov, family.glm=family.glm))
+	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(data=data, null.model=null.model, base.cov=base.cov, family.glm=family.glm, link.betareg=link.betareg))
   }
   ffn=fit.functions("names")
 

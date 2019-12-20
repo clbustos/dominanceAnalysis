@@ -29,8 +29,10 @@ dominanceBriefing(da.longley, abbrev=FALSE)
 dominanceBriefing(da.longley, abbrev=TRUE)
 }
 \seealso{
-Other retrieval methods: \code{\link{averageContribution}},
-  \code{\link{contributionByLevel}},
-  \code{\link{dominanceMatrix}}, \code{\link{getFits}}
+Other retrieval methods: 
+\code{\link{averageContribution}()},
+\code{\link{contributionByLevel}()},
+\code{\link{dominanceMatrix}()},
+\code{\link{getFits}()}
 }
 \concept{retrieval methods}

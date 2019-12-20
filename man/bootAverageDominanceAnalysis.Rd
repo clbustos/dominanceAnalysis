@@ -4,8 +4,15 @@
 \alias{bootAverageDominanceAnalysis}
 \title{Bootstrap average values for Dominance Analysis}
 \usage{
-bootAverageDominanceAnalysis(object, R, constants = c(), terms = NULL,
-  fit.functions = "default", null.model = NULL, ...)
+bootAverageDominanceAnalysis(
+  object,
+  R,
+  constants = c(),
+  terms = NULL,
+  fit.functions = "default",
+  null.model = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{lm, glm or lmer model}

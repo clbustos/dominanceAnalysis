@@ -4,8 +4,15 @@
 \alias{bootDominanceAnalysis}
 \title{Bootstrap analysis for Dominance Analysis}
 \usage{
-bootDominanceAnalysis(x, R, constants = c(), terms = NULL,
-  fit.functions = "default", null.model = NULL, ...)
+bootDominanceAnalysis(
+  x,
+  R,
+  constants = c(),
+  terms = NULL,
+  fit.functions = "default",
+  null.model = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{lm, glm or lmer model}

@@ -102,8 +102,8 @@ da.glm.fit<-function(data,family.glm,...) {
 		n<-nrow(mc$data)
 
 
-    r2.cs<-1-exp(l0-l1)^(2/n)
-    #cat(l0,",",l1,",",n,",",r2.cs,"\n")
+		r2.cs<- 1-   exp(2/n*(l0 - l1) )
+		#cat(l0,",",l1,",",n,",",r2.cs,"\n")
     list(
 		  r2.m=1-(l1/l0),
 		  r2.cs=r2.cs,
@@ -113,6 +113,71 @@ da.glm.fit<-function(data,family.glm,...) {
 	}
 
 }
+
+
+#' Provides fit indices for betareg models.
+#' Nagelkerke and Estrella are not provided because are designed for discrete dependent variables.
+#' Cox and Snell is preferred and pseudo-\eqn{R^2} should be preferred, because McFadden's index
+#' could be negative.
+#'
+#' @param data complete data set
+#' @param link.betareg link function for the mean model. By default, logit.
+#' @param ...  ignored
+#'
+#' @return A function described by \link{using-fit-indices}. You could retrieve following indices:
+#' \describe{
+#' \item{\code{r2.pseudo}}{Provided by betareg by default}
+#' \item{\code{r2.m}}{McFadden(1974)}
+#' \item{\code{r2.cs}}{Cox and Snell(1989).}
+#' }
+#'
+#' @references
+#' \itemize{
+#' \item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
+#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. Journal of Business & Economic Statistics, 16(2), 198-205. doi: 10.1080/07350015.1998.10524753.
+#' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
+#' \item Shou, Y., & Smithson, M. (2015). Evaluating Predictors of Dispersion:A Comparison of Dominance Analysis and Bayesian Model Averaging. Psychometrika, 80(1), 236-256.
+#' }
+#'
+#' @family fit indices
+#' @importFrom stats lm logLik update
+#' @export
+#'
+da.betareg.fit<-function(data,link.betareg,...) {
+  if (!requireNamespace("betareg", quietly = TRUE)) { #nocov start
+    stop("betareg needed for this function to work. Please install it.",
+         call. = FALSE)
+  } #nocov end
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return(c("r2.cs","r2.pseudo","r2.m"))
+    }
+
+    g1<-betareg::betareg(formula = x,data=data, link=link.betareg)
+    pseudo.r2<-g1$pseudo.r.squared
+    if(is.na(pseudo.r2)) {
+      pseudo.r2<-0
+    }
+    g.null<-update(g1,~1,data=data)
+    l0=logLik(g.null)
+    l1=logLik(g1)
+    n<-nrow(mc$data)
+
+
+    r2.cs<- 1-   exp(2/n*(l0 - l1) )
+    #cat(l0,",",l1,",",n,",",r2.cs,"\n")
+    list(
+      r2.cs=r2.cs,
+      r2.pseudo=pseudo.r2,
+      r2.m=1-(l1/l0)
+    )
+  }
+
+}
+
+
+
 #' Provides fit indices for hierarchical linear models, based on Luo and Azen (2013).
 #'
 #' @param data complete data set containing the variables in the model

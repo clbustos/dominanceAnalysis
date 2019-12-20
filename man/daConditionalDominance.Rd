@@ -10,8 +10,9 @@ daConditionalDominance(daRR)
 Uses daRawResults as input
 }
 \seealso{
-Other dominance matrices: \code{\link{daCompleteDominance}},
-  \code{\link{daGeneralDominance}}
+Other dominance matrices: 
+\code{\link{daCompleteDominance}()},
+\code{\link{daGeneralDominance}()}
 }
 \concept{dominance matrices}
 \keyword{internal}

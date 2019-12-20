@@ -20,21 +20,24 @@
 #' To obtain the fit-indices for each model, a function called \code{da.<model>.fit}
 #' is executed. For example, for a lm model, function \code{\link{da.lm.fit}} provides
 #' \eqn{R^2} values.
-#' Currently, five models are implemented:
+#' Currently, seven models are implemented:
 #' \describe{
 #' \item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit}}}
-#' \item{glm}{ Provides three of the four fit indices recommended by Azen & Traxel (2009):  McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
+#' \item{glm}{ Provides four fit indices recommended by Azen & Traxel (2009):  Cox and Snell(1989), McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
 #' \item{lmerMod}{ Provides  four fit indices recommended by Lou & Azen (2012). See \code{\link{da.lmerMod.fit}}}
 #' \item{lmWithCov}{Provides \eqn{R^2} for a correlation/covariance matrix. See \code{\link{lmWithCov}} to create the model and \code{\link{da.lmWithCov.fit}} for the fit index function.}
 #' \item{mlmWithCov}{Provides both \eqn{R^2_{XY}} and \eqn{P^2_{XY}} for multivariate regression models using a correlation/covariance matrix. See \code{\link{mlmWithCov}} to create the model and \code{\link{da.mlmWithCov.fit}} for the fit index function }
-#' \item{dynlm}{Provides \eqn{R^2} for dynamic linear models. There is no literature reference about using dominance analysis on dynamic linear models, so you're warned!. See \code{\link{da.dynlm.fit}}}
+#' \item{dynlm}{Provides \eqn{R^2} for dynamic linear models. There is no literature reference about using dominance analysis on dynamic linear models, so you're warned!. See \code{\link{da.dynlm.fit}}}.
+#' \item{betareg}{Provides pseudo-\eqn{R^2}, Cox and Snell(1989), McFadden (1974), and Estrella (1998). You could set the link function using link.betareg if automatic detection of link function doesn't work.
 #' }
+#'   See \code{\link{da.betareg.fit}} }
 #' @param x lm, glm, lmer model
 #' @param constants vector of predictors to remain unchanged between models
 #' @param terms     vector of terms to be analyzed. By default, obtained from the model
 #' @param fit.functions Name of the method used to provide fit indices
 #' @param data optional data.frame
 #' @param null.model for mixed models, null model against to test the submodels
+#' @param link.betareg for betareg, link function to use.
 #' @param ... Other arguments provided to lm or lmer (not implemented yet)
 #' @return
 #' \item{predictors}{Vector of predictors.}
@@ -87,13 +90,14 @@ dominanceAnalysis <-
            fit.functions = "default",
            data = NULL,
            null.model = NULL,
+           link.betareg = NULL,
            ...) {
     if(is.list(terms)) {
       terms<-sapply(terms,paste0,collapse="+")
     }
     daModels        <- daSubmodels(x = x, constants = constants, terms = terms)
 
-    daRaw           <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, ...)
+    daRaw           <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, link.betareg= link.betareg,...)
 
     daAverageByLevel <- daAverageContributionByLevel(daRaw)
     daAverageGeneral <- lapply(daAverageByLevel, function(x) {colMeans(x[, -1])})
@@ -103,6 +107,7 @@ dominanceAnalysis <-
       terms        = terms,
       fit.functions = daRaw$fit.functions,
       fits = daRaw,
+      link.betareg=link.betareg,
       contribution.by.level = daAverageByLevel,
       contribution.average = daAverageGeneral,
       complete = daCompleteDominance(daRaw),

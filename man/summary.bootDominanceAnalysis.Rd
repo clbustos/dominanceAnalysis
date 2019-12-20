@@ -4,8 +4,7 @@
 \alias{summary.bootDominanceAnalysis}
 \title{Summary for bootDominanceAnalysis.}
 \usage{
-\method{summary}{bootDominanceAnalysis}(object, fit.functions = NULL,
-  ...)
+\method{summary}{bootDominanceAnalysis}(object, fit.functions = NULL, ...)
 }
 \arguments{
 \item{object}{a \code{\link{bootDominanceAnalysis}} object}

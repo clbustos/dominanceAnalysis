@@ -18,8 +18,8 @@ and Hierarchical Linear Models.
 **Features**:
 
   - Provides complete, conditional and general dominance analysis for
-    *lm* (univariate and multivariate), *dynlm*, *lmer* and *glm*
-    (family=binomial) models.
+    *lm* (univariate and multivariate), *dynlm*, *lmer*, *betareg* and
+    *glm* (family=binomial) models.
   - Covariance / correlation matrixes could be used as input for OLS
     dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods,
     respectively.
@@ -125,145 +125,145 @@ average contribution of each variable.
 #>      0.371      0.156      0.120      0.051      0.028      0.007 
 #> 
 #> Dominance Analysis matrix:
-#>                                                   model level   fit
-#>                                                       1     0     0
-#>                                              complaints     1 0.681
-#>                                              privileges     1 0.182
-#>                                                learning     1 0.389
-#>                                                  raises     1 0.348
-#>                                                critical     1 0.024
-#>                                                 advance     1 0.024
-#>                                         Average level 1     1      
-#>                                   complaints+privileges     2 0.683
-#>                                     complaints+learning     2 0.708
-#>                                       complaints+raises     2 0.684
-#>                                     complaints+critical     2 0.681
-#>                                      complaints+advance     2 0.682
-#>                                     privileges+learning     2 0.408
-#>                                       privileges+raises     2 0.382
-#>                                     privileges+critical     2 0.191
-#>                                      privileges+advance     2 0.182
-#>                                         learning+raises     2 0.451
-#>                                       learning+critical     2 0.396
-#>                                        learning+advance     2 0.432
-#>                                         raises+critical     2 0.353
-#>                                          raises+advance     2 0.399
-#>                                        critical+advance     2 0.038
-#>                                         Average level 2     2      
-#>                          complaints+privileges+learning     3 0.715
-#>                            complaints+privileges+raises     3 0.686
-#>                          complaints+privileges+critical     3 0.683
-#>                           complaints+privileges+advance     3 0.683
-#>                              complaints+learning+raises     3 0.708
-#>                            complaints+learning+critical     3 0.708
-#>                             complaints+learning+advance     3 0.726
-#>                              complaints+raises+critical     3 0.684
-#>                               complaints+raises+advance     3  0.69
-#>                             complaints+critical+advance     3 0.682
-#>                              privileges+learning+raises     3 0.459
-#>                            privileges+learning+critical     3 0.413
-#>                             privileges+learning+advance     3 0.458
-#>                              privileges+raises+critical     3 0.386
-#>                               privileges+raises+advance     3 0.443
-#>                             privileges+critical+advance     3 0.191
-#>                                learning+raises+critical     3 0.451
-#>                                 learning+raises+advance     3 0.552
-#>                               learning+critical+advance     3 0.453
-#>                                 raises+critical+advance     3 0.401
-#>                                         Average level 3     3      
-#>                   complaints+privileges+learning+raises     4 0.715
-#>                 complaints+privileges+learning+critical     4 0.715
-#>                  complaints+privileges+learning+advance     4 0.729
-#>                   complaints+privileges+raises+critical     4 0.686
-#>                    complaints+privileges+raises+advance     4  0.69
-#>                  complaints+privileges+critical+advance     4 0.684
-#>                     complaints+learning+raises+critical     4 0.708
-#>                      complaints+learning+raises+advance     4 0.729
-#>                    complaints+learning+critical+advance     4 0.727
-#>                      complaints+raises+critical+advance     4  0.69
-#>                     privileges+learning+raises+critical     4 0.459
-#>                      privileges+learning+raises+advance     4 0.563
-#>                    privileges+learning+critical+advance     4 0.476
-#>                      privileges+raises+critical+advance     4 0.445
-#>                        learning+raises+critical+advance     4 0.553
-#>                                         Average level 4     4      
-#>          complaints+privileges+learning+raises+critical     5 0.715
-#>           complaints+privileges+learning+raises+advance     5 0.732
-#>         complaints+privileges+learning+critical+advance     5 0.731
-#>           complaints+privileges+raises+critical+advance     5 0.691
-#>             complaints+learning+raises+critical+advance     5 0.729
-#>             privileges+learning+raises+critical+advance     5 0.564
-#>                                         Average level 5     5      
-#>  complaints+privileges+learning+raises+critical+advance     6 0.733
-#>  complaints privileges learning raises critical advance
-#>       0.681      0.182    0.389  0.348    0.024   0.024
-#>                  0.002    0.027  0.003        0   0.001
-#>       0.501               0.226    0.2    0.009       0
-#>       0.319      0.019           0.062    0.007   0.043
-#>       0.336      0.033    0.102           0.005    0.05
-#>       0.657      0.166    0.372  0.329            0.013
-#>       0.658      0.158    0.408  0.375    0.014        
-#>       0.494      0.075    0.227  0.194    0.007   0.022
-#>                           0.032  0.003        0       0
-#>                  0.007               0        0   0.018
-#>                  0.002    0.024               0   0.006
-#>                  0.002    0.027  0.003            0.001
-#>                  0.001    0.043  0.007        0        
-#>       0.307                      0.051    0.005    0.05
-#>       0.305               0.077           0.004   0.061
-#>       0.493               0.222  0.195                0
-#>       0.502               0.276  0.261    0.009        
-#>       0.258      0.008                        0   0.102
-#>       0.312      0.016           0.055            0.057
-#>       0.293      0.026            0.12    0.021        
-#>       0.331      0.033    0.098                   0.048
-#>       0.291      0.044    0.154           0.003        
-#>       0.645      0.153    0.416  0.363                 
-#>       0.374      0.029    0.137  0.106    0.004   0.034
-#>                                      0        0   0.014
-#>                           0.029               0   0.004
-#>                           0.032  0.003                0
-#>                           0.046  0.007        0        
-#>                  0.007                        0    0.02
-#>                  0.007               0            0.019
-#>                  0.004           0.003    0.002        
-#>                  0.002    0.024                   0.005
-#>                  0.001    0.039               0        
-#>                  0.001    0.045  0.007                 
-#>       0.257                                   0   0.104
-#>       0.302                      0.046            0.063
-#>       0.271                      0.105    0.018        
-#>       0.301               0.073                   0.059
-#>       0.247                0.12           0.002        
-#>       0.493               0.285  0.254                 
-#>       0.257      0.008                            0.102
-#>       0.176      0.011                    0.001        
-#>       0.274      0.022             0.1                 
-#>       0.288      0.044    0.152                        
-#>       0.287      0.011    0.084  0.053    0.002   0.039
-#>                                               0   0.017
-#>                                      0            0.016
-#>                                  0.002    0.002        
-#>                           0.029                   0.004
-#>                           0.041               0        
-#>                           0.047  0.007                 
-#>                  0.007                            0.021
-#>                  0.003                    0.001        
-#>                  0.004           0.002                 
-#>                  0.001     0.04                        
-#>       0.256                                       0.105
-#>       0.169                               0.001        
-#>       0.255                      0.088                 
-#>       0.246               0.119                        
-#>       0.176      0.011                                 
-#>        0.22      0.005    0.055   0.02    0.001   0.032
-#>                                                   0.017
-#>                                           0.001        
-#>                                  0.002                 
-#>                           0.042                        
-#>                  0.003                                 
-#>       0.169                                            
-#>       0.169      0.003    0.042  0.002    0.001   0.017
+#>                                                   model level   fit complaints
+#>                                                       1     0     0      0.681
+#>                                              complaints     1 0.681           
+#>                                              privileges     1 0.182      0.501
+#>                                                learning     1 0.389      0.319
+#>                                                  raises     1 0.348      0.336
+#>                                                critical     1 0.024      0.657
+#>                                                 advance     1 0.024      0.658
+#>                                         Average level 1     1            0.494
+#>                                   complaints+privileges     2 0.683           
+#>                                     complaints+learning     2 0.708           
+#>                                       complaints+raises     2 0.684           
+#>                                     complaints+critical     2 0.681           
+#>                                      complaints+advance     2 0.682           
+#>                                     privileges+learning     2 0.408      0.307
+#>                                       privileges+raises     2 0.382      0.305
+#>                                     privileges+critical     2 0.191      0.493
+#>                                      privileges+advance     2 0.182      0.502
+#>                                         learning+raises     2 0.451      0.258
+#>                                       learning+critical     2 0.396      0.312
+#>                                        learning+advance     2 0.432      0.293
+#>                                         raises+critical     2 0.353      0.331
+#>                                          raises+advance     2 0.399      0.291
+#>                                        critical+advance     2 0.038      0.645
+#>                                         Average level 2     2            0.374
+#>                          complaints+privileges+learning     3 0.715           
+#>                            complaints+privileges+raises     3 0.686           
+#>                          complaints+privileges+critical     3 0.683           
+#>                           complaints+privileges+advance     3 0.683           
+#>                              complaints+learning+raises     3 0.708           
+#>                            complaints+learning+critical     3 0.708           
+#>                             complaints+learning+advance     3 0.726           
+#>                              complaints+raises+critical     3 0.684           
+#>                               complaints+raises+advance     3  0.69           
+#>                             complaints+critical+advance     3 0.682           
+#>                              privileges+learning+raises     3 0.459      0.257
+#>                            privileges+learning+critical     3 0.413      0.302
+#>                             privileges+learning+advance     3 0.458      0.271
+#>                              privileges+raises+critical     3 0.386      0.301
+#>                               privileges+raises+advance     3 0.443      0.247
+#>                             privileges+critical+advance     3 0.191      0.493
+#>                                learning+raises+critical     3 0.451      0.257
+#>                                 learning+raises+advance     3 0.552      0.176
+#>                               learning+critical+advance     3 0.453      0.274
+#>                                 raises+critical+advance     3 0.401      0.288
+#>                                         Average level 3     3            0.287
+#>                   complaints+privileges+learning+raises     4 0.715           
+#>                 complaints+privileges+learning+critical     4 0.715           
+#>                  complaints+privileges+learning+advance     4 0.729           
+#>                   complaints+privileges+raises+critical     4 0.686           
+#>                    complaints+privileges+raises+advance     4  0.69           
+#>                  complaints+privileges+critical+advance     4 0.684           
+#>                     complaints+learning+raises+critical     4 0.708           
+#>                      complaints+learning+raises+advance     4 0.729           
+#>                    complaints+learning+critical+advance     4 0.727           
+#>                      complaints+raises+critical+advance     4  0.69           
+#>                     privileges+learning+raises+critical     4 0.459      0.256
+#>                      privileges+learning+raises+advance     4 0.563      0.169
+#>                    privileges+learning+critical+advance     4 0.476      0.255
+#>                      privileges+raises+critical+advance     4 0.445      0.246
+#>                        learning+raises+critical+advance     4 0.553      0.176
+#>                                         Average level 4     4             0.22
+#>          complaints+privileges+learning+raises+critical     5 0.715           
+#>           complaints+privileges+learning+raises+advance     5 0.732           
+#>         complaints+privileges+learning+critical+advance     5 0.731           
+#>           complaints+privileges+raises+critical+advance     5 0.691           
+#>             complaints+learning+raises+critical+advance     5 0.729           
+#>             privileges+learning+raises+critical+advance     5 0.564      0.169
+#>                                         Average level 5     5            0.169
+#>  complaints+privileges+learning+raises+critical+advance     6 0.733           
+#>  privileges learning raises critical advance
+#>       0.182    0.389  0.348    0.024   0.024
+#>       0.002    0.027  0.003        0   0.001
+#>                0.226    0.2    0.009       0
+#>       0.019           0.062    0.007   0.043
+#>       0.033    0.102           0.005    0.05
+#>       0.166    0.372  0.329            0.013
+#>       0.158    0.408  0.375    0.014        
+#>       0.075    0.227  0.194    0.007   0.022
+#>                0.032  0.003        0       0
+#>       0.007               0        0   0.018
+#>       0.002    0.024               0   0.006
+#>       0.002    0.027  0.003            0.001
+#>       0.001    0.043  0.007        0        
+#>                       0.051    0.005    0.05
+#>                0.077           0.004   0.061
+#>                0.222  0.195                0
+#>                0.276  0.261    0.009        
+#>       0.008                        0   0.102
+#>       0.016           0.055            0.057
+#>       0.026            0.12    0.021        
+#>       0.033    0.098                   0.048
+#>       0.044    0.154           0.003        
+#>       0.153    0.416  0.363                 
+#>       0.029    0.137  0.106    0.004   0.034
+#>                           0        0   0.014
+#>                0.029               0   0.004
+#>                0.032  0.003                0
+#>                0.046  0.007        0        
+#>       0.007                        0    0.02
+#>       0.007               0            0.019
+#>       0.004           0.003    0.002        
+#>       0.002    0.024                   0.005
+#>       0.001    0.039               0        
+#>       0.001    0.045  0.007                 
+#>                                    0   0.104
+#>                       0.046            0.063
+#>                       0.105    0.018        
+#>                0.073                   0.059
+#>                 0.12           0.002        
+#>                0.285  0.254                 
+#>       0.008                            0.102
+#>       0.011                    0.001        
+#>       0.022             0.1                 
+#>       0.044    0.152                        
+#>       0.011    0.084  0.053    0.002   0.039
+#>                                    0   0.017
+#>                           0            0.016
+#>                       0.002    0.002        
+#>                0.029                   0.004
+#>                0.041               0        
+#>                0.047  0.007                 
+#>       0.007                            0.021
+#>       0.003                    0.001        
+#>       0.004           0.002                 
+#>       0.001     0.04                        
+#>                                        0.105
+#>                                0.001        
+#>                       0.088                 
+#>                0.119                        
+#>       0.011                                 
+#>       0.005    0.055   0.02    0.001   0.032
+#>                                        0.017
+#>                                0.001        
+#>                       0.002                 
+#>                0.042                        
+#>       0.003                                 
+#>                                             
+#>       0.003    0.042  0.002    0.001   0.017
 #> 
 ```
 
@@ -383,79 +383,79 @@ summary(da.cov)
 #>   0.152   0.124   0.096   0.091   0.043 
 #> 
 #> Dominance Analysis matrix:
-#>                              model level   fit picture blocks  maze
-#>                                  1     0     0   0.217  0.304 0.116
-#>                            picture     1 0.217          0.121 0.065
-#>                             blocks     1 0.304   0.034        0.011
-#>                               maze     1 0.116   0.167    0.2      
-#>                            reading     1 0.332   0.106  0.138 0.057
-#>                              vocab     1 0.265   0.125  0.155 0.054
-#>                    Average level 1     1         0.108  0.153 0.047
-#>                     picture+blocks     2 0.338                0.015
-#>                       picture+maze     2 0.282           0.07      
-#>                    picture+reading     2 0.439          0.055 0.036
-#>                      picture+vocab     2  0.39          0.059 0.033
-#>                        blocks+maze     2 0.316   0.037             
-#>                     blocks+reading     2  0.47   0.023        0.009
-#>                       blocks+vocab     2  0.42   0.028        0.007
-#>                       maze+reading     2 0.389   0.086   0.09      
-#>                         maze+vocab     2 0.319   0.104  0.108      
-#>                      reading+vocab     2 0.341   0.103  0.131 0.052
-#>                    Average level 2     2         0.064  0.085 0.025
-#>                picture+blocks+maze     3 0.353                     
-#>             picture+blocks+reading     3 0.494                0.011
-#>               picture+blocks+vocab     3 0.448                0.009
-#>               picture+maze+reading     3 0.475           0.03      
-#>                 picture+maze+vocab     3 0.423          0.035      
-#>              picture+reading+vocab     3 0.445          0.051 0.033
-#>                blocks+maze+reading     3 0.479   0.026             
-#>                  blocks+maze+vocab     3 0.427   0.031             
-#>               blocks+reading+vocab     3 0.473   0.023        0.008
-#>                 maze+reading+vocab     3 0.394   0.085  0.087      
-#>                    Average level 3     3         0.041  0.051 0.016
-#>        picture+blocks+maze+reading     4 0.505                     
-#>          picture+blocks+maze+vocab     4 0.458                     
-#>       picture+blocks+reading+vocab     4 0.496                0.011
-#>         picture+maze+reading+vocab     4 0.478          0.028      
-#>          blocks+maze+reading+vocab     4 0.481   0.026             
-#>                    Average level 4     4         0.026  0.028 0.011
-#>  picture+blocks+maze+reading+vocab     5 0.507                     
-#>  reading vocab
-#>    0.332 0.265
-#>    0.221 0.172
-#>    0.166 0.116
-#>    0.273 0.203
-#>          0.009
-#>    0.077      
-#>    0.184 0.125
-#>    0.156  0.11
-#>    0.193 0.141
-#>          0.006
-#>    0.055      
-#>    0.164 0.111
-#>          0.002
-#>    0.053      
-#>          0.004
-#>    0.074      
-#>               
-#>    0.116 0.062
-#>    0.152 0.105
-#>          0.002
-#>    0.048      
-#>          0.003
-#>    0.055      
-#>               
-#>          0.002
-#>    0.054      
-#>               
-#>               
-#>    0.077 0.028
-#>          0.002
-#>    0.049      
-#>               
-#>               
-#>               
-#>    0.049 0.002
+#>                              model level   fit picture blocks  maze reading
+#>                                  1     0     0   0.217  0.304 0.116   0.332
+#>                            picture     1 0.217          0.121 0.065   0.221
+#>                             blocks     1 0.304   0.034        0.011   0.166
+#>                               maze     1 0.116   0.167    0.2         0.273
+#>                            reading     1 0.332   0.106  0.138 0.057        
+#>                              vocab     1 0.265   0.125  0.155 0.054   0.077
+#>                    Average level 1     1         0.108  0.153 0.047   0.184
+#>                     picture+blocks     2 0.338                0.015   0.156
+#>                       picture+maze     2 0.282           0.07         0.193
+#>                    picture+reading     2 0.439          0.055 0.036        
+#>                      picture+vocab     2  0.39          0.059 0.033   0.055
+#>                        blocks+maze     2 0.316   0.037                0.164
+#>                     blocks+reading     2  0.47   0.023        0.009        
+#>                       blocks+vocab     2  0.42   0.028        0.007   0.053
+#>                       maze+reading     2 0.389   0.086   0.09              
+#>                         maze+vocab     2 0.319   0.104  0.108         0.074
+#>                      reading+vocab     2 0.341   0.103  0.131 0.052        
+#>                    Average level 2     2         0.064  0.085 0.025   0.116
+#>                picture+blocks+maze     3 0.353                        0.152
+#>             picture+blocks+reading     3 0.494                0.011        
+#>               picture+blocks+vocab     3 0.448                0.009   0.048
+#>               picture+maze+reading     3 0.475           0.03              
+#>                 picture+maze+vocab     3 0.423          0.035         0.055
+#>              picture+reading+vocab     3 0.445          0.051 0.033        
+#>                blocks+maze+reading     3 0.479   0.026                     
+#>                  blocks+maze+vocab     3 0.427   0.031                0.054
+#>               blocks+reading+vocab     3 0.473   0.023        0.008        
+#>                 maze+reading+vocab     3 0.394   0.085  0.087              
+#>                    Average level 3     3         0.041  0.051 0.016   0.077
+#>        picture+blocks+maze+reading     4 0.505                             
+#>          picture+blocks+maze+vocab     4 0.458                        0.049
+#>       picture+blocks+reading+vocab     4 0.496                0.011        
+#>         picture+maze+reading+vocab     4 0.478          0.028              
+#>          blocks+maze+reading+vocab     4 0.481   0.026                     
+#>                    Average level 4     4         0.026  0.028 0.011   0.049
+#>  picture+blocks+maze+reading+vocab     5 0.507                             
+#>  vocab
+#>  0.265
+#>  0.172
+#>  0.116
+#>  0.203
+#>  0.009
+#>       
+#>  0.125
+#>   0.11
+#>  0.141
+#>  0.006
+#>       
+#>  0.111
+#>  0.002
+#>       
+#>  0.004
+#>       
+#>       
+#>  0.062
+#>  0.105
+#>  0.002
+#>       
+#>  0.003
+#>       
+#>       
+#>  0.002
+#>       
+#>       
+#>       
+#>  0.028
+#>  0.002
+#>       
+#>       
+#>       
+#>       
+#>  0.002
 #> 
 ```
 
@@ -853,22 +853,14 @@ correlated.
 ``` r
 data(longley)
 round(cor(longley),2)
-#>              GNP.deflator  GNP Unemployed Armed.Forces Population Year
-#> GNP.deflator         1.00 0.99       0.62         0.46       0.98 0.99
-#> GNP                  0.99 1.00       0.60         0.45       0.99 1.00
-#> Unemployed           0.62 0.60       1.00        -0.18       0.69 0.67
-#> Armed.Forces         0.46 0.45      -0.18         1.00       0.36 0.42
-#> Population           0.98 0.99       0.69         0.36       1.00 0.99
-#> Year                 0.99 1.00       0.67         0.42       0.99 1.00
-#> Employed             0.97 0.98       0.50         0.46       0.96 0.97
-#>              Employed
-#> GNP.deflator     0.97
-#> GNP              0.98
-#> Unemployed       0.50
-#> Armed.Forces     0.46
-#> Population       0.96
-#> Year             0.97
-#> Employed         1.00
+#>              GNP.deflator  GNP Unemployed Armed.Forces Population Year Employed
+#> GNP.deflator         1.00 0.99       0.62         0.46       0.98 0.99     0.97
+#> GNP                  0.99 1.00       0.60         0.45       0.99 1.00     0.98
+#> Unemployed           0.62 0.60       1.00        -0.18       0.69 0.67     0.50
+#> Armed.Forces         0.46 0.45      -0.18         1.00       0.36 0.42     0.46
+#> Population           0.98 0.99       0.69         0.36       1.00 0.99     0.96
+#> Year                 0.99 1.00       0.67         0.42       0.99 1.00     0.97
+#> Employed             0.97 0.98       0.50         0.46       0.96 0.97     1.00
 ```
 
 We can group GNP and employment related variables, to determine the
@@ -927,6 +919,7 @@ install_github("clbustos/dominanceanalysis")
 
   - Daniel Schlaepfer: Error reporting on logistic regression code.
   - Xiong Zhang: Incorporation of dynamic linear models.
+  - Maartje Hidalgo: Incorporation of beta regression.
 
 ## References
 
@@ -953,3 +946,8 @@ install_github("clbustos/dominanceanalysis")
     Hierarchical Linear Models Using Dominance Analysis. Journal of
     Educational and Behavioral Statistics, 38(1), 3-31.
     <https://doi.org/10.3102/1076998612458319>
+
+  - Shou, Y., & Smithson, M. (2015). Evaluating Predictors of
+    Dispersion: A Comparison of Dominance Analysis and Bayesian Model
+    Averaging. Psychometrika, 80(1), 236-256.
+    <https://doi.org/10.1007/s11336-013-9375-8>

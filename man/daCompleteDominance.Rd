@@ -12,8 +12,9 @@ Matrix of Complete dominance of one variable over another
 Uses daRawResults as input
 }
 \seealso{
-Other dominance matrices: \code{\link{daConditionalDominance}},
-  \code{\link{daGeneralDominance}}
+Other dominance matrices: 
+\code{\link{daConditionalDominance}()},
+\code{\link{daGeneralDominance}()}
 }
 \concept{dominance matrices}
 \keyword{internal}

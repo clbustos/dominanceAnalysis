@@ -4,8 +4,16 @@
 \alias{dominanceAnalysis}
 \title{Dominance analysis for OLS (univariate and multivariate), GLM and LMM models}
 \usage{
-dominanceAnalysis(x, constants = c(), terms = NULL,
-  fit.functions = "default", data = NULL, null.model = NULL, ...)
+dominanceAnalysis(
+  x,
+  constants = c(),
+  terms = NULL,
+  fit.functions = "default",
+  data = NULL,
+  null.model = NULL,
+  link.betareg = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{lm, glm, lmer model}
@@ -19,6 +27,8 @@ dominanceAnalysis(x, constants = c(), terms = NULL,
 \item{data}{optional data.frame}
 
 \item{null.model}{for mixed models, null model against to test the submodels}
+
+\item{link.betareg}{for betareg, link function to use.}
 
 \item{...}{Other arguments provided to lm or lmer (not implemented yet)}
 }
@@ -64,15 +74,17 @@ as the mean of average contribution on each level.
 To obtain the fit-indices for each model, a function called \code{da.<model>.fit}
 is executed. For example, for a lm model, function \code{\link{da.lm.fit}} provides
 \eqn{R^2} values.
-Currently, five models are implemented:
+Currently, seven models are implemented:
 \describe{
 \item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit}}}
-\item{glm}{ Provides three of the four fit indices recommended by Azen & Traxel (2009):  McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
+\item{glm}{ Provides four fit indices recommended by Azen & Traxel (2009):  Cox and Snell(1989), McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
 \item{lmerMod}{ Provides  four fit indices recommended by Lou & Azen (2012). See \code{\link{da.lmerMod.fit}}}
 \item{lmWithCov}{Provides \eqn{R^2} for a correlation/covariance matrix. See \code{\link{lmWithCov}} to create the model and \code{\link{da.lmWithCov.fit}} for the fit index function.}
 \item{mlmWithCov}{Provides both \eqn{R^2_{XY}} and \eqn{P^2_{XY}} for multivariate regression models using a correlation/covariance matrix. See \code{\link{mlmWithCov}} to create the model and \code{\link{da.mlmWithCov.fit}} for the fit index function }
-\item{dynlm}{Provides \eqn{R^2} for dynamic linear models. There is no literature reference about using dominance analysis on dynamic linear models, so you're warned!. See \code{\link{da.dynlm.fit}}}
+\item{dynlm}{Provides \eqn{R^2} for dynamic linear models. There is no literature reference about using dominance analysis on dynamic linear models, so you're warned!. See \code{\link{da.dynlm.fit}}}.
+\item{betareg}{Provides pseudo-\eqn{R^2}, Cox and Snell(1989), McFadden (1974), and Estrella (1998). You could set the link function using link.betareg if automatic detection of link function doesn't work.
 }
+  See \code{\link{da.betareg.fit}} }
 }
 
 \examples{

@@ -25,8 +25,10 @@ da.longley<-dominanceAnalysis(lm(Employed~.,longley))
 contributionByLevel(da.longley)
 }
 \seealso{
-Other retrieval methods: \code{\link{averageContribution}},
-  \code{\link{dominanceBriefing}},
-  \code{\link{dominanceMatrix}}, \code{\link{getFits}}
+Other retrieval methods: 
+\code{\link{averageContribution}()},
+\code{\link{dominanceBriefing}()},
+\code{\link{dominanceMatrix}()},
+\code{\link{getFits}()}
 }
 \concept{retrieval methods}

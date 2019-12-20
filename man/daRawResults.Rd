@@ -4,8 +4,16 @@
 \alias{daRawResults}
 \title{Retrieve raw results for dominance analysis.}
 \usage{
-daRawResults(x, constants = c(), terms = NULL,
-  fit.functions = "default", data = NULL, null.model = NULL, ...)
+daRawResults(
+  x,
+  constants = c(),
+  terms = NULL,
+  fit.functions = "default",
+  data = NULL,
+  null.model = NULL,
+  link.betareg = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{a model.}

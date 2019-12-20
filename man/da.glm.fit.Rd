@@ -48,9 +48,12 @@ da.glm.fit(data=df.1, family.glm='binomial')(y~x1)
 }
 }
 \seealso{
-Other fit indices: \code{\link{da.dynlm.fit}},
-  \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}},
-  \code{\link{da.lmerMod.fit}},
-  \code{\link{da.mlmWithCov.fit}}
+Other fit indices: 
+\code{\link{da.betareg.fit}()},
+\code{\link{da.dynlm.fit}()},
+\code{\link{da.lm.fit}()},
+\code{\link{da.lmWithCov.fit}()},
+\code{\link{da.lmerMod.fit}()},
+\code{\link{da.mlmWithCov.fit}()}
 }
 \concept{fit indices}

@@ -31,6 +31,12 @@ getData<-function(x) {
     }
   } else if(is(x,"lmerMod")) {
 		data=x@frame
+  } else if(is(x,"betareg")) {
+    if(is.null(x$model)) {
+      stop("Please, use model=TRUE to fit betareg")
+    } else {
+      data=x$model
+    }
   }
   data;
 }

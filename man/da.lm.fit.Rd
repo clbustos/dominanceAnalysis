@@ -26,9 +26,12 @@ da.lm.fit(df.1)("names")
 da.lm.fit(df.1)(y~x1)
 }
 \seealso{
-Other fit indices: \code{\link{da.dynlm.fit}},
-  \code{\link{da.glm.fit}}, \code{\link{da.lmWithCov.fit}},
-  \code{\link{da.lmerMod.fit}},
-  \code{\link{da.mlmWithCov.fit}}
+Other fit indices: 
+\code{\link{da.betareg.fit}()},
+\code{\link{da.dynlm.fit}()},
+\code{\link{da.glm.fit}()},
+\code{\link{da.lmWithCov.fit}()},
+\code{\link{da.lmerMod.fit}()},
+\code{\link{da.mlmWithCov.fit}()}
 }
 \concept{fit indices}

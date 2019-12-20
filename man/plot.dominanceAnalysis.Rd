@@ -4,9 +4,12 @@
 \alias{plot.dominanceAnalysis}
 \title{Plot for a \code{\link{dominanceAnalysis}} object}
 \usage{
-\method{plot}{dominanceAnalysis}(x, which.graph = c("general",
-  "complete", "complete_no_facet", "conditional"), fit.function = NULL,
-  ...)
+\method{plot}{dominanceAnalysis}(
+  x,
+  which.graph = c("general", "complete", "complete_no_facet", "conditional"),
+  fit.function = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{a \code{\link{dominanceAnalysis}} object}
