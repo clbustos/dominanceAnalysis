@@ -116,6 +116,7 @@ da.glm.fit<-function(data,family.glm,...) {
 
 
 #' Provides fit indices for betareg models.
+#'
 #' Nagelkerke and Estrella are not provided because are designed for discrete dependent variables.
 #' Cox and Snell is preferred and pseudo-\eqn{R^2} should be preferred, because McFadden's index
 #' could be negative.

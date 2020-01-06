@@ -190,7 +190,7 @@ Lastly, if conditional dominance cannot be established, we explore general domin
 averageContribution(dapres,fit.functions = "r2.m")
 ```
 
-The average contribution could be also plotted usign method `plot()` with argument `which.graph='general'`
+The average contribution could be also plotted using method `plot()` with argument `which.graph='general'`
 
 ```{r}
 plot(dapres, which.graph ="general",fit.function = "r2.m")

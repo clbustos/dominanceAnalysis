@@ -1,3 +1,10 @@
+# dominanceanalysis 1.3.0
+
+- Added plot() method for dominanceAnalysis object.
+- Added support for beta regression, using betareg package. Suggestion by Maartje Hidalgo
+- Added 'ordered' parameter to dominanceMatrix() method
+- Bug fix: Fixed some mistakes on logistic regression vignette on v1.2.0. Added some plots, to compensate.
+
 # dominanceanalysis 1.2.0
 
 - Added documentation for da.dynlm.fit. 

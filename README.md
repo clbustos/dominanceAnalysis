@@ -350,7 +350,7 @@ which is composed of five specific skills that might explain *general
 intelligence* (general). The biggest average contribution is for
 predictor *reading* (0.152). Nevertheless, in the output of `summary()`
 method on level 1, we can see that *picture* (0.125) dominates over
-*reading* (0.077) on ‘vocab’ submodel.
+*reading* (0.077) on *vocab* submodel.
 
 ``` r
 lmwithcov<-lmWithCov( f = general~picture+blocks+maze+reading+vocab,
