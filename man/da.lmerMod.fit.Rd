@@ -4,10 +4,10 @@
 \alias{da.lmerMod.fit}
 \title{Provides fit indices for hierarchical linear models, based on Luo and Azen (2013).}
 \usage{
-da.lmerMod.fit(data, null.model, ...)
+da.lmerMod.fit(original.model, null.model, ...)
 }
 \arguments{
-\item{data}{complete data set containing the variables in the model}
+\item{original.model}{Original fitted model}
 
 \item{null.model}{needed for HLM models}
 

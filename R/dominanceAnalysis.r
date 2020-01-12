@@ -37,7 +37,6 @@
 #' @param fit.functions Name of the method used to provide fit indices
 #' @param data optional data.frame
 #' @param null.model for mixed models, null model against to test the submodels
-#' @param link.betareg for betareg, link function to use.
 #' @param ... Other arguments provided to lm or lmer (not implemented yet)
 #' @return
 #' \item{predictors}{Vector of predictors.}
@@ -90,14 +89,13 @@ dominanceAnalysis <-
            fit.functions = "default",
            data = NULL,
            null.model = NULL,
-           link.betareg = NULL,
            ...) {
     if(is.list(terms)) {
       terms<-sapply(terms,paste0,collapse="+")
     }
     daModels        <- daSubmodels(x = x, constants = constants, terms = terms)
 
-    daRaw           <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model, link.betareg= link.betareg,...)
+    daRaw           <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model,...)
 
     daAverageByLevel <- daAverageContributionByLevel(daRaw)
     daAverageGeneral <- lapply(daAverageByLevel, function(x) {colMeans(x[, -1])})
@@ -107,7 +105,6 @@ dominanceAnalysis <-
       terms        = terms,
       fit.functions = daRaw$fit.functions,
       fits = daRaw,
-      link.betareg=link.betareg,
       contribution.by.level = daAverageByLevel,
       contribution.average = daAverageGeneral,
       complete = daCompleteDominance(daRaw),

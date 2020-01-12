@@ -11,7 +11,6 @@ daRawResults(
   fit.functions = "default",
   data = NULL,
   null.model = NULL,
-  link.betareg = NULL,
   ...
 )
 }

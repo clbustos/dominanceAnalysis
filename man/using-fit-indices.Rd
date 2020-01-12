@@ -4,13 +4,13 @@
 \alias{using-fit-indices}
 \title{Provides fit indices for different regression models.}
 \arguments{
+\item{original.model}{Original fitted model}
+
 \item{data}{Complete data set containing the variables in the model.}
 
 \item{null.model}{Null model only needed for HLM models.}
 
 \item{base.cov}{Required if only a covariance/correlation matrix is provided.}
-
-\item{family.glm}{family param for glm models.}
 }
 \description{
 \code{\link{dominanceAnalysis}} tries to infer, based on the class of the
@@ -23,6 +23,6 @@ on the data.
 Interfaces are:
 \itemize{
 \item \code{da.CLASS.fit("names")} returns a vector with names for fit indices
-\item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one parameter, the formula to calculate the submodel.
+\item \code{da.CLASS.fit(original.model, data, null.model, base.cov=NULL)} returns a function with one parameter, the formula to calculate the submodel.
 }
 }

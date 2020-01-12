@@ -4,10 +4,10 @@
 \alias{da.lm.fit}
 \title{Provides coefficient of determination for \code{lm} models.}
 \usage{
-da.lm.fit(data, ...)
+da.lm.fit(original.model, ...)
 }
 \arguments{
-\item{data}{complete data set containing the variables in the model}
+\item{original.model}{Original fitted model}
 
 \item{...}{ignored}
 }
@@ -22,8 +22,9 @@ x1<-rnorm(1000)
 x2<-rnorm(1000)
 y <-x1+x2+rnorm(1000)
 df.1=data.frame(y=y,x1=x1,x2=x2)
-da.lm.fit(df.1)("names")
-da.lm.fit(df.1)(y~x1)
+lm.1<-lm(y~x1+x2)
+da.lm.fit(lm.1)("names")
+da.lm.fit(lm.1)(y~x1)
 }
 \seealso{
 Other fit indices: 

@@ -11,7 +11,6 @@ dominanceAnalysis(
   fit.functions = "default",
   data = NULL,
   null.model = NULL,
-  link.betareg = NULL,
   ...
 )
 }
@@ -27,8 +26,6 @@ dominanceAnalysis(
 \item{data}{optional data.frame}
 
 \item{null.model}{for mixed models, null model against to test the submodels}
-
-\item{link.betareg}{for betareg, link function to use.}
 
 \item{...}{Other arguments provided to lm or lmer (not implemented yet)}
 }

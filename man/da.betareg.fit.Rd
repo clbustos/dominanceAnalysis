@@ -4,12 +4,10 @@
 \alias{da.betareg.fit}
 \title{Provides fit indices for betareg models.}
 \usage{
-da.betareg.fit(data, link.betareg, ...)
+da.betareg.fit(original.model, ...)
 }
 \arguments{
-\item{data}{complete data set}
-
-\item{link.betareg}{link function for the mean model. By default, logit.}
+\item{original.model}{Original fitted model}
 
 \item{...}{ignored}
 }

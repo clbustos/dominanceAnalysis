@@ -9,12 +9,12 @@
 #' Interfaces are:
 #' \itemize{
 #' \item \code{da.CLASS.fit("names")} returns a vector with names for fit indices
-#' \item \code{da.CLASS.fit(data, null.model, base.cov=NULL,family.glm=NULL)} returns a function with one parameter, the formula to calculate the submodel.
+#' \item \code{da.CLASS.fit(original.model, data, null.model, base.cov=NULL)} returns a function with one parameter, the formula to calculate the submodel.
 #' }
+#' @param original.model Original fitted model
 #' @param data Complete data set containing the variables in the model.
 #' @param null.model Null model only needed for HLM models.
 #' @param base.cov Required if only a covariance/correlation matrix is provided.
-#' @param family.glm family param for glm models.
 #' @name using-fit-indices
 
 NULL
@@ -22,7 +22,7 @@ NULL
 #' Provides coefficient of determination for \code{lm} models.
 #'
 #' Uses \eqn{R^2} (coefficient of determination) as fit index
-#' @param data complete data set containing the variables in the model
+#' @param original.model Original fitted model
 #' @param ... ignored
 #' @return A function described by \link{using-fit-indices} description for interface
 #' @export
@@ -33,15 +33,16 @@ NULL
 #' x2<-rnorm(1000)
 #' y <-x1+x2+rnorm(1000)
 #' df.1=data.frame(y=y,x1=x1,x2=x2)
-#' da.lm.fit(df.1)("names")
-#' da.lm.fit(df.1)(y~x1)
-da.lm.fit<-function(data,...) {
+#' lm.1<-lm(y~x1+x2)
+#' da.lm.fit(lm.1)("names")
+#' da.lm.fit(lm.1)(y~x1)
+da.lm.fit<-function(original.model, ...) {
   mc=match.call()
   function(x) {
   	if(x=="names") {
   		return("r2")
   	}
-	 list(r2=summary(lm(x, data=data))$r.squared)
+	 list(r2=summary(update(original.model, x))$r.squared)
 	}
 }
 
@@ -50,8 +51,7 @@ da.lm.fit<-function(data,...) {
 #' Functions only available for logistic regression, based on Azen and Traxel(2009).
 #'
 #' Check \link{daRawResults}.
-#' @param data complete data set
-#' @param family.glm family for glm method. Use 'binomial' for logistic regression.
+#' @param original.model Original fitted model
 #' @param ...  ignored
 #' @return A function described by \link{using-fit-indices}. You could retrieve following indices
 #' \describe{
@@ -79,30 +79,31 @@ da.lm.fit<-function(data,...) {
 #' x3<-rnorm(1000)
 #' y<-factor(runif(1000) > exp(x1+x2+x3)/(1+exp(x1+x2+x3)))
 #' df.1=data.frame(x1,x2,x3,y)
-#' da.glm.fit(data=df.1)("names")
-#' da.glm.fit(data=df.1, family.glm='binomial')(y~x1)
-da.glm.fit<-function(data,family.glm,...) {
+#' glm.1<-glm(y~x1+x2+x3,data=df.1,family=binomial)
+#' da.glm.fit(original.model=glm.1)("names")
+#' da.glm.fit(original.model=glm.1)(y~x1)
+da.glm.fit<-function(original.model,...) {
 
 	mc=match.call()
 	function(x) {
 	    if(x=="names") {
 			return(c("r2.m","r2.cs","r2.n","r2.e"))
 		}
+	  g1<-update(original.model, x)
+		g.null<-update(original.model,~1)
 
-		g1<-glm(x,data=data,family=family.glm);
-
-		g.null<-update(g1,~1,data=data,family=family.glm)
-		#print(summary(g1))
 		#print(logLik(g.null))
+		#print(logLik(g1))
 		#l0=-0.5*g1$null.deviance
 
 		#print(l0)
+
+
 		l0=logLik(g.null)
 		l1=logLik(g1)
-		n<-nrow(mc$data)
+		n<-nrow(original.model$model)
 
-
-		r2.cs<- 1-   exp(2/n*(l0 - l1) )
+		r2.cs<- 1- exp(2/n*(l0 - l1) )
 		#cat(l0,",",l1,",",n,",",r2.cs,"\n")
     list(
 		  r2.m=1-(l1/l0),
@@ -121,8 +122,7 @@ da.glm.fit<-function(data,family.glm,...) {
 #' Cox and Snell is preferred and pseudo-\eqn{R^2} should be preferred, because McFadden's index
 #' could be negative.
 #'
-#' @param data complete data set
-#' @param link.betareg link function for the mean model. By default, logit.
+#' @param original.model Original fitted model
 #' @param ...  ignored
 #'
 #' @return A function described by \link{using-fit-indices}. You could retrieve following indices:
@@ -144,7 +144,7 @@ da.glm.fit<-function(data,family.glm,...) {
 #' @importFrom stats lm logLik update
 #' @export
 #'
-da.betareg.fit<-function(data,link.betareg,...) {
+da.betareg.fit<-function(original.model,...) {
   if (!requireNamespace("betareg", quietly = TRUE)) { #nocov start
     stop("betareg needed for this function to work. Please install it.",
          call. = FALSE)
@@ -155,15 +155,15 @@ da.betareg.fit<-function(data,link.betareg,...) {
       return(c("r2.cs","r2.pseudo","r2.m"))
     }
 
-    g1<-betareg::betareg(formula = x,data=data, link=link.betareg)
+    g1<-update(original.model, x)
     pseudo.r2<-g1$pseudo.r.squared
     if(is.na(pseudo.r2)) {
       pseudo.r2<-0
     }
-    g.null<-update(g1,~1,data=data)
+    g.null<-update(original.model,~1)
     l0=logLik(g.null)
     l1=logLik(g1)
-    n<-nrow(mc$data)
+    n<-nrow(original.model$model)
 
 
     r2.cs<- 1-   exp(2/n*(l0 - l1) )
@@ -181,7 +181,7 @@ da.betareg.fit<-function(data,link.betareg,...) {
 
 #' Provides fit indices for hierarchical linear models, based on Luo and Azen (2013).
 #'
-#' @param data complete data set containing the variables in the model
+#' @param original.model Original fitted model
 #' @param null.model needed for HLM models
 #' @param ... ignored
 #' @references
@@ -192,7 +192,7 @@ da.betareg.fit<-function(data,link.betareg,...) {
 #' @family fit indices
 #' @export
 
-da.lmerMod.fit<-function(data, null.model, ...) {
+da.lmerMod.fit<-function(original.model, null.model, ...) {
   if (!requireNamespace("lme4", quietly = TRUE)) { #nocov start
     stop("lme4 needed for this function to work. Please install it.",
       call. = FALSE)
@@ -203,7 +203,8 @@ da.lmerMod.fit<-function(data, null.model, ...) {
 			return(c("rb.r2.1","rb.r2.2","sb.r2.1","sb.r2.2"))
 		}
 
-		l1<-lme4::lmer(x,data=data);
+
+		l1<-update(original.model, x);
 		lmmr2<-lmmR2(m.null=null.model, l1)
 		list(rb.r2.1=lmmr2$rb.r2.1,rb.r2.2=lmmr2$rb.r2.2, sb.r2.1=lmmr2$sb.r2.1,sb.r2.2=lmmr2$sb.r2.2)
 	}
@@ -260,12 +261,12 @@ da.mlmWithCov.fit<-function(base.cov, ...) {
 #' Provides coefficient of determination for \code{dynlm} models.
 #'
 #' Uses \eqn{R^2} (coefficient of determination) as fit index
-#' @param data complete data set containing the variables in the model
+#' @param original.model Original fitted model
 #' @param ... ignored
 #' @return A function described by \link{using-fit-indices} description for interface
 #' @export
 #' @family fit indices
-da.dynlm.fit<-function(data,...) {
+da.dynlm.fit<-function(original.model,...) {
   mc=match.call()
   function(x) {
     if(x=="names") {
@@ -273,7 +274,8 @@ da.dynlm.fit<-function(data,...) {
     }
 
     environment(x)<-environment()
-    dlm<-dynlm::dynlm(formula=x,data=data)
+    #dlm<-dynlm::dynlm(formula=x,data=data)
+    dlm<-update(original.model, x)
     out<-list(r2=summary(dlm)$r.squared)
     out
   }
