@@ -10,11 +10,11 @@
 #' data(longley)
 #' lm.1<-lm(Employed~.,longley)
 #' da<-dominanceAnalysis(lm.1)
-#' # By default, plot complete dominance of first fit function
+#' # By default, plot() shows the general dominance plot
 #' plot(da)
-#' # Parameter which.graph defines dominance to plot
+#' # Parameter which.graph defines which type of dominance to plot
 #' plot(da,which.graph='conditional')
-#' plot(da,which.graph='general')
+#' plot(da,which.graph='complete')
 
 plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "complete_no_facet", "conditional"), fit.function=NULL,...) {
   which.graph<-which.graph[1]
@@ -39,7 +39,8 @@ plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "comple
     colnames(x.fits)<-replaceTermsInString(string = colnames(x.fits), x$terms)
     x.df<-data.frame(.level=factor(paste0("Level: ",x.level)), .names=x.names, x.fits)
     x.df.m<-na.omit(reshape2::melt(x.df,id.vars = c(".level",".names")))
-    gg<-ggplot2::ggplot(x.df.m, ggplot2::aes_string(y=".names", x="value", color="variable",group="variable", shape=switch(which.graph, complete=NULL, complete_no_facet=".level"))) +
+    gg<-ggplot2::ggplot(x.df.m,
+                        ggplot2::aes_string(y=".names", x="value", color="variable", group="variable", shape = switch(which.graph, complete=NULL, complete_no_facet=".level"))) +
       ggplot2::geom_point(size=2) +
       ggplot2::guides(shape=FALSE) +
       ggplot2::xlab("Submodels") +
