@@ -13,7 +13,7 @@
 #' }
 #' @param original.model Original fitted model
 #' @param data Complete data set containing the variables in the model.
-#' @param null.model Null model only needed for HLM models.
+#' @param null.model Null model, only needed for HLM models.
 #' @param base.cov Required if only a covariance/correlation matrix is provided.
 #' @name using-fit-indices
 
@@ -179,7 +179,7 @@ da.betareg.fit<-function(original.model,...) {
 
 
 
-#' Provides fit indices for hierarchical linear models, based on Luo and Azen (2013).
+#' Provides fit indices for hierarchical linear models, based on Nakagawa(2013) and Luo and Azen (2013).
 #'
 #' @param original.model Original fitted model
 #' @param null.model needed for HLM models
@@ -187,6 +187,7 @@ da.betareg.fit<-function(original.model,...) {
 #' @references
 #' \itemize{
 #' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
+#' \item Nakagawa, S., & Schielzeth, H. (2013). A general and simple method for obtaining R2 from generalized linear mixed-effects models. Methods in Ecology and Evolution, 4(2), 133-142. doi:10.1111/j.2041-210x.2012.00261.x
 #' }
 #' @inheritParams using-fit-indices
 #' @family fit indices
@@ -197,16 +198,30 @@ da.lmerMod.fit<-function(original.model, null.model, ...) {
     stop("lme4 needed for this function to work. Please install it.",
       call. = FALSE)
   } #nocov end
+
+  performance.available<-requireNamespace("performance", quietly=TRUE)
 	mc=match.call()
 	function(x) {
 		if(x=="names") {
-			return(c("rb.r2.1","rb.r2.2","sb.r2.1","sb.r2.2"))
+
+		  if(performance.available) {
+		    names.out<-c("n.marg","n.cond","rb.r2.1","rb.r2.2","sb.r2.1","sb.r2.2")
+		  } else {
+		    names.out<-c("rb.r2.1","rb.r2.2","sb.r2.1","sb.r2.2")
+		  }
+		  return(names.out)
 		}
 
 
 		l1<-update(original.model, x);
 		lmmr2<-lmmR2(m.null=null.model, l1)
-		list(rb.r2.1=lmmr2$rb.r2.1,rb.r2.2=lmmr2$rb.r2.2, sb.r2.1=lmmr2$sb.r2.1,sb.r2.2=lmmr2$sb.r2.2)
+		out<-list(rb.r2.1=lmmr2$rb.r2.1,rb.r2.2=lmmr2$rb.r2.2, sb.r2.1=lmmr2$sb.r2.1,sb.r2.2=lmmr2$sb.r2.2)
+		if(performance.available) {
+      r2.nak<-performance::r2_nakagawa(l1)
+      out$n.marg<-r2.nak[[2]]
+      out$n.cond<-r2.nak[[1]]
+		}
+    out
 	}
 }
 

@@ -48,6 +48,8 @@ daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", da
   if(fit.functions=="default") {
 	# Should return
 	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(null.model=null.model, base.cov=base.cov, family.glm=family.glm, original.model=x))
+  } else {
+    fit.functions<-do.call(fit.functions, list(null.model=null.model, base.cov=base.cov, family.glm=family.glm, original.model=x))
   }
   ffn=fit.functions("names")
 

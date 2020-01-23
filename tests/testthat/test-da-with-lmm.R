@@ -16,3 +16,14 @@ test_that("contribution.average are correct",{
   ca<-averageContribution(da.lmer,fit.functions = "rb.r2.1")
   expect_equal(ca$rb.r2.1,c(N=0.34,P=-0.03, K=.15),tolerance=0.005)
 })
+
+
+performance.available<-requireNamespace("performance", quietly=TRUE)
+
+if(performance.available) {
+  test_that("if performance package is available, related functions are incorporated", {
+    ca<-averageContribution(da.lmer)
+    expect_true(all(c("n.marg","n.cond") %in% names(ca)))
+  })
+
+}

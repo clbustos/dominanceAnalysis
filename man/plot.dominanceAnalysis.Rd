@@ -30,9 +30,9 @@ Plot for a \code{\link{dominanceAnalysis}} object
 data(longley)
 lm.1<-lm(Employed~.,longley)
 da<-dominanceAnalysis(lm.1)
-# By default, plot complete dominance of first fit function
+# By default, plot() shows the general dominance plot
 plot(da)
-# Parameter which.graph defines dominance to plot
+# Parameter which.graph defines which type of dominance to plot
 plot(da,which.graph='conditional')
-plot(da,which.graph='general')
+plot(da,which.graph='complete')
 }
