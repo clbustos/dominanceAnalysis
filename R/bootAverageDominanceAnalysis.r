@@ -39,8 +39,11 @@ bootAverageDominanceAnalysis<-function(object,R,constants=c(), terms = NULL, fit
   eg          <- expand.grid(preds,ff)
 
   boot.da<-function(d,i) {
-    ss<-d[i,]
-    da<-dominanceAnalysis(object,constants=constants,terms=terms,fit.functions=fit.functions,data=ss, null.model=null.model,...)
+    # UGLY HACK
+    .boot.new.data<-d[i,]
+    object.2<-update(object, data=.boot.new.data)
+    da<-dominanceAnalysis(object.2,constants=constants,terms=terms,fit.functions=fit.functions,data=.boot.new.data, null.model=null.model,...)
+    .boot.new.data<-NULL
     as.numeric(sapply(da$contribution.average,I))
   }
 

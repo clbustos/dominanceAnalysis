@@ -14,6 +14,7 @@ test_that("should have correct sample values", {
   bs.da.1 <- bootAverageDominanceAnalysis(lm.1, R=2)
   expect_equivalent(names(bs.da.1),c("boot","preds","fit.functions","R","eg","terms"))
   expect_equivalent(bs.da.1$R,2)
+  expect_gt(abs(bs.da.1$boot$t[1,1]-bs.da.1$boot$t[2,1]),0)
   sum.bs.da.1<-summary(bs.da.1)
   expect_equal(colnames(sum.bs.da.1$r2),c("Var","Fit.Index","original","bs.E","bias","bs.SE"))
   expect_equal(sum.bs.da.1$r2$Var, c("xa","xb","xc","xd"))
