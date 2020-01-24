@@ -7,6 +7,7 @@ test_that("Bootstrap should have correct sample values", {
   x4<-rnorm(1000)
   y1<-10*x1+8*x2+6*x3+4*x4+rnorm(1000)
   y2<-x1+x2+x3+x4+rnorm(1000)
+  # This should be fixed
   d.f11<<-data.frame(xa=x1,xb=x2,xc=x3,xd=x4,y=y1,y2=y2)
   lm.1<-lm(y~xa+xb+xc+xd,data=d.f11)
   da<-dominanceAnalysis(lm.1)
@@ -16,7 +17,7 @@ test_that("Bootstrap should have correct sample values", {
   bs.da.1 <- bootDominanceAnalysis(lm.1, R=3)
   #expect_gt(sum(apply(bs.da.1$boot$t,1,sd)),0)
   expect_equal(sum(summary(bs.da.1)$r2[,4]==1),18)
-  lm.2<-lm(y2~xa+xb+xc+xd,data=d.f)
+  lm.2<-lm(y2~xa+xb+xc+xd,data=d.f11)
 
   da.2<-dominanceAnalysis(lm.2)
   da.2.gen<-da.2$general$r2

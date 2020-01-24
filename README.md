@@ -276,7 +276,8 @@ you need to run at least 1000 replications.
 
 ``` r
   set.seed(1234)
-  bda.attitude=bootDominanceAnalysis(lm.attitude, R=100)
+  bda.attitude<-bootDominanceAnalysis(lm.attitude, R=100)
+  
 ```
 
 The `summary()` method presents the results for the bootstrap analysis.
@@ -470,7 +471,6 @@ on the growth of peas conducted on 6 blocks.
 
 ``` r
 library(lme4)
-#> Loading required package: Matrix
 lmer.npk.1<-lmer(yield~N+P+K+(1|block),npk)
 lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
@@ -485,8 +485,26 @@ print(da.lmer)
 #> Dominance analysis
 #> Predictors: N, P, K 
 #> Constants: ( 1 | block ) 
-#> Fit-indices: rb.r2.1, rb.r2.2, sb.r2.1, sb.r2.2 
+#> Fit-indices: n.marg, n.cond, rb.r2.1, rb.r2.2, sb.r2.1, sb.r2.2 
 #> 
+#> * Fit index:  n.marg 
+#>   complete conditional general
+#> N      P,K         P,K     P,K
+#> P                             
+#> K        P           P       P
+#> 
+#> Average contribution:
+#>     N     K     P 
+#> 0.199 0.099 0.006 
+#> * Fit index:  n.cond 
+#>   complete conditional general
+#> N      P,K         P,K     P,K
+#> P                             
+#> K        P           P       P
+#> 
+#> Average contribution:
+#>      N      K      P 
+#>  0.256  0.120 -0.006 
 #> * Fit index:  rb.r2.1 
 #>   complete conditional general
 #> N      P,K         P,K     P,K
@@ -525,7 +543,8 @@ print(da.lmer)
 #> 0 0 0
 ```
 
-The fit indices used in the analysis were *rb.r2.1* (R\&B \(R^2_1\):
+The fit indices used in the analysis were *n.marg* (Nakagawa’s marginal
+R²), *n.cond* (Nakagawa’s conditional R²), *rb.r2.1* (R\&B \(R^2_1\):
 Level-1 variance component explained by predictors), *rb.r2.2* (R\&B
 \(R^2_2\): Level-2 variance component explained by predictors),
 *sb.r2.1* (S\&B \(R^2_1\): Level-1 proportional reduction in error
@@ -538,6 +557,46 @@ predictors on Level-1 variance, clearly *nitrogen* dominates over
 ``` r
 s.da.lmer=summary(da.lmer)
 s.da.lmer
+#> 
+#> * Fit index:  n.marg 
+#> 
+#> Average contribution of each variable:
+#> 
+#>     N     K     P 
+#> 0.199 0.099 0.006 
+#> 
+#> Dominance Analysis matrix:
+#>                model level   fit     N     P     K
+#>        ( 1 | block )     0     0 0.203 0.009 0.102
+#>      ( 1 | block )+N     1 0.203       0.004 0.097
+#>      ( 1 | block )+P     1 0.009 0.198       0.099
+#>      ( 1 | block )+K     1 0.102 0.198 0.006      
+#>      Average level 1     1       0.198 0.005 0.098
+#>    ( 1 | block )+N+P     2 0.207             0.097
+#>    ( 1 | block )+N+K     2   0.3       0.004      
+#>    ( 1 | block )+P+K     2 0.108 0.196            
+#>      Average level 2     2       0.196 0.004 0.097
+#>  ( 1 | block )+N+P+K     3 0.304                  
+#> 
+#> * Fit index:  n.cond 
+#> 
+#> Average contribution of each variable:
+#> 
+#>      N      K      P 
+#>  0.256  0.120 -0.006 
+#> 
+#> Dominance Analysis matrix:
+#>                model level   fit     N      P     K
+#>        ( 1 | block )     0 0.248 0.254 -0.007 0.118
+#>      ( 1 | block )+N     1 0.501       -0.007 0.121
+#>      ( 1 | block )+P     1 0.241 0.253        0.117
+#>      ( 1 | block )+K     1 0.366 0.257 -0.008      
+#>      Average level 1     1       0.255 -0.007 0.119
+#>    ( 1 | block )+N+P     2 0.495              0.123
+#>    ( 1 | block )+N+K     2 0.623       -0.005      
+#>    ( 1 | block )+P+K     2 0.358  0.26             
+#>      Average level 2     2        0.26 -0.005 0.123
+#>  ( 1 | block )+N+P+K     3 0.618                   
 #> 
 #> * Fit index:  rb.r2.1 
 #> 

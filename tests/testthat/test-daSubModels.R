@@ -2,10 +2,11 @@ context("daSubmodels tests")
 x1<-rnorm(1000)
 x2<-rnorm(1000)
 x3<-rnorm(1000)
+y1<-x1+x2+x3+rnorm(1000)
+d.f<-data.frame(xa=x1,xb=x2,xc=x3,y=y1)
 
 test_that("Correct submodels for standard data.frame and lm", {
-	y1<-x1+x2+x3+rnorm(1000)
-	d.f<-data.frame(xa=x1,xb=x2,xc=x3,y=y1)
+
 	pred.matrix<-matrix(
 	  c(0,0,0,
 	    1,0,0,
@@ -29,8 +30,8 @@ test_that("Correct submodels for standard data.frame and lm", {
 	})
 
 test_that("Correct submodels for standard data.frame, lm and manual terms", {
-  y1<-x1+x2+x3+rnorm(1000)
-  lm.1<-lm(y~xa+xb+xc,d.f)
+
+  lm.1<-lm(y~xa+xb+xc, d.f)
 
   pred.matrix<-matrix(
     c(0,0,
