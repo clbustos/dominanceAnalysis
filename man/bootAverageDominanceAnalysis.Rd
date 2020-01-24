@@ -5,7 +5,7 @@
 \title{Bootstrap average values for Dominance Analysis}
 \usage{
 bootAverageDominanceAnalysis(
-  object,
+  x,
   R,
   constants = c(),
   terms = NULL,
@@ -15,7 +15,7 @@ bootAverageDominanceAnalysis(
 )
 }
 \arguments{
-\item{object}{lm, glm or lmer model}
+\item{x}{lm, glm or lmer model}
 
 \item{R}{number on bootstrap resamples}
 

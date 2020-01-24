@@ -29,6 +29,6 @@ Depends:
 License: GPL-2
 LazyData: true
 Imports: methods, stats
-Suggests: lme4, boot, testthat, car, covr, knitr,rmarkdown,pscl, dynlm, ggplot2, reshape2, betareg
+Suggests: lme4, boot, testthat, car, covr, knitr,rmarkdown,pscl, dynlm, ggplot2, reshape2, betareg, performance
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr

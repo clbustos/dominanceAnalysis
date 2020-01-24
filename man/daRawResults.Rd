@@ -9,7 +9,7 @@ daRawResults(
   constants = c(),
   terms = NULL,
   fit.functions = "default",
-  data = NULL,
+  newdata = NULL,
   null.model = NULL,
   ...
 )
@@ -23,7 +23,7 @@ daRawResults(
 
 \item{fit.functions}{name of functions to fit.}
 
-\item{data}{Provides full data, if can't be obtained from the model}
+\item{newdata}{optional data.frame, that update data used on original model}
 
 \item{null.model}{Null model, for LMM models}
 }

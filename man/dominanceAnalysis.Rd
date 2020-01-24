@@ -9,13 +9,13 @@ dominanceAnalysis(
   constants = c(),
   terms = NULL,
   fit.functions = "default",
-  data = NULL,
+  newdata = NULL,
   null.model = NULL,
   ...
 )
 }
 \arguments{
-\item{x}{lm, glm, lmer model}
+\item{x}{fitted model (lm, glm, betareg), lmWithCov or mlmWithCov object}
 
 \item{constants}{vector of predictors to remain unchanged between models}
 
@@ -23,7 +23,7 @@ dominanceAnalysis(
 
 \item{fit.functions}{Name of the method used to provide fit indices}
 
-\item{data}{optional data.frame}
+\item{newdata}{optional data.frame, that update data used on original model}
 
 \item{null.model}{for mixed models, null model against to test the submodels}
 

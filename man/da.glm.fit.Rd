@@ -4,10 +4,12 @@
 \alias{da.glm.fit}
 \title{Provides fit indices for GLM models.}
 \usage{
-da.glm.fit(original.model, ...)
+da.glm.fit(original.model, newdata = NULL, ...)
 }
 \arguments{
 \item{original.model}{Original fitted model}
+
+\item{newdata}{Data used in update statement}
 
 \item{...}{ignored}
 }

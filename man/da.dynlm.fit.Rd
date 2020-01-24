@@ -4,10 +4,12 @@
 \alias{da.dynlm.fit}
 \title{Provides coefficient of determination for \code{dynlm} models.}
 \usage{
-da.dynlm.fit(original.model, ...)
+da.dynlm.fit(original.model, newdata = NULL, ...)
 }
 \arguments{
 \item{original.model}{Original fitted model}
+
+\item{newdata}{Data used in update statement}
 
 \item{...}{ignored}
 }

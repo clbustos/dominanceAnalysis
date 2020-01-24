@@ -12,7 +12,7 @@
 #' \item \code{da.CLASS.fit(original.model, data, null.model, base.cov=NULL)} returns a function with one parameter, the formula to calculate the submodel.
 #' }
 #' @param original.model Original fitted model
-#' @param data Complete data set containing the variables in the model.
+#' @param newdata Data used in update statement
 #' @param null.model Null model, only needed for HLM models.
 #' @param base.cov Required if only a covariance/correlation matrix is provided.
 #' @name using-fit-indices
@@ -23,6 +23,7 @@ NULL
 #'
 #' Uses \eqn{R^2} (coefficient of determination) as fit index
 #' @param original.model Original fitted model
+#' @param newdata Data used in update statement
 #' @param ... ignored
 #' @return A function described by \link{using-fit-indices} description for interface
 #' @export
@@ -36,13 +37,18 @@ NULL
 #' lm.1<-lm(y~x1+x2)
 #' da.lm.fit(lm.1)("names")
 #' da.lm.fit(lm.1)(y~x1)
-da.lm.fit<-function(original.model, ...) {
+da.lm.fit<-function(original.model, newdata=NULL, ...) {
   mc=match.call()
   function(x) {
   	if(x=="names") {
   		return("r2")
   	}
-	 list(r2=summary(update(original.model, x))$r.squared)
+    if(!is.null(newdata)) {
+      mod<-update(original.model, x, data=newdata)
+    } else {
+      mod<-update(original.model, x)
+    }
+	 list(r2=summary(mod)$r.squared)
 	}
 }
 
@@ -52,6 +58,7 @@ da.lm.fit<-function(original.model, ...) {
 #'
 #' Check \link{daRawResults}.
 #' @param original.model Original fitted model
+#' @param newdata Data used in update statement
 #' @param ...  ignored
 #' @return A function described by \link{using-fit-indices}. You could retrieve following indices
 #' \describe{
@@ -82,15 +89,22 @@ da.lm.fit<-function(original.model, ...) {
 #' glm.1<-glm(y~x1+x2+x3,data=df.1,family=binomial)
 #' da.glm.fit(original.model=glm.1)("names")
 #' da.glm.fit(original.model=glm.1)(y~x1)
-da.glm.fit<-function(original.model,...) {
+da.glm.fit<-function(original.model,newdata=NULL,...) {
 
 	mc=match.call()
 	function(x) {
 	    if(x=="names") {
 			return(c("r2.m","r2.cs","r2.n","r2.e"))
-		}
-	  g1<-update(original.model, x)
-		g.null<-update(original.model,~1)
+	    }
+
+
+	  if(!is.null(newdata)) {
+	    g1<-update(original.model, x, data=newdata)
+	    g.null<-update(original.model,~1, data=newdata)
+	  } else {
+	    g1<-update(original.model, x)
+	    g.null<-update(original.model,~1)
+	  }
 
 		#print(logLik(g.null))
 		#print(logLik(g1))
@@ -101,7 +115,7 @@ da.glm.fit<-function(original.model,...) {
 
 		l0=logLik(g.null)
 		l1=logLik(g1)
-		n<-nrow(original.model$model)
+		n<-nrow(g1$model)
 
 		r2.cs<- 1- exp(2/n*(l0 - l1) )
 		#cat(l0,",",l1,",",n,",",r2.cs,"\n")
@@ -123,6 +137,7 @@ da.glm.fit<-function(original.model,...) {
 #' could be negative.
 #'
 #' @param original.model Original fitted model
+#' @param newdata Data used in update statement
 #' @param ...  ignored
 #'
 #' @return A function described by \link{using-fit-indices}. You could retrieve following indices:
@@ -144,7 +159,7 @@ da.glm.fit<-function(original.model,...) {
 #' @importFrom stats lm logLik update
 #' @export
 #'
-da.betareg.fit<-function(original.model,...) {
+da.betareg.fit<-function(original.model, newdata=NULL, ...) {
   if (!requireNamespace("betareg", quietly = TRUE)) { #nocov start
     stop("betareg needed for this function to work. Please install it.",
          call. = FALSE)
@@ -155,15 +170,22 @@ da.betareg.fit<-function(original.model,...) {
       return(c("r2.cs","r2.pseudo","r2.m"))
     }
 
-    g1<-update(original.model, x)
+    if(!is.null(newdata)) {
+      g1<-update(original.model, x,data=newdata)
+      g.null<-update(original.model,~1, data=newdata)
+    } else {
+      g1<-update(original.model, x)
+      g.null<-update(original.model,~1)
+    }
+
     pseudo.r2<-g1$pseudo.r.squared
     if(is.na(pseudo.r2)) {
       pseudo.r2<-0
     }
-    g.null<-update(original.model,~1)
+
     l0=logLik(g.null)
     l1=logLik(g1)
-    n<-nrow(original.model$model)
+    n<-nrow(g1$model)
 
 
     r2.cs<- 1-   exp(2/n*(l0 - l1) )
@@ -183,6 +205,7 @@ da.betareg.fit<-function(original.model,...) {
 #'
 #' @param original.model Original fitted model
 #' @param null.model needed for HLM models
+#' @param newdata Data used in update statement
 #' @param ... ignored
 #' @references
 #' \itemize{
@@ -193,7 +216,7 @@ da.betareg.fit<-function(original.model,...) {
 #' @family fit indices
 #' @export
 
-da.lmerMod.fit<-function(original.model, null.model, ...) {
+da.lmerMod.fit<-function(original.model, null.model, newdata=NULL, ...) {
   if (!requireNamespace("lme4", quietly = TRUE)) { #nocov start
     stop("lme4 needed for this function to work. Please install it.",
       call. = FALSE)
@@ -212,9 +235,17 @@ da.lmerMod.fit<-function(original.model, null.model, ...) {
 		  return(names.out)
 		}
 
+	  if(!is.null(newdata)) {
+	    l1<-update(original.model, x,data=newdata)
+	    g.null<-update(null.model, data=newdata)
+	  } else {
+	    l1<-update(original.model, x)
+	    g.null<-null.model
+	  }
 
-		l1<-update(original.model, x);
-		lmmr2<-lmmR2(m.null=null.model, l1)
+		lmmr2<-lmmR2(m.null=g.null, l1)
+
+
 		out<-list(rb.r2.1=lmmr2$rb.r2.1,rb.r2.2=lmmr2$rb.r2.2, sb.r2.1=lmmr2$sb.r2.1,sb.r2.2=lmmr2$sb.r2.2)
 		if(performance.available) {
       r2.nak<-performance::r2_nakagawa(l1)
@@ -277,11 +308,12 @@ da.mlmWithCov.fit<-function(base.cov, ...) {
 #'
 #' Uses \eqn{R^2} (coefficient of determination) as fit index
 #' @param original.model Original fitted model
+#' @param newdata Data used in update statement
 #' @param ... ignored
 #' @return A function described by \link{using-fit-indices} description for interface
 #' @export
 #' @family fit indices
-da.dynlm.fit<-function(original.model,...) {
+da.dynlm.fit<-function(original.model, newdata=NULL, ...) {
   mc=match.call()
   function(x) {
     if(x=="names") {
@@ -290,7 +322,13 @@ da.dynlm.fit<-function(original.model,...) {
 
     environment(x)<-environment()
     #dlm<-dynlm::dynlm(formula=x,data=data)
-    dlm<-update(original.model, x)
+
+    if(!is.null(newdata)) {
+      dlm<-update(original.model, x, data=newdata)
+    } else {
+      dlm<-update(original.model, x)
+    }
+
     out<-list(r2=summary(dlm)$r.squared)
     out
   }

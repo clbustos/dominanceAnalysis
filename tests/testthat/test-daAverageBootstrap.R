@@ -1,6 +1,6 @@
 context("Average bootstrap")
 
-test_that("should have correct sample values", {
+test_that("should have correct sample values for lm", {
   x1      <- rnorm(1000)
   x2      <- rnorm(1000)
   x3      <- rnorm(1000)
@@ -20,6 +20,23 @@ test_that("should have correct sample values", {
   expect_equal(sum.bs.da.1$r2$Var, c("xa","xb","xc","xd"))
   expect_output(print(sum.bs.da.1),"Resamples:  2")
 })
+
+test_that("should work for glm", {
+  x1      <- rnorm(1000)
+  x2      <- rnorm(1000)
+  x3      <- rnorm(1000)
+  x4      <- rnorm(1000)
+  y1      <- (2*x1+8*x2+2*x3+1.5*x4)/10
+  y<-exp(y1)/(1+exp(y1))
+
+  d.f     <<- data.frame(xa=x1,xb=x2,xc=x3,xd=x4,y=as.numeric(runif(1000)<y))
+  glm.1    <- glm(y~xa+xb+xc+xd, data = d.f, family=binomial)
+  set.seed(12345)
+  bs.da.1 <- bootAverageDominanceAnalysis(glm.1, R=2)
+  expect_gt(sum(apply(bs.da.1$boot$t,2,sd)),0)
+
+})
+
 
 test_that("should have correct values using terms",{
 

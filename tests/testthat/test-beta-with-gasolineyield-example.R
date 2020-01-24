@@ -5,7 +5,7 @@ gy_logit <- betareg(yield ~ batch + temp, data = GasolineYield, model=TRUE,link=
 
 
 test_that("fit a beta regression without model=TRUE should fail", {
-  expect_error(dominanceAnalysis(betareg(yield ~ batch + temp, data = GasolineYield, model=F)),"model=TRUE")
+  expect_error(dominanceAnalysis(betareg(yield ~ batch + temp, data = GasolineYield, model=F) ),"model=TRUE")
 })
 
 da.gy <- dominanceAnalysis(gy_logit)

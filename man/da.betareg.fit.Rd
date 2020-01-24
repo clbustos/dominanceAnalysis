@@ -4,10 +4,12 @@
 \alias{da.betareg.fit}
 \title{Provides fit indices for betareg models.}
 \usage{
-da.betareg.fit(original.model, ...)
+da.betareg.fit(original.model, newdata = NULL, ...)
 }
 \arguments{
 \item{original.model}{Original fitted model}
+
+\item{newdata}{Data used in update statement}
 
 \item{...}{ignored}
 }

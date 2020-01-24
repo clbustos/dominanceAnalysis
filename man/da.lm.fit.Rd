@@ -4,10 +4,12 @@
 \alias{da.lm.fit}
 \title{Provides coefficient of determination for \code{lm} models.}
 \usage{
-da.lm.fit(original.model, ...)
+da.lm.fit(original.model, newdata = NULL, ...)
 }
 \arguments{
 \item{original.model}{Original fitted model}
+
+\item{newdata}{Data used in update statement}
 
 \item{...}{ignored}
 }

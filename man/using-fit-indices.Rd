@@ -6,9 +6,9 @@
 \arguments{
 \item{original.model}{Original fitted model}
 
-\item{data}{Complete data set containing the variables in the model.}
+\item{newdata}{Data used in update statement}
 
-\item{null.model}{Null model only needed for HLM models.}
+\item{null.model}{Null model, only needed for HLM models.}
 
 \item{base.cov}{Required if only a covariance/correlation matrix is provided.}
 }

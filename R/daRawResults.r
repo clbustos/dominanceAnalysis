@@ -6,7 +6,7 @@
 #' @param constants a vector of parameter to be fixed on all analysis
 #' @param terms     vector of terms to be analyzed. By default, obtained using the formula of model
 #' @param fit.functions name of functions to fit.
-#' @param data Provides full data, if can't be obtained from the model
+#' @param newdata optional data.frame, that update data used on original model
 #' @param null.model Null model, for LMM models
 #' @return a list with this elements
 #' \describe{
@@ -17,24 +17,18 @@
 #' }
 #' @importFrom stats formula terms family
 #' @keywords internal
-daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", data=NULL, null.model=NULL, ...) {
+daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", newdata=NULL, null.model=NULL, ...) {
   f<-formula(x)
   t.f<-terms(f)
-  base.cov<-family.glm<-NULL
+  base.cov<-NULL
   if(is(x,"lmWithCov") | is (x,"mlmWithCov")) {
-  	base.cov=x$cov
-  } else if (is.null(data)) {
-	  data=getData(x)
-  	if(is.null(data)) {
-  		stop("Not implemented method to retrieve data from model")
-  	}
+    	base.cov=x$cov
+  } else {
+    old.data=getData(x)
+    if(is.null(old.data)) {
+    	stop("Not implemented method to retrieve data from model")
+    }
   }
-
-  if(is(x,"glm")) {
-    family.glm<-family(x)
-  }
-
-
   if(is.null(terms)) {
     x.terms<-attr(t.f,"term.labels")
   } else {
@@ -47,9 +41,9 @@ daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", da
 
   if(fit.functions=="default") {
 	# Should return
-	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(null.model=null.model, base.cov=base.cov, family.glm=family.glm, original.model=x))
+	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(null.model=null.model, base.cov=base.cov,  original.model=x,newdata=newdata))
   } else {
-    fit.functions<-do.call(fit.functions, list(null.model=null.model, base.cov=base.cov, family.glm=family.glm, original.model=x))
+    fit.functions<-do.call(fit.functions, list(null.model=null.model, base.cov=base.cov, original.model=x,newdata=newdata))
   }
   ffn=fit.functions("names")
 

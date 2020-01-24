@@ -31,11 +31,11 @@
 #' \item{betareg}{Provides pseudo-\eqn{R^2}, Cox and Snell(1989), McFadden (1974), and Estrella (1998). You could set the link function using link.betareg if automatic detection of link function doesn't work.
 #' }
 #'   See \code{\link{da.betareg.fit}} }
-#' @param x lm, glm, lmer model
+#' @param x fitted model (lm, glm, betareg), lmWithCov or mlmWithCov object
 #' @param constants vector of predictors to remain unchanged between models
 #' @param terms     vector of terms to be analyzed. By default, obtained from the model
 #' @param fit.functions Name of the method used to provide fit indices
-#' @param data optional data.frame
+#' @param newdata optional data.frame, that update data used on original model
 #' @param null.model for mixed models, null model against to test the submodels
 #' @param ... Other arguments provided to lm or lmer (not implemented yet)
 #' @return
@@ -87,15 +87,14 @@ dominanceAnalysis <-
            constants = c(),
            terms = NULL,
            fit.functions = "default",
-           data = NULL,
+           newdata = NULL,
            null.model = NULL,
            ...) {
     if(is.list(terms)) {
       terms<-sapply(terms,paste0,collapse="+")
     }
     daModels        <- daSubmodels(x = x, constants = constants, terms = terms)
-
-    daRaw           <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, data = data, null.model = null.model,...)
+    daRaw           <- daRawResults(x = x, constants = constants, terms = terms, fit.functions = fit.functions, newdata = newdata, null.model = null.model,...)
 
     daAverageByLevel <- daAverageContributionByLevel(daRaw)
     daAverageGeneral <- lapply(daAverageByLevel, function(x) {colMeans(x[, -1])})
