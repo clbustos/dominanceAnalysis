@@ -3,6 +3,8 @@
 #' @param x a \code{\link{dominanceAnalysis}} object
 #' @param which.graph which graph to plot
 #' @param fit.function name of the fit indices to retrieve. If NULL, first index will be used
+#' @param complete_flipped_axis For complete and complete_no_facet plot, set the R2 on X axis
+#'                              to allow easier visualization
 #' @param ... unused
 #' @return a ggplot object
 #' @export
@@ -16,7 +18,7 @@
 #' plot(da,which.graph='conditional')
 #' plot(da,which.graph='complete')
 
-plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "complete_no_facet", "conditional"), fit.function=NULL,...) {
+plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "complete_no_facet", "conditional"),  fit.function=NULL, complete_flipped_axis=TRUE,...) {
   which.graph<-which.graph[1]
 
   if(is.null(fit.function)) {
@@ -39,16 +41,22 @@ plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "comple
     colnames(x.fits)<-replaceTermsInString(string = colnames(x.fits), x$terms)
     x.df<-data.frame(.level=factor(paste0("Level: ",x.level)), .names=x.names, x.fits)
     x.df.m<-na.omit(reshape2::melt(x.df,id.vars = c(".level",".names")))
-    gg<-ggplot2::ggplot(x.df.m,
-                        ggplot2::aes_string(y=".names", x="value", color="variable", group="variable", shape = switch(which.graph, complete=NULL, complete_no_facet=".level"))) +
-      ggplot2::geom_point(size=2) +
+    if(complete_flipped_axis) {
+      gg<-ggplot2::ggplot(x.df.m, ggplot2::aes_string(y=".names", x="value", color="variable", group="variable", shape = switch(which.graph, complete=NULL, complete_no_facet=".level")))
+      free_scale<-"free_y"
+    } else {
+      gg<-ggplot2::ggplot(x.df.m, ggplot2::aes_string(x=".names", y="value", color="variable", group="variable", shape = switch(which.graph, complete=NULL, complete_no_facet=".level")))
+      free_scale<-"free_x"
+    }
+
+    gg<-gg+ggplot2::geom_point(size=2) +
       ggplot2::guides(shape=FALSE) +
       ggplot2::xlab("Submodels") +
       ggplot2::ylab(fit.function) +
       ggplot2::ggtitle("Complete dominance")
 
     if(which.graph=='complete') {
-      gg<-gg+ggplot2::facet_wrap(~.level, scales="free_y")
+      gg<-gg + ggplot2::facet_wrap(~.level, scales=free_scale)
     }
 
   }

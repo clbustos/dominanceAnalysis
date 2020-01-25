@@ -8,6 +8,7 @@
   x,
   which.graph = c("general", "complete", "complete_no_facet", "conditional"),
   fit.function = NULL,
+  complete_flipped_axis = TRUE,
   ...
 )
 }
@@ -17,6 +18,9 @@
 \item{which.graph}{which graph to plot}
 
 \item{fit.function}{name of the fit indices to retrieve. If NULL, first index will be used}
+
+\item{complete_flipped_axis}{For complete and complete_no_facet plot, set the R2 on X axis
+to allow easier visualization}
 
 \item{...}{unused}
 }
