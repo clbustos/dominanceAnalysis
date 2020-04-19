@@ -2,22 +2,79 @@
 % Please edit documentation in R/dominanceMatrix.r
 \name{dominanceMatrix}
 \alias{dominanceMatrix}
-\title{Calculates the dominance for a given matrix}
+\alias{dominanceMatrix.data.frame}
+\alias{dominanceMatrix.matrix}
+\alias{dominanceMatrix.dominanceAnalysis}
+\title{Retrieve or calculates a dominance matrix for a given object}
 \usage{
-dominanceMatrix(x, undefined.value = 0.5)
+dominanceMatrix(x, ...)
+
+\method{dominanceMatrix}{data.frame}(x, undefined.value = 0.5, ordered = FALSE, ...)
+
+\method{dominanceMatrix}{matrix}(x, undefined.value = 0.5, ordered = FALSE, ...)
+
+\method{dominanceMatrix}{dominanceAnalysis}(
+  x,
+  type,
+  fit.functions = NULL,
+  drop = TRUE,
+  ordered = FALSE,
+  ...
+)
 }
 \arguments{
-\item{x}{matrix with fit indexes}
+\item{x}{matrix (calculate) or dominanceAnalysis (retrieve)}
+
+\item{...}{extra arguments. Not used}
 
 \item{undefined.value}{value when no dominance can be established}
+
+\item{ordered}{Logical. If TRUE, sort the output according to dominance.}
+
+\item{type}{type of dominance matrix to retrieve. Could be complete, conditional or general}
+
+\item{fit.functions}{name of the fit indices to retrieve. If NULL, all fit indices will be retrieved}
+
+\item{drop}{if TRUE and just one fit index is available, returns a matrix. Else, returns a list}
 }
 \value{
-A matrix representing dominance. 1 represented domination of the row variable 
-        over the column variable, 0 dominance of the column over the row variable.
-        Undefined dominance is represented by \code{undefined.value} parameter
+for matrix and data-frame, returns a matrix representing dominance.
+         1 represents domination of the row variable over the column variable,
+         0 dominance of the column over the row variable.
+         Undefined dominance is represented by \code{undefined.value} parameter.
+         For dominanceAnalysis object, returns a matrix, if \code{drop} parameter
+         if TRUE and just one index is available. Else, a list is returned, with
+         keys as name of fit-indices and values as matrices, as described previously.
 }
 \description{
-Dominance is defined between a pair of variables if all values on a given
-variable are higher than for other variable.
-}
+This methods calculates or retrieve dominance matrix
 
+This methods allows a common interface to retrieve all dominance matrices
+from dominanceAnalysis objects
+}
+\details{
+To calculate a dominance matrix from a matrix or dataframe, use
+
+  \code{dominanceMatrix(x,undefined.value)}.
+
+To retrieve the dominance matrices from a dominanceAnalysis object, use
+
+   \code{dominanceMatrix(x,type,fit.function,drop)}
+}
+\examples{
+# For matrix or data.frame
+mm<-data.frame(a=c(5,3,2),b=c(4,2,1),c=c(5,4,3))
+dominanceMatrix(mm)
+# For dominanceAnalysis
+data(longley)
+da.longley<-dominanceAnalysis(lm(Employed~.,longley))
+dominanceMatrix(da.longley,type="complete")
+}
+\seealso{
+Other retrieval methods: 
+\code{\link{averageContribution}()},
+\code{\link{contributionByLevel}()},
+\code{\link{dominanceBriefing}()},
+\code{\link{getFits}()}
+}
+\concept{retrieval methods}

@@ -4,9 +4,16 @@
 \alias{summary.bootDominanceAnalysis}
 \title{Summary for bootDominanceAnalysis.}
 \usage{
-\method{summary}{bootDominanceAnalysis}(x, ...)
+\method{summary}{bootDominanceAnalysis}(object, fit.functions = NULL, ...)
+}
+\arguments{
+\item{object}{a \code{\link{bootDominanceAnalysis}} object}
+
+\item{fit.functions}{name of the fit indices to retrieve. If NULL, all fit indices will be retrieved}
+
+\item{...}{ignored}
 }
 \description{
 Summary for bootDominanceAnalysis.
 }
-
+\keyword{internal}

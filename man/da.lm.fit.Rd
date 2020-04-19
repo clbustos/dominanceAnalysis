@@ -4,14 +4,34 @@
 \alias{da.lm.fit}
 \title{Provides coefficient of determination for \code{lm} models.}
 \usage{
-da.lm.fit(...)
+da.lm.fit(data, ...)
+}
+\arguments{
+\item{data}{complete data set containing the variables in the model}
+
+\item{...}{ignored}
+}
+\value{
+A function described by \link{using-fit-indices} description for interface
 }
 \description{
 Uses \eqn{R^2} (coefficient of determination) as fit index
 }
-\seealso{
-Other fit indexes: \code{\link{da.glm.fit}},
-  \code{\link{da.lmWithCov.fit}},
-  \code{\link{da.lmerMod.fit}}
+\examples{
+x1<-rnorm(1000)
+x2<-rnorm(1000)
+y <-x1+x2+rnorm(1000)
+df.1=data.frame(y=y,x1=x1,x2=x2)
+da.lm.fit(df.1)("names")
+da.lm.fit(df.1)(y~x1)
 }
-
+\seealso{
+Other fit indices: 
+\code{\link{da.betareg.fit}()},
+\code{\link{da.dynlm.fit}()},
+\code{\link{da.glm.fit}()},
+\code{\link{da.lmWithCov.fit}()},
+\code{\link{da.lmerMod.fit}()},
+\code{\link{da.mlmWithCov.fit}()}
+}
+\concept{fit indices}

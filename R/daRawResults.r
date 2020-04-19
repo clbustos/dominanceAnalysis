@@ -1,31 +1,66 @@
-#' Retrieve raw results for dominance analysis
+#' Retrieve raw results for dominance analysis.
+#'
 #' Provides name functions, base fit values and
 #' matrix for models vs predictors importance
-#' @export
+#' @param x a model.
+#' @param constants a vector of parameter to be fixed on all analysis
+#' @param terms     vector of terms to be analyzed. By default, obtained using the formula of model
+#' @param fit.functions name of functions to fit.
+#' @param data Provides full data, if can't be obtained from the model
+#' @param null.model Null model, for LMM models
+#' @return a list with this elements
+#' \describe{
+#' \item{fit.functions}{Name of fit indices}
+#' \item{fits}{Increment on fit indices, when specific variable is added}
+#' \item{base.fits}{Raw fit indices for each model}
+#' \item{level}{Vector of levels, compatible with fits and base.fits}
+#' }
+#' @importFrom stats formula terms family
 #' @keywords internal
-daRawResults<-function(x,constants=c(),fit.functions="default",data=NULL,null.model=NULL, ...) {
+daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", data=NULL, null.model=NULL, link.betareg=NULL, ...) {
   f<-formula(x)
   t.f<-terms(f)
-  base.cov<-family.glm<-NULL
+  base.cov<-family.glm<-link.betareg<-NULL
   if(is(x,"lmWithCov") | is (x,"mlmWithCov")) {
   	base.cov=x$cov
   } else if (is.null(data)) {
 	  data=getData(x)
   	if(is.null(data)) {
-  		stop("Not implemented")
+  		stop("Not implemented method to retrieve data from model")
   	}
   }
+
   if(is(x,"glm")) {
     family.glm<-family(x)
   }
-  x.terms<-sort(attr(t.f,"term.labels"))
-  respuesta<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]
 
-  models<-daSubmodels(x,constants)
+  if(is(x,"betareg")) {
+    # check if link.betareg is provided
+
+    if(is.null(link.betareg)) {
+      link.betareg.call<-x$call$link
+      if(is.null(link.betareg.call)) {
+        link.betareg="logit"
+      } else {
+        link.betareg=link.betareg.call
+      }
+    } else {
+      link.betareg=link.betareg
+    }
+  }
+  if(is.null(terms)) {
+    x.terms<-attr(t.f,"term.labels")
+  } else {
+    x.terms<-terms
+  }
+  response<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]
+
+  models<-daSubmodels(x = x,constants = constants, terms=x.terms)
   fm<-formulas.daSubmodels(models)
+
   if(fit.functions=="default") {
 	# Should return
-	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(data=data,null.model=null.model,base.cov=base.cov,family.glm=family.glm))
+	  fit.functions<-do.call(paste0("da.",class(x)[1],".fit"), list(data=data, null.model=null.model, base.cov=base.cov, family.glm=family.glm, link.betareg=link.betareg))
   }
   ffn=fit.functions("names")
 
@@ -71,7 +106,7 @@ daRawResults<-function(x,constants=c(),fit.functions="default",data=NULL,null.mo
 	  }
 	  raw.vals[[ff]]<-mm
    }
-   out<-list(fit.functions=ffn, fits=raw.vals, base.fits=fits,level=models$level)
+   out<-list(fit.functions = ffn, fits=raw.vals, base.fits=fits, level=models$level)
    class(out)<-"daRawResults"
    out
 }

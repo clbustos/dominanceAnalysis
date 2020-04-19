@@ -2,12 +2,19 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lmerMod.fit}
 \alias{da.lmerMod.fit}
-\title{Provides fit indexes for mixed models, based on Luo and Azen (2012).}
+\title{Provides fit indices for hierarchical linear models, based on Luo and Azen (2013).}
 \usage{
-da.lmerMod.fit(...)
+da.lmerMod.fit(data, null.model, ...)
+}
+\arguments{
+\item{data}{complete data set containing the variables in the model}
+
+\item{null.model}{needed for HLM models}
+
+\item{...}{ignored}
 }
 \description{
-Requires glmmextra @url{https://github.com/clbustos/r-glmmextra}
+Provides fit indices for hierarchical linear models, based on Luo and Azen (2013).
 }
 \references{
 \itemize{
@@ -15,7 +22,12 @@ Requires glmmextra @url{https://github.com/clbustos/r-glmmextra}
 }
 }
 \seealso{
-Other fit indexes: \code{\link{da.glm.fit}},
-  \code{\link{da.lm.fit}}, \code{\link{da.lmWithCov.fit}}
+Other fit indices: 
+\code{\link{da.betareg.fit}()},
+\code{\link{da.dynlm.fit}()},
+\code{\link{da.glm.fit}()},
+\code{\link{da.lm.fit}()},
+\code{\link{da.lmWithCov.fit}()},
+\code{\link{da.mlmWithCov.fit}()}
 }
-
+\concept{fit indices}

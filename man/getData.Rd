@@ -10,4 +10,3 @@ getData(x)
 Returns data from different models
 }
 \keyword{internal}
-
