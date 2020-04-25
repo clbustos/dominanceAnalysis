@@ -4,36 +4,46 @@
 \alias{bootDominanceAnalysis}
 \title{Bootstrap analysis for Dominance Analysis}
 \usage{
-bootDominanceAnalysis(x, R, constants = c(), fit.functions = "default",
-  null.model = NULL, ...)
+bootDominanceAnalysis(
+  x,
+  R,
+  constants = c(),
+  terms = NULL,
+  fit.functions = "default",
+  null.model = NULL,
+  ...
+)
 }
 \arguments{
-\item{x}{lm, glm, lmer model}
+\item{x}{lm, glm or lmer model}
 
-\item{constants}{vector of variables to remain unchanged between models}
+\item{R}{number on bootstrap resamples}
 
-\item{fit.functions}{list of functions which provides fit indexes for model.}
+\item{constants}{vector of predictors to remain unchanged between models.
+i.e. vector of variables not subjected to bootstrap analysis.}
 
-\item{null.model}{for mixel models, null model against to test the submodels}
+\item{terms}{vector of terms to be analyzed. By default, obtained from the model}
 
-\item{...}{Other arguments provided to lm or lmer (not implemented yet)}
+\item{fit.functions}{list of functions which provides fit indices for model.
+See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
+function.}
+
+\item{null.model}{only for linear mixed models, null model against to test the submodels.
+i.e. only random effects, without any fixed effect.}
+
+\item{...}{Other arguments provided to lm or lmer (not implemented yet).}
 }
 \description{
-Bootstrap procedure as presented on Azen and Bodescu(2003).
-Provides the expected level of dominance of variable \eqn{X_i} over \eqn{X_j},
-as the degree to which the pattern found on sample is reproduced on the 
+Bootstrap procedure as presented on Azen and Budescu (2003).
+Provides the expected level of dominance of predictor \eqn{X_i} over \eqn{X_j},
+as the degree to which the pattern found on sample is reproduced on the
 bootstrap samples.
-Use \code{\link{summary.bootDominanceAnalysis}} to get a nice formatted
-data.frame
+Use \code{summary()} to get a nice formatted data.frame
 }
 \examples{
-\dontrun{
+\donttest{
 lm.1<-lm(Employed~.,longley)
 da.boot<-bootDominanceAnalysis(lm.1,R=1000)
 summary(da.boot)
 }
 }
-\seealso{
-\code{\link{summary.bootDominanceAnalysis}}
-}
-

@@ -18,4 +18,3 @@ list
 Return a list with formulas for a given daSubmodels object
 }
 \keyword{internal}
-

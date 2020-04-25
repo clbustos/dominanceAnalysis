@@ -1,27 +1,27 @@
-#' Uses covariance/correlation matrix for calculate OLS.
+#' Uses covariance/correlation matrix for calculate OLS
 #'
-#' Calculate coefficients and \eqn{R^2} for an OLS regression
+#' Calculate regression coefficients and \eqn{R^2} for an OLS regression.
 #' Could be used with \code{\link{dominanceAnalysis}} to
-#' perform a dominance analysis without the original data
+#' perform a dominance analysis without the original data.
 #'
-#' @param f formula
+#'
+#' @param f formula for lm model
 #' @param x correlation/covariance matrix
 #' @return
-#' \item{coef}{coefficients of the regression}
-#' \item{r.squared}{\eqn{R^2} of the regression}
+#' \item{coef}{regression coefficients}
+#' \item{r.squared}{\eqn{R^2} or coefficient of determination}
 #' \item{formula}{formula provided as parameter}
 #' \item{cov}{covariance/correlation matrix provided as parameter}
 #' @examples
 #' cov.m<-matrix(c(1,0.2,0.3, 0.2,1,0.5,0.3,0.5,1),3,3,
 #' dimnames=list(c("x1","x2","y"),c("x1","x2","y")))
 #' lm.cov<-lmWithCov(y~x1+x2,cov.m)
-#' \dontrun{
 #' da<-dominanceAnalysis(lm.cov)
-#' }
 #' @export
 lmWithCov<-function(f,x) {
 	t.f<-terms(f)
-	x.terms<-sort(attr(t.f,"term.labels"))
+
+	x.terms<-attr(t.f,"term.labels")
 
 	if(length(x.terms)>0) {
 		respuesta<-rownames(attr(terms(f),"factors"))[attr(t.f,"response")]

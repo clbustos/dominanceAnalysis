@@ -15,4 +15,3 @@ getEqualRowId(m, r)
 Return the index of row equals to r on m
 }
 \keyword{internal}
-
