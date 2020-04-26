@@ -151,3 +151,74 @@ da.mlmWithCov.fit<-function(...) {
     list(r.squared.xy=mlm.1$r.squared.xy, p.squared.yx=mlm.1$p.squared.yx)
   }
 }
+#' Provides fit indexes for polr and multinom models, based on Luchman(2014) - 
+#'
+#' @return A list with several fit indexes
+#' \item{r2.m}{McFadden(1974)}
+#' \item{r2.cs}{Cox and Snell(1989). Use as a reference, because don't have 1 as upper bound}
+#' \item{r2.n}{Nagelkerke(1991), that corrects the upper bound of Cox and Snell(1989) index }
+#' \item{r2.e}{Estrella(1998)}
+#'
+#' @inheritParams using-fit-indexes
+#' @references
+#' \itemize{
+#' \item Luchman, J. N. (2014). Relative importance analysis with multicategory dependent variables: An extension and review of best practices. Organizational Research Methods, 17(4), 452-471.
+#' }
+#' @export
+#' @family fit indexes
+
+da.polr.fit<-function(...) {
+  
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return(c("r2.m","r2.cs","r2.n","r2.e"))
+    }
+    
+    p1<-polr(x,data=mc$data,method="logistic");
+    
+    p0 <- do.call("polr", 
+      list(formula=as.formula(paste0(as.list(attr(p1$terms,"variables"))[[2]]," ~ 1")),
+        data=mc$data,method="logistic"))
+    
+    l0=logLik(p0)
+    l1=logLik(p1)
+    n<-p1$n
+    r2.cs<-1-(exp(l0-l1))^(2/n)
+    list(
+      r2.m=1-(l1/l0),
+      r2.cs=r2.cs,
+      r2.n=r2.cs/(1-exp((2/n)*l0)),
+      r2.e=1-(l1/l0)^(-(2/n)*l0)
+    )
+  }
+  
+}
+
+da.multinom.fit<-function(...) {
+  
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return(c("r2.m","r2.cs","r2.n","r2.e"))
+    }
+    
+    p1<-multinom(x,data=mc$data)
+    
+    p0 <- do.call("multinom", 
+      list(formula=as.formula(paste0(as.list(attr(p1$terms,"variables"))[[2]]," ~ 1")),
+        data=mc$data))
+    
+    l0=logLik(p0)
+    l1=logLik(p1)
+    n<-nrow(p1$weights)
+    r2.cs<-1-(exp(l0-l1))^(2/n)
+    list(
+      r2.m=1-(l1/l0),
+      r2.cs=r2.cs,
+      r2.n=r2.cs/(1-exp((2/n)*l0)),
+      r2.e=1-(l1/l0)^(-(2/n)*l0)
+    )
+  }
+  
+}
