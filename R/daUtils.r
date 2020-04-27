@@ -10,6 +10,7 @@ getEqualRowId<-function(m,r) {
 #'
 #' @keywords internal
 getData<-function(x) {
+
   data=NULL;
   if(is(x,"glm")) {
     if(!is.null(x$data) & !is(x$data,"environment")) {
@@ -17,17 +18,61 @@ getData<-function(x) {
     } else {
       data=x$model
     }
+<<<<<<< HEAD
   } else if(is(x,"lm") | is(x,"polr") | is(x,"multinom")) {
 	  if(!is.null(x$call$data)) {
+=======
+  } else if(is(x,"lm")) {
+
+    if(!is.null(x$call$data)) {
+      #print(where(as.character(x$call$data)))
+>>>>>>> 21ee8b21c7bb9e4d39cdf5623e4c848a14ea77cb
       data=get(as.character(x$call$data))
 	  } else {
-      data=lm.1$model
+      data=x$model
     }
     if(is.null(data)) {
       stop("Can't get data")
     }
   } else if(is(x,"lmerMod")) {
 		data=x@frame
+  } else if(is(x,"betareg")) {
+    if(is.null(x$model)) {
+      stop("Please, use model=TRUE to fit betareg")
+    } else {
+      data=x$model
+    }
   }
   data;
+}
+
+#' Check if the given object have the dominanceAnalysis class
+#'
+#' Stop execution if object isn't a dominanceAnalysis object
+#' @param x an object
+#' @return boolean TRUE if x is a dominanceAnalysis object, raises an error otherwise
+#' @keywords internal
+checkDominanceAnalysis<-function(x) {
+  if(!inherits(x,"dominanceAnalysis")) {
+    stop("parameter da.object should be a dominanceAnalysis object")
+  }
+  TRUE
+}
+
+#' Replace terms by name using the terms definition
+#' @param string string to be updated
+#' @param replacement string with replacement for strings. values are replaced by names
+replaceTermsInString<-function(string,replacement) {
+  if(is.null(replacement) || is.null(names(replacement))) {
+    string
+  } else {
+    names.r=names(replacement)
+    to.replace<-as.character(replacement)
+    for(i in 1:length(names.r)) {
+      if(names.r[i]!="") {
+        string=sub(to.replace[i], names.r[i], string, fixed=TRUE)
+      }
+    }
+  }
+  string
 }
