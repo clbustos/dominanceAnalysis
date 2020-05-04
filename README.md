@@ -18,8 +18,8 @@ and Hierarchical Linear Models.
 **Features**:
 
   - Provides complete, conditional and general dominance analysis for
-    *lm* (univariate and multivariate), *dynlm*, *lmer*, *betareg* and
-    *glm* (family=binomial) models.
+    *lm* (univariate and multivariate), *dynlm*, *lmer*, *polr*, 
+    *multinom*, *betareg* and *glm* (family=binomial) models.
   - Covariance / correlation matrixes could be used as input for OLS
     dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods,
     respectively.
@@ -946,6 +946,11 @@ install_github("clbustos/dominanceanalysis")
     Hierarchical Linear Models Using Dominance Analysis. Journal of
     Educational and Behavioral Statistics, 38(1), 3-31.
     <https://doi.org/10.3102/1076998612458319>
+    
+  - Luchman, J. N. (2014). Relative Importance Analysis With Multicategory 
+    Dependent Variables: An Extension and Review of Best Practices. Organizational 
+    Research Methods, 17(4), 452-471. 
+    <https://doi.org/10.1177/1094428114544509>
 
   - Shou, Y., & Smithson, M. (2015). Evaluating Predictors of
     Dispersion: A Comparison of Dominance Analysis and Bayesian Model
