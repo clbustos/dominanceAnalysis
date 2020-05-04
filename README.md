@@ -12,8 +12,8 @@ version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](ht
 
 Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009;
 Budescu, 1993; Luo and Azen, 2013), for multiple regression models:
-Ordinary Least Squares, Generalized Linear Models, Dynamic Linear Models
-and Hierarchical Linear Models.
+Ordinary Least Squares, Generalized Linear Models, Multi-category Dependent 
+Variable models, Dynamic Linear Models and Hierarchical Linear Models.
 
 **Features**:
 
