@@ -278,7 +278,7 @@ da.dynlm.fit<-function(data,...) {
     out
   }
 }
-#' Provides fit indexes for polr and multinom models, based on Luchman(2014) - 
+#' Provides fit indexes for \code{polr} models 
 #'
 #' @return A list with several fit indexes
 #' \item{r2.m}{McFadden(1974)}
@@ -321,6 +321,22 @@ da.polr.fit<-function(...) {
   }
   
 }
+
+#' Provides fit indexes for \code{multinom} models 
+#'
+#' @return A list with several fit indexes
+#' \item{r2.m}{McFadden(1974)}
+#' \item{r2.cs}{Cox and Snell(1989). Use as a reference, because don't have 1 as upper bound}
+#' \item{r2.n}{Nagelkerke(1991), that corrects the upper bound of Cox and Snell(1989) index }
+#' \item{r2.e}{Estrella(1998)}
+#'
+#' @inheritParams using-fit-indexes
+#' @references
+#' \itemize{
+#' \item Luchman, J. N. (2014). Relative importance analysis with multicategory dependent variables: An extension and review of best practices. Organizational Research Methods, 17(4), 452-471.
+#' }
+#' @export
+#' @family fit indexes
 
 da.multinom.fit<-function(...) {
   
