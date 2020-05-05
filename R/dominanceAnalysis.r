@@ -1,4 +1,4 @@
-#' Dominance analysis for OLS (univariate and multivariate), GLM and LMM models
+#' Dominance analysis for OLS (univariate and multivariate), GLM (binary and multi-category logit), and LMM models
 #'
 #' @section Definition of Dominance Analysis:
 #' Budescu (1993) developed a clear and intuitive definition of importance
@@ -8,7 +8,7 @@
 #' more to the prediction of the criterion than does its competitor
 #' at a given level of analysis.
 #' @section Types of dominance:
-#' The original paper (Bodescu, 1993) defines that variable \eqn{X_1} dominates
+#' The original paper (Budescu, 1993) defines that variable \eqn{X_1} dominates
 #' \eqn{X_2} when \eqn{X_1} is chosen over \eqn{X_2} in all possible subset of models
 #' where only one of these two predictors is to be entered.
 #' Later, Azen & Bodescu (2003), name the previously definition as 'complete dominance'
@@ -20,18 +20,21 @@
 #' To obtain the fit-indices for each model, a function called \code{da.<model>.fit}
 #' is executed. For example, for a lm model, function \code{\link{da.lm.fit}} provides
 #' \eqn{R^2} values.
-#' Currently, seven models are implemented:
+#' Currently, nine models/approaches are implemented:
 #' \describe{
-#' \item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit}}}
-#' \item{glm}{ Provides four fit indices recommended by Azen & Traxel (2009):  Cox and Snell(1989), McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
-#' \item{lmerMod}{ Provides  four fit indices recommended by Lou & Azen (2012). See \code{\link{da.lmerMod.fit}}}
+#' \item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit
+#' }}}
+#' \item{glm}{ Provides four fit indices recommended by Azen & Traxel (2009): Cox and Snell (1989), McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
+#' \item{polr}{Provides two fit indices recommended by Luchman (2014): McFadden (1974) and Estrella (1998) as well as the Cox and Snell (1989) and Nagelkerke (1991),. See \code{\link{da.polr.fit}} }
+#' \item{multinom}{Provides two fit indices recommended by Luchman (2014): McFadden (1974) and Estrella (1998) as well as the Cox and Snell (1989) and Nagelkerke (1991),. See \code{\link{da.multinom.fit}} }
+#' \item{lmerMod}{ Provides  four fit indices recommended by Luo & Azen (2012). See \code{\link{da.lmerMod.fit}}}
 #' \item{lmWithCov}{Provides \eqn{R^2} for a correlation/covariance matrix. See \code{\link{lmWithCov}} to create the model and \code{\link{da.lmWithCov.fit}} for the fit index function.}
 #' \item{mlmWithCov}{Provides both \eqn{R^2_{XY}} and \eqn{P^2_{XY}} for multivariate regression models using a correlation/covariance matrix. See \code{\link{mlmWithCov}} to create the model and \code{\link{da.mlmWithCov.fit}} for the fit index function }
-#' \item{dynlm}{Provides \eqn{R^2} for dynamic linear models. There is no literature reference about using dominance analysis on dynamic linear models, so you're warned!. See \code{\link{da.dynlm.fit}}}.
+#' \item{dynlm}{Provides \eqn{R^2} for dynamic linear models. There is no literature reference about using dominance analysis on dynamic linear models, so you're warned!. See \code{\link{da.dynlm.fit}}}
 #' \item{betareg}{Provides pseudo-\eqn{R^2}, Cox and Snell(1989), McFadden (1974), and Estrella (1998). You could set the link function using link.betareg if automatic detection of link function doesn't work.
+#' } See \code{\link{da.betareg.fit}} 
 #' }
-#'   See \code{\link{da.betareg.fit}} }
-#' @param x lm, glm, lmer model
+#' @param x lm, glm, polr, multinom, lmer model
 #' @param constants vector of predictors to remain unchanged between models
 #' @param terms     vector of terms to be analyzed. By default, obtained from the model
 #' @param fit.functions Name of the method used to provide fit indices
@@ -56,6 +59,7 @@
 #' \item Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
 #' \item Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. Journal of Educational and Behavioral Statistics, 34(3), 319-347. doi:10.3102/1076998609332754
 #' \item Budescu, D. V. (1993). Dominance analysis: A new approach to the problem of relative importance of predictors in multiple regression. Psychological Bulletin, 114(3), 542-551. doi:10.1037/0033-2909.114.3.542
+#' \item Luchman, J. N. (2014). Relative Importance Analysis With Multicategory Dependent Variables: An Extension and Review of Best Practices. Organizational Research Methods, 17(4), 452-471. doi:10.1177/1094428114544509
 #' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 #' }
 #' @examples
