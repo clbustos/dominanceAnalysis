@@ -280,7 +280,7 @@ da.dynlm.fit<-function(data,...) {
 
 #' Provides fit indexes for \code{polr} models 
 #' 
-#' Requires the use of ordered logistic regression (i.e., not Probit, complementary log-log, etc.)
+#' Requires the use of ordered logistic regression (i.e., not Probit, complementary log-log, etc.) based on Luchman (2014).
 #'
 #' Check \link{daRawResults}.
 #' @param data complete data set
@@ -305,7 +305,7 @@ da.dynlm.fit<-function(data,...) {
 #' @importFrom stats lm logLik update
 #' @importFrom MASS polr
 #' @export
-da.polr.fit<-function(...) {
+da.polr.fit<-function(data, ...) {
   
   mc=match.call()
   function(x) {
@@ -334,6 +334,8 @@ da.polr.fit<-function(...) {
 }
 
 #' Provides fit indexes for \code{multinom} models 
+#' 
+#' Based on Luchman (2014).
 #'
 #' Check \link{daRawResults}.
 #' @param data complete data set
@@ -358,7 +360,7 @@ da.polr.fit<-function(...) {
 #' @importFrom stats lm logLik update
 #' @importFrom nnet multinom
 #' @export
-da.multinom.fit<-function(...) {
+da.multinom.fit<-function(data, ...) {
   
   mc=match.call()
   function(x) {
@@ -366,11 +368,11 @@ da.multinom.fit<-function(...) {
       return(c("r2.m","r2.cs","r2.n","r2.e"))
     }
     
-    p1<-multinom(x,data=mc$data)
+    p1<-multinom(x,data=mc$data, trace=FALSE)
     
     p0 <- do.call("multinom", 
       list(formula=as.formula(paste0(as.list(attr(p1$terms,"variables"))[[2]]," ~ 1")),
-        data=mc$data))
+        data=mc$data, trace=FALSE))
     
     l0=logLik(p0)
     l1=logLik(p1)
