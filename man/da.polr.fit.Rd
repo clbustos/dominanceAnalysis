@@ -4,12 +4,12 @@
 \alias{da.polr.fit}
 \title{Provides fit indexes for \code{polr} models}
 \usage{
-da.polr.fit(...)
+da.polr.fit(data, ...)
 }
 \arguments{
-\item{...}{ignored}
-
 \item{data}{complete data set}
+
+\item{...}{ignored}
 }
 \value{
 A function described by \link{using-fit-indices}. You could retrieve following indices
@@ -21,7 +21,7 @@ A function described by \link{using-fit-indices}. You could retrieve following i
 }
 }
 \description{
-Requires the use of ordered logistic regression (i.e., not Probit, complementary log-log, etc.)
+Requires the use of ordered logistic regression (i.e., not Probit, complementary log-log, etc.) based on Luchman (2014).
 }
 \details{
 Check \link{daRawResults}.

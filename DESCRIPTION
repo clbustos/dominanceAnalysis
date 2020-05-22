@@ -30,7 +30,8 @@ Depends:
     R (>= 3.5.0)
 License: GPL-2
 LazyData: true
-Imports: methods, stats
-Suggests: lme4, boot, testthat, car, covr, knitr, rmarkdown,pscl, dynlm, ggplot2, reshape2, betareg, MASS, nnet
+Imports: methods, stats, MASS, nnet
+Suggests: lme4, boot, testthat, car, covr, knitr, rmarkdown,pscl, dynlm, ggplot2, reshape2, betareg
 RoxygenNote: 7.1.0
+Encoding: UTF-8
 VignetteBuilder: knitr

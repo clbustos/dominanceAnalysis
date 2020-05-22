@@ -302,7 +302,7 @@ da.dynlm.fit<-function(data,...) {
 #' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
 #' }
 #' @family fit indices
-#' @importFrom stats lm logLik update
+#' @importFrom stats lm logLik update as.formula
 #' @importFrom MASS polr
 #' @export
 da.polr.fit<-function(data, ...) {
@@ -357,7 +357,7 @@ da.polr.fit<-function(data, ...) {
 #' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
 #' }
 #' @family fit indices
-#' @importFrom stats lm logLik update
+#' @importFrom stats lm logLik update as.formula
 #' @importFrom nnet multinom
 #' @export
 da.multinom.fit<-function(data, ...) {

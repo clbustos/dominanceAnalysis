@@ -4,12 +4,12 @@
 \alias{da.multinom.fit}
 \title{Provides fit indexes for \code{multinom} models}
 \usage{
-da.multinom.fit(...)
+da.multinom.fit(data, ...)
 }
 \arguments{
-\item{...}{ignored}
-
 \item{data}{complete data set}
+
+\item{...}{ignored}
 }
 \value{
 A function described by \link{using-fit-indices}. You could retrieve following indices
@@ -21,6 +21,9 @@ A function described by \link{using-fit-indices}. You could retrieve following i
 }
 }
 \description{
+Based on Luchman (2014).
+}
+\details{
 Check \link{daRawResults}.
 }
 \references{

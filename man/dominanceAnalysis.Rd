@@ -76,8 +76,7 @@ is executed. For example, for a lm model, function \code{\link{da.lm.fit}} provi
 \eqn{R^2} values.
 Currently, nine models/approaches are implemented:
 \describe{
-\item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit
-}}}
+\item{lm}{ Provides \eqn{R^2} or coefficient of determination. See \code{\link{da.lm.fit}}}
 \item{glm}{ Provides four fit indices recommended by Azen & Traxel (2009): Cox and Snell (1989), McFadden (1974), Nagelkerke (1991), and Estrella (1998). See \code{\link{da.glm.fit}} }
 \item{polr}{Provides two fit indices recommended by Luchman (2014): McFadden (1974) and Estrella (1998) as well as the Cox and Snell (1989) and Nagelkerke (1991),. See \code{\link{da.polr.fit}} }
 \item{multinom}{Provides two fit indices recommended by Luchman (2014): McFadden (1974) and Estrella (1998) as well as the Cox and Snell (1989) and Nagelkerke (1991),. See \code{\link{da.multinom.fit}} }
