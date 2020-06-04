@@ -39,4 +39,7 @@ plot(da)
 # Parameter which.graph defines which type of dominance to plot
 plot(da,which.graph='conditional')
 plot(da,which.graph='complete')
+# Parameter complete_flipped_axis allows to flip axis on complete plot, to better visualization
+plot(da,which.graph='complete', complete_flipped_axis=TRUE)
+plot(da,which.graph='complete', complete_flipped_axis=FALSE)
 }
