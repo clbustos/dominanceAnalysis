@@ -18,10 +18,9 @@ getData<-function(x) {
     } else {
       data=x$model
     }
-  } else if(is(x,"lm")) {
-
-    if(!is.null(x$call$data)) {
-      #print(where(as.character(x$call$data)))
+    
+  } else if(is(x,"lm") | is(x,"polr") | is(x,"multinom")) {
+	  if(!is.null(x$call$data)) {
       data=get(as.character(x$call$data))
 	  } else {
       data=x$model

@@ -2,7 +2,7 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.betareg.fit}
 \alias{da.betareg.fit}
-\title{Provides fit indices for betareg models.}
+\title{Provides fit indices for \code{betareg} models.}
 \usage{
 da.betareg.fit(data, link.betareg, ...)
 }
@@ -17,8 +17,8 @@ da.betareg.fit(data, link.betareg, ...)
 A function described by \link{using-fit-indices}. You could retrieve following indices:
 \describe{
 \item{\code{r2.pseudo}}{Provided by betareg by default}
-\item{\code{r2.m}}{McFadden(1974)}
-\item{\code{r2.cs}}{Cox and Snell(1989).}
+\item{\code{r2.m}}{McFadden (1974)}
+\item{\code{r2.cs}}{Cox and Snell (1989).}
 }
 }
 \description{
@@ -29,9 +29,9 @@ could be negative.
 \references{
 \itemize{
 \item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
-\item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. Journal of Business & Economic Statistics, 16(2), 198-205. doi: 10.1080/07350015.1998.10524753.
+\item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. \emph{Journal of Business & Economic Statistics, 16(2)}, 198-205. doi: 10.1080/07350015.1998.10524753.
 \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
-\item Shou, Y., & Smithson, M. (2015). Evaluating Predictors of Dispersion:A Comparison of Dominance Analysis and Bayesian Model Averaging. Psychometrika, 80(1), 236-256.
+\item Shou, Y., & Smithson, M. (2015). Evaluating Predictors of Dispersion:A Comparison of Dominance Analysis and Bayesian Model Averaging. \emph{Psychometrika, 80(1)}, 236-256.
 }
 }
 \seealso{
@@ -41,6 +41,8 @@ Other fit indices:
 \code{\link{da.lm.fit}()},
 \code{\link{da.lmWithCov.fit}()},
 \code{\link{da.lmerMod.fit}()},
-\code{\link{da.mlmWithCov.fit}()}
+\code{\link{da.mlmWithCov.fit}()},
+\code{\link{da.multinom.fit}()},
+\code{\link{da.polr.fit}()}
 }
 \concept{fit indices}

@@ -18,7 +18,7 @@ Provides fit indices for hierarchical linear models, based on Luo and Azen (2013
 }
 \references{
 \itemize{
-\item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
+\item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. \emph{Journal of Educational and Behavioral Statistics, 38(1)}, 3-31. doi:10.3102/1076998612458319
 }
 }
 \seealso{
@@ -28,6 +28,8 @@ Other fit indices:
 \code{\link{da.glm.fit}()},
 \code{\link{da.lm.fit}()},
 \code{\link{da.lmWithCov.fit}()},
-\code{\link{da.mlmWithCov.fit}()}
+\code{\link{da.mlmWithCov.fit}()},
+\code{\link{da.multinom.fit}()},
+\code{\link{da.polr.fit}()}
 }
 \concept{fit indices}

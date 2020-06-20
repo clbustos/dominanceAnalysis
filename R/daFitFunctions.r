@@ -45,9 +45,9 @@ da.lm.fit<-function(data,...) {
 	}
 }
 
-#' Provides fit indices for GLM models.
+#' Provides fit indices for \code{glm} models.
 #'
-#' Functions only available for logistic regression, based on Azen and Traxel(2009).
+#' Functions only available for logistic regression, based on Azen and Traxel (2009).
 #'
 #' Check \link{daRawResults}.
 #' @param data complete data set
@@ -55,19 +55,18 @@ da.lm.fit<-function(data,...) {
 #' @param ...  ignored
 #' @return A function described by \link{using-fit-indices}. You could retrieve following indices
 #' \describe{
-#' \item{\code{r2.m}}{McFadden(1974)}
-#' \item{\code{r2.cs}}{Cox and Snell(1989). Use with caution, because don't have 1 as upper bound}
-#' \item{\code{r2.n}}{Nagelkerke(1991), that corrects the upper bound of Cox and Snell(1989) index }
-#' \item{\code{r2.e}}{Estrella(1998)}
+#' \item{\code{r2.m}}{McFadden (1974)}
+#' \item{\code{r2.cs}}{Cox and Snell (1989). Use with caution, because don't have 1 as upper bound}
+#' \item{\code{r2.n}}{Nagelkerke (1991), that corrects the upper bound of Cox and Snell (1989) index}
+#' \item{\code{r2.e}}{Estrella (1998)}
 #' }
 #'
 #' @references
 #' \itemize{
 #' \item Azen, R. and Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. \emph{Journal of Educational and Behavioral Statistics, 34} (3), 319-347. doi:10.3102/1076998609332754.
-#'
 #' \item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. \emph{Biometrika, 78}(3), 691-692. doi:10.1093/biomet/78.3.691.
 #' \item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
-#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. Journal of Business & Economic Statistics, 16(2), 198-205. doi: 10.1080/07350015.1998.10524753
+#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. \emph{Journal of Business & Economic Statistics, 16(2)}, 198-205. doi: 10.1080/07350015.1998.10524753
 #' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
 #' }
 #' @family fit indices
@@ -115,7 +114,7 @@ da.glm.fit<-function(data,family.glm,...) {
 }
 
 
-#' Provides fit indices for betareg models.
+#' Provides fit indices for \code{betareg} models.
 #'
 #' Nagelkerke and Estrella are not provided because are designed for discrete dependent variables.
 #' Cox and Snell is preferred and pseudo-\eqn{R^2} should be preferred, because McFadden's index
@@ -128,16 +127,16 @@ da.glm.fit<-function(data,family.glm,...) {
 #' @return A function described by \link{using-fit-indices}. You could retrieve following indices:
 #' \describe{
 #' \item{\code{r2.pseudo}}{Provided by betareg by default}
-#' \item{\code{r2.m}}{McFadden(1974)}
-#' \item{\code{r2.cs}}{Cox and Snell(1989).}
+#' \item{\code{r2.m}}{McFadden (1974)}
+#' \item{\code{r2.cs}}{Cox and Snell (1989).}
 #' }
 #'
 #' @references
 #' \itemize{
 #' \item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
-#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. Journal of Business & Economic Statistics, 16(2), 198-205. doi: 10.1080/07350015.1998.10524753.
+#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. \emph{Journal of Business & Economic Statistics, 16(2)}, 198-205. doi: 10.1080/07350015.1998.10524753.
 #' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
-#' \item Shou, Y., & Smithson, M. (2015). Evaluating Predictors of Dispersion:A Comparison of Dominance Analysis and Bayesian Model Averaging. Psychometrika, 80(1), 236-256.
+#' \item Shou, Y., & Smithson, M. (2015). Evaluating Predictors of Dispersion:A Comparison of Dominance Analysis and Bayesian Model Averaging. \emph{Psychometrika, 80(1)}, 236-256.
 #' }
 #'
 #' @family fit indices
@@ -186,7 +185,7 @@ da.betareg.fit<-function(data,link.betareg,...) {
 #' @param ... ignored
 #' @references
 #' \itemize{
-#' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
+#' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. \emph{Journal of Educational and Behavioral Statistics, 38(1)}, 3-31. doi:10.3102/1076998612458319
 #' }
 #' @inheritParams using-fit-indices
 #' @family fit indices
@@ -243,7 +242,7 @@ da.lmWithCov.fit<-function(base.cov, ...) {
 #' See \code{\link{mlmWithCov}}
 #' @inheritParams using-fit-indices
 #' @references
-#' Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
+#' Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. \emph{Journal of Educational and Behavioral Statistics, 31(2)}, 157-180. doi:10.3102/10769986031002157
 #' @family fit indices
 #' @export
 da.mlmWithCov.fit<-function(base.cov, ...) {
@@ -277,4 +276,114 @@ da.dynlm.fit<-function(data,...) {
     out<-list(r2=summary(dlm)$r.squared)
     out
   }
+}
+
+#' Provides fit indexes for \code{polr} models 
+#' 
+#' Requires the use of ordered logistic regression (i.e., not Probit, complementary log-log, etc.) based on Luchman (2014).
+#'
+#' Check \link{daRawResults}.
+#' @param data complete data set
+#' @param ...  ignored
+#' @return A function described by \link{using-fit-indices}. You could retrieve following indices
+#' \describe{
+#' \item{\code{r2.m}}{McFadden (1974)}
+#' \item{\code{r2.cs}}{Cox and Snell (1989). Use with caution, because don't have 1 as upper bound}
+#' \item{\code{r2.n}}{Nagelkerke (1991), that corrects the upper bound of Cox and Snell (1989) index }
+#' \item{\code{r2.e}}{Estrella (1998)}
+#' }
+#'
+#' @references
+#' \itemize{
+#' \item Luchman, J. N. (2014). Relative importance analysis with multicategory dependent variables: An extension and review of best practices. \emph{Organizational Research Methods, 17(4)}, 452-471.
+#' \item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. \emph{Biometrika, 78}(3), 691-692. doi:10.1093/biomet/78.3.691.
+#' \item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
+#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. \emph{Journal of Business & Economic Statistics, 16(2)}, 198-205. doi: 10.1080/07350015.1998.10524753
+#' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
+#' }
+#' @family fit indices
+#' @importFrom stats lm logLik update as.formula
+#' @importFrom MASS polr
+#' @export
+da.polr.fit<-function(data, ...) {
+  
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return(c("r2.m","r2.cs","r2.n","r2.e"))
+    }
+    
+    p1<-polr(x,data=mc$data,method="logistic");
+    
+    p0 <- do.call("polr", 
+      list(formula=as.formula(paste0(as.list(attr(p1$terms,"variables"))[[2]]," ~ 1")),
+        data=mc$data,method="logistic"))
+    
+    l0=logLik(p0)
+    l1=logLik(p1)
+    n<-p1$n
+    r2.cs<-1-(exp(l0-l1))^(2/n)
+    list(
+      r2.m=1-(l1/l0),
+      r2.cs=r2.cs,
+      r2.n=r2.cs/(1-exp((2/n)*l0)),
+      r2.e=1-(l1/l0)^(-(2/n)*l0)
+    )
+  }
+  
+}
+
+#' Provides fit indexes for \code{multinom} models 
+#' 
+#' Based on Luchman (2014).
+#'
+#' Check \link{daRawResults}.
+#' @param data complete data set
+#' @param ...  ignored
+#' @return A function described by \link{using-fit-indices}. You could retrieve following indices
+#' \describe{
+#' \item{\code{r2.m}}{McFadden (1974)}
+#' \item{\code{r2.cs}}{Cox and Snell (1989). Use with caution, because don't have 1 as upper bound}
+#' \item{\code{r2.n}}{Nagelkerke (1991), that corrects the upper bound of Cox and Snell (1989) index }
+#' \item{\code{r2.e}}{Estrella (1998)}
+#' }
+#'
+#' @references
+#' \itemize{
+#' \item Luchman, J. N. (2014). Relative importance analysis with multicategory dependent variables: An extension and review of best practices. \emph{Organizational Research Methods, 17(4)}, 452-471.
+#' \item Nagelkerke, N. J. D. (1991). A note on a general definition of the coefficient of determination. \emph{Biometrika, 78}(3), 691-692. doi:10.1093/biomet/78.3.691.
+#' \item Cox, D. R., & Snell, E. J. (1989). The analysis of binary data (2nd ed.). London, UK: Chapman and Hall.
+#' \item Estrella, A. (1998). A new measure of fit for equations with dichotomous dependent variables. \emph{Journal of Business & Economic Statistics, 16(2)}, 198-205. doi: 10.1080/07350015.1998.10524753
+#' \item McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), Frontiers in econometrics (pp. 104-142). New York, NY: Academic Press.
+#' }
+#' @family fit indices
+#' @importFrom stats lm logLik update as.formula
+#' @importFrom nnet multinom
+#' @export
+da.multinom.fit<-function(data, ...) {
+  
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return(c("r2.m","r2.cs","r2.n","r2.e"))
+    }
+    
+    p1<-multinom(x,data=mc$data, trace=FALSE)
+    
+    p0 <- do.call("multinom", 
+      list(formula=as.formula(paste0(as.list(attr(p1$terms,"variables"))[[2]]," ~ 1")),
+        data=mc$data, trace=FALSE))
+    
+    l0=logLik(p0)
+    l1=logLik(p1)
+    n<-nrow(p1$weights)
+    r2.cs<-1-(exp(l0-l1))^(2/n)
+    list(
+      r2.m=1-(l1/l0),
+      r2.cs=r2.cs,
+      r2.n=r2.cs/(1-exp((2/n)*l0)),
+      r2.e=1-(l1/l0)^(-(2/n)*l0)
+    )
+  }
+  
 }
