@@ -1,11 +1,11 @@
-#' The dominanceanalysis package allows to perform the dominance analysis for multiple regression models, such as OLS (univariate and multivariate), GLM and HLM.
+#' The dominanceanalysis package allows to perform the dominance analysis for multiple regression models, such as OLS (univariate and multivariate), GLM (binary and multi-category logit) and HLM.
 #' The dominance analysis on this package is performed by \code{\link{dominanceAnalysis}}
 #' function. To perform bootstrap procedures you should use \code{\link{bootDominanceAnalysis}}
 #' function. For both, standard \code{print} and \code{summary} functions are provided.
 #'
 #' @section Main Features:
 #' \itemize{
-#' \item Provides complete, conditional and general dominance analysis for lm (univariate and multivariate), lmer and glm (family=binomial) models.
+#' \item Provides complete, conditional and general dominance analysis for lm (univariate and multivariate), lmer, glm (family=binomial), polr, and multinom models.
 #' \item Covariance / correlation matrixes could be used as input for OLS dominance analysis, using \code{\link{lmWithCov}} and \code{\link{mlmWithCov}} methods, respectively.
 #' \item Multiple criteria can be used as fit indices, which is useful especially for HLM.
 #' }
@@ -19,7 +19,8 @@
 #' The original method was developed for OLS regression (Budescu, 1993).
 #' Later, several definitions of dominance and bootstrap procedures
 #' were provided by Azen & Budescu (2003), as well as adaptations
-#' to Generalized Linear Models (Azen & Traxel, 2009)
+#' to Generalized Linear Models (Azen & Traxel, 2009),
+#' Multi-category Dependent Variable Models (Luchman, 2014),
 #' and Hierarchical Linear Models (Luo & Azen, 2013).
 #'
 #' @name dominanceanalysis-package
@@ -34,6 +35,7 @@
 #' \item Azen, R., & Budescu, D. V. (2003). The dominance analysis approach for comparing predictors in multiple regression. Psychological Methods, 8(2), 129-148. doi:10.1037/1082-989X.8.2.129
 #' \item Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
 #' \item Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine Predictor Importance in Logistic Regression. Journal of Educational and Behavioral Statistics, 34(3), 319-347. doi:10.3102/1076998609332754
+#' \item Luchman, J. N. (2014). Relative Importance Analysis With Multicategory Dependent Variables: An Extension and Review of Best Practices. Organizational Research Methods, 17(4), 452-471. doi:10.1177/1094428114544509
 #' \item Luo, W., & Azen, R. (2013). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 #' }
 #' @examples

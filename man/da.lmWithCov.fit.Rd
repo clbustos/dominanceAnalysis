@@ -22,6 +22,8 @@ Other fit indices:
 \code{\link{da.glm.fit}()},
 \code{\link{da.lm.fit}()},
 \code{\link{da.lmerMod.fit}()},
-\code{\link{da.mlmWithCov.fit}()}
+\code{\link{da.mlmWithCov.fit}()},
+\code{\link{da.multinom.fit}()},
+\code{\link{da.polr.fit}()}
 }
 \concept{fit indices}

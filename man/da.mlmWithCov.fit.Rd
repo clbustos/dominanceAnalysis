@@ -23,7 +23,7 @@ See \code{\link{mlmWithCov}}
 Provides coefficient of determination for multivariate models.
 }
 \references{
-Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
+Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. \emph{Journal of Educational and Behavioral Statistics, 31(2)}, 157-180. doi:10.3102/10769986031002157
 }
 \seealso{
 Other fit indices: 
@@ -32,6 +32,8 @@ Other fit indices:
 \code{\link{da.glm.fit}()},
 \code{\link{da.lm.fit}()},
 \code{\link{da.lmWithCov.fit}()},
-\code{\link{da.lmerMod.fit}()}
+\code{\link{da.lmerMod.fit}()},
+\code{\link{da.multinom.fit}()},
+\code{\link{da.polr.fit}()}
 }
 \concept{fit indices}

@@ -4,7 +4,8 @@
 \name{tropicbird}
 \alias{tropicbird}
 \title{Distribution of a tropical native bird species inhabiting a small oceanic island.}
-\format{A data frame with 2398 rows and 8 variables:
+\format{
+A data frame with 2398 rows and 8 variables:
 \describe{
 \item{ID}{Point identification}
 \item{rem}{remoteness is an index that represents the difficulty of movement through the landscape, with the highest values corresponding to the most remote areas}
@@ -14,7 +15,8 @@
 \item{rain}{rainfall is a continuous variable, with the highest values corresponding to the rainy wet areas}
 \item{coast}{distance to the coast is the minimum linear distance between each point and the coast line, with the highest values corresponding to the points further away from the coastline}
 \item{pres}{Species presence}
-}}
+}
+}
 \source{
 Soares, F.C., 2017. Modelling the distribution of Sao Tome bird species: Ecological determinants and conservation prioritization. Faculdade de Ciencias da Universidade de Lisboa.
 }

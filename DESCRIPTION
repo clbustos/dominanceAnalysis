@@ -1,9 +1,10 @@
 Package: dominanceanalysis
 Title: Dominance Analysis
-Date: 2020-01-07
+Date: 2020-05-04
 Description: Dominance analysis is a method that allows to compare the
              relative importance of predictors in multiple regression models:
-             ordinary least squares, generalized linear models, 
+             ordinary least squares, generalized linear models, multi-category dependent 
+             variable models
              hierarchical linear models, beta regression and dynamic linear models. 
              The main principles and methods of 
              dominance analysis are described in
@@ -13,8 +14,9 @@ Description: Dominance analysis is a method that allows to compare the
              for multivariate regression, logistic regression and
              hierarchical linear models were described in 
              Azen, R., & Budescu, D. V. (2006) <doi:10.3102/10769986031002157>,
-             Azen, R., & Traxel, N. (2009) <doi:10.3102/1076998609332754> and
-             Luo, W., & Azen, R. (2013) <doi:10.3102/1076998612458319>,
+             Azen, R., & Traxel, N. (2009) <doi:10.3102/1076998609332754>
+             Luo, W., & Azen, R. (2013) <doi:10.3102/1076998612458319>, and
+             Luchman, J. N. (2014) <doi:10.1177/1094428114544509>
              respectively.
 Authors@R: c(
   person("Claudio", "Bustos Navarrete", 
@@ -23,12 +25,13 @@ Authors@R: c(
   person("Filipa", "Coutinho Soares", 
          email = "filipa.mco.soares@gmail.com", role = c("aut"),
          comment = c(ORCID = "0000-0002-7579-2538")))
-Version: 1.3.0
+Version: 1.3.1
 Depends:
     R (>= 3.5.0)
 License: GPL-2
 LazyData: true
-Imports: methods, stats
-Suggests: lme4, boot, testthat, car, covr, knitr,rmarkdown,pscl, dynlm, ggplot2, reshape2, betareg
-RoxygenNote: 7.0.2
+Imports: methods, stats, MASS, nnet
+Suggests: lme4, boot, testthat, car, covr, knitr, rmarkdown,pscl, dynlm, ggplot2, reshape2, betareg
+RoxygenNote: 7.1.0
+Encoding: UTF-8
 VignetteBuilder: knitr
