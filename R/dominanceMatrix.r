@@ -53,8 +53,6 @@ dominanceMatrix.data.frame<-function(x,undefined.value=0.5, ordered=FALSE, ...) 
 #' @importFrom stats na.omit
 #' @export
 #' @rdname dominanceMatrix
-
-
 dominanceMatrix.matrix<-function(x,undefined.value=0.5, ordered=FALSE, ...) {
 	vars<-colnames(x)
 	if(is.null(vars)) {
