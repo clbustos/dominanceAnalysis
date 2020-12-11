@@ -89,7 +89,7 @@ da.lm.fit<-function(original.model, newdata=NULL, ...) {
 #' glm.1<-glm(y~x1+x2+x3,data=df.1,family=binomial)
 #' da.glm.fit(original.model=glm.1)("names")
 #' da.glm.fit(original.model=glm.1)(y~x1)
-da.glm.fit<-function(original.model,newdata=NULL,...) {
+da.glm.fit<-function(original.model, newdata=NULL,...) {
 
 	mc=match.call()
 	function(x) {
