@@ -1,3 +1,6 @@
+# dominanceanalysis 2.0.0
+
+
 # dominanceanalysis 1.3.0
 
 - Added plot() method for dominanceAnalysis object.

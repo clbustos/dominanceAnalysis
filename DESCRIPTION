@@ -1,6 +1,6 @@
 Package: dominanceanalysis
 Title: Dominance Analysis
-Date: 2020-01-07
+Date: 2020-12-10
 Description: Dominance analysis is a method that allows to compare the
              relative importance of predictors in multiple regression models:
              ordinary least squares, generalized linear models, 
@@ -23,12 +23,12 @@ Authors@R: c(
   person("Filipa", "Coutinho Soares", 
          email = "filipa.mco.soares@gmail.com", role = c("aut"),
          comment = c(ORCID = "0000-0002-7579-2538")))
-Version: 1.3.9999
+Version: 2.0.0
 Depends:
-    R (>= 3.5.0)
+    R (>= 3.6.0)
 License: GPL-2
 LazyData: true
 Imports: methods, stats
 Suggests: lme4, boot, testthat, car, covr, knitr,rmarkdown,pscl, dynlm, ggplot2, reshape2, betareg, performance
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
