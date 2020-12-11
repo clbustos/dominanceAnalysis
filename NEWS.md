@@ -1,5 +1,22 @@
 # dominanceanalysis 2.0.0
 
+** Important API change:**
+
+* All submodels on fit functions are calculated using update(), so all settings on original model are used on dominance analysis. If R can't find the original dataset for update, just provide the dataset using the  *newdata* paramater on dominanceanalysis() method.
+
+Minor updates
+- Little modification on dominanceMatrix.
+- Added complete_flipped_axis parameter for plot() function. Added examples of flipped axis for plots.
+- Tests for bootstrap analysis (betareg, lmm, glm). 
+- Added Nakagawa's indexes for linear mixed models. See README for examples.
+- On beta regression test, on test we check that using different estimator generates differents results.
+
+Bug fixes:
+
+- Bug fix: On R-devel, correct number of controls are provided for esoph dataset, breaking a test based on that example.
+- Bug fix: sort.matrix replaced to .sort.matrix to avoid sorting a standard matrix when devtools are used. 
+- Fixed documentation error on plot.dominanceAnalysis: default plot is for general dominance, no complete.
+
 
 # dominanceanalysis 1.3.0
 
