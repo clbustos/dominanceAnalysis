@@ -471,6 +471,7 @@ on the growth of peas conducted on 6 blocks.
 
 ``` r
 library(lme4)
+#> Loading required package: Matrix
 lmer.npk.1<-lmer(yield~N+P+K+(1|block),npk)
 lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
@@ -535,8 +536,8 @@ print(da.lmer)
 #> * Fit index:  sb.r2.2 
 #>   complete conditional general
 #> N                             
-#> P      N,K         N,K     N,K
-#> K                            N
+#> P        N           N     N,K
+#> K        N           N       N
 #> 
 #> Average contribution:
 #> P K N 
@@ -702,8 +703,7 @@ Looking at the report for standard glm summary method, we can see that
 the linear effect of each variable was significant (*p* \< 0.05 for
 *agegp.L*, *alcgp.L* and *tobgp.L*), such as the quadratic effect of
 predictor age (*p* \< 0.05 for *agegp.Q*). Even so,it is hard to
-identify which variable is more important to predict esophageal
-cancer.
+identify which variable is more important to predict esophageal cancer.
 
 ``` r
 glm.esoph<-glm(cbind(ncases,ncontrols)~agegp+alcgp+tobgp, esoph,family="binomial")
