@@ -62,7 +62,7 @@ Please note that in this dataset there are no false negatives, hence the bird wa
 We start by loading the csv data using the `data` function.
 
 ```{r}
-library(dominanceanalysis)
+#library(dominanceanalysis)
 data("tropicbird")
 ```
 
@@ -212,7 +212,8 @@ Furthermore, if we want to establish a rank of importance among predictors, we c
 To evaluate the robustness of our results, we use bootstrapping analysis by using `bootDominanceAnalysis()` function. Remember that this method could take a long time to complete.
 
 ```{r,eval=FALSE}
-bootmodpres100 <- bootDominanceAnalysis(modpres, R=100)
+set.seed(12346)
+bootmodpres100 <- bootDominanceAnalysis(modpres, R=10)
 summary(bootmodpres100,fit.functions="r2.m")
 ```
 ```{r, echo=FALSE}

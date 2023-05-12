@@ -31,6 +31,7 @@ bootDominanceAnalysis<-function(x,R,constants=c(),terms=NULL, fit.functions="def
   } #nocov end
   # Extract the data
 	total.data<-getData(x)
+
 	da.original<-dominanceAnalysis(x, constants=constants, terms=terms, fit.functions=fit.functions, null.model=null.model,...)
 	preds<-			da.original$predictor
 	n.preds<-length(preds)
@@ -66,6 +67,7 @@ bootDominanceAnalysis<-function(x,R,constants=c(),terms=NULL, fit.functions="def
 	  # UGLY HACK.
 		boot.new.data<-d[i,]
 		da<-dominanceAnalysis(x,constants=constants,terms=terms, fit.functions=fit.functions, newdata=boot.new.data, null.model=null.model,...)
+		#print(da$complete$r2.m[3,]-da$conditional$r2.m[3,])
 		out<-c(aplanar(da$complete),aplanar(da$conditional),aplanar(da$general))
 		names(out)<-c.names
 		out

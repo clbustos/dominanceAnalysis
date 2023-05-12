@@ -1,14 +1,18 @@
 context("Bootstrap dominance analysis")
 
 test_that("Bootstrap should have correct sample values", {
+  set.seed(1234)
   x1<-rnorm(1000)
   x2<-rnorm(1000)
   x3<-rnorm(1000)
   x4<-rnorm(1000)
+  x5<-x1+x2+x3+rnorm(1000,sd=0.1)
+
   y1<-10*x1+8*x2+6*x3+4*x4+rnorm(1000)
   y2<-x1+x2+x3+x4+rnorm(1000)
+  y3<-x1+x4+rnorm(1000)
   # This should be fixed
-  d.f11<<-data.frame(xa=x1,xb=x2,xc=x3,xd=x4,y=y1,y2=y2)
+  d.f11<<-data.frame(xa=x1,xb=x2,xc=x3,xd=x4,xe=x5,y=y1,y2=y2,y3=y3)
   lm.1<-lm(y~xa+xb+xc+xd,data=d.f11)
   da<-dominanceAnalysis(lm.1)
   cdom<-dominanceMatrix(da,"complete",fit.function = "r2")
@@ -32,6 +36,41 @@ test_that("Bootstrap should have correct sample values", {
                       1-res.gen[3], 1-res.gen[5], 1-res.gen[6],0.5 ), 4,4,byrow=T)
   expect_equivalent(da.2.gen,da.2.gen.bs)
   expect_output(print(summary(bs.da.2)),"complete xa xb")
+
+  # Should complete, conditional and general be different
+
+  lm.3<-lm(y3~xa+xb+xc+xd+xe,data=d.f11)
+  da.3<-dominanceAnalysis(lm.3)
+  da.2.gen<-da.2$general$r2
+  set.seed(1234)
+  bs.da.3 <- bootDominanceAnalysis(lm.3, R=5,data=d.f11)
+  sum.bs.da.3<-summary(bs.da.3)$r2
+  print("")
+  print(sum.bs.da.3)
+  expect_gt(sum.bs.da.3["complete-r2-xa.xb","SE.Dij"],0.1)
+  expect_gt(sum.bs.da.3["complete-r2-xa.xc","SE.Dij"],0.1)
+  expect_equal(sum.bs.da.3["conditional-r2-xa.xb","SE.Dij"],0)
+})
+
+test_that("Bootstrap should have correct sample values", {
+  set.seed(1234)
+  x1<-rnorm(1000)
+  x2<-rnorm(1000)
+  x3<-rnorm(1000)
+  x4<-rnorm(1000)
+  x5<-x1+x2+x3+rnorm(1000,sd=0.1)
+
+
+  y3<-as.factor((x1+x4+rnorm(1000))>0)
+  # This should be fixed
+  d.f11<<-data.frame(xa=x1,xb=x2,xc=x3,xd=x4,xe=x5,y3=y3)
+
+  glm.1<-glm(y3~xa+xb+xc+xd+xe,data=d.f11, family="binomial")
+  da.glm<-dominanceAnalysis(glm.1)
+  bs.da.3 <- bootDominanceAnalysis(glm.1, R=5,data=d.f11)
+  s1.r2m.a<-summary(bs.da.3)$r2.m
+  s1.r2m.b<-summary(bs.da.3,fit.functions = "r2.m")$r2.m
+  expect_equal(s1.r2m.a$mDij, s1.r2m.b$mDij)
 })
 
 

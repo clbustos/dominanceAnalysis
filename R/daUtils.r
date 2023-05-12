@@ -12,7 +12,7 @@ getEqualRowId<-function(m,r) {
 getData<-function(x) {
 
   data=NULL;
-  if(is(x,"glm")) {
+  if(is(x,"glm")|| is(x,"clm")) {
     if(!is.null(x$data) & !is(x$data,"environment")) {
       data=x$data
     } else {

@@ -54,7 +54,8 @@ da.lm.fit<-function(original.model, newdata=NULL, ...) {
 
 #' Provides fit indices for GLM models.
 #'
-#' Functions only available for logistic regression, based on Azen and Traxel(2009).
+#' FThese functions are only available for logistic regression models and are
+#' based on the work of Azen and Traxel (2009).
 #'
 #' Check \link{daRawResults}.
 #' @param original.model Original fitted model
@@ -126,15 +127,18 @@ da.glm.fit<-function(original.model, newdata=NULL,...) {
 		  r2.e=1-(l1/l0)^(-(2/n)*l0) # Estrella
 		)
 	}
-
 }
+
+
+
 
 
 #' Provides fit indices for betareg models.
 #'
-#' Nagelkerke and Estrella are not provided because are designed for discrete dependent variables.
-#' Cox and Snell is preferred and pseudo-\eqn{R^2} should be preferred, because McFadden's index
-#' could be negative.
+#' Note that Nagelkerke and Estrella coefficients are designed for discrete dependent variables
+#' and thus cannot be used in this context. Instead, the Cox and Snell coefficient is recommended,
+#' along with the pseudo-\eqn{R^2}. It is worth noting that McFadden's index may produce
+#' negative values and should be avoided.
 #'
 #' @param original.model Original fitted model
 #' @param newdata Data used in update statement
@@ -196,9 +200,48 @@ da.betareg.fit<-function(original.model, newdata=NULL, ...) {
       r2.m=1-(l1/l0)
     )
   }
-
 }
 
+#' Provides fit indices for ordinal regression models, based on the Nagelkerke (1991) method.
+#'
+#' @param original.model Original fitted model
+#' @param newdata Data used in update statement
+#' @param ... ignored
+#' @references
+#' \itemize{
+#' \item Nagelkerke, N. J. D. (1991). A Note on a General Definition of the Coefficient of Determination. Biometrika, 78(3), 691-692. doi:10.1093/biomet/78.3.691
+#' }
+#' @inheritParams using-fit-indices
+#' @importFrom stats lm logLik update
+#' @family fit indices
+#' @export
+
+da.clm.fit<-function(original.model, newdata=NULL, ...) {
+	if (!requireNamespace("performance", quietly = TRUE)) { #nocov start
+    stop("performance needed for this function to work. Please install it.",
+         call. = FALSE)
+  } #nocov end
+  mc=match.call()
+  function(x) {
+    if(x=="names") {
+      return(c("r2.n"))
+    }
+
+    if(!is.null(newdata)) {
+      g1<-update(original.model, x,data=newdata)
+#      g.null<-update(original.model,~1, data=newdata)
+    } else {
+      g1<-update(original.model, x)
+#      g.null<-update(original.model,~1)
+    }
+
+    nagelkerge<-as.numeric(performance::r2_nagelkerke(g1))
+    list(
+      r2.n=nagelkerge
+    )
+  }
+	
+}
 
 
 #' Provides fit indices for hierarchical linear models, based on Nakagawa(2013) and Luo and Azen (2013).

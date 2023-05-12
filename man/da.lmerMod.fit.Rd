@@ -27,6 +27,7 @@ Provides fit indices for hierarchical linear models, based on Nakagawa(2013) and
 \seealso{
 Other fit indices: 
 \code{\link{da.betareg.fit}()},
+\code{\link{da.clm.fit}()},
 \code{\link{da.dynlm.fit}()},
 \code{\link{da.glm.fit}()},
 \code{\link{da.lm.fit}()},

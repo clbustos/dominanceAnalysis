@@ -26,7 +26,7 @@ daRawResults<-function(x, constants=c(), terms=NULL, fit.functions="default", ne
   } else {
     old.data=getData(x)
     if(is.null(old.data)) {
-    	stop("Not implemented method to retrieve data from model")
+    	stop("Not implemented method to retrieve data from model.")
     }
   }
   if(is.null(terms)) {

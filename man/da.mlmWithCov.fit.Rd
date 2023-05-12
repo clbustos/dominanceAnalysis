@@ -28,6 +28,7 @@ Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regressi
 \seealso{
 Other fit indices: 
 \code{\link{da.betareg.fit}()},
+\code{\link{da.clm.fit}()},
 \code{\link{da.dynlm.fit}()},
 \code{\link{da.glm.fit}()},
 \code{\link{da.lm.fit}()},

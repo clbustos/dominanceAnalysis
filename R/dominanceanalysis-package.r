@@ -26,7 +26,7 @@
 #' @aliases dominanceanalysis
 #' @docType package
 #' @title Dominance analysis for general, generalized and mixed linear models
-#' @author Claudio Bustos \email{clbustos_at_gmail_com}, Filipa Coutinho Soares (documentation)
+#' @author Claudio Bustos \email{clbustos@gmail_com}, Filipa Coutinho Soares (documentation)
 #' @seealso \code{\link{dominanceAnalysis}} , \code{\link{bootDominanceAnalysis}}
 #' @references
 #' \itemize{

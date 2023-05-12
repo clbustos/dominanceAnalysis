@@ -22,9 +22,10 @@ A function described by \link{using-fit-indices}. You could retrieve following i
 }
 }
 \description{
-Nagelkerke and Estrella are not provided because are designed for discrete dependent variables.
-Cox and Snell is preferred and pseudo-\eqn{R^2} should be preferred, because McFadden's index
-could be negative.
+Note that Nagelkerke and Estrella coefficients are designed for discrete dependent variables
+and thus cannot be used in this context. Instead, the Cox and Snell coefficient is recommended,
+along with the pseudo-\eqn{R^2}. It is worth noting that McFadden's index may produce
+negative values and should be avoided.
 }
 \references{
 \itemize{
@@ -36,6 +37,7 @@ could be negative.
 }
 \seealso{
 Other fit indices: 
+\code{\link{da.clm.fit}()},
 \code{\link{da.dynlm.fit}()},
 \code{\link{da.glm.fit}()},
 \code{\link{da.lm.fit}()},

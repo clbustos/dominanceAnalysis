@@ -54,7 +54,7 @@ plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "comple
     }
 
     gg<-gg+ggplot2::geom_point(size=2) +
-      ggplot2::guides(shape=FALSE) +
+      ggplot2::guides(shape="none") +
       ggplot2::xlab("Submodels") +
       ggplot2::ylab(fit.function) +
       ggplot2::ggtitle("Complete dominance")
@@ -73,7 +73,7 @@ plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "comple
                         ggplot2::aes_string(x="level", y="value", color="variable", group = "variable")) +
       ggplot2::geom_point(size=2) +
       ggplot2::geom_line() +
-      ggplot2::guides(shape=FALSE) +
+      ggplot2::guides(shape="none") +
       ggplot2::xlab("Levels") +
       ggplot2::ylab(fit.function) +
       ggplot2::ggtitle("Conditional dominance")

@@ -22,6 +22,7 @@ Uses \eqn{R^2} (coefficient of determination) as fit index
 \seealso{
 Other fit indices: 
 \code{\link{da.betareg.fit}()},
+\code{\link{da.clm.fit}()},
 \code{\link{da.glm.fit}()},
 \code{\link{da.lm.fit}()},
 \code{\link{da.lmWithCov.fit}()},
