@@ -1,7 +1,8 @@
 # dominanceanalysis 2.1.0
 
 * Support only for R >= 4.0.0
-
+* Updated README
+* Added support for ordinal regression, using *clm*
 
 # dominanceanalysis 2.0.0
 
