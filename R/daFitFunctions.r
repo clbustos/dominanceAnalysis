@@ -211,7 +211,6 @@ da.betareg.fit<-function(original.model, newdata=NULL, ...) {
 #' \itemize{
 #' \item Nagelkerke, N. J. D. (1991). A Note on a General Definition of the Coefficient of Determination. Biometrika, 78(3), 691-692. doi:10.1093/biomet/78.3.691
 #' }
-#' @inheritParams using-fit-indices
 #' @importFrom stats lm logLik update
 #' @family fit indices
 #' @export
@@ -240,7 +239,7 @@ da.clm.fit<-function(original.model, newdata=NULL, ...) {
       r2.n=nagelkerge
     )
   }
-	
+
 }
 
 
@@ -255,7 +254,6 @@ da.clm.fit<-function(original.model, newdata=NULL, ...) {
 #' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
 #' \item Nakagawa, S., & Schielzeth, H. (2013). A general and simple method for obtaining R2 from generalized linear mixed-effects models. Methods in Ecology and Evolution, 4(2), 133-142. doi:10.1111/j.2041-210x.2012.00261.x
 #' }
-#' @inheritParams using-fit-indices
 #' @family fit indices
 #' @export
 
@@ -307,7 +305,6 @@ da.lmerMod.fit<-function(original.model, null.model, newdata=NULL, ...) {
 #' @param base.cov variance/covariance matrix
 #' @param ... ignored
 #'
-#' @inheritParams using-fit-indices
 #' @family fit indices
 #' @export
 da.lmWithCov.fit<-function(base.cov, ...) {
@@ -331,7 +328,6 @@ da.lmWithCov.fit<-function(base.cov, ...) {
 #' \item{\code{p.squared.yx}}{\eqn{P^2_{YX}}}
 #' }
 #' See \code{\link{mlmWithCov}}
-#' @inheritParams using-fit-indices
 #' @references
 #' Azen, R., & Budescu, D. V. (2006). Comparing Predictors in Multivariate Regression Models: An Extension of Dominance Analysis. Journal of Educational and Behavioral Statistics, 31(2), 157-180. doi:10.3102/10769986031002157
 #' @family fit indices

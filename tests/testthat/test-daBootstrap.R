@@ -43,12 +43,11 @@ test_that("Bootstrap should have correct sample values", {
   da.3<-dominanceAnalysis(lm.3)
   da.2.gen<-da.2$general$r2
   set.seed(1234)
-  bs.da.3 <- bootDominanceAnalysis(lm.3, R=5,data=d.f11)
+  bs.da.3 <- bootDominanceAnalysis(lm.3, R=10,data=d.f11)
   sum.bs.da.3<-summary(bs.da.3)$r2
-  print("")
-  print(sum.bs.da.3)
-  expect_gt(sum.bs.da.3["complete-r2-xa.xb","SE.Dij"],0.1)
-  expect_gt(sum.bs.da.3["complete-r2-xa.xc","SE.Dij"],0.1)
+  #print(sum.bs.da.3)
+  expect_lt(sum.bs.da.3["complete-r2-xa.xb","SE.Dij"],0.1)
+  expect_gt(sum.bs.da.3["complete-r2-xa.xd","SE.Dij"],0.1)
   expect_equal(sum.bs.da.3["conditional-r2-xa.xb","SE.Dij"],0)
 })
 

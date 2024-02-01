@@ -3,8 +3,6 @@
 
 # dominanceanalysis
 
-[![Build
-Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis)
 [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
 [![Stable
 version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
@@ -17,14 +15,14 @@ and Hierarchical Linear Models.
 
 **Features**:
 
-  - Provides complete, conditional and general dominance analysis for
-    *lm* (univariate and multivariate), *dynlm*, *lmer*, *betareg* and
-    *glm* (family=binomial) models.
-  - Covariance / correlation matrixes could be used as input for OLS
-    dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods,
-    respectively.
-  - Multiple criteria can be used as fit indices, which is useful
-    especially for HLM.
+- Provides complete, conditional and general dominance analysis for *lm*
+  (univariate and multivariate), *clm*, *dynlm*, *lmer*, *betareg* and
+  *glm* (family=binomial) models.
+- Covariance / correlation matrixes could be used as input for OLS
+  dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods,
+  respectively.
+- Multiple criteria can be used as fit indices, which is useful
+  especially for HLM.
 
 # Examples
 
@@ -271,8 +269,8 @@ To evaluate the robustness of our results, we can use bootstrap analysis
 (Azen and Budescu, 2006).
 
 We applied a bootstrap analysis using `bootDominanceAnalysis()` method
-with \(R^2\) as a fit index and 100 permutations. For precise results,
-you need to run at least 1000 replications.
+with $R^2$ as a fit index and 100 permutations. For precise results, you
+need to run at least 1000 replications.
 
 ``` r
   set.seed(1234)
@@ -478,7 +476,7 @@ da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)
 ```
 
 Using `print()` method, we can see that random effects are modeled as a
-constant (1 | block).
+constant (1 \| block).
 
 ``` r
 print(da.lmer)
@@ -545,15 +543,15 @@ print(da.lmer)
 ```
 
 The fit indices used in the analysis were *n.marg* (Nakagawa’s marginal
-R²), *n.cond* (Nakagawa’s conditional R²), *rb.r2.1* (R\&B \(R^2_1\):
-Level-1 variance component explained by predictors), *rb.r2.2* (R\&B
-\(R^2_2\): Level-2 variance component explained by predictors),
-*sb.r2.1* (S\&B \(R^2_1\): Level-1 proportional reduction in error
-predicting scores at Level-1), and *sb.r2.2* (S\&B \(R^2_2\): Level-2
-proportional reduction in error predicting scores at Level-1). We can
-see that using *rb.r2.1* and *sb.r2.1* index, that shows influence of
-predictors on Level-1 variance, clearly *nitrogen* dominates over
-*potassium* and *phosphate*, and *potassium* dominates over *phosphate*.
+R²), *n.cond* (Nakagawa’s conditional R²), *rb.r2.1* (R&B $R^2_1$:
+Level-1 variance component explained by predictors), *rb.r2.2* (R&B
+$R^2_2$: Level-2 variance component explained by predictors), *sb.r2.1*
+(S&B $R^2_1$: Level-1 proportional reduction in error predicting scores
+at Level-1), and *sb.r2.2* (S&B $R^2_2$: Level-2 proportional reduction
+in error predicting scores at Level-1). We can see that using *rb.r2.1*
+and *sb.r2.1* index, that shows influence of predictors on Level-1
+variance, clearly *nitrogen* dominates over *potassium* and *phosphate*,
+and *potassium* dominates over *phosphate*.
 
 ``` r
 s.da.lmer=summary(da.lmer)
@@ -713,43 +711,39 @@ summary(glm.esoph)
 #> glm(formula = cbind(ncases, ncontrols) ~ agegp + alcgp + tobgp, 
 #>     family = "binomial", data = esoph)
 #> 
-#> Deviance Residuals: 
-#>     Min       1Q   Median       3Q      Max  
-#> -1.6891  -0.5618  -0.2168   0.2314   2.0642  
-#> 
 #> Coefficients:
 #>             Estimate Std. Error z value Pr(>|z|)    
-#> (Intercept) -1.77997    0.19796  -8.992  < 2e-16 ***
-#> agegp.L      3.00534    0.65215   4.608 4.06e-06 ***
-#> agegp.Q     -1.33787    0.59111  -2.263  0.02362 *  
-#> agegp.C      0.15307    0.44854   0.341  0.73291    
-#> agegp^4      0.06410    0.30881   0.208  0.83556    
-#> agegp^5     -0.19363    0.19537  -0.991  0.32164    
-#> alcgp.L      1.49185    0.19935   7.484 7.23e-14 ***
-#> alcgp.Q     -0.22663    0.17952  -1.262  0.20680    
-#> alcgp.C      0.25463    0.15906   1.601  0.10942    
-#> tobgp.L      0.59448    0.19422   3.061  0.00221 ** 
-#> tobgp.Q      0.06537    0.18811   0.347  0.72823    
-#> tobgp.C      0.15679    0.18658   0.840  0.40071    
+#> (Intercept) -1.19039    0.20737  -5.740 9.44e-09 ***
+#> agegp.L      3.99663    0.69389   5.760 8.42e-09 ***
+#> agegp.Q     -1.65741    0.62115  -2.668  0.00762 ** 
+#> agegp.C      0.11094    0.46815   0.237  0.81267    
+#> agegp^4      0.07892    0.32463   0.243  0.80792    
+#> agegp^5     -0.26219    0.21337  -1.229  0.21915    
+#> alcgp.L      2.53899    0.26385   9.623  < 2e-16 ***
+#> alcgp.Q      0.09376    0.22419   0.418  0.67578    
+#> alcgp.C      0.43930    0.18347   2.394  0.01665 *  
+#> tobgp.L      1.11749    0.24014   4.653 3.26e-06 ***
+#> tobgp.Q      0.34516    0.22414   1.540  0.12358    
+#> tobgp.C      0.31692    0.21091   1.503  0.13294    
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> (Dispersion parameter for binomial family taken to be 1)
 #> 
-#>     Null deviance: 227.241  on 87  degrees of freedom
-#> Residual deviance:  53.973  on 76  degrees of freedom
-#> AIC: 225.45
+#>     Null deviance: 367.953  on 87  degrees of freedom
+#> Residual deviance:  82.337  on 76  degrees of freedom
+#> AIC: 221.39
 #> 
 #> Number of Fisher Scoring iterations: 6
 ```
 
 We performed dominance analysis on this dataset and the results are
-shown below. The fit indices were *r2.m* (\(R^2_M\): McFadden’s
-measure), *r2.cs* (\(R^2_{CS}\): Cox and Snell’s measure), *r2.n*
-(\(R^2_N\): Nagelkerke’s measure) and *r2.e* (\(R^2_E\): Estrella’s
-measure). For all fit indices, we can conclude that *age* and *alcohol*
-completely dominate *tobacco*, while *age* shows general dominance over
-both *alcohol* and *tobacco.*
+shown below. The fit indices were *r2.m* ($R^2_M$: McFadden’s measure),
+*r2.cs* ($R^2_{CS}$: Cox and Snell’s measure), *r2.n* ($R^2_N$:
+Nagelkerke’s measure) and *r2.e* ($R^2_E$: Estrella’s measure). For all
+fit indices, we can conclude that *age* and *alcohol* completely
+dominate *tobacco*, while *age* shows general dominance over both
+*alcohol* and *tobacco.*
 
 ``` r
 da.esoph<-dominanceAnalysis(glm.esoph)
@@ -760,122 +754,122 @@ print(da.esoph)
 #> Fit-indices: r2.m, r2.cs, r2.n, r2.e 
 #> 
 #> * Fit index:  r2.m 
-#>       complete conditional   general
-#> agegp     tbgp        tbgp alcg,tbgp
-#> alcgp     tbgp        tbgp      tbgp
-#> tobgp                               
+#>        complete conditional   general
+#> agegp      tbgp        tbgp      tbgp
+#> alcgp aggp,tbgp   aggp,tbgp aggp,tbgp
+#> tobgp                                
 #> 
 #> Average contribution:
-#> agegp alcgp tobgp 
-#> 0.220 0.205 0.037 
+#> alcgp agegp tobgp 
+#> 0.283 0.256 0.052 
 #> * Fit index:  r2.cs 
-#>       complete conditional   general
-#> agegp     tbgp        tbgp alcg,tbgp
-#> alcgp     tbgp        tbgp      tbgp
-#> tobgp                               
+#>        complete conditional   general
+#> agegp      tbgp        tbgp      tbgp
+#> alcgp aggp,tbgp   aggp,tbgp aggp,tbgp
+#> tobgp                                
 #> 
 #> Average contribution:
-#> agegp alcgp tobgp 
-#> 0.398 0.378 0.084 
+#> alcgp agegp tobgp 
+#> 0.441 0.407 0.113 
 #> * Fit index:  r2.n 
-#>       complete conditional   general
-#> agegp     tbgp        tbgp alcg,tbgp
-#> alcgp     tbgp        tbgp      tbgp
-#> tobgp                               
+#>        complete conditional   general
+#> agegp      tbgp        tbgp      tbgp
+#> alcgp aggp,tbgp   aggp,tbgp aggp,tbgp
+#> tobgp                                
 #> 
 #> Average contribution:
-#> agegp alcgp tobgp 
-#> 0.404 0.384 0.085 
+#> alcgp agegp tobgp 
+#> 0.442 0.409 0.113 
 #> * Fit index:  r2.e 
-#>       complete conditional   general
-#> agegp     tbgp        tbgp alcg,tbgp
-#> alcgp     tbgp        tbgp      tbgp
-#> tobgp                               
+#>        complete conditional   general
+#> agegp      tbgp        tbgp      tbgp
+#> alcgp aggp,tbgp   aggp,tbgp aggp,tbgp
+#> tobgp                                
 #> 
 #> Average contribution:
-#> agegp alcgp tobgp 
-#> 0.432 0.410 0.087
+#> alcgp agegp tobgp 
+#> 0.457 0.422 0.114
 summary(da.esoph)
 #> 
 #> * Fit index:  r2.m 
 #> 
 #> Average contribution of each variable:
 #> 
-#> agegp alcgp tobgp 
-#> 0.220 0.205 0.037 
+#> alcgp agegp tobgp 
+#> 0.283 0.256 0.052 
 #> 
 #> Dominance Analysis matrix:
 #>              model level   fit agegp alcgp tobgp
-#>                  1     0     0 0.235 0.236 0.047
-#>              agegp     1 0.235       0.199 0.051
-#>              alcgp     1 0.236 0.198       0.019
-#>              tobgp     1 0.047 0.239 0.208      
-#>    Average level 1     1       0.218 0.204 0.035
-#>        agegp+alcgp     2 0.434             0.028
-#>        agegp+tobgp     2 0.286       0.176      
-#>        alcgp+tobgp     2 0.256 0.207            
-#>    Average level 2     2       0.207 0.176 0.028
-#>  agegp+alcgp+tobgp     3 0.462                  
+#>                  1     0     0 0.251 0.303 0.058
+#>              agegp     1 0.251       0.292 0.076
+#>              alcgp     1 0.303 0.239       0.026
+#>              tobgp     1 0.058 0.269 0.272      
+#>    Average level 1     1       0.254 0.282 0.051
+#>        agegp+alcgp     2 0.543             0.049
+#>        agegp+tobgp     2 0.326       0.265      
+#>        alcgp+tobgp     2 0.329 0.262            
+#>    Average level 2     2       0.262 0.265 0.049
+#>  agegp+alcgp+tobgp     3 0.591                  
 #> 
 #> * Fit index:  r2.cs 
 #> 
 #> Average contribution of each variable:
 #> 
-#> agegp alcgp tobgp 
-#> 0.398 0.378 0.084 
+#> alcgp agegp tobgp 
+#> 0.441 0.407 0.113 
 #> 
 #> Dominance Analysis matrix:
 #>              model level   fit agegp alcgp tobgp
-#>                  1     0     0 0.633 0.634 0.182
-#>              agegp     1 0.633        0.21 0.072
-#>              alcgp     1 0.634 0.209       0.029
-#>              tobgp     1 0.182 0.522 0.481      
-#>    Average level 1     1       0.365 0.345  0.05
-#>        agegp+alcgp     2 0.843             0.018
-#>        agegp+tobgp     2 0.704       0.156      
-#>        alcgp+tobgp     2 0.663 0.197            
-#>    Average level 2     2       0.197 0.156 0.018
-#>  agegp+alcgp+tobgp     3  0.86                  
+#>                  1     0     0 0.747 0.811 0.271
+#>              agegp     1 0.747       0.202 0.086
+#>              alcgp     1 0.811 0.138       0.025
+#>              tobgp     1 0.271 0.562 0.565      
+#>    Average level 1     1        0.35 0.383 0.056
+#>        agegp+alcgp     2 0.949             0.012
+#>        agegp+tobgp     2 0.833       0.128      
+#>        alcgp+tobgp     2 0.836 0.125            
+#>    Average level 2     2       0.125 0.128 0.012
+#>  agegp+alcgp+tobgp     3 0.961                  
 #> 
 #> * Fit index:  r2.n 
 #> 
 #> Average contribution of each variable:
 #> 
-#> agegp alcgp tobgp 
-#> 0.404 0.384 0.085 
+#> alcgp agegp tobgp 
+#> 0.442 0.409 0.113 
 #> 
 #> Dominance Analysis matrix:
 #>              model level   fit agegp alcgp tobgp
-#>                  1     0     0 0.642 0.643 0.185
-#>              agegp     1 0.642       0.213 0.073
-#>              alcgp     1 0.643 0.212        0.03
-#>              tobgp     1 0.185 0.529 0.488      
-#>    Average level 1     1        0.37  0.35 0.051
-#>        agegp+alcgp     2 0.855             0.018
-#>        agegp+tobgp     2 0.714       0.158      
-#>        alcgp+tobgp     2 0.673   0.2            
-#>    Average level 2     2         0.2 0.158 0.018
-#>  agegp+alcgp+tobgp     3 0.873                  
+#>                  1     0     0  0.75 0.814 0.272
+#>              agegp     1  0.75       0.203 0.086
+#>              alcgp     1 0.814 0.139       0.025
+#>              tobgp     1 0.272 0.564 0.567      
+#>    Average level 1     1       0.352 0.385 0.056
+#>        agegp+alcgp     2 0.953             0.012
+#>        agegp+tobgp     2 0.837       0.128      
+#>        alcgp+tobgp     2  0.84 0.126            
+#>    Average level 2     2       0.126 0.128 0.012
+#>  agegp+alcgp+tobgp     3 0.965                  
 #> 
 #> * Fit index:  r2.e 
 #> 
 #> Average contribution of each variable:
 #> 
-#> agegp alcgp tobgp 
-#> 0.432 0.410 0.087 
+#> alcgp agegp tobgp 
+#> 0.457 0.422 0.114 
 #> 
 #> Dominance Analysis matrix:
 #>              model level   fit agegp alcgp tobgp
-#>                  1     0     0 0.681 0.682 0.186
-#>              agegp     1 0.681       0.231 0.081
-#>              alcgp     1 0.682 0.229       0.033
-#>              tobgp     1 0.186 0.576 0.529      
-#>    Average level 1     1       0.402  0.38 0.057
-#>        agegp+alcgp     2 0.911             0.017
-#>        agegp+tobgp     2 0.762       0.167      
-#>        alcgp+tobgp     2 0.715 0.213            
-#>    Average level 2     2       0.213 0.167 0.017
-#>  agegp+alcgp+tobgp     3 0.929
+#>                  1     0     0 0.795 0.862 0.278
+#>              agegp     1 0.795       0.192 0.091
+#>              alcgp     1 0.862 0.124       0.026
+#>              tobgp     1 0.278 0.608  0.61      
+#>    Average level 1     1       0.366 0.401 0.059
+#>        agegp+alcgp     2 0.986             0.006
+#>        agegp+tobgp     2 0.886       0.107      
+#>        alcgp+tobgp     2 0.888 0.104            
+#>    Average level 2     2       0.104 0.107 0.006
+#>  agegp+alcgp+tobgp     3 0.993
 ```
 
 Then, we performed a bootstrap analysis. Using McFadden’s measure
@@ -889,16 +883,16 @@ reproducible and require more research
 set.seed(1234)
 da.b.esoph<-bootDominanceAnalysis(glm.esoph,R = 200)
 print(format(summary(da.b.esoph)$r2.m,digits=3),row.names=F)
-#>    dominance     i     k Dij  mDij SE.Dij   Pij   Pji Pnoij   Rep
-#>     complete agegp alcgp 0.5 0.627 0.4312 0.530 0.275 0.195 0.195
-#>     complete agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>     complete alcgp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>  conditional agegp alcgp 0.5 0.627 0.4312 0.530 0.275 0.195 0.195
-#>  conditional agegp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>  conditional alcgp tobgp 1.0 0.998 0.0354 0.995 0.000 0.005 0.995
-#>      general agegp alcgp 1.0 0.600 0.4911 0.600 0.400 0.000 0.600
-#>      general agegp tobgp 1.0 1.000 0.0000 1.000 0.000 0.000 1.000
-#>      general alcgp tobgp 1.0 0.995 0.0707 0.995 0.005 0.000 0.995
+#>    dominance     i     k Dij  mDij SE.Dij   Pij  Pji Pnoij   Rep
+#>     complete agegp alcgp   0 0.438 0.4425 0.335 0.46 0.205 0.460
+#>     complete agegp tobgp   1 0.988 0.0783 0.975 0.00 0.025 0.975
+#>     complete alcgp tobgp   1 0.998 0.0354 0.995 0.00 0.005 0.995
+#>  conditional agegp alcgp   0 0.438 0.4425 0.335 0.46 0.205 0.460
+#>  conditional agegp tobgp   1 0.988 0.0783 0.975 0.00 0.025 0.975
+#>  conditional alcgp tobgp   1 0.998 0.0354 0.995 0.00 0.005 0.995
+#>      general agegp alcgp   0 0.400 0.4911 0.400 0.60 0.000 0.600
+#>      general agegp tobgp   1 1.000 0.0000 1.000 0.00 0.000 1.000
+#>      general alcgp tobgp   1 1.000 0.0000 1.000 0.00 0.000 1.000
 ```
 
 ## Set of predictors
@@ -971,42 +965,43 @@ install_github("clbustos/dominanceanalysis")
 
 ## Authors
 
-  - Claudio Bustos Navarrete: Creator and maintainer
-  - Filipa Coutinho Soares: Documentation and testing
+- Claudio Bustos Navarrete: Creator and maintainer
+- Filipa Coutinho Soares: Documentation and testing
 
 ## Acknowledgments
 
-  - Daniel Schlaepfer: Error reporting on logistic regression code.
-  - Xiong Zhang: Incorporation of dynamic linear models.
-  - Maartje Hidalgo: Incorporation of beta regression.
+- Daniel Schlaepfer: Reported an error in the logistic regression code.
+- Xiong Zhang: Contributed to the incorporation of dynamic linear
+  models.
+- Maartje Hidalgo: Contributed to the incorporation of beta regression.
 
 ## References
 
-  - Budescu, D. V. (1993). Dominance analysis: A new approach to the
-    problem of relative importance of predictors in multiple regression.
-    Psychological Bulletin, 114(3), 542-551.
-    <https://doi.org/10.1037/0033-2909.114.3.542>
+- Budescu, D. V. (1993). Dominance analysis: A new approach to the
+  problem of relative importance of predictors in multiple regression.
+  Psychological Bulletin, 114(3), 542-551.
+  <https://doi.org/10.1037/0033-2909.114.3.542>
 
-  - Azen, R., & Budescu, D. V. (2003). The dominance analysis approach
-    for comparing predictors in multiple regression. Psychological
-    Methods, 8(2), 129-148. <https://doi.org/10.1037/1082-989X.8.2.129>
+- Azen, R., & Budescu, D. V. (2003). The dominance analysis approach for
+  comparing predictors in multiple regression. Psychological Methods,
+  8(2), 129-148. <https://doi.org/10.1037/1082-989X.8.2.129>
 
-  - Azen, R., & Budescu, D. V. (2006). Comparing Predictors in
-    Multivariate Regression Models: An Extension of Dominance Analysis.
-    Journal of Educational and Behavioral Statistics, 31(2), 157-180.
-    <https://doi.org/10.3102/10769986031002157>
+- Azen, R., & Budescu, D. V. (2006). Comparing Predictors in
+  Multivariate Regression Models: An Extension of Dominance Analysis.
+  Journal of Educational and Behavioral Statistics, 31(2), 157-180.
+  <https://doi.org/10.3102/10769986031002157>
 
-  - Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine
-    Predictor Importance in Logistic Regression. Journal of Educational
-    and Behavioral Statistics, 34(3), 319-347.
-    <https://doi.org/10.3102/1076998609332754>
+- Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine
+  Predictor Importance in Logistic Regression. Journal of Educational
+  and Behavioral Statistics, 34(3), 319-347.
+  <https://doi.org/10.3102/1076998609332754>
 
-  - Luo, W., & Azen, R. (2013). Determining Predictor Importance in
-    Hierarchical Linear Models Using Dominance Analysis. Journal of
-    Educational and Behavioral Statistics, 38(1), 3-31.
-    <https://doi.org/10.3102/1076998612458319>
+- Luo, W., & Azen, R. (2013). Determining Predictor Importance in
+  Hierarchical Linear Models Using Dominance Analysis. Journal of
+  Educational and Behavioral Statistics, 38(1), 3-31.
+  <https://doi.org/10.3102/1076998612458319>
 
-  - Shou, Y., & Smithson, M. (2015). Evaluating Predictors of
-    Dispersion: A Comparison of Dominance Analysis and Bayesian Model
-    Averaging. Psychometrika, 80(1), 236-256.
-    <https://doi.org/10.1007/s11336-013-9375-8>
+- Shou, Y., & Smithson, M. (2015). Evaluating Predictors of Dispersion:
+  A Comparison of Dominance Analysis and Bayesian Model Averaging.
+  Psychometrika, 80(1), 236-256.
+  <https://doi.org/10.1007/s11336-013-9375-8>

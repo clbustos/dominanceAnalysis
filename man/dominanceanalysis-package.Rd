@@ -95,5 +95,5 @@ summary(da.glm.boot)
 \code{\link{dominanceAnalysis}} , \code{\link{bootDominanceAnalysis}}
 }
 \author{
-Claudio Bustos \email{clbustos@gmail_com}, Filipa Coutinho Soares (documentation)
+Claudio Bustos \email{clbustos@gmail.com}, Filipa Coutinho Soares (documentation)
 }

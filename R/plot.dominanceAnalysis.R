@@ -7,6 +7,7 @@
 #'                              to allow easier visualization
 #' @param ... unused
 #' @return a ggplot object
+#' @importFrom ggplot2 .data
 #' @export
 #' @examples
 #' data(longley)
@@ -46,10 +47,12 @@ plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "comple
     x.df<-data.frame(.level=factor(paste0("Level: ",x.level)), .names=x.names, x.fits)
     x.df.m<-na.omit(reshape2::melt(x.df,id.vars = c(".level",".names")))
     if(complete_flipped_axis) {
-      gg<-ggplot2::ggplot(x.df.m, ggplot2::aes_string(y=".names", x="value", color="variable", group="variable", shape = switch(which.graph, complete=NULL, complete_no_facet=".level")))
+
+      gg<-ggplot2::ggplot(x.df.m, ggplot2::aes(y=.data$.names, x=.data$value, color=.data$variable, group=.data$variable,
+                                               shape = switch(which.graph, complete=NULL, complete_no_facet=".level")))
       free_scale<-"free_y"
     } else {
-      gg<-ggplot2::ggplot(x.df.m, ggplot2::aes_string(x=".names", y="value", color="variable", group="variable", shape = switch(which.graph, complete=NULL, complete_no_facet=".level")))
+      gg<-ggplot2::ggplot(x.df.m, ggplot2::aes(x=.data$.names, y=.data$value, color=.data$variable, group=.data$variable, shape = switch(which.graph, complete=NULL, complete_no_facet=".level")))
       free_scale<-"free_x"
     }
 
@@ -70,7 +73,7 @@ plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "comple
     x.df.m<-reshape2::melt(cbl,id.vars = c("level"))
 
     gg<-ggplot2::ggplot(x.df.m,
-                        ggplot2::aes_string(x="level", y="value", color="variable", group = "variable")) +
+                        ggplot2::aes(x=.data$level, y=.data$value, color=.data$variable, group = .data$variable)) +
       ggplot2::geom_point(size=2) +
       ggplot2::geom_line() +
       ggplot2::guides(shape="none") +
@@ -81,7 +84,7 @@ plot.dominanceAnalysis<-function(x, which.graph=c("general", "complete", "comple
   if(which.graph=="general") {
     av.c<-averageContribution(x,fit.function)[[fit.function]]
     gg<-ggplot2::ggplot(data.frame(variable=names(av.c), value=as.numeric(av.c)),
-                        ggplot2::aes_string(x="variable", y="value",fill="variable"))+
+                        ggplot2::aes(x=.data$variable, y=.data$value,fill=.data$variable))+
       ggplot2::geom_bar(stat="identity")+
       ggplot2::theme_minimal()+
       ggplot2::ylab(fit.function)+

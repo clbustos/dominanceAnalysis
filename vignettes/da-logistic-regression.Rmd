@@ -62,7 +62,7 @@ Please note that in this dataset there are no false negatives, hence the bird wa
 We start by loading the csv data using the `data` function.
 
 ```{r}
-#library(dominanceanalysis)
+library(dominanceanalysis)
 data("tropicbird")
 ```
 

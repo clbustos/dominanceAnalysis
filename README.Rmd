@@ -14,7 +14,6 @@ knitr::opts_chunk$set(
 ```
 # dominanceanalysis
 
-[![Build Status](https://travis-ci.org/clbustos/dominanceAnalysis.svg?branch=master)](https://travis-ci.org/clbustos/dominanceAnalysis)
 [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
 [![Stable version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
@@ -24,7 +23,7 @@ Dominance Analysis (Azen and Budescu, 2003, 2006; Azen and Traxel, 2009; Budescu
 
 **Features**:
 
-- Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *dynlm*, *lmer*, *betareg* and *glm* (family=binomial) models.
+- Provides complete, conditional and general dominance analysis for *lm* (univariate and multivariate), *clm*, *dynlm*, *lmer*, *betareg* and *glm* (family=binomial) models.
 - Covariance / correlation matrixes could be used as input for OLS dominance analysis, using `lmWithCov()` and `mlmWithCov()` methods, respectively.
 - Multiple criteria can be used as fit indices, which is useful especially for HLM.
 
@@ -200,9 +199,10 @@ install_github("clbustos/dominanceanalysis")
 
 ## Acknowledgments
 
-* Daniel Schlaepfer: Error reporting on logistic regression code.
-* Xiong Zhang: Incorporation of dynamic linear models.
-* Maartje Hidalgo: Incorporation of beta regression. 
+* Daniel Schlaepfer: Reported an error in the logistic regression code.
+* Xiong Zhang: Contributed to the incorporation of dynamic linear models.
+* Maartje Hidalgo: Contributed to the incorporation of beta regression.
+
 	
 
 ## References
