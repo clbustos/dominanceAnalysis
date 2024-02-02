@@ -24,7 +24,7 @@ Authors@R: c(
   person("Filipa", "Coutinho Soares", 
          email = "filipa.mco.soares@gmail.com", role = c("aut"),
          comment = c(ORCID = "0000-0002-7579-2538")))
-Version: 2.0.0
+Version: 2.1.0
 Depends:
     R (>= 4.0.0)
 License: GPL-2
