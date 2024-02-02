@@ -19,12 +19,12 @@ Description: Dominance analysis is a method that allows to compare the
              respectively.
 Authors@R: c(
   person("Claudio", "Bustos Navarrete", 
-         email = "clbustos@gmail.com", role = c("aut", "cre"),
+         email = "clbustos@gmail.com", role = c("aut", "cre", "cph"),
          comment = c(ORCID = "0000-0003-3478-9858")),
   person("Filipa", "Coutinho Soares", 
          email = "filipa.mco.soares@gmail.com", role = c("aut"),
          comment = c(ORCID = "0000-0002-7579-2538")))
-Version: 2.1.0
+Version: 2.0.0
 Depends:
     R (>= 4.0.0)
 License: GPL-2

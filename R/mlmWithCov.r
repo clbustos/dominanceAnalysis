@@ -54,7 +54,8 @@ mlmWithCov<-function(f,x) {
 	class(out)<-"mlmWithCov"
 	out
 }
-# @internal
-formula.mlmWithCov<-function(x) {
+#' @keywords internal
+#' @export
+formula.mlmWithCov<-function(x, ...) {
 	x$formula
 }

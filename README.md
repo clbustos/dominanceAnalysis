@@ -3,7 +3,7 @@
 
 # dominanceanalysis
 
-[![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://codecov.io/gh/clbustos/dominanceAnalysis)
+[![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://app.codecov.io/gh/clbustos/dominanceAnalysis)
 [![Stable
 version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)
