@@ -1,6 +1,6 @@
 #' Calculates several measures of fit for Linear Mixed Models
 #' based on Lou and Azen (2013) text.
-#' Models could be lmer or lme models
+#' Models could be lmer or lme models.
 #' @param m.null Null model (only with random intercept effects)
 #' @param m.full Full model
 #' @return lmmR2 class
@@ -21,7 +21,7 @@ lmmR2<-function(m.null, m.full) {
 
 # Calculates coefficients of determination for different models on mer models
 #
-# Calculates the four R^2 presents on Lou and Azen (2013) text.
+# Calculates the four $R^2$ presents on Lou and Azen (2013) text.
 # Should extract the intercepts for each model
 lmmR2.mer<-function(m.null,m.full) {
   # First, I verify the group structure.
@@ -56,9 +56,10 @@ lmmR2.mer<-function(m.null,m.full) {
 
 
 
-#' Print method for  lmmR2 models summary
+#' Print method for lmmR2 object, that retrieves the summary.
 #' @param x    lmmR2 object
 #' @param ...  extra arguments for print
+#' @return an lmmR2 object
 #' @keywords internal
 
 print.lmmR2<-function(x,...) {
@@ -68,6 +69,7 @@ print.lmmR2<-function(x,...) {
 #' Print method for  lmmR2 models summary
 #' @param x    summary.lmmR2 object
 #' @param ...  unused
+#' @return a summary.lmmR2 object
 #' @keywords internal
 
 print.summary.lmmR2<-function(x, ...) {
@@ -78,12 +80,15 @@ print.summary.lmmR2<-function(x, ...) {
 	cat("Indeces:\n")
 	print(x$m2,row.names=F)
 	cat("\n")
-
+	invisible(x)
 }
 
 #' Summary for lmmR2 models
 #' @param object lmmR2 object
 #' @param ... unused
+#' @return An object of class \code{"summary.lmmR2"} containing:
+#' \item{m1}{A data frame with variance information and pseudo R-squared values}
+#' \item{m2}{A data frame with index information, meaning and values}
 #' @keywords internal
 
 summary.lmmR2<-function(object, ...) {

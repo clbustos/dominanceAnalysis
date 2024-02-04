@@ -1,4 +1,31 @@
-## New version: 2.1.0
+## New version: 2.1.0, first resubmission
+
+Added \value tags to .Rd files regarding exported methods and, explaining
+the functions results in the documentation. 
+
+Missing Rd-tags that were resolved:
+      bootAverageDominanceAnalysis.Rd: \value
+      bootDominanceAnalysis.Rd: \value
+      da.clm.fit.Rd: \value
+      da.lmerMod.fit.Rd: \value
+      da.lmWithCov.fit.Rd: \value
+      print.lmmR2.Rd: \value
+      print.summary.dominanceAnalysis.Rd: \value
+      print.summary.lmmR2.Rd: \value
+      summary.bootAverageDominanceAnalysis.Rd: \value
+      summary.bootDominanceAnalysis.Rd: \value
+      summary.lmmR2.Rd: \value
+
+Local check:
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+Check on win-builder-stable: Note regarding new submission
+
+Check on rhub Windows Server 2022, R-devel, 64 bit: same notes as first submission
+
+## First submission message from now on
+
 
 This is a minor release, to provide a version of dominanceAnalysis that complies
 with current requirements of CRAN.

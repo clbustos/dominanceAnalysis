@@ -11,6 +11,9 @@
 
 \item{...}{unused}
 }
+\value{
+a summary.lmmR2 object
+}
 \description{
 Print method for  lmmR2 models summary
 }

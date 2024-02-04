@@ -13,6 +13,10 @@ da.clm.fit(original.model, newdata = NULL, ...)
 
 \item{...}{ignored}
 }
+\value{
+A function described by \link{using-fit-indices} description for interface.
+        You could retrieve \code{r2.n} index, corresponding to Nagelkerke method.
+}
 \description{
 Provides fit indices for ordinal regression models, based on the Nagelkerke (1991) method.
 }

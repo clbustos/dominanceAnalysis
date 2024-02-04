@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dominanceanalysis
+# dominanceanalysis <img src='logo/dominance_analysis_logo.png' align="right" height="139" />
 
 [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://app.codecov.io/gh/clbustos/dominanceAnalysis)
 [![Stable

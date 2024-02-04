@@ -25,7 +25,8 @@ NULL
 #' @param original.model Original fitted model
 #' @param newdata Data used in update statement
 #' @param ... ignored
-#' @return A function described by \link{using-fit-indices} description for interface
+#' @return A function described by \link{using-fit-indices} description for interface.
+#'         You could retrieve \code{r2} index.
 #' @export
 #' @family fit indices
 #' @importFrom stats lm
@@ -54,14 +55,14 @@ da.lm.fit<-function(original.model, newdata=NULL, ...) {
 
 #' Provides fit indices for GLM models.
 #'
-#' FThese functions are only available for logistic regression models and are
+#' These functions are only available for logistic regression models and are
 #' based on the work of Azen and Traxel (2009).
 #'
 #' Check \link{daRawResults}.
 #' @param original.model Original fitted model
 #' @param newdata Data used in update statement
 #' @param ...  ignored
-#' @return A function described by \link{using-fit-indices}. You could retrieve following indices
+#' @return A function described by \link{using-fit-indices}. You could retrieve the following indices:
 #' \describe{
 #' \item{\code{r2.m}}{McFadden(1974)}
 #' \item{\code{r2.cs}}{Cox and Snell(1989). Use with caution, because don't have 1 as upper bound}
@@ -135,7 +136,7 @@ da.glm.fit<-function(original.model, newdata=NULL,...) {
 
 #' Provides fit indices for betareg models.
 #'
-#' Note that Nagelkerke and Estrella coefficients are designed for discrete dependent variables
+#' Note that the Nagelkerke and Estrella coefficients are designed for discrete dependent variables
 #' and thus cannot be used in this context. Instead, the Cox and Snell coefficient is recommended,
 #' along with the pseudo-\eqn{R^2}. It is worth noting that McFadden's index may produce
 #' negative values and should be avoided.
@@ -207,6 +208,8 @@ da.betareg.fit<-function(original.model, newdata=NULL, ...) {
 #' @param original.model Original fitted model
 #' @param newdata Data used in update statement
 #' @param ... ignored
+#' @return A function described by \link{using-fit-indices} description for interface.
+#'         You could retrieve \code{r2.n} index, corresponding to Nagelkerke method.
 #' @references
 #' \itemize{
 #' \item Nagelkerke, N. J. D. (1991). A Note on a General Definition of the Coefficient of Determination. Biometrika, 78(3), 691-692. doi:10.1093/biomet/78.3.691
@@ -243,16 +246,26 @@ da.clm.fit<-function(original.model, newdata=NULL, ...) {
 }
 
 
-#' Provides fit indices for hierarchical linear models, based on Nakagawa(2013) and Luo and Azen (2013).
+#' Provides fit indices for hierarchical linear models, based on
+#' Nakagawa et al.(2017) and Luo and Azen (2013).
 #'
 #' @param original.model Original fitted model
 #' @param null.model needed for HLM models
 #' @param newdata Data used in update statement
 #' @param ... ignored
+#' @return A function described by \link{using-fit-indices} description for interface.
+#'         By default, four indices are provided:
+#'         \item{rb.r2.1}{Amount of  Level-1 variance explained by the addition of the predictor. }
+#'         \item{rb.r2.2}{Amount of  Level-2 variance explained by the addition of the predictor.}
+#'         \item{sb.r2.1}{Proportional reduction in error of predicting scores at Level 1 }
+#'         \item{sb.r2.2}{Proportional reduction in  error of predicting cluster means at Level 2}
+#'         If \code{performance} library is available, the two following indices are also available:
+#'         \item{n.marg}{Marginal R2 coefficient based on Nakagawa et al. (2017). Considers only the variance of the fixed effects. }
+#'         \item{n.cond}{Conditional R2 coefficient based on Nakagawa et al. (2017). Takes both the fixed and random effects into account.}
 #' @references
 #' \itemize{
-#' \item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
-#' \item Nakagawa, S., & Schielzeth, H. (2013). A general and simple method for obtaining R2 from generalized linear mixed-effects models. Methods in Ecology and Evolution, 4(2), 133-142. doi:10.1111/j.2041-210x.2012.00261.x
+#' \item Luo, W., & Azen, R. (2013). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
+#' \item Nakagawa, S., Johnson, P. C. D., and Schielzeth, H. (2017). The coefficient of determination R2 and intra-class correlation coefficient from generalized linear mixed-effects models revisited and expanded. Journal of The Royal Society Interface, 14(134), 20170213.
 #' }
 #' @family fit indices
 #' @export
@@ -299,12 +312,13 @@ da.lmerMod.fit<-function(original.model, null.model, newdata=NULL, ...) {
 
 #' Provides coefficient of determination for linear models, using covariance/correlation matrix.
 #'
-#' Uses \eqn{R^2} (coefficient of determination)
-#' See \code{\link{lmWithCov}}
+#' Uses \eqn{R^2} (coefficient of determination).
+#' See \code{\link{lmWithCov}}.
 #'
 #' @param base.cov variance/covariance matrix
 #' @param ... ignored
-#'
+#' @return A function described by \link{using-fit-indices} description for interface.
+#'         You could retrieve \code{r2} index.
 #' @family fit indices
 #' @export
 da.lmWithCov.fit<-function(base.cov, ...) {
@@ -324,8 +338,8 @@ da.lmWithCov.fit<-function(base.cov, ...) {
 #' @param ... ignored
 #' @return A list with several fit indices
 #' \describe{
-#' \item{\code{r.squared.xy}}{\eqn{R^2_{XY}}}
-#' \item{\code{p.squared.yx}}{\eqn{P^2_{YX}}}
+#' \item{\code{r.squared.xy}}{Corresponds to \eqn{R^2_{XY}}}
+#' \item{\code{p.squared.yx}}{Corresponds to \eqn{P^2_{YX}}}
 #' }
 #' See \code{\link{mlmWithCov}}
 #' @references

@@ -2,7 +2,7 @@
 % Please edit documentation in R/lmmR2.r
 \name{print.lmmR2}
 \alias{print.lmmR2}
-\title{Print method for  lmmR2 models summary}
+\title{Print method for lmmR2 object, that retrieves the summary.}
 \usage{
 \method{print}{lmmR2}(x, ...)
 }
@@ -11,7 +11,10 @@
 
 \item{...}{extra arguments for print}
 }
+\value{
+an lmmR2 object
+}
 \description{
-Print method for  lmmR2 models summary
+Print method for lmmR2 object, that retrieves the summary.
 }
 \keyword{internal}

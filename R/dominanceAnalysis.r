@@ -113,8 +113,10 @@ dominanceAnalysis <-
     class(z)<-c("dominanceAnalysis","list")
     z
   }
+#' Print the results of a dominanceAnalysis object
 #' @keywords internal
 #' @export
+#' @return an object of type \code{dominanceAnalysis}
 print.dominanceAnalysis<-function(x,...) {
   cat("\nDominance analysis\n")
   cat("Predictors:", paste0(x$predictors,collapse=", "),"\n")

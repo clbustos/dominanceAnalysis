@@ -14,7 +14,8 @@ da.lm.fit(original.model, newdata = NULL, ...)
 \item{...}{ignored}
 }
 \value{
-A function described by \link{using-fit-indices} description for interface
+A function described by \link{using-fit-indices} description for interface.
+        You could retrieve \code{r2} index.
 }
 \description{
 Uses \eqn{R^2} (coefficient of determination) as fit index

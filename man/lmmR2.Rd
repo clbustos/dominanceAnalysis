@@ -4,7 +4,7 @@
 \alias{lmmR2}
 \title{Calculates several measures of fit for Linear Mixed Models
 based on Lou and Azen (2013) text.
-Models could be lmer or lme models}
+Models could be lmer or lme models.}
 \usage{
 lmmR2(m.null, m.full)
 }
@@ -19,5 +19,5 @@ lmmR2 class
 \description{
 Calculates several measures of fit for Linear Mixed Models
 based on Lou and Azen (2013) text.
-Models could be lmer or lme models
+Models could be lmer or lme models.
 }

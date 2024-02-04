@@ -2,7 +2,8 @@
 % Please edit documentation in R/daFitFunctions.r
 \name{da.lmerMod.fit}
 \alias{da.lmerMod.fit}
-\title{Provides fit indices for hierarchical linear models, based on Nakagawa(2013) and Luo and Azen (2013).}
+\title{Provides fit indices for hierarchical linear models, based on
+Nakagawa et al.(2017) and Luo and Azen (2013).}
 \usage{
 da.lmerMod.fit(original.model, null.model, newdata = NULL, ...)
 }
@@ -15,13 +16,25 @@ da.lmerMod.fit(original.model, null.model, newdata = NULL, ...)
 
 \item{...}{ignored}
 }
+\value{
+A function described by \link{using-fit-indices} description for interface.
+        By default, four indices are provided:
+        \item{rb.r2.1}{Amount of  Level-1 variance explained by the addition of the predictor. }
+        \item{rb.r2.2}{Amount of  Level-2 variance explained by the addition of the predictor.}
+        \item{sb.r2.1}{Proportional reduction in error of predicting scores at Level 1 }
+        \item{sb.r2.2}{Proportional reduction in  error of predicting cluster means at Level 2}
+        If \code{performance} library is available, the two following indices are also available:
+        \item{n.marg}{Marginal R2 coefficient based on Nakagawa et al. (2017). Considers only the variance of the fixed effects. }
+        \item{n.cond}{Conditional R2 coefficient based on Nakagawa et al. (2017). Takes both the fixed and random effects into account.}
+}
 \description{
-Provides fit indices for hierarchical linear models, based on Nakagawa(2013) and Luo and Azen (2013).
+Provides fit indices for hierarchical linear models, based on
+Nakagawa et al.(2017) and Luo and Azen (2013).
 }
 \references{
 \itemize{
-\item Luo, W., & Azen, R. (2012). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
-\item Nakagawa, S., & Schielzeth, H. (2013). A general and simple method for obtaining R2 from generalized linear mixed-effects models. Methods in Ecology and Evolution, 4(2), 133-142. doi:10.1111/j.2041-210x.2012.00261.x
+\item Luo, W., & Azen, R. (2013). Determining Predictor Importance in Hierarchical Linear Models Using Dominance Analysis. Journal of Educational and Behavioral Statistics, 38(1), 3-31. doi:10.3102/1076998612458319
+\item Nakagawa, S., Johnson, P. C. D., and Schielzeth, H. (2017). The coefficient of determination R2 and intra-class correlation coefficient from generalized linear mixed-effects models revisited and expanded. Journal of The Royal Society Interface, 14(134), 20170213.
 }
 }
 \seealso{

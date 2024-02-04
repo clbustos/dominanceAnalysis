@@ -11,9 +11,13 @@ da.lmWithCov.fit(base.cov, ...)
 
 \item{...}{ignored}
 }
+\value{
+A function described by \link{using-fit-indices} description for interface.
+        You could retrieve \code{r2} index.
+}
 \description{
-Uses \eqn{R^2} (coefficient of determination)
-See \code{\link{lmWithCov}}
+Uses \eqn{R^2} (coefficient of determination).
+See \code{\link{lmWithCov}}.
 }
 \seealso{
 Other fit indices: 

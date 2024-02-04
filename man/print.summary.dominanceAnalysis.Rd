@@ -13,6 +13,9 @@
 
 \item{...}{further arguments passed to print method}
 }
+\value{
+a summary.dominanceAnalysis object
+}
 \description{
 Print a summary.dominanceAnalysis object
 }

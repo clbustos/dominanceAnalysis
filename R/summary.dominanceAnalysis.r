@@ -51,6 +51,7 @@ summary.dominanceAnalysis<-function(object, ...) {
 #' @param x a \code{\link{summary.dominanceAnalysis}} object
 #' @param round.digits Number of decimal places to round results
 #' @param ... further arguments passed to print method
+#' @return a summary.dominanceAnalysis object
 #' @keywords internal
 #' @export
 print.summary.dominanceAnalysis<-function(x, round.digits=3,...) {
@@ -70,4 +71,5 @@ print.summary.dominanceAnalysis<-function(x, round.digits=3,...) {
     }
     print(data.frame(lapply(x[[fit]]$summary.matrix,delete.na)), row.names=F, ...)
   }
+  invisible(x)
 }

@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# dominanceanalysis
+# dominanceanalysis <img src='logo/dominance_analysis_logo.png' align="right" height="139" />
+
 
 [![codecov](https://codecov.io/gh/clbustos/dominanceAnalysis/branch/master/graph/badge.svg)](https://app.codecov.io/gh/clbustos/dominanceAnalysis)
 [![Stable version](http://www.r-pkg.org/badges/version-last-release/dominanceanalysis)](https://cran.r-project.org/package=dominanceanalysis)

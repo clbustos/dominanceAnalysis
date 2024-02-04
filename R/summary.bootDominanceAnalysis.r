@@ -5,6 +5,9 @@
 #' @importFrom stats sd
 #' @export
 #' @keywords internal
+#' @return An object \code{summary.bootDominanceAnalysis}, that contains
+#'         data frames with bootstrap summary statistics for each fit index
+
 
 summary.bootDominanceAnalysis<-function(object,fit.functions=NULL,...) {
 	out<-list()
@@ -43,10 +46,11 @@ summary.bootDominanceAnalysis<-function(object,fit.functions=NULL,...) {
 	out
 }
 
-# Print a summary.bootDominanceAnalysis object
-# @param x a \code{\link{summary.bootDominanceAnalysis}} object
-# @param round.digits Number of decimal places to round results
-# @param ... further arguments passed to print method
+#' Print a summary.bootDominanceAnalysis object
+#' @param x a \code{\link{summary.bootDominanceAnalysis}} object
+#' @param round.digits Number of decimal places to round results
+#' @param ... further arguments passed to print method
+#' @return an object \code{\link{summary.bootDominanceAnalysis}}
 #' @export
 #' @keywords internal
 
@@ -60,5 +64,6 @@ print.summary.bootDominanceAnalysis<-function(x,round.digits=3,...) {
 		cat("\n")
 
 	}
+	invisible(x)
 }
 

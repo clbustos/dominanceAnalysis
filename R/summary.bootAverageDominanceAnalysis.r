@@ -5,6 +5,10 @@
 #' @importFrom stats sd
 #' @export
 #' @keywords internal
+#' @return An object \code{summary.bootAverageDominanceAnalysis},
+#'         that containts a list of data frames containing
+#'         summary statistics for each fit index.
+
 
 summary.bootAverageDominanceAnalysis<-function(object, fit.functions=NULL, ...) {
 	bs.mean<-colMeans(object$boot$t)

@@ -13,6 +13,10 @@
 
 \item{...}{ignored}
 }
+\value{
+An object \code{summary.bootDominanceAnalysis}, that contains
+        data frames with bootstrap summary statistics for each fit index
+}
 \description{
 Summary for bootDominanceAnalysis.
 }

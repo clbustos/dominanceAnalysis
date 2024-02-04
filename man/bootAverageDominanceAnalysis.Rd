@@ -2,7 +2,7 @@
 % Please edit documentation in R/bootAverageDominanceAnalysis.r
 \name{bootAverageDominanceAnalysis}
 \alias{bootAverageDominanceAnalysis}
-\title{Bootstrap average values for Dominance Analysis}
+\title{Bootstrap Average Values for Dominance Analysis}
 \usage{
 bootAverageDominanceAnalysis(
   x,
@@ -15,35 +15,44 @@ bootAverageDominanceAnalysis(
 )
 }
 \arguments{
-\item{x}{lm, glm or lmer model}
+\item{x}{A model object, like `lm`, `glm`, or `lmer`.}
 
-\item{R}{number on bootstrap resamples}
+\item{R}{An integer indicating the number of bootstrap resamples to be performed.}
 
-\item{constants}{vector of predictors to remain unchanged between models.
-i.e. vector of variables not subjected to bootstrap analysis.}
+\item{constants}{A character vector specifying predictors that should remain constant in the bootstrap analysis. Default is an empty vector.}
 
-\item{terms}{vector of terms to be analyzed. By default, obtained from the model}
+\item{terms}{An optional vector of terms (predictors) to be analyzed. If NULL, terms are obtained from the model. Default is NULL.}
 
-\item{fit.functions}{list of functions which provides fit indices for model.
-See \code{fit.functions} param in \code{\link{dominanceAnalysis}}
-function.}
+\item{fit.functions}{A vector of functions providing fit indices for the model. See `fit.functions` parameter in `dominanceAnalysis` function.}
 
-\item{null.model}{only for linear mixed models, null model against to test the submodels.
-i.e. only random effects, without any fixed effect.}
+\item{null.model}{An optional model object specifying the null model for linear mixed models, used as a baseline for testing submodels. Default is NULL.}
 
-\item{...}{Other arguments provided to lm or lmer (not implemented yet).}
+\item{...}{Additional arguments passed to `dominanceAnalysis` method}
+}
+\value{
+An object of class `bootAverageDominanceAnalysis` containing:
+-\item{boot}{The results of the bootstrap analysis in a \code{boot} object.}
+\item{preds}{The predictors analyzed}
+\item{fit.functions}{The fit functions used in the analysis}
+\item{R}{The number of bootstrap resamples}
+\item{eg}{expanded grid of predictors by fit functions}
+\item{terms}{The terms analyzed}
 }
 \description{
-Bootstrap average values and correspond standard errors for each predictor
-in the dominance analysis. Those values are used for general dominance.
+Bootstrap average values and corresponding standard errors for each predictor
+in the dominance analysis. These values are used for assessing general dominance.
 }
 \details{
-Use \code{summary()} to get a nice formatted \code{data.frame} object.
+Use \code{summary()} to obtain a nicely formatted \code{data.frame} object.
 }
 \examples{
 \donttest{
-lm.1<-lm(Employed~.,longley)
-da.ave.boot<-bootAverageDominanceAnalysis(lm.1,R=1000)
+lm.1 <- lm(Employed ~ ., longley)
+da.ave.boot <- bootAverageDominanceAnalysis(lm.1, R = 1000)
 summary(da.ave.boot)
 }
+
+}
+\seealso{
+\code{\link{dominanceAnalysis}}, \code{\link{boot}}
 }

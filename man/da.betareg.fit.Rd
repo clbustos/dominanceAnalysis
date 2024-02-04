@@ -22,7 +22,7 @@ A function described by \link{using-fit-indices}. You could retrieve following i
 }
 }
 \description{
-Note that Nagelkerke and Estrella coefficients are designed for discrete dependent variables
+Note that the Nagelkerke and Estrella coefficients are designed for discrete dependent variables
 and thus cannot be used in this context. Instead, the Cox and Snell coefficient is recommended,
 along with the pseudo-\eqn{R^2}. It is worth noting that McFadden's index may produce
 negative values and should be avoided.

@@ -11,6 +11,11 @@
 
 \item{...}{unused}
 }
+\value{
+An object of class \code{"summary.lmmR2"} containing:
+\item{m1}{A data frame with variance information and pseudo R-squared values}
+\item{m2}{A data frame with index information, meaning and values}
+}
 \description{
 Summary for lmmR2 models
 }

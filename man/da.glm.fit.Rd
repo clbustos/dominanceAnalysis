@@ -14,7 +14,7 @@ da.glm.fit(original.model, newdata = NULL, ...)
 \item{...}{ignored}
 }
 \value{
-A function described by \link{using-fit-indices}. You could retrieve following indices
+A function described by \link{using-fit-indices}. You could retrieve the following indices:
 \describe{
 \item{\code{r2.m}}{McFadden(1974)}
 \item{\code{r2.cs}}{Cox and Snell(1989). Use with caution, because don't have 1 as upper bound}
@@ -23,7 +23,7 @@ A function described by \link{using-fit-indices}. You could retrieve following i
 }
 }
 \description{
-FThese functions are only available for logistic regression models and are
+These functions are only available for logistic regression models and are
 based on the work of Azen and Traxel (2009).
 }
 \details{

@@ -14,8 +14,8 @@ da.mlmWithCov.fit(base.cov, ...)
 \value{
 A list with several fit indices
 \describe{
-\item{\code{r.squared.xy}}{\eqn{R^2_{XY}}}
-\item{\code{p.squared.yx}}{\eqn{P^2_{YX}}}
+\item{\code{r.squared.xy}}{Corresponds to \eqn{R^2_{XY}}}
+\item{\code{p.squared.yx}}{Corresponds to \eqn{P^2_{YX}}}
 }
 See \code{\link{mlmWithCov}}
 }
