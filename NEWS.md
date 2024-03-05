@@ -1,3 +1,5 @@
+# dominanceanalysis (development version)
+
 # dominanceanalysis 2.1.0
 
 * Support only for R >= 4.0.0
