@@ -24,7 +24,6 @@
 #'
 #' @name dominanceanalysis-package
 #' @aliases dominanceanalysis
-#' @docType package
 #' @title Dominance analysis for general, generalized and mixed linear models
 #' @author Claudio Bustos \email{clbustos@gmail.com}, Filipa Coutinho Soares (documentation)
 #' @seealso \code{\link{dominanceAnalysis}} , \code{\link{bootDominanceAnalysis}}
@@ -83,5 +82,4 @@
 #' da.glm.boot<-bootDominanceAnalysis(glm.1,R=200)
 #' summary(da.glm.boot)
 #' }
-
-NULL
+"_PACKAGE"

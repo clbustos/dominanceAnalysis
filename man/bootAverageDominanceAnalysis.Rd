@@ -54,5 +54,5 @@ summary(da.ave.boot)
 
 }
 \seealso{
-\code{\link{dominanceAnalysis}}, \code{\link{boot}}
+\code{\link{dominanceAnalysis}}, \code{\link[boot]{boot}}
 }

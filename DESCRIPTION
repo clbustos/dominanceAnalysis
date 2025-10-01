@@ -31,5 +31,5 @@ License: GPL-2
 LazyData: true
 Imports: methods, stats, ggplot2
 Suggests: lme4, boot, testthat, car, covr, knitr,rmarkdown,pscl, dynlm,  reshape2, betareg, performance
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr

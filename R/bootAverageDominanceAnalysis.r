@@ -27,7 +27,7 @@
 #' summary(da.ave.boot)
 #' }
 #'
-#' @seealso \code{\link{dominanceAnalysis}}, \code{\link{boot}}
+#' @seealso \code{\link{dominanceAnalysis}}, \code{\link[boot]{boot}}
 
 bootAverageDominanceAnalysis<-function(x,R,constants=c(), terms = NULL, fit.functions="default",null.model=NULL, ...) {
   if (!requireNamespace("boot", quietly = TRUE)) { #nocov start

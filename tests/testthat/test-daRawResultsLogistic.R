@@ -8,7 +8,7 @@ y.binom<-rbinom(1000,1,exp(y1)/(1+exp(y1)))
 d.f1<<-data.frame(xa=x1,xb=x2,xc=x3,y=y.binom)
 glm.1<-glm(y~xa+xb+xc,data=d.f1,family=binomial)
 daRW<-daRawResults(glm.1)
-
+print(daRW)
 test_that("Correct raw results using glm(family=binomial)", {
 
 	base.fits<-daRW$base.fits
