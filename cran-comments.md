@@ -19,10 +19,15 @@ with current requirements of CRAN.
 ## Test environments
 * local Ubuntu 22.04 install, R 4.5.1
 * local Ubuntu 24.04 install, R 4.3.3
-* remote R Under development (unstable) (2025-09-30 r88885 ucrt)
+* remote winbuilder R Under development (unstable) (2025-09-30 r88885 ucrt)
+* Rhub atlas-linux-containers
+* Rhub m1-san (R-devel)-other-platforms
+* Rhub windows (R-devel)-other-platforms 
+
+
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs on Ubuntu 22.04 local R 4.5.1, 24.04 local R 4.3.3
+There were no ERRORs, WARNINGs or NOTEs on Ubuntu 22.04 local R 4.5.1, 24.04 local R 4.3.3, Rhub atlas, m1-san and windows container
 There were no ERRORs or NOTEs for remote winbuilder R devel and remote winbuilder R release.
 
 
