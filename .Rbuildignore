@@ -1,0 +1,17 @@
+^CRAN-RELEASE$
+^Meta$
+^doc$
+^data-raw$
+^README_cache$
+^README\.Rmd$
+^cran-comments\.md$
+^\.travis\.yml$
+^.*\.Rproj$
+^\.Rproj\.user$
+^.*bug_Cases$
+^revdep$
+^vagrant$
+^CRAN-SUBMISSION$
+^todo.txt$
+^logo$
+^.github$
