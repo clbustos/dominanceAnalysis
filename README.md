@@ -469,7 +469,7 @@ on the growth of peas conducted on 6 blocks.
 
 ``` r
 library(lme4)
-#> Loading required package: Matrix
+#> Cargando paquete requerido: Matrix
 lmer.npk.1<-lmer(yield~N+P+K+(1|block),npk)
 lmer.npk.0<-lmer(yield~1+(1|block),npk)
 da.lmer<-dominanceAnalysis(lmer.npk.1,null.model=lmer.npk.0)

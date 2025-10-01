@@ -1,20 +1,9 @@
-## New version: 2.1.0, first resubmission
+## New version: 2.1.1
 
-Added \value tags to .Rd files regarding exported methods and, explaining
-the functions results in the documentation. 
-
-Missing Rd-tags that were resolved:
-      bootAverageDominanceAnalysis.Rd: \value
-      bootDominanceAnalysis.Rd: \value
-      da.clm.fit.Rd: \value
-      da.lmerMod.fit.Rd: \value
-      da.lmWithCov.fit.Rd: \value
-      print.lmmR2.Rd: \value
-      print.summary.dominanceAnalysis.Rd: \value
-      print.summary.lmmR2.Rd: \value
-      summary.bootAverageDominanceAnalysis.Rd: \value
-      summary.bootDominanceAnalysis.Rd: \value
-      summary.lmmR2.Rd: \value
+- Examples now use fewer iterations, reducing test run time.
+- Replaced `is.ggplot(p1)` with `is_ggplot(p1)` in tests.
+- Added `[]` in documentation for package references.
+- Removed `docType: Package` from documentation.
 
 Local check:
 
@@ -22,16 +11,14 @@ Local check:
 
 Check on win-builder-stable: Note regarding new submission
 
-Check on rhub Windows Server 2022, R-devel, 64 bit: same notes as first submission
-
 ## First submission message from now on
 
-
-This is a minor release, to provide a version of dominanceAnalysis that complies
+This is a patch release, to provide a version of dominanceAnalysis that complies
 with current requirements of CRAN.
 
 ## Test environments
-* local Ubuntu 22.04 install, R 4.3.2
+* local Ubuntu 22.04 install, R 4.5.1
+* local Ubuntu 24.04 install, R 4.3.3
 * remote macOS (r-release-macosx-arm64|4.3.0|macosx|macOS 13.3.1 (22E261)|Mac mini|Apple M1||en_US.UTF-8|macOS 11.3|clang-1403.0.22.14.1|GNU Fortran (GCC) 12.2.0 )
 * remote R-hub Windows Server 2022, R-devel, 64 bit
 * remote R-hub Fedora Linux, R-devel, clang, gfortran
@@ -39,7 +26,7 @@ with current requirements of CRAN.
 * remote winbuilder R release R 4.3.2 (2023-10-31 ucrt)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs on Ubuntu 22.04 local, for R 4.3.2 and for remote macOS 11.3, for R 4.3.0
+There were no ERRORs, WARNINGs or NOTEs on Ubuntu 22.04 local R 4.5.1, 24.04 local R 4.3.3
 
 There is a common 1 WARNING in remote winbuilder R devel, remote winbuilder R release ,R-hub Windows Server 2022, R-devel, and remote R-hub Fedora Linux, R-devel, clang, gfortran: 
 

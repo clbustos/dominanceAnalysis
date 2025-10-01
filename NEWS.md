@@ -1,4 +1,9 @@
-# dominanceanalysis (development version)
+# dominanceanalysis 2.1.1
+
+- Examples now use fewer iterations, reducing test run time.
+- Replaced `is.ggplot(p1)` with `is_ggplot(p1)` in tests.
+- Added `[]` in documentation for package references.
+- Removed `docType: Package` from documentation.
 
 # dominanceanalysis 2.1.0
 
