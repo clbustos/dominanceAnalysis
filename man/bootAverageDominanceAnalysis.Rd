@@ -48,7 +48,7 @@ Use \code{summary()} to obtain a nicely formatted \code{data.frame} object.
 \examples{
 \donttest{
 lm.1 <- lm(Employed ~ ., longley)
-da.ave.boot <- bootAverageDominanceAnalysis(lm.1, R = 1000)
+da.ave.boot <- bootAverageDominanceAnalysis(lm.1, R = 10) # smaller for example, should be >1000
 summary(da.ave.boot)
 }
 

@@ -57,7 +57,7 @@ Use \code{summary()} to obtain a nicely formatted \code{data.frame}.
 \examples{
 \donttest{
 lm.1 <- lm(Employed ~ ., longley)
-da.boot <- bootDominanceAnalysis(lm.1, R = 1000)
+da.boot <- bootDominanceAnalysis(lm.1, R = 10) # smaller for example, should be >1000
 summary(da.boot)
 }
 }
